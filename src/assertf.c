@@ -175,7 +175,6 @@ static bool32 PutS(u32 *x, u32 *y, const u8 *s)
         else
             c = '_';
 
-        s++;
         if (!Putc(x, y, c))
             return FALSE;
     }

@@ -1207,35 +1207,100 @@ static bool32 IsValidGender(u32 gender)
     }
 }
 
-u32 GetMonPersonality(u16 species, u8 gender, u8 nature, u8 unownLetter)
+static bool32 GenderRatioCanBe(u32 genderRatio, u32 gender)
 {
-    u32 personality, actualLetter;
+    switch (gender)
+    {
+    case MON_MALE:
+        return genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS;
+    case MON_FEMALE:
+        return genderRatio != MON_MALE && genderRatio != MON_GENDERLESS;
+    case MON_GENDERLESS:
+        return genderRatio == MON_GENDERLESS;
+    default:
+        assertf(FALSE, "unknown gender: %d", gender);
+        return FALSE;
+    }
+}
+
+void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
+{
+    u32 personality;
+    u32 genderRatio = gSpeciesInfo[species].genderRatio;
 
     assertf(IsValidGender(gender), "invalid gender: %d", gender)
     {
-        gender = MON_GENDER_RANDOM;
+        u16 actualLetter;
+
+        while (TRUE)
+        {
+            personality = Random32();
+            actualLetter = GET_UNOWN_LETTER(personality);
+
+            assertf(GenderRatioCanBe(genderRatio, gender), "genderRatio %d can't be gender %d", genderRatio, gender)
+            {
+                break;
+            }
+
+            if (nature == GetNatureFromPersonality(personality)
+             && gender == GetGenderFromSpeciesAndPersonality(species, personality)
+             && actualLetter == unownLetter - 1)
+            {
+                break;
+            }
+        }
     }
 
     assertf(nature <= NATURE_RANDOM, "invalid nature: %d", nature)
     {
-        nature = NATURE_RANDOM;
+        while (TRUE)
+        {
+            personality = Random32();
+
+            assertf(GenderRatioCanBe(genderRatio, gender), "genderRatio %d can't be gender %d", genderRatio, gender)
+            {
+                break;
+            }
+
+            if (nature == GetNatureFromPersonality(personality)
+             && gender == GetGenderFromSpeciesAndPersonality(species, personality))
+            {
+                break;
+            }
+        }
     }
 
-    assertf(unownLetter <= NUM_UNOWN_FORMS, "invalid letter: %d", unownLetter)
-    {
-        unownLetter = RANDOM_UNOWN_LETTER;
-    }
+    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
+}
 
-    //gender outside valid gender ratios for species is not asserted because it could be triggered by cute charm
-    do
+// This is only used to create Wally's Ralts.
+void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
+{
+    u32 personality;
+    u32 otId;
+    u32 genderRatio = gSpeciesInfo[species].genderRatio;
+
+    while (TRUE)
     {
         personality = Random32();
-        actualLetter = GET_UNOWN_LETTER(personality);
+
+        assertf(GenderRatioCanBe(genderRatio, MON_MALE), "genderRatio %d can't be MON_MALE", genderRatio)
+        {
+            break;
+        }
+
+        if (GetGenderFromSpeciesAndPersonality(species, personality) == MON_MALE)
+            break;
     }
-    while ((nature != GetNatureFromPersonality(personality) && nature != NATURE_RANDOM)
-            || (gender != GetGenderFromSpeciesAndPersonality(species, personality) && gender != MON_GENDER_RANDOM)
-            || ((actualLetter != unownLetter - 1) && unownLetter > 0));
-    return personality;
+
+    CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
+}
+
+void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality)
+{
+    CreateMon(mon, species, level, 0, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    SetMonData(mon, MON_DATA_IVS, &ivs);
+    CalculateMonStats(mon);
 }
 
 // This is only used to create Wally's Ralts.

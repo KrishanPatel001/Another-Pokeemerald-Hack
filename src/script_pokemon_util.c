@@ -365,8 +365,23 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, e
     u16 targetSpecies;
     bool32 isShiny;
 
-    u32 personality = GetMonPersonality(species, gender, nature, RANDOM_UNOWN_LETTER);
-    CreateMon(&mon, species, level, personality, OTID_STRUCT_PLAYER_ID);
+    // check whether to use a specific nature or a random one
+    if (nature >= NUM_NATURES)
+    {
+        if (OW_SYNCHRONIZE_NATURE >= GEN_6
+         && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
+            nature = PickWildMonNature();
+        else
+            nature = Random() % NUM_NATURES;
+    }
+
+    // create a Pokémon with basic data
+    // TODO: Use another value for "any gender" so that we can report an
+    // error if genderless.
+    if (gender != MON_GENDERLESS)
+        CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature, 0);
+    else
+        CreateMonWithNature(&mon, species, level, 32, nature);
 
     // shininess
     if (shinyMode == SHINY_MODE_ALWAYS || (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY)))
@@ -452,25 +467,49 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, e
     if (side == B_SIDE_PLAYER)
         return GiveScriptedMonToPlayer(&mon, slot);
 
-    assertf(slot < PARTY_SIZE, "invalid slot: %d", slot)
+    if (side == B_SIDE_PLAYER)
     {
-        return MON_CANT_GIVE;
+        if (slot < PARTY_SIZE)
+        {
+            CopyMon(&gPlayerParty[slot], &mon, sizeof(struct Pokemon));
+            sentToPc = MON_GIVEN_TO_PARTY;
+        }
+        else
+        {
+            // find empty party slot to decide whether the Pokémon goes to the Player's party or the storage system.
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+                    break;
+            }
+            if (i >= PARTY_SIZE)
+            {
+                sentToPc = CopyMonToPC(&mon);
+            }
+            else
+            {
+                sentToPc = MON_GIVEN_TO_PARTY;
+                CopyMon(&gPlayerParty[i], &mon, sizeof(mon));
+                gPlayerPartyCount = i + 1;
+            }
+        }
+
+        // set pokédex flags
+        nationalDexNum = SpeciesToNationalPokedexNum(species);
+        if (sentToPc != MON_CANT_GIVE)
+        {
+            GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
+            GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+        }
     }
-    CopyMon(&gEnemyParty[slot], &mon, sizeof(struct Pokemon));
-    return MON_GIVEN_TO_PARTY;
-}
-
-u32 ScriptGiveMon(u16 species, u8 level, enum Item item)
-{
-    struct Pokemon mon;
-    u8 heldItem[2];
-
-    CreateRandomMon(&mon, species, level);
-    if (item)
+    else
     {
-        heldItem[0] = item;
-        heldItem[1] = item >> 8;
-        SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
+        assertf(slot < PARTY_SIZE, "invalid slot: %d", slot)
+        {
+            return MON_CANT_GIVE;
+        }
+        CopyMon(&gEnemyParty[slot], &mon, sizeof(struct Pokemon));
+        sentToPc = MON_GIVEN_TO_PARTY;
     }
 
     return GiveScriptedMonToPlayer(&mon, PARTY_SIZE);

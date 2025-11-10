@@ -949,22 +949,11 @@ static const struct PickupItem sPickupTable[] =
 
 static void ValidateSavedBattlerCounts(void)
 {
-    if (gBattleStruct->savedAttackerCount > 0)
-    {
-        if (TESTING)
-        {
-            Test_ExitWithResult(TEST_RESULT_ERROR, 0, "savedAttackerCount is greater than 0! More calls to SaveBattlerAttacker than RestoreBattlerAttacker!", __FILE__, __LINE__);
-        }
-        else
-            DebugPrintfLevel(MGBA_LOG_WARN, "savedAttackerCount is greater than 0! More calls to SaveBattlerAttacker than RestoreBattlerAttacker!");
-    }
-    if (gBattleStruct->savedTargetCount > 0)
-    {
-        if (TESTING)
-            Test_ExitWithResult(TEST_RESULT_ERROR, 0, "savedTargetCount is greater than 0! More calls to SaveBattlerTarget than RestoreBattlerTarget!", __FILE__, __LINE__);
-        else
-            DebugPrintfLevel(MGBA_LOG_WARN, "savedTargetCount is greater than 0! More calls to SaveBattlerTarget than RestoreBattlerTarget!");
-    }
+    // More calls to SaveBattlerAttacker than RestoreBattlerAttacker.
+    assertf(gBattleStruct->savedAttackerCount == 0, "savedAttackerCount is greater than 0");
+
+    // More calls to SaveBattlerTarget than RestoreBattlerTarget.
+    assertf(gBattleStruct->savedTargetCount == 0, "savedTargetCount is greater than 0");
 }
 
 static bool32 NoTargetPresent(u8 battler, u32 move)
@@ -1121,8 +1110,8 @@ static inline bool32 IsBattlerUsingBeakBlast(u32 battler)
 static void Cmd_attackcanceler(void)
 {
     CMD_ARGS();
-    assertf(gBattlerAttacker < gBattlersCount, "invalid gBattlerAttacker: %d\nmove: %S", gBattlerAttacker, GetMoveName(gCurrentMove));
-    assertf(gBattlerTarget < gBattlersCount, "invalid gBattlerTarget: %d\nmove: %S", gBattlerTarget, GetMoveName(gCurrentMove));
+    assertf(gBattlerAttacker < gBattlersCount, "invalid gBattlerAttacker: %d", gBattlerAttacker);
+    assertf(gBattlerTarget < gBattlersCount, "invalid gBattlerTarget: %d", gBattlerTarget);
 
     if (gBattleStruct->battlerState[gBattlerAttacker].usedEjectItem)
     {
@@ -5646,6 +5635,8 @@ static bool32 HandleMoveEndMoveBlock(u32 moveEffect)
 static void Cmd_moveend(void)
 {
     CMD_ARGS(u8 endMode, u8 endState);
+    assertf(gBattlerAttacker < gBattlersCount, "invalid gBattlerAttacker: %d", gBattlerAttacker);
+    assertf(gBattlerTarget < gBattlersCount, "invalid gBattlerTarget: %d", gBattlerTarget);
 
     s32 i;
     bool32 effect = FALSE;
@@ -6662,6 +6653,8 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_CLEAR_BITS: // Clear/Set bits for things like using a move for all targets and all hits.
+            assertf(gBattlerAttacker < gBattlersCount, "invalid gBattlerAttacker: %d", gBattlerAttacker);
+            assertf(gBattlerTarget < gBattlersCount, "invalid gBattlerTarget: %d", gBattlerTarget);
             if (gSpecialStatuses[gBattlerAttacker].instructedChosenTarget)
                 gBattleStruct->moveTarget[gBattlerAttacker] = gSpecialStatuses[gBattlerAttacker].instructedChosenTarget & 0x3;
             if (gSpecialStatuses[gBattlerAttacker].dancerOriginalTarget)
@@ -6858,7 +6851,7 @@ static u32 GetArbitraryValidSwitchIn(enum BattleSide side)
             return i;
     }
 
-    errorf("no valid switch ins for side: %d", side);
+    assertf(FALSE, "no valid switch ins for side: %d", side);
     return 0;
 }
 
@@ -9039,12 +9032,14 @@ static void Cmd_unused_0x78(void)
 static void TryResetProtectUseCounter(u32 battler)
 {
     u32 lastMove = gLastResultingMoves[battler];
-    enum BattleMoveEffects lastEffect = GetMoveEffect(lastMove);
     if (lastMove == MOVE_UNAVAILABLE)
     {
         gBattleMons[battler].volatiles.protectUses = 0;
+        return;
     }
-    else if (!gBattleMoveEffects[lastEffect].usesProtectCounter)
+
+    enum BattleMoveEffects lastEffect = GetMoveEffect(lastMove);
+    if (!gBattleMoveEffects[lastEffect].usesProtectCounter)
     {
         if (GetConfig(CONFIG_ALLY_SWITCH_FAIL_CHANCE) < GEN_9 || lastEffect != EFFECT_ALLY_SWITCH)
             gBattleMons[battler].volatiles.protectUses = 0;
@@ -13698,6 +13693,50 @@ void BS_RestoreAttacker(void)
 {
     NATIVE_ARGS();
     assertf(gBattleStruct->savedAttackerCount > 0, "No savedBattlerAttackers")
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+
+    gBattleStruct->savedAttackerCount--;
+    gBattlerAttacker = gBattleStruct->savedBattlerAttacker[gBattleStruct->savedAttackerCount];
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CalcMetalBurstDmg(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+
+    u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
+    u8 sideTarget = 0;
+
+    if (gProtectStructs[gBattlerAttacker].physicalDmg
+        && sideAttacker != (sideTarget = GetBattlerSide(gProtectStructs[gBattlerAttacker].physicalBattlerId))
+        && gBattleMons[gProtectStructs[gBattlerAttacker].physicalBattlerId].hp)
+    {
+
+        if (IsAffectedByFollowMe(gBattlerAttacker, sideTarget, gCurrentMove))
+            gBattlerTarget = gSideTimers[sideTarget].followmeTarget;
+        else
+            gBattlerTarget = gProtectStructs[gBattlerAttacker].physicalBattlerId;
+
+        CalcReflectBackDamage(gProtectStructs[gBattlerAttacker].physicalDmg, 150);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else if (gProtectStructs[gBattlerAttacker].specialDmg
+             && sideAttacker != (sideTarget = GetBattlerSide(gProtectStructs[gBattlerAttacker].specialBattlerId))
+             && gBattleMons[gProtectStructs[gBattlerAttacker].specialBattlerId].hp)
+    {
+
+        if (IsAffectedByFollowMe(gBattlerAttacker, sideTarget, gCurrentMove))
+            gBattlerTarget = gSideTimers[sideTarget].followmeTarget;
+        else
+            gBattlerTarget = gProtectStructs[gBattlerAttacker].specialBattlerId;
+
+        CalcReflectBackDamage(gProtectStructs[gBattlerAttacker].specialDmg, 150);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;

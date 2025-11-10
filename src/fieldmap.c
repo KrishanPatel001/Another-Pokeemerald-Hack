@@ -645,7 +645,7 @@ static void SetPositionFromConnection(const struct MapConnection *connection, en
         gSaveBlock1Ptr->pos.y = mapHeader->mapLayout->height;
         break;
     default:
-        errorf("invalid direction: %d", direction);
+        assertf(0, "invalid direction: %d", direction);
         break;
     }
 }

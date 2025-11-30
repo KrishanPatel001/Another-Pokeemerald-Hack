@@ -9,21 +9,21 @@
 #include "constants/battle.h"
 #include "constants/moves.h"
 
-static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues);
+static bool32 FirstEventBlockEvents(struct BattleContext *ctx);
 static bool32 TryHazardsOnSwitchIn(u32 battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType);
-static bool32 SecondEventBlockEvents(struct BattleCalcValues *calcValues);
+static bool32 SecondEventBlockEvents(struct BattleContext *ctx);
 
 bool32 DoSwitchInEvents(void)
 {
     u32 battler;
 
-    struct BattleCalcValues calcValues = {0};
+    struct BattleContext ctx = {0};
     for (battler = 0; battler < gBattlersCount; battler++)
     {
         if (!IsBattlerAlive(battler))
             continue;
-        calcValues.abilities[battler] = GetBattlerAbility(battler);
-        calcValues.holdEffects[battler] = GetBattlerHoldEffect(battler);
+        ctx.abilities[battler] = GetBattlerAbility(battler);
+        ctx.holdEffects[battler] = GetBattlerHoldEffect(battler);
     }
 
     switch (gBattleStruct->eventState.switchIn)
@@ -41,7 +41,7 @@ bool32 DoSwitchInEvents(void)
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
             battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
-            if (AbilityBattleEffects(ABILITYEFFECT_TERA_SHIFT, battler, calcValues.abilities[battler], 0, gBattleStruct->battlerState[battler].switchIn))
+            if (AbilityBattleEffects(ABILITYEFFECT_TERA_SHIFT, battler, ctx.abilities[battler], 0, gBattleStruct->battlerState[battler].switchIn))
                 return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
@@ -51,7 +51,7 @@ bool32 DoSwitchInEvents(void)
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
             battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
-            if (AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, battler, calcValues.abilities[battler], 0, gBattleStruct->battlerState[battler].switchIn))
+            if (AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, battler, ctx.abilities[battler], 0, gBattleStruct->battlerState[battler].switchIn))
                 return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
@@ -61,7 +61,7 @@ bool32 DoSwitchInEvents(void)
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
             battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
-            if (AbilityBattleEffects(ABILITYEFFECT_UNNERVE, battler, calcValues.abilities[battler], 0, gBattleStruct->battlerState[battler].switchIn))
+            if (AbilityBattleEffects(ABILITYEFFECT_UNNERVE, battler, ctx.abilities[battler], 0, gBattleStruct->battlerState[battler].switchIn))
                 return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
@@ -79,10 +79,10 @@ bool32 DoSwitchInEvents(void)
                 continue;
             }
 
-            calcValues.battlerAtk = battler;
+            ctx.battlerAtk = battler;
             while (gBattleStruct->eventState.battlerSwitchIn < FIRST_EVENT_BLOCK_COUNT)
             {
-                if (FirstEventBlockEvents(&calcValues))
+                if (FirstEventBlockEvents(&ctx))
                     return TRUE;
             }
 
@@ -104,10 +104,10 @@ bool32 DoSwitchInEvents(void)
                 continue;
             }
 
-            calcValues.battlerAtk = battler;
+            ctx.battlerAtk = battler;
             while (gBattleStruct->eventState.battlerSwitchIn < SECOND_EVENT_BLOCK_COUNT)
             {
-                if (SecondEventBlockEvents(&calcValues))
+                if (SecondEventBlockEvents(&ctx))
                     return TRUE;
             }
 
@@ -121,7 +121,7 @@ bool32 DoSwitchInEvents(void)
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
             u32 battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
-            if (ItemBattleEffects(battler, 0, calcValues.holdEffects[battler], IsWhiteHerbActivation))
+            if (ItemBattleEffects(battler, 0, ctx.holdEffects[battler], IsWhiteHerbActivation))
                 return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
@@ -131,7 +131,7 @@ bool32 DoSwitchInEvents(void)
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
             u32 battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
-            if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, calcValues.abilities[battler], 0, TRUE))
+            if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, ctx.abilities[battler], 0, TRUE))
                 return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
@@ -173,28 +173,19 @@ bool32 DoSwitchInEvents(void)
 
 static bool32 CanBattlerBeHealed(u32 battler)
 {
-    if (GetConfig(CONFIG_HEALING_WISH_SWITCH) < GEN_8)
+    if (GetGenConfig(GEN_CONFIG_HEALING_WISH_SWITCH) < GEN_8)
         return TRUE;
 
     if (gBattleMons[battler].hp != gBattleMons[battler].maxHP || gBattleMons[battler].status1)
         return TRUE;
 
-    if (gBattleStruct->battlerState[battler].storedLunarDance
-     && (gBattleMons[battler].pp[0] < CalculatePPWithBonus(gBattleMons[battler].moves[0], gBattleMons[battler].ppBonuses, 0)
-      || gBattleMons[battler].pp[1] < CalculatePPWithBonus(gBattleMons[battler].moves[1], gBattleMons[battler].ppBonuses, 1)
-      || gBattleMons[battler].pp[2] < CalculatePPWithBonus(gBattleMons[battler].moves[2], gBattleMons[battler].ppBonuses, 2)
-      || gBattleMons[battler].pp[3] < CalculatePPWithBonus(gBattleMons[battler].moves[3], gBattleMons[battler].ppBonuses, 3)))
-    {
-        return TRUE;
-    }
-
     return FALSE;
 }
 
-static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
+static bool32 FirstEventBlockEvents(struct BattleContext *ctx)
 {
     bool32 effect = FALSE;
-    u32 battler = calcValues->battlerAtk;
+    u32 battler = ctx->battlerAtk;
 
     switch (gBattleStruct->eventState.battlerSwitchIn)
     {
@@ -238,6 +229,7 @@ static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
         else if (EmergencyExitCanBeTriggered(battler))
         {
             gBattleScripting.battler = gBattlerAbility = battler;
+            gSpecialStatuses[battler].switchInItemDone = FALSE;
             gBattleStruct->battlerState[battler].forcedSwitch = FALSE;
             gBattleStruct->eventState.switchIn = 0;
             BattleScriptCall(BattleScript_EmergencyExit);
@@ -253,24 +245,24 @@ static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
             }
             else
             {
-                effect = TryHazardsOnSwitchIn(battler, calcValues->abilities[battler], calcValues->holdEffects[battler], hazard);
+                effect = TryHazardsOnSwitchIn(battler, ctx->abilities[battler], ctx->holdEffects[battler], hazard);
             }
         }
         break;
     case FIRST_EVENT_BLOCK_GENERAL_ABILITIES:
         if (TryPrimalReversion(battler)
-         || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, calcValues->abilities[battler], MOVE_NONE, gBattleStruct->battlerState[battler].switchIn)
-         || TryClearIllusion(battler, calcValues->abilities[battler]))
+         || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, ctx->abilities[battler], MOVE_NONE, gBattleStruct->battlerState[battler].switchIn)
+         || TryClearIllusion(battler, ctx->abilities[battler]))
             effect = TRUE;
         gBattleStruct->eventState.battlerSwitchIn++;
         break;
     case FIRST_EVENT_BLOCK_IMMUNITY_ABILITIES:
-        if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, battler, calcValues->abilities[battler], MOVE_NONE, TRUE))
+        if (AbilityBattleEffects(ABILITYEFFECT_IMMUNITY, battler, ctx->abilities[battler], MOVE_NONE, TRUE))
             effect = TRUE;
         gBattleStruct->eventState.battlerSwitchIn++;
         break;
     case FIRST_EVENT_BLOCK_ITEMS:
-        if (ItemBattleEffects(battler, 0, calcValues->holdEffects[battler], IsOnSwitchInActivation))
+        if (ItemBattleEffects(battler, 0, ctx->holdEffects[battler], IsOnSwitchInActivation))
             effect = TRUE;
         gBattleStruct->eventState.battlerSwitchIn++;
         break;
@@ -292,7 +284,7 @@ static void SetDmgHazardsBattlescript(u8 battler, u8 multistringId)
 static bool32 TryHazardsOnSwitchIn(u32 battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType)
 {
     bool32 effect = FALSE;
-    enum BattleSide side = GetBattlerSide(battler);
+    u32 side = GetBattlerSide(battler);
     bool32 clearedToxicSpikes = FALSE;
 
     switch (hazardType)
@@ -386,22 +378,22 @@ static bool32 TryHazardsOnSwitchIn(u32 battler, enum Ability ability, enum HoldE
     return effect;
 }
 
-static bool32 SecondEventBlockEvents(struct BattleCalcValues *calcValues)
+static bool32 SecondEventBlockEvents(struct BattleContext *ctx)
 {
     bool32 effect = FALSE;
-    u32 battler = calcValues->battlerAtk;
+    u32 battler = ctx->battlerAtk;
 
     switch (gBattleStruct->eventState.battlerSwitchIn)
     {
     case SECOND_EVENT_ABILITIES:
-        if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battler, calcValues->abilities[battler], MOVE_NONE, TRUE)
-         || AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, calcValues->abilities[battler], MOVE_NONE, TRUE)
-         || AbilityBattleEffects(ABILITYEFFECT_COMMANDER, battler, calcValues->abilities[battler], MOVE_NONE, gBattleStruct->battlerState[battler].switchIn))
+        if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battler, ctx->abilities[battler], MOVE_NONE, TRUE)
+         || AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, ctx->abilities[battler], MOVE_NONE, TRUE)
+         || AbilityBattleEffects(ABILITYEFFECT_COMMANDER, battler, ctx->abilities[battler], MOVE_NONE, gBattleStruct->battlerState[battler].switchIn))
             effect = TRUE;
         gBattleStruct->eventState.battlerSwitchIn++;
         break;
     case SECOND_EVENT_BOOSTER_ENERGY:
-        if (ItemBattleEffects(battler, 0, calcValues->holdEffects[battler], IsBoosterEnergyActivation))
+        if (ItemBattleEffects(battler, 0, ctx->holdEffects[battler], IsBoosterEnergyActivation))
             effect = TRUE;
         gBattleStruct->eventState.battlerSwitchIn++;
         break;

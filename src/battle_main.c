@@ -208,7 +208,6 @@ EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
 EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
 EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
-EWRAM_DATA struct StartingStatuses gStartingStatuses = {0};
 EWRAM_DATA struct AiThinkingStruct *gAiThinkingStruct = NULL;
 EWRAM_DATA struct AiLogicData *gAiLogicData = NULL;
 EWRAM_DATA struct AiPartyData *gAiPartyData = NULL;
@@ -3220,6 +3219,7 @@ void SwitchInClearSetData(u32 battler, struct Volatiles *volatilesCopy)
     gBattleStruct->battlerState[battler].canPickupItem = FALSE;
     gBattleStruct->battlerState[battler].wasAboveHalfHp = gBattleMons[battler].hp > gBattleMons[battler].maxHP / 2;
     gBattleStruct->hazardsCounter = 0;
+    gSpecialStatuses[battler].switchInItemDone = FALSE;
 
     ClearPursuitValuesIfSet(battler);
 
@@ -3767,7 +3767,7 @@ static void TryDoEventsBeforeFirstTurn(void)
 
         gBattleStruct->speedTieBreaks = RandomUniform(RNG_SPEED_TIE, 0, Factorial(MAX_BATTLERS_COUNT) - 1);
         gBattleTurnCounter = 0;
-        gBattleStruct->eventState.beforeFirstTurn++;
+        gBattleStruct->eventState.beforeFristTurn++;
         break;
     case FIRST_TURN_EVENTS_OVERWORLD_WEATHER:
         gBattleStruct->eventState.beforeFirstTurn++;
@@ -3799,44 +3799,14 @@ static void TryDoEventsBeforeFirstTurn(void)
             }
         }
         memset(gQueuedStatBoosts, 0, sizeof(gQueuedStatBoosts)); // erase all totem boosts for Mirror Herb and Opportunist
-        gBattleStruct->eventState.beforeFirstTurn++;
+        gBattleStruct->eventState.beforeFristTurn++;
         break;
     case FIRST_TURN_SWITCH_IN_EVENTS:
         gBattleStruct->eventState.switchIn = 0;
         for (u32 battler = 0; battler < gBattlersCount; battler++)
             gBattleStruct->battlerState[battler].switchIn = TRUE;
         BattleScriptPushCursorAndCallback(BattleScript_FirstTurnSwitchInEvents);
-        gBattleStruct->eventState.beforeFirstTurn++;
-        break;
-    case FIRST_TURN_FAINTED_BATTLERS:
-        // Handle any Pokemon that fainted from starting hazards before transitioning to action selection
-        if (HandleFaintedMonActions())
-            return;
-        gBattleStruct->eventState.faintedAction = 0;
-        gBattleStruct->eventState.beforeFirstTurn++;
-        break;
-    case FIRST_TURN_EVENTS_TRAINER_SLIDE_A:
-        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
-            BattleScriptExecute(BattleScript_TrainerASlideMsgEnd2);
-        gBattleStruct->eventState.beforeFirstTurn++;
-        break;
-    case FIRST_TURN_EVENTS_TRAINER_SLIDE_B:
-        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
-        {
-            // Ensures only trainer A slide is played in single-trainer doubles (B == A / B == TRAINER_NONE) and 2v1 multibattles (B == 0xFFFF)
-            if (!((TRAINER_BATTLE_PARAM.opponentB == TRAINER_BATTLE_PARAM.opponentA)
-            || (TRAINER_BATTLE_PARAM.opponentB == TRAINER_NONE)
-            || (TRAINER_BATTLE_PARAM.opponentB == 0xFFFF)))
-            {
-                BattleScriptExecute(BattleScript_TrainerBSlideMsgEnd2);
-            }
-        }
-        gBattleStruct->eventState.beforeFirstTurn++;
-        break;
-    case FIRST_TURN_EVENTS_TRAINER_SLIDE_PARTNER:
-        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
-            BattleScriptExecute(BattleScript_TrainerPartnerSlideMsgEnd2);
-        gBattleStruct->eventState.beforeFirstTurn++;
+        gBattleStruct->eventState.beforeFristTurn++;
         break;
     case FIRST_TURN_EVENTS_END:
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)

@@ -498,22 +498,6 @@ extern const u8 BattleScript_AlreadyBurned[];
 extern const u8 BattleScript_PrintAbilityMadeIneffective[];
 extern const u8 BattleScript_ItDoesntAffectFoe[];
 extern const u8 BattleScript_FirstTurnSwitchInEvents[];
-extern const u8 BattleScript_FickleBeamDoubled[];
-extern const u8 BattleScript_QuestionForfeitBattle[];
-extern const u8 BattleScript_ForfeitBattleGaveMoney[];
-extern const u8 BattleScript_AbilityPopUp[];
-extern const u8 BattleScript_Attackstring[];
-extern const u8 BattleScript_SubmoveAttackstring[];
-extern const u8 BattleScript_MetronomeAttackstring[];
-extern const u8 BattleScript_SleepTalkAttackstring[];
-extern const u8 BattleScript_NaturePowerAttackstring[];
-extern const u8 BattleScript_PokemonCantUseTheMove[];
-extern const u8 BattleScript_TwoTurnMoveCharging[];
-extern const u8 BattleScript_PowerHerbActivation[];
-extern const u8 BattleScript_Explosion[];
-extern const u8 BattleScript_ActivateSwitchInAbility[];
-extern const u8 BattleScript_BreakScreens[];
-extern const u8 BattleScript_StealStats[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

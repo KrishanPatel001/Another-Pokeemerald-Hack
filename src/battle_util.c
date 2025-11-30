@@ -3092,7 +3092,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
     return effect;
 }
 
-u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ability, enum Move move, bool32 shouldAbilityTrigger)
+u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ability, u32 move, bool32 shouldAbilityTrigger)
 {
     u32 effect = 0;
     enum Type moveType = 0;
@@ -3168,7 +3168,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                     diagonalBattler = BATTLE_PARTNER(diagonalBattler);
 
                 // Imposter only activates when the battler first switches in
-                if (!gBattleMons[battler].volatiles.overwrittenAbility
+                if (!gDisableStructs[battler].overwrittenAbility
                     && IsBattlerAlive(diagonalBattler)
                     && !gBattleMons[diagonalBattler].volatiles.substitute
                     && !gBattleMons[diagonalBattler].volatiles.transformed
@@ -3384,7 +3384,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_RAIN, gLastUsedAbility))
             {
-                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                BattleScriptCall(BattleScript_DrizzleActivates);
                 effect++;
             }
             else if (gBattleWeather & B_WEATHER_PRIMAL_ANY && HasWeatherEffect())
@@ -3398,7 +3398,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_SANDSTORM, gLastUsedAbility))
             {
-                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                BattleScriptCall(BattleScript_SandstreamActivates);
                 effect++;
             }
             else if (gBattleWeather & B_WEATHER_PRIMAL_ANY && HasWeatherEffect())
@@ -3413,7 +3413,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_SUN, gLastUsedAbility))
             {
-                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                BattleScriptCall(BattleScript_DroughtActivates);
                 effect++;
             }
             else if (gBattleWeather & B_WEATHER_PRIMAL_ANY && HasWeatherEffect())
@@ -3423,20 +3423,20 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             }
             break;
         case ABILITY_SNOW_WARNING:
-            if (!shouldAbilityTrigger)
-                break;
+            if (GetGenConfig(GEN_SNOW_WARNING) >= GEN_9 && TryChangeBattleWeather(battler, BATTLE_WEATHER_SNOW, gLastUsedAbility))
             {
-                u32 weather = (GetConfig(CONFIG_SNOW_WARNING) >= GEN_9 ? BATTLE_WEATHER_SNOW : BATTLE_WEATHER_HAIL);
-                if (TryChangeBattleWeather(battler, weather, gLastUsedAbility))
-                {
-                    BattleScriptCall(BattleScript_WeatherAbilityActivates);
-                    effect++;
-                }
-                else if (gBattleWeather & B_WEATHER_PRIMAL_ANY && HasWeatherEffect())
-                {
-                    BattleScriptCall(BattleScript_BlockedByPrimalWeather);
-                    effect++;
-                }
+                BattleScriptCall(BattleScript_SnowWarningActivatesSnow);
+                effect++;
+            }
+            else if (GetGenConfig(GEN_SNOW_WARNING) < GEN_9 && TryChangeBattleWeather(battler, BATTLE_WEATHER_HAIL, gLastUsedAbility))
+            {
+                BattleScriptCall(BattleScript_SnowWarningActivatesHail);
+                effect++;
+            }
+            else if (gBattleWeather & B_WEATHER_PRIMAL_ANY && HasWeatherEffect())
+            {
+                BattleScriptCall(BattleScript_BlockedByPrimalWeather);
+                effect++;
             }
             break;
         case ABILITY_ELECTRIC_SURGE:
@@ -3568,7 +3568,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_SUN_PRIMAL, gLastUsedAbility))
             {
-                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                BattleScriptCall(BattleScript_DesolateLandActivates);
                 effect++;
             }
             break;
@@ -3577,7 +3577,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_RAIN_PRIMAL, gLastUsedAbility))
             {
-                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                BattleScriptCall(BattleScript_PrimordialSeaActivates);
                 effect++;
             }
             break;
@@ -3586,7 +3586,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_STRONG_WINDS, gLastUsedAbility))
             {
-                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                BattleScriptCall(BattleScript_DeltaStreamActivates);
                 effect++;
             }
             break;
@@ -4761,7 +4761,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
         }
         break;
     case ABILITYEFFECT_NEUTRALIZINGGAS:
-        if (ability == ABILITY_NEUTRALIZING_GAS && !gBattleMons[battler].volatiles.neutralizingGas)
+        if (ability == ABILITY_NEUTRALIZING_GAS && !gDisableStructs[battler].neutralizingGas)
         {
             gBattleMons[battler].volatiles.neutralizingGas = TRUE;
             gBattlerAbility = battler;
@@ -4774,24 +4774,24 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
         switch (ability)
         {
         case ABILITY_UNNERVE:
-            if (shouldAbilityTrigger && !gBattleMons[battler].volatiles.unnerveActivated)
+            if (shouldAbilityTrigger && !gDisableStructs[battler].unnerveActivated)
             {
                 gBattleScripting.battler = battler;
                 gEffectBattler = GetOppositeBattler(battler);
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_UNNERVE;
-                gBattleMons[battler].volatiles.unnerveActivated = TRUE;
+                gDisableStructs[battler].unnerveActivated = TRUE;
                 BattleScriptCall(BattleScript_SwitchInAbilityMsg);
                 effect++;
             }
             break;
         case ABILITY_AS_ONE_ICE_RIDER:
         case ABILITY_AS_ONE_SHADOW_RIDER:
-            if (shouldAbilityTrigger && !gBattleMons[battler].volatiles.unnerveActivated)
+            if (shouldAbilityTrigger && !gDisableStructs[battler].unnerveActivated)
             {
                 gBattleScripting.battler = battler;
                 gEffectBattler = GetOppositeBattler(battler);
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_ASONE;
-                gBattleMons[battler].volatiles.unnerveActivated = TRUE;
+                gDisableStructs[battler].unnerveActivated = TRUE;
                 BattleScriptCall(BattleScript_ActivateAsOne);
                 effect++;
             }
@@ -4842,14 +4842,10 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             if (shouldAbilityTrigger
              && IsDoubleBattle()
              && IsBattlerAlive(partner)
-             && BattlerHasCopyableChanges(partner))
+             && CountBattlerStatIncreases(partner, FALSE))
             {
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
                     gBattleMons[battler].statStages[i] = gBattleMons[partner].statStages[i];
-                // Copy crit boosts (Focus Energy, Dragon Cheer, G-Max Chi Strike)
-                gBattleMons[battler].volatiles.focusEnergy = gBattleMons[partner].volatiles.focusEnergy;
-                gBattleMons[battler].volatiles.dragonCheer = gBattleMons[partner].volatiles.dragonCheer;
-                gBattleMons[battler].volatiles.bonusCritStages = gBattleMons[partner].volatiles.bonusCritStages;
                 gEffectBattler = partner;
                 BattleScriptCall(BattleScript_CostarActivates);
                 effect++;
@@ -4882,7 +4878,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
              && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_WEATHER))
             {
                 gBattleScripting.battler = battler;
-                gBattleMons[battler].volatiles.weatherAbilityDone = TRUE;
+                gDisableStructs[battler].weatherAbilityDone = TRUE;
                 BattleScriptCall(BattleScript_BattlerFormChangeWithString);
                 effect++;
             }
@@ -9109,7 +9105,7 @@ void SetIllusionMon(struct Pokemon *mon, u32 battler)
     }
 }
 
-enum ImmunityHealStatusOutcome TryImmunityAbilityHealStatus(u32 battler)
+u32 TryImmunityAbilityHealStatus(u32 battler)
 {
     enum ImmunityHealStatusOutcome outcome = IMMUNITY_NO_EFFECT;
     switch (GetBattlerAbilityIgnoreMoldBreaker(battler))
@@ -9174,24 +9170,30 @@ enum ImmunityHealStatusOutcome TryImmunityAbilityHealStatus(u32 battler)
 
     switch (outcome)
     {
-    case IMMUNITY_STATUS_CLEARED:
-        gBattleMons[battler].status1 = 0;
-        BattleScriptCall(BattleScript_AbilityCuredStatus);
-        break;
-    case IMMUNITY_CONFUSION_CLEARED:
-        RemoveConfusionStatus(battler);
-        BattleScriptCall(BattleScript_AbilityCuredStatus);
-        break;
-    case IMMUNITY_INFATUATION_CLEARED:
-        gBattleMons[battler].volatiles.infatuation = 0;
-        BattleScriptCall(BattleScript_AbilityCuredStatus);
-        break;
-    case IMMUNITY_TAUNT_CLEARED:
-        gBattleMons[battler].volatiles.tauntTimer = 0;
-        BattleScriptCall(BattleScript_AbilityCuredStatus);
-        break;
-    case IMMUNITY_NO_EFFECT:
-        return IMMUNITY_NO_EFFECT;
+        switch (effect)
+        {
+        case 1: // status cleared
+            gBattleMons[battler].status1 = 0;
+            BattleScriptCall(BattleScript_AbilityCuredStatus);
+            break;
+        case 2: // get rid of confusion
+            RemoveConfusionStatus(battler);
+            BattleScriptCall(BattleScript_AbilityCuredStatus);
+            break;
+        case 3: // get rid of infatuation
+            gBattleMons[battler].volatiles.infatuation = 0;
+            BattleScriptCall(BattleScript_AbilityCuredStatus);
+            break;
+        case 4: // get rid of taunt
+            gDisableStructs[battler].tauntTimer = 0;
+            BattleScriptCall(BattleScript_AbilityCuredStatus);
+            break;
+        }
+
+        gBattleScripting.battler = gBattlerAbility = battler;
+        BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
+        MarkBattlerForControllerExec(battler);
+        return effect;
     }
 
     gBattleScripting.battler = gBattlerAbility = battler;
@@ -10224,35 +10226,10 @@ bool32 EmergencyExitCanBeTriggered(u32 battler)
     return FALSE;
 }
 
-bool32 TryTriggerSymbiosis(u32 battler, u32 ally)
-{
-    return GetBattlerAbility(ally) == ABILITY_SYMBIOSIS
-        && gBattleMons[battler].item == ITEM_NONE
-        && gBattleMons[ally].item != ITEM_NONE
-        && CanBattlerGetOrLoseItem(battler, ally, gBattleMons[ally].item)
-        && CanBattlerGetOrLoseItem(ally, battler, gBattleMons[ally].item)
-        && IsBattlerAlive(battler)
-        && IsBattlerAlive(ally);
-}
-
-// Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
-bool32 TrySymbiosis(u32 battler, enum Item itemId, bool32 moveEnd)
-{
-    if (!gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen
-        && gBattleStruct->changedItems[battler] == ITEM_NONE
-        && GetBattlerHoldEffect(battler) != HOLD_EFFECT_EJECT_BUTTON
-        && GetBattlerHoldEffect(battler) != HOLD_EFFECT_EJECT_PACK
-        && (GetConfig(CONFIG_SYMBIOSIS_GEMS) < GEN_7 || !(gSpecialStatuses[battler].gemBoost))
-        && GetMoveEffect(gCurrentMove) != EFFECT_FLING //Fling and damage-reducing berries are handled separately.
-        && !gSpecialStatuses[battler].berryReduced
-        && TryTriggerSymbiosis(battler, BATTLE_PARTNER(battler)))
-    {
-        BestowItem(BATTLE_PARTNER(battler), battler);
-        gLastUsedAbility = gBattleMons[BATTLE_PARTNER(battler)].ability;
-        gEffectBattler = battler;
-        gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(battler);
-        if (moveEnd)
-            BattleScriptPushCursor();
+        gBattleScripting.battler = battler;
+        gLastUsedItem = gBattleMons[battler].item;
+        if (timing == END_TURN)
+            BattleScriptExecute(BattleScript_EjectPackActivate_End2);
         else
             BattleScriptPush(gBattlescriptCurrInstr + 2);
         gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
@@ -10261,20 +10238,21 @@ bool32 TrySymbiosis(u32 battler, enum Item itemId, bool32 moveEnd)
     return FALSE;
 }
 
-// Used by Bestow and Symbiosis to take an item from one battler and give to another.
-void BestowItem(u32 battlerAtk, u32 battlerDef)
+bool32 EmergencyExitCanBeTriggered(u32 battler)
 {
-    gLastUsedItem = gBattleMons[battlerAtk].item;
+    enum Ability ability = GetBattlerAbility(battler);
 
-    gBattleMons[battlerAtk].item = ITEM_NONE;
-    BtlController_EmitSetMonData(battlerAtk, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerAtk].item), &gBattleMons[battlerAtk].item);
-    MarkBattlerForControllerExec(battlerAtk);
-    CheckSetUnburden(battlerAtk);
+    if (ability != ABILITY_EMERGENCY_EXIT && ability != ABILITY_WIMP_OUT)
+        return FALSE;
 
-    gBattleMons[battlerDef].item = gLastUsedItem;
-    BtlController_EmitSetMonData(battlerDef, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerDef].item), &gBattleMons[battlerDef].item);
-    MarkBattlerForControllerExec(battlerDef);
-    gBattleMons[battlerDef].volatiles.unburdenActive = FALSE;
+    if (IsBattlerAlive(battler)
+     && HadMoreThanHalfHpNowDoesnt(battler)
+     && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+     && !(gBattleTypeFlags & BATTLE_TYPE_ARENA)
+     && gBattleMons[battler].volatiles.semiInvulnerable != STATE_SKY_DROP)
+        return TRUE;
+
+    return FALSE;
 }
 
 #define UNPACK_VOLATILE_GETTERS(_enum, _fieldName, _typeMaxValue, ...) case _enum: return gBattleMons[battler].volatiles._fieldName;

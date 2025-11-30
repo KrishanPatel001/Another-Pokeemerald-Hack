@@ -50,7 +50,6 @@ enum AbilityEffect
     ABILITYEFFECT_SYNCHRONIZE,
     ABILITYEFFECT_ATK_SYNCHRONIZE,
     ABILITYEFFECT_MOVE_END_OTHER,
-    ABILITYEFFECT_MOVE_END_FOES_FAINTED, // Moxie-like abilities / Battle Bond / Magician
 
     // On Switch in
     ABILITYEFFECT_TERA_SHIFT,
@@ -226,7 +225,7 @@ bool32 CanPsychicTerrainProtectTarget(struct BattleContext *ctx, s32 movePriorit
 bool32 CanMoveBeBlockedByTarget(struct BattleContext *ctx, s32 movePriority);
 bool32 CanAbilityAbsorbMove(struct BattleContext *ctx);
 bool32 TryFieldEffects(enum FieldEffectCases caseId);
-u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ability, enum Move move, bool32 shouldAbilityTrigger);
+u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ability, u32 move, bool32 shouldAbilityTrigger);
 bool32 TryPrimalReversion(u32 battler);
 bool32 IsNeutralizingGasOnField(void);
 bool32 IsMoldBreakerTypeAbility(u32 battler, enum Ability ability);
@@ -290,8 +289,8 @@ u32 GetIllusionMonSpecies(u32 battler);
 struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);
 u32 GetIllusionMonPartyId(struct Pokemon *party, struct Pokemon *mon, struct Pokemon *partnerMon, u32 battler);
-void SetIllusionMon(struct Pokemon *mon, u32 battler);
-enum ImmunityHealStatusOutcome TryImmunityAbilityHealStatus(u32 battler);
+bool32 SetIllusionMon(struct Pokemon *mon, u32 battler);
+u32 TryImmunityAbilityHealStatus(u32 battler);
 bool32 ShouldGetStatBadgeBoost(u16 flagId, u32 battler);
 uq4_12_t GetBadgeBoostModifier(void);
 enum DamageCategory GetBattleMoveCategory(enum Move move);
@@ -308,8 +307,9 @@ void SetShellSideArmCategory(void);
 bool32 MoveIsAffectedBySheerForce(enum Move move);
 bool32 IsSheerForceAffected(enum Move move, enum Ability ability);
 void TryRestoreHeldItems(void);
-bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, enum Item item);
-void TrySaveExchangedItem(u32 battler, enum Item stolenItem);
+bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
+void TrySaveExchangedItem(u32 battler, u16 stolenItem);
+bool32 IsPartnerMonFromSameTrainer(u32 battler);
 bool32 IsBattlerAffectedByHazards(u32 battler, enum HoldEffect holdEffect, bool32 toxicSpikes);
 void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast);
 bool32 CompareStat(u32 battler, enum Stat statId, u32 cmpTo, u32 cmpKind, enum Ability ability);
@@ -385,11 +385,9 @@ bool32 HadMoreThanHalfHpNowDoesnt(u32 battler);
 void ChooseStatBoostAnimation(u32 battler);
 void UpdateStallMons(void);
 bool32 TrySwitchInEjectPack(enum EjectPackTiming timing);
+bool32 TryEmergencyExit(void);
 bool32 EmergencyExitCanBeTriggered(u32 battler);
-bool32 TryTriggerSymbiosis(u32 battler, u32 ally);
-bool32 TrySymbiosis(u32 battler, enum Item itemId, bool32 moveEnd);
-void BestowItem(u32 battlerAtk, u32 battlerDef);
-ARM_FUNC u32 GetBattlerVolatile(u32 battler, enum Volatile _volatile);
+u32 GetBattlerVolatile(u32 battler, enum Volatile _volatile);
 void SetMonVolatile(u32 battler, enum Volatile _volatile, u32 newValue);
 bool32 ItemHealMonVolatile(u32 battler, enum Item itemId);
 void PushHazardTypeToQueue(enum BattleSide side, enum Hazards hazardType);

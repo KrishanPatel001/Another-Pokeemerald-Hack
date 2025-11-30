@@ -420,7 +420,7 @@
 	.endm
 
 	.macro trainerslidein position:req
-	.byte B_SCR_OP_TRAINERSLIDEIN
+	.byte 0x48
 	.byte \position
 	.endm
 
@@ -512,7 +512,7 @@
 	.endm
 
 	.macro switchinevents
-	.byte B_SCR_OP_SWITCHINEVENTS
+	.byte 0x53
 	.endm
 
 	.macro playse song:req
@@ -1285,7 +1285,7 @@
 	.endm
 
 	.macro sortbattlers
-	.byte B_SCR_OP_SORTBATTLERS
+	.byte 0xf4
 	.endm
 
 	.macro removeattackerstatus1

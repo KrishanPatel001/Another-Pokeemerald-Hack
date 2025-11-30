@@ -77,6 +77,70 @@
 
 #define BATTLE_BUFFER_LINK_SIZE 0x1000
 
+// Cleared each time a mon leaves the field, either by switching out or fainting
+struct DisableStruct
+{
+    u32 transformedMonPersonality;
+    bool8 transformedMonShininess;
+    u16 disabledMove;
+    u16 encoredMove;
+    u8 protectUses:4;
+    u8 stockpileCounter:4;
+    s8 stockpileDef;
+    s8 stockpileSpDef;
+    s8 stockpileBeforeDef;
+    s8 stockpileBeforeSpDef;
+    u8 substituteHP;
+    u8 encoredMovePos;
+    u16 disableTimer;
+    u16 encoreTimer;
+    u16 perishSongTimer;
+    u16 rolloutTimer;
+    u16 rolloutTimerStartValue;
+    u16 tauntTimer;
+    u8 furyCutterCounter;
+    u8 battlerPreventingEscape;
+    u8 battlerWithSureHit;
+    u8 isFirstTurn;
+    u8 mimickedMoves:4;
+    u8 rechargeTimer:4;
+    u8 autotomizeCount;
+    u16 slowStartTimer;
+    u16 embargoTimer;
+    u16 magnetRiseTimer;
+    u16 telekinesisTimer;
+    u16 healBlockTimer;
+    u16 laserFocusTimer;
+    u16 throatChopTimer;
+    u8 wrapTurns;
+    u16 syrupBombTimer;
+    u16 tormentTimer; // used for G-Max Meltdown
+    u8 usedMoves:4;
+    u8 truantCounter:1;
+    u8 truantSwitchInHack:1;
+    u8 tarShot:1;
+    u8 octolock:1;
+    u8 cudChew:1;
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
+    u8 syrupBombIsShiny:1;
+    u8 usedProteanLibero:1;
+    u8 flashFireBoosted:1;
+    u8 boosterEnergyActivated:1;
+    u8 padding1:1;
+    u16 overwrittenAbility;   // abilities overwritten during battle (keep separate from battle history in case of switching)
+    u8 roostActive:1;
+    u8 unburdenActive:1;
+    u8 neutralizingGas:1;
+    u8 iceFaceActivationPrevention:1; // fixes hit escape move edge case
+    u8 unnerveActivated:1; // Unnerve and As One (Unnerve part) activate only once per switch in
+    u8 endured:1;
+    u8 tryEjectPack:1;
+    u8 octolockedBy:3;
+    u8 paradoxBoostedStat:4;
+    u8 padding2:2;
+};
+
 // Fully Cleared each turn after end turn effects are done. A few things are cleared before end turn effects
 struct ProtectStruct
 {
@@ -106,8 +170,10 @@ struct ProtectStruct
     u32 padding1:1;
     // End of 32-bit bitfield
     u16 helpingHand:3;
-    u16 revengeDoubled:4;
-    u16 padding2:9;
+    u16 assuranceDoubled:1;
+    u16 myceliumMight:1;
+    u16 forcedSwitch:1;
+    u16 padding:10;
     // End of 16-bit bitfield
     u16 physicalDmg;
     u16 specialDmg;
@@ -128,13 +194,15 @@ struct SpecialStatus
     u8 afterYou:1;
     u8 damagedByAttack:1;
     u8 dancerUsedMove:1;
-    u8 criticalHit:1;
+    u8 rototillerAffected:1;  // to be affected by rototiller
     // End of byte
+    u8 criticalHit:1;
+    u8 switchInItemDone:1;
     u8 instructedChosenTarget:3;
     u8 neutralizingGasRemoved:1;
     u8 berryReduced:1;
-    u8 mindBlownRecoil:1;
-    u8 padding2:2;
+    u8 neutralizingGasRemoved:1;    // See VARIOUS_TRY_END_NEUTRALIZING_GAS
+    u8 padding2:1;
     // End of byte
     u8 gemParam:7;
     u8 gemBoost:1;
@@ -519,13 +587,10 @@ struct BattlerState
     u32 wasAboveHalfHp:1; // For Berserk, Emergency Exit, Wimp Out and Anger Shell.
     u32 commanderSpecies:11;
     u32 selectionScriptFinished:1;
-    u32 lastMoveTarget:3; // The last target on which each mon used a move, for the sake of Instruct
+    u32 switchIn:1;
+    u32 padding:3;
     // End of Word
     u16 hpOnSwitchout;
-    u16 switchIn:1;
-    u16 fainted:1;
-    u16 isFirstTurn:2;
-    u16 padding:12;
 };
 
 struct PartyState
@@ -560,7 +625,7 @@ struct EventStates
     enum BattleIntroStates battleIntro:8;
     enum SwitchInEvents switchIn:8;
     u32 battlerSwitchIn:8; // SwitchInFirstEventBlock, SwitchInSecondEventBlock
-    u32 moveEndBlock:8;
+    u32 padding:8;
 };
 
 // Cleared at the beginning of the battle. Fields need to be cleared when needed manually otherwise.
@@ -619,8 +684,8 @@ struct BattleStruct
     u8 anyMonHasTransformed:1; // Only used in battle_tv.c
     u8 sleepClauseNotBlocked:1;
     u8 isSkyBattle:1;
-    u8 unableToUseMove:1; // for the current action only, to check if the battler failed to act at end turn use the DisableStruct member
-    u8 unused:4;
+    u8 unused:5;
+    u8 sortedBattlers[MAX_BATTLERS_COUNT];
     void (*savedCallback)(void);
     u16 chosenItem[MAX_BATTLERS_COUNT];
     u16 choicedMove[MAX_BATTLERS_COUNT];
@@ -637,6 +702,7 @@ struct BattleStruct
     u8 poisonPuppeteerConfusion:1;
     u8 toxicChainPriority:1; // If Toxic Chain will trigger on target, all other non volatiles will be blocked
     u8 battlersSorted:1; // To avoid unnessasery computation
+    u16 startingStatusTimer;
     struct BattleTvMovePoints tvMovePoints;
     struct BattleTv tv;
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
@@ -707,7 +773,8 @@ struct BattleStruct
     u8 calculatedDamageDone:1;
     u8 calculatedSpreadMoveAccuracy:1;
     u8 printedStrongWindsWeakenedAttack:1;
-    u8 numSpreadTargets:3;
+    u8 numSpreadTargets:2;
+    u8 noTargetPresent:1;
     u8 moldBreakerActive:1;
     struct MessageStatus slideMessageStatus;
     u8 trainerSlideSpriteIds[MAX_BATTLERS_COUNT];
@@ -720,11 +787,7 @@ struct BattleStruct
     u16 flingItem;
     u8 incrementEchoedVoice:1;
     u8 echoedVoiceCounter:3;
-    u8 preAttackAnimPlayed:1;
-    u8 padding4:1;
-    u8 magicCoatActive:1;
-    u8 magicBounceActive:1;
-    u8 moveBouncer;
+    u8 padding4:4;
 };
 
 struct AiBattleData

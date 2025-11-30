@@ -1108,7 +1108,7 @@
 	.endm
 
 	.macro unused_0xcf
-	.byte B_SCR_OP_UNUSED_0XCF
+	.byte 0xcf
 	.endm
 
 	.macro settaunt failInstr:req

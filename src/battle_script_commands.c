@@ -799,7 +799,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     Cmd_unused_0xCC,                             //0xCC
     Cmd_curestatuswithmove,                      //0xCD
     Cmd_settorment,                              //0xCE
-    Cmd_jumpifnodamage,                          //0xCF
+    Cmd_unused_0xCF,                             //0xCF
     Cmd_settaunt,                                //0xD0
     Cmd_trysethelpinghand,                       //0xD1
     Cmd_tryswapitems,                            //0xD2

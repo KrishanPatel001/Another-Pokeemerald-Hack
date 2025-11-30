@@ -19,7 +19,7 @@
 
 	.macro critcalc
 	.warning "critcalc macro has been deprecated, please remove from scripts"
-	.byte B_SCR_OP_CRITCALC
+	.byte 0x4
 	.endm
 
 	.macro damagecalc

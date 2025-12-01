@@ -57,7 +57,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 	waitmessage
 	closemessage
 	special HealPlayerParty
-	dofacilitytrainerbattle FACILITY_BATTLE_FACTORY
+	dofacilitytrainerbattle FACILITY_BATTLE_PYRAMID
 	waitstate
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent

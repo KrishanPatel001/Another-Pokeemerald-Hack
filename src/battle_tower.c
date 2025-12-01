@@ -1091,7 +1091,7 @@ static void GetOpponentIntroSpeech(void)
 
 static void SaveCurrentWinStreak(void)
 {
-    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
@@ -1102,8 +1102,7 @@ static void SaveCurrentWinStreak(void)
 static void SaveBattleTowerRecord(void)
 {
     s32 i;
-    enum FrontierLevelMode lvlMode;
-    u8 battleMode, class;
+    u8 lvlMode, battleMode, class;
     struct EmeraldBattleTowerRecord *playerRecord = &gSaveBlock2Ptr->frontier.towerPlayer;
 
     ClearBattleTowerRecord(playerRecord);
@@ -1149,7 +1148,7 @@ static void SaveBattleTowerRecord(void)
 
 static void SaveTowerChallenge(void)
 {
-    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u16 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     s32 challengeNum = (signed)(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE);
 

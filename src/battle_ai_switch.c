@@ -2592,10 +2592,129 @@ static bool32 AiExpectsToFaintPlayer(u32 battler)
 
     GetAIPartyIndexes(battler, &firstId, &lastId);
 
-    for (u32 monIndex = firstId; monIndex < lastId; monIndex++)
-    {
-        if (GetMonData(&party[monIndex], MON_DATA_HP) != 0)
-            continue; // Only consider fainted mons
+        switch (GetItemBattleUsage(item))
+        {
+        case EFFECT_ITEM_HEAL_AND_CURE_STATUS:
+            healAmount = GetHPHealAmount(itemEffects[GetItemEffectParamOffset(battler, item, 4, ITEM4_HEAL_HP)], GetBattlerMon(battler));
+            shouldUse = AI_ShouldHeal(battler, healAmount);
+            break;
+        case EFFECT_ITEM_RESTORE_HP:
+            healAmount = GetHPHealAmount(itemEffects[GetItemEffectParamOffset(battler, item, 4, ITEM4_HEAL_HP)], GetBattlerMon(battler));
+            shouldUse = AI_ShouldHeal(battler, healAmount);
+            break;
+        case EFFECT_ITEM_CURE_STATUS:
+            if ((itemEffects[3] & ITEM3_SLEEP && gBattleMons[battler].status1 & STATUS1_SLEEP)
+             || (itemEffects[3] & ITEM3_POISON && gBattleMons[battler].status1 & STATUS1_PSN_ANY)
+             || (itemEffects[3] & ITEM3_BURN && gBattleMons[battler].status1 & STATUS1_BURN)
+             || (itemEffects[3] & ITEM3_FREEZE && gBattleMons[battler].status1 & STATUS1_ICY_ANY)
+             || (itemEffects[3] & ITEM3_PARALYSIS && gBattleMons[battler].status1 & STATUS1_PARALYSIS)
+             || (itemEffects[3] & ITEM3_CONFUSION && gBattleMons[battler].volatiles.confusionTurns > 0))
+                shouldUse = ShouldCureStatusWithItem(battler, battler, gAiLogicData);
+            break;
+        case EFFECT_ITEM_INCREASE_STAT:
+            if (gDisableStructs[battler].isFirstTurn || !AI_OpponentCanFaintAiWithMod(battler, 0))
+            {
+                if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_FORCE_SETUP_FIRST_TURN)
+                {
+                    shouldUse = TRUE;
+                    break;
+                }
+
+                enum StatChange statChange = STAT_CHANGE_ATK;
+
+                if (B_X_ITEMS_BUFF >= GEN_7)
+                    statChange = STAT_CHANGE_ATK_2;
+
+                statChange = statChange + itemEffects[1] - STAT_ATK;
+
+                if (IsBattlerAlive(LEFT_FOE(battler)) && IncreaseStatUpScore(battler, LEFT_FOE(battler), statChange) > NO_INCREASE)
+                    shouldUse = TRUE;
+
+                if (IsBattlerAlive(RIGHT_FOE(battler)) && IncreaseStatUpScore(battler, RIGHT_FOE(battler), statChange) > NO_INCREASE)
+                    shouldUse = TRUE;
+
+                break;
+            }
+            break;
+        case EFFECT_ITEM_INCREASE_ALL_STATS:
+            if (gAiLogicData->abilities[battler] == ABILITY_CONTRARY)
+                break;
+            if (gDisableStructs[battler].isFirstTurn || !AI_OpponentCanFaintAiWithMod(battler, 0))
+            {
+                if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_FORCE_SETUP_FIRST_TURN)
+                {
+                    shouldUse = TRUE;
+                    break;
+                }
+
+                if (IsBattlerAlive(LEFT_FOE(battler)))
+                {
+                    if (ShouldRaiseAnyStat(battler, LEFT_FOE(battler)))
+                        shouldUse = TRUE;
+                    else
+                        break;
+                }
+
+                if (IsBattlerAlive(RIGHT_FOE(battler)))
+                {
+                    if (ShouldRaiseAnyStat(battler, RIGHT_FOE(battler)))
+                        shouldUse = TRUE;
+                    else
+                        break;
+                }
+            }
+            break;
+        case EFFECT_ITEM_SET_FOCUS_ENERGY:
+            if (!gDisableStructs[battler].isFirstTurn
+                || gBattleMons[battler].volatiles.dragonCheer
+                || gBattleMons[battler].volatiles.focusEnergy
+                || AI_OpponentCanFaintAiWithMod(battler, 0))
+            {
+                break;
+            }
+            else
+            {
+                if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_FORCE_SETUP_FIRST_TURN)
+                {
+                    shouldUse = TRUE;
+                    break;
+                }
+
+                if (gAiLogicData->abilities[battler] == ABILITY_SUPER_LUCK
+                 || gAiLogicData->abilities[battler] == ABILITY_SNIPER
+                 || gAiLogicData->holdEffects[battler] == HOLD_EFFECT_SCOPE_LENS
+                 || HasMoveWithFlag(battler, GetMoveCriticalHitStage))
+                    shouldUse = TRUE;
+            }
+            break;
+        case EFFECT_ITEM_SET_MIST:
+            battlerSide = GetBattlerSide(battler);
+            if (gDisableStructs[battler].isFirstTurn && !(gSideStatuses[battlerSide] & SIDE_STATUS_MIST))
+                shouldUse = TRUE;
+            break;
+        case EFFECT_ITEM_REVIVE:
+            gBattleStruct->itemPartyIndex[battler] = GetFirstFaintedPartyIndex(battler);
+            if (gBattleStruct->itemPartyIndex[battler] != PARTY_SIZE) // Revive if possible.
+                shouldUse = TRUE;
+            break;
+        case EFFECT_ITEM_USE_POKE_FLUTE:
+            if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+                shouldUse = TRUE;
+            break;
+        default:
+            return FALSE;
+        }
+        if (shouldUse)
+        {
+            // Set selected party ID to current battler if none chosen.
+            if (gBattleStruct->itemPartyIndex[battler] == PARTY_SIZE)
+                gBattleStruct->itemPartyIndex[battler] = gBattlerPartyIndexes[battler];
+            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
+            gBattleStruct->chosenItem[battler] = item;
+            gBattleHistory->trainerItems[i] = 0;
+            return shouldUse;
+        }
+    }
 
         bool32 isAceMon = IsAceMon(battler, monIndex);
 

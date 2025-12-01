@@ -4008,46 +4008,22 @@ static enum MoveComparisonResult CompareGuaranteeFaintTarget(u32 battlerAtk, u32
     return MOVE_NEUTRAL_COMPARISON;
 }
 
-static enum MoveComparisonResult CompareResistBerryEffects(u32 battlerAtk, u32 battlerDef, u32 moveSlot1, u32 moveSlot2)
+static enum MoveComparisonResult CompareResistBerryEffects(u32 battlerAtk, u32 battlerDef, u32 move1, u32 moveSlot1, u32 move2, u32 moveSlot2)
 {
     // Check for resist berries in OHKOs
     if (gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_RESIST_BERRY)
     {
         if (gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot2] && !gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot1])
             return MOVE_WON_COMPARISON;
-
+        
         if (gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot1] && !gAiLogicData->resistBerryAffected[battlerAtk][battlerDef][moveSlot2])
-            return MOVE_LOST_COMPARISON;
+            return MOVE_LOST_COMPARISON;        
     }
 
     return MOVE_NEUTRAL_COMPARISON;
 }
 
-static enum MoveComparisonResult CompareMoveSelfSacrifice(u32 battlerAtk, u32 battlerDef, enum Move move1, enum Move move2)
-{
-    bool32 selfSacrifice1 = IsSelfSacrificeEffect(move1);
-    bool32 selfSacrifice2 = IsSelfSacrificeEffect(move2);
-
-    if (selfSacrifice1 && !selfSacrifice2)
-        return MOVE_LOST_COMPARISON;
-    if (selfSacrifice2 && !selfSacrifice1)
-        return MOVE_WON_COMPARISON;
-    return MOVE_NEUTRAL_COMPARISON;
-}
-
-static enum MoveComparisonResult CompareMoveTwoTurnEffect(u32 battlerAtk, enum Move move1, enum Move move2)
-{
-    bool32 twoTurn1 = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, move1);
-    bool32 twoTurn2 = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, move2);
-
-    if (twoTurn1 && !twoTurn2)
-        return MOVE_LOST_COMPARISON;
-    if (twoTurn2 && !twoTurn1)
-        return MOVE_WON_COMPARISON;
-    return MOVE_NEUTRAL_COMPARISON;
-}
-
-static inline bool32 ShouldUseSpreadDamageMove(u32 battlerAtk, enum Move move, u32 moveIndex, u32 hitsToFaintOpposingBattler)
+static inline bool32 ShouldUseSpreadDamageMove(u32 battlerAtk, u32 move, u32 moveIndex, u32 hitsToFaintOpposingBattler)
 {
     u32 partnerBattler = BATTLE_PARTNER(battlerAtk);
     u32 noOfHitsToFaintPartner = GetNoOfHitsToKOBattler(battlerAtk, partnerBattler, moveIndex, AI_ATTACKING, CONSIDER_ENDURE);
@@ -4119,14 +4095,13 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
         }
 
         // Priority list:
-        // 1. Lower number of hits to KO
+        // 1. Less no of hits to ko
             // 2. Move not affected by resist berry (if two moves OHKO)
-        // 3. Not charging
-            // 4. Priority if outsped and a OHKO (if two moves OHKO)
-        // 5. Not self sacrificing
-            // 6. Guaranteed KO (if two moves OHKO)
-        // 7. More accuracy
-        // 8. Better effect
+            // 3. Priority if outsped and a OHKO (if two moves OHKO)
+        // 4. Not charging
+            // 5. Guaranteed KO (if two moves OHKO)
+        // 6. More accuracy
+        // 7. Better effect
 
         // Current move requires the least hits to KO. Compare with other moves.
         if (leastHits == noOfHits[currId])
@@ -4142,13 +4117,13 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                     if (noOfHits[currId] == 1)
                     {
                         // If one move is berry-resisted, use the other one
-                        switch (CompareResistBerryEffects(battlerAtk, battlerDef, currId, compareId))
+                        switch (CompareResistBerryEffects(battlerAtk, battlerDef, moves[currId], currId, moves[i], i))
                         {
                         case MOVE_WON_COMPARISON:
                             tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
                             break;
                         case MOVE_LOST_COMPARISON:
-                            tempMoveScores[compareId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
+                            tempMoveScores[i] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
                             break;
                         case MOVE_NEUTRAL_COMPARISON:
                             break;

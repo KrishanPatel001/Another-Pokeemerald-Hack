@@ -859,13 +859,21 @@ static inline bool32 ShouldCalcCritDamage(struct DamageContext *ctx)
     return FALSE;
 }
 
-static s32 HandleKOThroughBerryReduction(struct BattleContext *ctx, s32 dmg)
+static s32 HandleKOThroughBerryReduction(struct DamageContext *ctx, s32 dmg)
 {
     if (ctx->aiCheckBerryModifier) // Only set if AI running calcs
     {
+        // Store resist berry affected move
+        u32 moveIndex = 0;
+        for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            if (ctx->move == gBattleMons[ctx->battlerAtk].moves[moveIndex])
+                break;
+        }
+
         // Only indicate move is ignoring berry resist if it doesn't already OHKO even if resisted
         if (dmg < gBattleMons[ctx->battlerDef].hp)
-            gAiLogicData->resistBerryAffected[ctx->battlerAtk][ctx->battlerDef][GetMoveIndex(ctx->battlerAtk, ctx->move)] = TRUE;
+            gAiLogicData->resistBerryAffected[ctx->battlerAtk][ctx->battlerDef][moveIndex] = TRUE;
 
         // Ignore resist berry if appropriate
         u32 berryModifier = gAiLogicData->abilities[ctx->battlerDef] == ABILITY_RIPEN ? 4 : 2;
@@ -873,7 +881,7 @@ static s32 HandleKOThroughBerryReduction(struct BattleContext *ctx, s32 dmg)
         u32 totalDamage = dmg;
 
         // Add unmitigated hits up to the set KO threshold, - 1 because the first hit is dmg
-        for (u32 hitsToKO = 0; hitsToKO < AI_IGNORE_BERRY_KO_THRESHOLD - 1; hitsToKO++)
+        for (int i = 0; i < AI_IGNORE_BERRY_KO_THRESHOLD - 1; i++)
             totalDamage += unmitigatedDamage;
 
         // If the total damage from reduced hit and non-reduced hit(s) are a KO, we can see our target KO threshold through berry damage
@@ -885,14 +893,14 @@ static s32 HandleKOThroughBerryReduction(struct BattleContext *ctx, s32 dmg)
     return dmg;
 }
 
-static s32 AI_ApplyModifiersAfterDmgRoll(struct BattleContext *ctx, s32 dmg)
+static s32 AI_ApplyModifiersAfterDmgRoll(struct DamageContext *ctx, s32 dmg)
 {
     dmg = ApplyModifiersAfterDmgRoll(ctx, dmg);
     dmg = HandleKOThroughBerryReduction(ctx, dmg);
     return dmg;
 }
 
-struct SimulatedDamage AI_CalcDamage(enum Move move, u32 battlerAtk, u32 battlerDef, uq4_12_t *typeEffectiveness, enum AIConsiderGimmick considerGimmickAtk, enum AIConsiderGimmick considerGimmickDef, u32 weather, u32 fieldStatuses)
+struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, uq4_12_t *typeEffectiveness, enum AIConsiderGimmick considerGimmickAtk, enum AIConsiderGimmick considerGimmickDef, u32 weather)
 {
     struct SimulatedDamage simDamage = {0};
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);
@@ -930,7 +938,7 @@ struct SimulatedDamage AI_CalcDamage(enum Move move, u32 battlerAtk, u32 battler
     gBattleStruct->magnitudeBasePower = 70;
     gBattleStruct->presentBasePower = 80;
 
-    struct BattleContext ctx = {0};
+    struct DamageContext ctx = {0};
     ctx.aiCalc = TRUE;
     ctx.aiCheckBerryModifier = FALSE;
     ctx.battlerAtk = battlerAtk;

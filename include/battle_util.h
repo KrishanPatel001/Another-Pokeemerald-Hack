@@ -153,14 +153,11 @@ struct BattleContext
     u32 battlerAtk:3;
     u32 battlerDef:3;
     u32 fixedBasePower:8;
-    u32 weather:16;
-    u32 unused:2;
-    u32 fieldStatuses;
-
-    enum Move move:13;
-    enum Move chosenMove:13; // May be different to 'move', e.g. for Z moves.
-    enum Type moveType:6;
-
+    u32 aiCalc:1;
+    u32 aiCheckBerryModifier:1; // Flags that KOing through a berry should be checked
+    u32 padding2:6;
+    u32 chosenMove:16; // May be different to 'move', e.g. for Z moves.
+    u32 padding3:16;
     uq4_12_t typeEffectivenessModifier;
     enum Ability abilityAtk;
     enum Ability abilityDef;

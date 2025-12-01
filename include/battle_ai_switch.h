@@ -47,7 +47,5 @@ u32 GetMostSuitableMonToSwitchInto(u32 battler, enum SwitchType switchType);
 bool32 ShouldSwitch(u32 battler);
 void ModifySwitchAfterMoveScoring(u32 battler);
 u32 AI_SelectRevivalBlessingMon(u32 battler);
-bool32 IsSwitchinValid(u32 battler);
-bool32 IsAceMon(u32 battler, u32 monPartyId);
 
 #endif // GUARD_BATTLE_AI_SWITCH_H

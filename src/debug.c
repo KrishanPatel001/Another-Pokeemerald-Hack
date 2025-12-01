@@ -2872,13 +2872,7 @@ static void DebugAction_Give_NewEgg(u8 taskId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 
     // Display initial Pokémon
-    u32 species;
-    if (!IsSpeciesEnabled(gTasks[taskId].tInput))
-        species = SPECIES_NONE;
-    else
-        species = sDebugMonData->species;
-
-    Debug_Display_SpeciesInfo(species, gTasks[taskId].tInput, 0, windowId);
+    Debug_Display_SpeciesInfo(sDebugMonData->species, 0, windowId);
 
     //Set task data
     gTasks[taskId].func = DebugAction_Give_Pokemon_SelectId;
@@ -2889,8 +2883,8 @@ static void DebugAction_Give_NewEgg(u8 taskId)
     gTasks[taskId].tIsEgg = TRUE;
 
     FreeMonIconPalettes();
-    LoadMonIconPalette(species);
-    gTasks[taskId].tSpriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
+    LoadMonIconPalette(gTasks[taskId].tInput);
+    gTasks[taskId].tSpriteId = CreateMonIcon(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
 }
 

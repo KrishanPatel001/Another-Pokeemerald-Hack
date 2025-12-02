@@ -980,7 +980,7 @@
 	.endm
 
 	.macro unused_0xb3
-	.byte B_SCR_OP_UNUSED_0XB3
+	.byte 0xb3
 	.endm
 
 	.macro jumpifconfusedandstatmaxed stat:req, jumpInstr:req
@@ -990,7 +990,7 @@
 	.endm
 
 	.macro unused_0xb5
-	.byte B_SCR_OP_UNUSED_0XB5
+	.byte 0xb5
 	.endm
 
 	.macro setembargo failInstr:req

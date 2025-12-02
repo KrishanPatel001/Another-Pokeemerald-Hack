@@ -2577,7 +2577,7 @@ static enum MoveCanceler CancelerPPDeduction(struct BattleContext *ctx)
 
     // For item Metronome, echoed voice
     if (ctx->currentMove != gLastResultingMoves[ctx->battlerAtk] || WasUnableToUseMove(ctx->battlerAtk))
-        gBattleStruct->metronomeItemCounter[ctx->battlerAtk] = 0;
+        gDisableStructs[ctx->battlerAtk].metronomeItemCounter = 0;
 
     if (gBattleMons[ctx->battlerAtk].pp[movePosition] > ppToDeduct)
         gBattleMons[ctx->battlerAtk].pp[movePosition] -= ppToDeduct;
@@ -7314,7 +7314,7 @@ const struct TypePower gNaturalGiftTable[] =
 static inline u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower)
 {
     u32 i;
-    for (i = 0; i < gBattleMons[battlerAtk].volatiles.rolloutTimer; i++)
+    for (i = 0; i < gDisableStructs[battlerAtk].rolloutTimer; i++)
         basePower *= 2;
     if (gBattleMons[battlerAtk].volatiles.defenseCurl)
         basePower *= 2;
@@ -7323,26 +7323,9 @@ static inline u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower)
 
 static inline u32 CalcFuryCutterBasePower(u32 battlerAtk, u32 basePower)
 {
-    for (u32 i = 0; i < gBattleMons[battlerAtk].volatiles.furyCutterCounter; i++)
+    for (u32 i = 0; i < gDisableStructs[battlerAtk].furyCutterCounter; i++)
         basePower *= 2;
     return min(basePower, 160); // The duration to reach 160 depends on a gen
-}
-
-static inline u32 CalcTerrainBoostedPower(struct BattleContext *ctx, u32 basePower)
-{
-    bool32 isTerrainAffected = FALSE;
-
-    if (GetMoveTerrainBoost_GroundCheck(ctx->move) == GROUND_CHECK_USER)
-        isTerrainAffected = IsBattlerTerrainAffected(ctx->battlerAtk, ctx->abilityAtk, ctx->holdEffectAtk, ctx->fieldStatuses, GetMoveTerrainBoost_Terrain(ctx->move));
-    else if (GetMoveTerrainBoost_GroundCheck(ctx->move) == GROUND_CHECK_TARGET)
-        isTerrainAffected = IsBattlerTerrainAffected(ctx->battlerDef, ctx->abilityDef, ctx->holdEffectDef, ctx->fieldStatuses, GetMoveTerrainBoost_Terrain(ctx->move));
-    else if (ctx->fieldStatuses & GetMoveTerrainBoost_Terrain(ctx->move)) // no ground check (Psyblade)
-        isTerrainAffected = TRUE;
-
-    if (isTerrainAffected)
-        basePower = uq4_12_multiply(basePower, PercentToUQ4_12AddOne(GetMoveTerrainBoost_Percent(ctx->move)));
-
-    return basePower;
 }
 
 static inline u32 IsFieldMudSportAffected(enum Type moveType)
@@ -8735,7 +8718,7 @@ static inline uq4_12_t GetAttackerItemsModifier(u32 battlerAtk, uq4_12_t typeEff
     {
     case HOLD_EFFECT_METRONOME:
         metronomeBoostBase = PercentToUQ4_12(GetBattlerHoldEffectParam(battlerAtk));
-        metronomeTurns = min(gBattleMons[battlerAtk].volatiles.metronomeItemCounter, 5);
+        metronomeTurns = min(gDisableStructs[battlerAtk].metronomeItemCounter, 5);
         // according to bulbapedia this is the "correct" way to calculate the metronome boost
         // due to the limited domain of damage numbers it will never really matter whether this is off by one
         return uq4_12_add(UQ_4_12(1.0), metronomeBoostBase * metronomeTurns);

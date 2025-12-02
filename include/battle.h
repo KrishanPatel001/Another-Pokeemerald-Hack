@@ -95,10 +95,10 @@ struct DisableStruct
     u16 disableTimer;
     u16 encoreTimer;
     u16 perishSongTimer;
-    u16 rolloutTimer;
-    u16 rolloutTimerStartValue;
+    u8 rolloutTimer;
     u16 tauntTimer;
     u8 furyCutterCounter;
+    u8 metronomeItemCounter;
     u8 battlerPreventingEscape;
     u8 battlerWithSureHit;
     u8 isFirstTurn;
@@ -585,10 +585,11 @@ struct BattlerState
     u32 wasAboveHalfHp:1; // For Berserk, Emergency Exit, Wimp Out and Anger Shell.
     u32 commanderSpecies:11;
     u32 selectionScriptFinished:1;
-    u32 switchIn:1;
-    u32 padding:3;
+    u32 lastMoveTarget:3; // The last target on which each mon used a move, for the sake of Instruct
     // End of Word
     u16 hpOnSwitchout;
+    u16 switchIn:1;
+    u16 padding:15;
 };
 
 struct PartyState

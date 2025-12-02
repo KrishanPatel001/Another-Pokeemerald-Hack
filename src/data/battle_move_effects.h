@@ -2089,7 +2089,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MAX_MOVE] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectMaxMove,
         .battleTvScore = 0, // TODO: Assign points
     },
 

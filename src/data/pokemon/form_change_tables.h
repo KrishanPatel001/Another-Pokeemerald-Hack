@@ -1788,8 +1788,7 @@ static const struct FormChange sFalinksFormChangeTable[] =
 #endif //P_FAMILY_FALINKS
 
 #if P_FAMILY_EISCUE
-static const struct FormChange sEiscueFormChangeTable[] =
-{
+static const struct FormChange sEiscueFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_WEATHER,    SPECIES_EISCUE_ICE, B_WEATHER_ICY_ANY, ABILITY_ICE_FACE},
     {FORM_CHANGE_FAINT,             SPECIES_EISCUE_ICE},
     {FORM_CHANGE_END_BATTLE,        SPECIES_EISCUE_ICE},

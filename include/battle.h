@@ -695,6 +695,7 @@ struct BattleStruct
         struct LinkBattlerHeader linkBattlerHeader;
         struct BattleVideo battleVideo;
     } multiBuffer;
+    u32 startingStatus; // statuses to apply at battle start. defined in constants/battle.h
     u8 battlerKOAnimsRunning:3;
     u8 friskedAbility:1; // If identifies two mons, show the ability pop-up only once.
     u8 fickleBeamBoosted:1;

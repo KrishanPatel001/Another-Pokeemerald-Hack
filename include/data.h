@@ -116,12 +116,11 @@ struct Trainer
 {
     u64 aiFlags;
     const struct TrainerMon *party;
-    enum Item items[MAX_TRAINER_ITEMS];
-    struct StartingStatuses startingStatus; // this trainer starts a battle with a given status. see include/constants/battle.h for values
+    u16 items[MAX_TRAINER_ITEMS];
+    u32 startingStatus; // this trainer starts a battle with a given status. see include/constants/battle.h for values
     u8 trainerClass;
-    u8 encounterMusic:7;
-    u8 gender:1;
-    enum TrainerPicID trainerPic;
+    u8 encounterMusic_gender; // last bit is gender
+    u8 trainerPic;
     u8 trainerName[TRAINER_NAME_LENGTH + 1];
     u8 battleType:2;
     u8 mugshotColor:6;
@@ -131,7 +130,7 @@ struct Trainer
     u8 poolPickIndex;
     u8 poolPruneIndex;
     u16 overrideTrainer;
-    enum TrainerPicID trainerBackPic;
+    u8 trainerBackPic;
 };
 
 struct TrainerClass
@@ -314,7 +313,7 @@ static inline const u8 GetTrainerBackPicFromId(u16 trainerId)
     return GetTrainerStructFromId(trainerId)->trainerBackPic;
 }
 
-static inline const struct StartingStatuses GetTrainerStartingStatusFromId(u16 trainerId)
+static inline const u32 GetTrainerStartingStatusFromId(u16 trainerId)
 {
     return GetTrainerStructFromId(trainerId)->startingStatus;
 }

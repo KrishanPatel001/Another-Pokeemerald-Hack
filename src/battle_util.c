@@ -3769,14 +3769,14 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
     switch (caseId)
     {
     case FIELD_EFFECT_TRAINER_STATUSES:  // starting field/side/etc statuses with a variable
-        if (gStartingStatuses.electricTerrain || gStartingStatuses.electricTerrainTemporary)
+        if (gBattleStruct->startingStatus & STARTING_STATUS_ELECTRIC_TERRAIN)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_ELECTRIC_TERRAIN,
                         B_MSG_TERRAIN_SET_ELECTRIC,
                         0,
-                        &gFieldTimers.terrainTimer, gStartingStatuses.electricTerrain ? 0 : 5);
-            gStartingStatuses.electricTerrainTemporary = gStartingStatuses.electricTerrain = FALSE;
+                        &gFieldTimers.terrainTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_ELECTRIC_TERRAIN;
             isTerrain = TRUE;
             if (effect)
             {
@@ -3784,14 +3784,14 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
                 return TRUE;
             }
         }
-        else if (gStartingStatuses.mistyTerrain || gStartingStatuses.mistyTerrainTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_MISTY_TERRAIN)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_MISTY_TERRAIN,
                         B_MSG_TERRAIN_SET_MISTY,
                         0,
-                        &gFieldTimers.terrainTimer, gStartingStatuses.mistyTerrain ? 0 : 5);
-            gStartingStatuses.mistyTerrainTemporary = gStartingStatuses.mistyTerrain = FALSE;
+                        &gFieldTimers.terrainTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_MISTY_TERRAIN;
             isTerrain = TRUE;
             if (effect)
             {
@@ -3799,14 +3799,14 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
                 return TRUE;
             }
         }
-        else if (gStartingStatuses.grassyTerrain || gStartingStatuses.grassyTerrainTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_GRASSY_TERRAIN)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_GRASSY_TERRAIN,
                         B_MSG_TERRAIN_SET_GRASSY,
                         0,
-                        &gFieldTimers.terrainTimer, gStartingStatuses.grassyTerrain ? 0 : 5);
-            gStartingStatuses.grassyTerrainTemporary = gStartingStatuses.grassyTerrain = FALSE;
+                        &gFieldTimers.terrainTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_GRASSY_TERRAIN;
             isTerrain = TRUE;
             if (effect)
             {
@@ -3814,239 +3814,122 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
                 return TRUE;
             }
         }
-        else if (gStartingStatuses.psychicTerrain || gStartingStatuses.psychicTerrainTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_PSYCHIC_TERRAIN)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_PSYCHIC_TERRAIN,
                         B_MSG_TERRAIN_SET_PSYCHIC,
                         0,
-                        &gFieldTimers.terrainTimer, gStartingStatuses.psychicTerrain ? 0 : 5);
-            gStartingStatuses.psychicTerrainTemporary = gStartingStatuses.psychicTerrain = FALSE;
+                        &gFieldTimers.terrainTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_PSYCHIC_TERRAIN;
             isTerrain = TRUE;
         }
-        else if (gStartingStatuses.trickRoom || gStartingStatuses.trickRoomTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_TRICK_ROOM)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_TRICK_ROOM,
                         B_MSG_SET_TRICK_ROOM,
                         B_ANIM_TRICK_ROOM,
-                        &gFieldTimers.trickRoomTimer, gStartingStatuses.trickRoom ? 0 : 5);
-            gStartingStatuses.trickRoomTemporary = gStartingStatuses.trickRoom = FALSE;
+                        &gFieldTimers.trickRoomTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_TRICK_ROOM;
         }
-        else if (gStartingStatuses.magicRoom || gStartingStatuses.magicRoomTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_MAGIC_ROOM)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_MAGIC_ROOM,
                         B_MSG_SET_MAGIC_ROOM,
                         B_ANIM_MAGIC_ROOM,
-                        &gFieldTimers.magicRoomTimer, gStartingStatuses.magicRoom ? 0 : 5);
-            gStartingStatuses.magicRoomTemporary = gStartingStatuses.magicRoom = FALSE;
+                        &gFieldTimers.magicRoomTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_MAGIC_ROOM;
         }
-        else if (gStartingStatuses.wonderRoom || gStartingStatuses.wonderRoomTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_WONDER_ROOM)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_WONDER_ROOM,
                         B_MSG_SET_WONDER_ROOM,
                         B_ANIM_WONDER_ROOM,
-                        &gFieldTimers.wonderRoomTimer,  gStartingStatuses.wonderRoom ? 0 : 5);
-            gStartingStatuses.wonderRoomTemporary = gStartingStatuses.wonderRoom = FALSE;
+                        &gFieldTimers.wonderRoomTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_WONDER_ROOM;
         }
-        else if (gStartingStatuses.tailwindPlayer || gStartingStatuses.tailwindPlayerTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_TAILWIND_PLAYER)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_TAILWIND,
                         B_SIDE_PLAYER,
                         B_MSG_SET_TAILWIND,
                         B_ANIM_TAILWIND,
-                        &gSideTimers[B_SIDE_PLAYER].tailwindTimer, gStartingStatuses.tailwindPlayer ? 0 : (B_TAILWIND_TURNS >= GEN_5 ? 4 : 3));
-            gStartingStatuses.tailwindPlayerTemporary = gStartingStatuses.tailwindPlayer = FALSE;
+                        &gSideTimers[B_SIDE_PLAYER].tailwindTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_TAILWIND_PLAYER;
         }
-        else if (gStartingStatuses.tailwindOpponent || gStartingStatuses.tailwindOpponentTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_TAILWIND_OPPONENT)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_TAILWIND,
                         B_SIDE_OPPONENT,
                         B_MSG_SET_TAILWIND,
                         B_ANIM_TAILWIND,
-                        &gSideTimers[B_SIDE_OPPONENT].tailwindTimer, gStartingStatuses.tailwindOpponent ? 0 : (B_TAILWIND_TURNS >= GEN_5 ? 4 : 3));
-            gStartingStatuses.tailwindOpponentTemporary = gStartingStatuses.tailwindOpponent = FALSE;
+                        &gSideTimers[B_SIDE_OPPONENT].tailwindTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_TAILWIND_OPPONENT;
         }
-        else if (gStartingStatuses.rainbowPlayer || gStartingStatuses.rainbowPlayerTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_RAINBOW_PLAYER)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_RAINBOW,
                         B_SIDE_PLAYER,
                         B_MSG_SET_RAINBOW,
                         B_ANIM_RAINBOW,
-                        &gSideTimers[B_SIDE_PLAYER].rainbowTimer, gStartingStatuses.rainbowPlayer ? 0 : 4);
-            gStartingStatuses.rainbowPlayerTemporary = gStartingStatuses.rainbowPlayer = FALSE;
+                        &gSideTimers[B_SIDE_PLAYER].rainbowTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_RAINBOW_PLAYER;
         }
-        else if (gStartingStatuses.rainbowOpponent || gStartingStatuses.rainbowOpponentTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_RAINBOW_OPPONENT)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_RAINBOW,
                         B_SIDE_OPPONENT,
                         B_MSG_SET_RAINBOW,
                         B_ANIM_RAINBOW,
-                        &gSideTimers[B_SIDE_OPPONENT].rainbowTimer, gStartingStatuses.rainbowOpponent ? 0 : 4);
-            gStartingStatuses.rainbowOpponentTemporary = gStartingStatuses.rainbowOpponent = FALSE;
+                        &gSideTimers[B_SIDE_OPPONENT].rainbowTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_RAINBOW_OPPONENT;
         }
-        else if (gStartingStatuses.seaOfFirePlayer || gStartingStatuses.seaOfFirePlayerTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_SEA_OF_FIRE_PLAYER)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_SEA_OF_FIRE,
                         B_SIDE_PLAYER,
                         B_MSG_SET_SEA_OF_FIRE,
                         B_ANIM_SEA_OF_FIRE,
-                        &gSideTimers[B_SIDE_PLAYER].seaOfFireTimer, gStartingStatuses.seaOfFirePlayer ? 0 : 4);
-            gStartingStatuses.seaOfFirePlayerTemporary = gStartingStatuses.seaOfFirePlayer = FALSE;
+                        &gSideTimers[B_SIDE_PLAYER].seaOfFireTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_SEA_OF_FIRE_PLAYER;
         }
-        else if (gStartingStatuses.seaOfFireOpponent || gStartingStatuses.seaOfFireOpponentTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_SEA_OF_FIRE_OPPONENT)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_SEA_OF_FIRE,
                         B_SIDE_OPPONENT,
                         B_MSG_SET_SEA_OF_FIRE,
                         B_ANIM_SEA_OF_FIRE,
-                        &gSideTimers[B_SIDE_OPPONENT].seaOfFireTimer, gStartingStatuses.seaOfFireOpponent ? 0 : 4);
-            gStartingStatuses.seaOfFireOpponentTemporary = gStartingStatuses.seaOfFireOpponent = FALSE;
+                        &gSideTimers[B_SIDE_OPPONENT].seaOfFireTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_SEA_OF_FIRE_OPPONENT;
         }
-        else if (gStartingStatuses.swampPlayer || gStartingStatuses.swampPlayerTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_SWAMP_PLAYER)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_SWAMP,
                         B_SIDE_PLAYER,
                         B_MSG_SET_SWAMP,
                         B_ANIM_SWAMP,
-                        &gSideTimers[B_SIDE_PLAYER].swampTimer, gStartingStatuses.swampPlayer ? 0 : 4);
-            gStartingStatuses.swampPlayerTemporary = gStartingStatuses.swampPlayer = FALSE;
+                        &gSideTimers[B_SIDE_PLAYER].swampTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_SWAMP_PLAYER;
         }
-        else if (gStartingStatuses.swampOpponent || gStartingStatuses.swampOpponentTemporary)
+        else if (gBattleStruct->startingStatus & STARTING_STATUS_SWAMP_OPPONENT)
         {
             effect = SetStartingSideStatus(
                         SIDE_STATUS_SWAMP,
                         B_SIDE_OPPONENT,
                         B_MSG_SET_SWAMP,
                         B_ANIM_SWAMP,
-                        &gSideTimers[B_SIDE_OPPONENT].swampTimer, gStartingStatuses.swampOpponent ? 0 : 4);
-            gStartingStatuses.swampOpponentTemporary = gStartingStatuses.swampOpponent = FALSE;
-        }
-        // Hazards - Spikes
-        else if (gStartingStatuses.spikesPlayerL1)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_PLAYER, 1, B_MSG_SET_SPIKES);
-            gStartingStatuses.spikesPlayerL1 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.spikesPlayerL2)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_PLAYER, 2, B_MSG_SET_SPIKES);
-            gStartingStatuses.spikesPlayerL2 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.spikesPlayerL3)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_PLAYER, 3, B_MSG_SET_SPIKES);
-            gStartingStatuses.spikesPlayerL3 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.spikesOpponentL1)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_OPPONENT, 1, B_MSG_SET_SPIKES);
-            gStartingStatuses.spikesOpponentL1 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.spikesOpponentL2)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_OPPONENT, 2, B_MSG_SET_SPIKES);
-            gStartingStatuses.spikesOpponentL2 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.spikesOpponentL3)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_OPPONENT, 3, B_MSG_SET_SPIKES);
-            gStartingStatuses.spikesOpponentL3 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        // Hazards - Toxic Spikes
-        else if (gStartingStatuses.toxicSpikesPlayerL1)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_PLAYER, 1, B_MSG_SET_POISON_SPIKES);
-            gStartingStatuses.toxicSpikesPlayerL1 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.toxicSpikesPlayerL2)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_PLAYER, 2, B_MSG_SET_POISON_SPIKES);
-            gStartingStatuses.toxicSpikesPlayerL2 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.toxicSpikesOpponentL1)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_OPPONENT, 1, B_MSG_SET_POISON_SPIKES);
-            gStartingStatuses.toxicSpikesOpponentL1 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.toxicSpikesOpponentL2)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_OPPONENT, 2, B_MSG_SET_POISON_SPIKES);
-            gStartingStatuses.toxicSpikesOpponentL2 = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        // Hazards - Sticky Web
-        else if (gStartingStatuses.stickyWebPlayer)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_STICKY_WEB, B_SIDE_PLAYER, 1, B_MSG_SET_STICKY_WEB);
-            gStartingStatuses.stickyWebPlayer = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.stickyWebOpponent)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_STICKY_WEB, B_SIDE_OPPONENT, 1, B_MSG_SET_STICKY_WEB);
-            gStartingStatuses.stickyWebOpponent = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        // Hazards - Stealth Rock
-        else if (gStartingStatuses.stealthRockPlayer)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_STEALTH_ROCK, B_SIDE_PLAYER, 1, B_MSG_SET_STEALTH_ROCK);
-            gStartingStatuses.stealthRockPlayer = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.stealthRockOpponent)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_STEALTH_ROCK, B_SIDE_OPPONENT, 1, B_MSG_SET_STEALTH_ROCK);
-            gStartingStatuses.stealthRockOpponent = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        // Hazards - Steelsurge
-        else if (gStartingStatuses.sharpSteelPlayer)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_STEELSURGE, B_SIDE_PLAYER, 1, B_MSG_SET_SHARP_STEEL);
-            gStartingStatuses.sharpSteelPlayer = FALSE;
-            if (effect)
-                return TRUE;
-        }
-        else if (gStartingStatuses.sharpSteelOpponent)
-        {
-            effect = SetStartingHazardStatus(HAZARDS_STEELSURGE, B_SIDE_OPPONENT, 1, B_MSG_SET_SHARP_STEEL);
-            gStartingStatuses.sharpSteelOpponent = FALSE;
-            if (effect)
-                return TRUE;
+                        &gSideTimers[B_SIDE_OPPONENT].swampTimer);
+            gBattleStruct->startingStatus &= ~STARTING_STATUS_SWAMP_OPPONENT;
         }
         if (effect)
         {

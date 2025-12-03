@@ -3716,11 +3716,17 @@ static void DoBattleIntro(void)
             struct StartingStatuses statusesOpponentB = {0};
 
             // Try to set a status to start the battle with
+            gBattleStruct->startingStatus = 0;
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
-                statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
-                if (TRAINER_BATTLE_PARAM.opponentB != 0xFFFF)
-                    statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+                gBattleStruct->startingStatus |= GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
+                gBattleStruct->startingStatus |= GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+                gBattleStruct->startingStatusTimer = 0; // infinite
+            }
+            if (B_VAR_STARTING_STATUS != 0)
+            {
+                gBattleStruct->startingStatus |= VarGet(B_VAR_STARTING_STATUS);
+                gBattleStruct->startingStatusTimer = VarGet(B_VAR_STARTING_STATUS_TIMER);
             }
             STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
             gBattleMainFunc = TryDoEventsBeforeFirstTurn;
@@ -3780,13 +3786,12 @@ static void TryDoEventsBeforeFirstTurn(void)
             return;
         break;
     case FIRST_TURN_EVENTS_STARTING_STATUS:
-        while (TRUE)
+        while (gBattleStruct->startingStatus)
         {
             if (TryFieldEffects(FIELD_EFFECT_TRAINER_STATUSES))
                 return;
-            break;
         }
-        gBattleStruct->eventState.beforeFirstTurn++;
+        gBattleStruct->eventState.beforeFristTurn++;
         break;
     case FIRST_TURN_EVENTS_TOTEM_BOOST:
         for (i = 0; i < gBattlersCount; i++)

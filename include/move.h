@@ -91,8 +91,7 @@ struct MoveInfo
     // end of word
     s32 priority:4;
     u32 strikeCount:4; // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
-    u32 multiHit:1; // Takes precedence over strikeCount
-    u32 explosion:1;
+    u32 multiHit:1; // Takes presendance over strikeCount
     u32 criticalHitStage:2;
     bool32 alwaysCriticalHit:1;
     u32 numAdditionalEffects:3; // limited to 7
@@ -116,6 +115,7 @@ struct MoveInfo
     bool32 minimizeDoubleDamage:1;
     // end of word
     bool32 ignoresTargetAbility:1;
+    // end of word
     bool32 ignoresTargetDefenseEvasionStages:1;
     bool32 damagesUnderground:1;
     bool32 damagesUnderwater:1;
@@ -152,7 +152,7 @@ struct MoveInfo
     bool32 dampBanned:1;
     //Other
     bool32 validApprenticeMove:1;
-    u32 padding2:17;
+    u32 padding:4;
     // end of word
 
     union {
@@ -168,16 +168,6 @@ struct MoveInfo
             u16 power:9;
             u16 numOfHits:7;
         } speciesPowerOverride;
-        struct {
-            u16 damagePercent:12;
-            u16 damageCategories:4; // bit field
-        } reflectDamage;
-        struct {
-            u16 terrain;
-            u16 percent:13;
-            enum TerrainGroundCheck groundCheck:2;
-            u16 hitsBothFoes:1;
-        } terrainBoost;
         u32 protectMethod;
         u32 status;
         u32 moveProperty;
@@ -292,17 +282,12 @@ static inline u32 GetMoveStrikeCount(enum Move moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].strikeCount;
 }
 
-static inline u32 IsMultiHitMove(enum Move moveId)
+static inline u32 IsMultiHitMove(u32 moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].multiHit;
 }
 
-static inline u32 IsExplosionMove(enum Move move)
-{
-    return gMovesInfo[SanitizeMoveId(move)].explosion;
-}
-
-static inline u32 GetMoveCriticalHitStage(enum Move moveId)
+static inline u32 GetMoveCriticalHitStage(u32 moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].criticalHitStage;
 }
@@ -596,7 +581,22 @@ static inline u32 GetMoveSpeciesPowerOverride_Species(enum Move moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].argument.speciesPowerOverride.species;
 }
 
-static inline u32 GetMoveSpeciesPowerOverride_Power(enum Move moveId)
+static inline u32 GetMoveSpeciesPowerOverride_Species(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].argument.speciesPowerOverride.species;
+}
+
+static inline u32 GetMoveSpeciesPowerOverride_Power(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].argument.speciesPowerOverride.power;
+}
+
+static inline u32 GetMoveSpeciesPowerOverride_NumOfHits(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].argument.speciesPowerOverride.numOfHits;
+}
+
+static inline enum ProtectMethod GetMoveProtectMethod(u32 moveId)
 {
     moveId = SanitizeMoveId(moveId);
     assertf(gMovesInfo[moveId].effect == EFFECT_SPECIES_POWER_OVERRIDE, "not a species power override move: %S", GetMoveName(moveId));

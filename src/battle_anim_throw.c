@@ -233,220 +233,173 @@ struct PokeBallParticles
 
 static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
 {
-    [BALL_STRANGE] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_STRANGE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(16, 23, 30),
-        .animNums = 0,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_STRANGE] = {
+        .tileTag = TAG_PARTICLES_STRANGEBALL,
+        .paletteTag = TAG_PARTICLES_STRANGEBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_POKE] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_POKE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 22, 30),
-        .animNums = 0,
-        .particleAnimationFunc = PokeBallOpenParticleAnimation,
+    [BALL_POKE] = {
+        .tileTag = TAG_PARTICLES_POKEBALL,
+        .paletteTag = TAG_PARTICLES_POKEBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_GREAT] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_GREAT_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(16, 23, 30),
-        .animNums = 0,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_GREAT] = {
+        .tileTag = TAG_PARTICLES_GREATBALL,
+        .paletteTag = TAG_PARTICLES_GREATBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_ULTRA] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_ULTRA_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 31, 15),
-        .animNums = 5,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_ULTRA] = {
+        .tileTag = TAG_PARTICLES_ULTRABALL,
+        .paletteTag = TAG_PARTICLES_ULTRABALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_MASTER] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_MASTER_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(23, 20, 28),
-        .animNums = 1,
-        .particleAnimationFunc = MasterBallOpenParticleAnimation,
+    [BALL_MASTER] = {
+        .tileTag = TAG_PARTICLES_MASTERBALL,
+        .paletteTag = TAG_PARTICLES_MASTERBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_PREMIER] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_PREMIER_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 9, 10),
-        .animNums = 4,
-        .particleAnimationFunc = PremierBallOpenParticleAnimation,
+    [BALL_PREMIER] = {
+        .tileTag = TAG_PARTICLES_PREMIERBALL,
+        .paletteTag = TAG_PARTICLES_PREMIERBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_HEAL] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_HEAL_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(31, 23, 27),
-        .animNums = 0,
-        .particleAnimationFunc = PokeBallOpenParticleAnimation,
+    [BALL_HEAL] = {
+        .tileTag = TAG_PARTICLES_HEALBALL,
+        .paletteTag = TAG_PARTICLES_HEALBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_NET] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_NET_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(21, 31, 25),
-        .animNums = 2,
-        .particleAnimationFunc = SafariBallOpenParticleAnimation,
+    [BALL_NET] = {
+        .tileTag = TAG_PARTICLES_NETBALL,
+        .paletteTag = TAG_PARTICLES_NETBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_NEST] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_NEST_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(30, 27, 10),
-        .animNums = 3,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_NEST] = {
+        .tileTag = TAG_PARTICLES_NESTBALL,
+        .paletteTag = TAG_PARTICLES_NESTBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_DIVE] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_DIVE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(12, 25, 30),
-        .animNums = 2,
-        .particleAnimationFunc = DiveBallOpenParticleAnimation,
+    [BALL_DIVE] = {
+        .tileTag = TAG_PARTICLES_DIVEBALL,
+        .paletteTag = TAG_PARTICLES_DIVEBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_DUSK] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_DUSK_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(7, 1, 13),
-        .animNums = 2,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_DUSK] = {
+        .tileTag = TAG_PARTICLES_DUSKBALL,
+        .paletteTag = TAG_PARTICLES_DUSKBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_TIMER] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_TIMER_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(29, 30, 30),
-        .animNums = 5,
-        .particleAnimationFunc = TimerBallOpenParticleAnimation,
+    [BALL_TIMER] = {
+        .tileTag = TAG_PARTICLES_TIMERBALL,
+        .paletteTag = TAG_PARTICLES_TIMERBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_QUICK] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_QUICK_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(16, 25, 30),
-        .animNums = 4,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_QUICK] = {
+        .tileTag = TAG_PARTICLES_QUICKBALL,
+        .paletteTag = TAG_PARTICLES_QUICKBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_REPEAT] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_REPEAT_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 24, 16),
-        .animNums = 5,
-        .particleAnimationFunc = RepeatBallOpenParticleAnimation,
+    [BALL_REPEAT] = {
+        .tileTag = TAG_PARTICLES_REPEATBALL,
+        .paletteTag = TAG_PARTICLES_REPEATBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_LUXURY] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_LUXURY_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 17, 10),
-        .animNums = 4,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_LUXURY] = {
+        .tileTag = TAG_PARTICLES_LUXURYBALL,
+        .paletteTag = TAG_PARTICLES_LUXURYBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_LEVEL] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_LEVEL_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(24, 4, 4),
-        .animNums = 5,
-        .particleAnimationFunc = SafariBallOpenParticleAnimation,
+    [BALL_LEVEL] = {
+        .tileTag = TAG_PARTICLES_LEVELBALL,
+        .paletteTag = TAG_PARTICLES_LEVELBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_LURE] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_LURE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(9, 22, 27),
-        .animNums = 2,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_LURE] = {
+        .tileTag = TAG_PARTICLES_LUREBALL,
+        .paletteTag = TAG_PARTICLES_LUREBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_MOON] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_MOON_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(30, 25, 8),
-        .animNums = 4,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_MOON] = {
+        .tileTag = TAG_PARTICLES_MOONBALL,
+        .paletteTag = TAG_PARTICLES_MOONBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_FRIEND] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_FRIEND_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(17, 24, 7),
-        .animNums = 3,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_FRIEND] = {
+        .tileTag = TAG_PARTICLES_FRIENDBALL,
+        .paletteTag = TAG_PARTICLES_FRIENDBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_LOVE] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_LOVE_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 19, 26),
-        .animNums = 3,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_LOVE] = {
+        .tileTag = TAG_PARTICLES_LOVEBALL,
+        .paletteTag = TAG_PARTICLES_LOVEBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_FAST] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_FAST_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(29, 17, 8),
-        .animNums = 4,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_FAST] = {
+        .tileTag = TAG_PARTICLES_FASTBALL,
+        .paletteTag = TAG_PARTICLES_FASTBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_HEAVY] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_HEAVY_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(7, 11, 20),
-        .animNums = 0,
-        .particleAnimationFunc = GreatBallOpenParticleAnimation,
+    [BALL_HEAVY] = {
+        .tileTag = TAG_PARTICLES_HEAVYBALL,
+        .paletteTag = TAG_PARTICLES_HEAVYBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_DREAM] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_DREAM_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 31, 15),
-        .animNums = 5,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_DREAM] = {
+        .tileTag = TAG_PARTICLES_DREAMBALL,
+        .paletteTag = TAG_PARTICLES_DREAMBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_SAFARI] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_SAFARI_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(23, 30, 20),
-        .animNums = 0,
-        .particleAnimationFunc = SafariBallOpenParticleAnimation,
+    [BALL_SAFARI] = {
+        .tileTag = TAG_PARTICLES_SAFARIBALL,
+        .paletteTag = TAG_PARTICLES_SAFARIBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_SPORT] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_SPORT_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 31, 15),
-        .animNums = 0,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_SPORT] = {
+        .tileTag = TAG_PARTICLES_SPORTBALL,
+        .paletteTag = TAG_PARTICLES_SPORTBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_PARK] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_PARK_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 31, 15),
-        .animNums = 5,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_PARK] = {
+        .tileTag = TAG_PARTICLES_PARKBALL,
+        .paletteTag = TAG_PARTICLES_PARKBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
-
-    [BALL_BEAST] =
-    {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_BEAST_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
-        .openFadeColor = RGB(31, 31, 15),
-        .animNums = 5,
-        .particleAnimationFunc = UltraBallOpenParticleAnimation,
+    [BALL_BEAST] = {
+        .tileTag = TAG_PARTICLES_BEASTBALL,
+        .paletteTag = TAG_PARTICLES_BEASTBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
+    },
+    [BALL_CHERISH] = {
+        .tileTag = TAG_PARTICLES_CHERISHBALL,
+        .paletteTag = TAG_PARTICLES_CHERISHBALL,
+        .oam = &gOamData_AffineOff_ObjNormal_8x8,
+        .anims = sAnims_BallParticles,
     },
 
     [BALL_CHERISH] =

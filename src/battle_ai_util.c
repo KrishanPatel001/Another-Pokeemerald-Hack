@@ -3132,13 +3132,25 @@ bool32 IsSwitchOutEffect(enum BattleMoveEffects effect)
     }
 }
 
-bool32 IsSelfSacrificeEffect(enum Move move)
+bool32 IsExplosionEffect(enum BattleMoveEffects effect)
+{
+    // Damaging self destruction effects like Explosion, Misty Explosion, Self Destruct, etc.
+    switch (effect)
+    {
+    case EFFECT_EXPLOSION:
+    case EFFECT_MISTY_EXPLOSION:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool32 IsSelfSacrificeEffect(enum BattleMoveEffects effect)
 {
     // All self sacrificing effects like Explosion, Final Gambit, Memento, etc.
-    if (IsExplosionMove(move))
+    if (IsExplosionEffect(effect))
         return TRUE;
-
-    switch (GetMoveEffect(move))
+    switch (effect)
     {
     case EFFECT_FINAL_GAMBIT:
     case EFFECT_MEMENTO:
@@ -6295,7 +6307,9 @@ bool32 ShouldFinalGambit(u32 battlerAtk, u32 battlerDef, bool32 aiIsFaster)
     if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT)
     {
         if (gBattleMons[battlerAtk].hp >= gBattleMons[battlerDef].hp && aiIsFaster)
+        {
             return TRUE;
+        }
     }
     else if (gAiLogicData->hpPercents[battlerAtk] >= gAiLogicData->hpPercents[battlerDef] // Consider using GetScaledHPFraction and moving B_HEALTHBAR_PIXELS define
         && GetSpeciesBaseHP(gBattleMons[battlerAtk].species) >= GetSpeciesBaseHP(gBattleMons[battlerDef].species)
@@ -6306,145 +6320,13 @@ bool32 ShouldFinalGambit(u32 battlerAtk, u32 battlerDef, bool32 aiIsFaster)
     return FALSE;
 }
 
-bool32 ShouldConsiderSelfSacrificeDamageEffect(u32 battlerAtk, u32 battlerDef, enum Move move, bool32 aiIsFaster)
+bool32 ShouldConsiderSelfSacrificeDamageEffect(u32 battlerAtk, u32 battlerDef, enum BattleMoveEffects effect, bool32 aiIsFaster)
 {
     if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_WILL_SUICIDE)
         return TRUE;
-    if (!IsDoubleBattle() && IsExplosionMove(move) && gAiLogicData->shouldConsiderExplosion)
+    if (!IsDoubleBattle() && IsExplosionEffect(effect) && gAiLogicData->shouldConsiderExplosion)
         return TRUE;
-    if (GetMoveEffect(move) == EFFECT_FINAL_GAMBIT)
+    if (effect == EFFECT_FINAL_GAMBIT)
         return ShouldFinalGambit(battlerAtk, battlerDef, aiIsFaster);
-    return FALSE;
-}
-
-bool32 AiExpectsToFaintPlayer(u32 battler)
-{
-    u8 target = gAiBattleData->chosenTarget[battler];
-
-    if (gAiBattleData->actionFlee || gAiBattleData->choiceWatch)
-        return FALSE; // AI not planning to use move
-
-    if (!IsBattlerAlly(target, battler)
-      && CanIndexMoveFaintTarget(battler, target, gAiBattleData->chosenMoveIndex[battler], AI_ATTACKING)
-      && AI_IsFaster(battler, target, GetAIChosenMove(battler), GetIncomingMove(battler, target, gAiLogicData), CONSIDER_PRIORITY))
-    {
-        // We expect to faint the target and move first -> dont use an item or switch
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-bool32 AI_OpponentCanFaintAiWithMod(u32 battler, u32 healAmount)
-{
-    // Check special cases to NOT heal
-    for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
-    {
-        if (IsOnPlayerSide(battlerIndex) && CanTargetFaintAiWithMod(battlerIndex, battler, healAmount, 0))
-        {
-            // Target is expected to faint us
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
-
-void GetAIPartyIndexes(u32 battler, s32 *firstId, s32 *lastId)
-{
-    if (BATTLE_TWO_VS_ONE_OPPONENT && (battler & BIT_SIDE) == B_SIDE_OPPONENT)
-    {
-        *firstId = 0, *lastId = PARTY_SIZE;
-    }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_TOWER_LINK_MULTI))
-    {
-        if ((battler & BIT_FLANK) == B_FLANK_LEFT)
-            *firstId = 0, *lastId = PARTY_SIZE / 2;
-        else
-            *firstId = PARTY_SIZE / 2, *lastId = PARTY_SIZE;
-    }
-    else
-    {
-        *firstId = 0, *lastId = PARTY_SIZE;
-    }
-}
-
-bool32 ShouldInstructPartner(u32 partner, enum Move move)
-{
-    if (GetMoveEffect(move) == EFFECT_MAX_HP_50_RECOIL && gAiLogicData->abilities[partner] != ABILITY_MAGIC_GUARD)
-        return FALSE;
-
-    enum MoveTarget type = AI_GetBattlerMoveTargetType(partner, move);
-    switch (type)
-    {
-    case TARGET_SELECTED:
-    case TARGET_SMART:
-    case TARGET_DEPENDS:
-    case TARGET_RANDOM:
-    case TARGET_BOTH:
-    case TARGET_FOES_AND_ALLY:
-    case TARGET_USER_AND_ALLY:
-    case TARGET_OPPONENTS_FIELD:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-
-    return FALSE;
-}
-
-bool32 CanMoveBeBouncedBack(u32 battler, enum Move move)
-{
-    if (!MoveCanBeBouncedBack(move) || !IsBattleMoveStatus(move))
-        return FALSE;
-
-    enum MoveTarget type = AI_GetBattlerMoveTargetType(battler, move);
-    switch (type)
-    {
-    case TARGET_SELECTED:
-    case TARGET_SMART:
-    case TARGET_OPPONENTS_FIELD:
-    case TARGET_BOTH:
-        return TRUE;
-    default:
-        return FALSE;
-    }
-
-    return FALSE;
-}
-
-u32 GetActiveBattlerIds(u32 battler, u32 *battlerIn1, u32 *battlerIn2)
-{
-    u32 opposingBattler = 0;
-    enum BattlerPosition battlerPosition = GetBattlerPosition(battler);
-    if (IsDoubleBattle())
-    {
-        *battlerIn1 = battler;
-        if (gAbsentBattlerFlags & (1u << BATTLE_PARTNER(battler)))
-            *battlerIn2 = battler;
-        else
-            *battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(battlerPosition));
-
-        opposingBattler = BATTLE_OPPOSITE(*battlerIn1);
-        if (gAbsentBattlerFlags & (1u << opposingBattler))
-            opposingBattler ^= BIT_FLANK;
-    }
-    else
-    {
-        opposingBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(battlerPosition));
-        *battlerIn1 = battler;
-        *battlerIn2 = battler;
-    }
-
-    return opposingBattler;
-}
-
-bool32 IsPartyMonOnFieldOrChosenToSwitch(u32 partyIndex, u32 battlerIn1, u32 battlerIn2)
-{
-    if (partyIndex == gBattlerPartyIndexes[battlerIn1]
-            || partyIndex == gBattlerPartyIndexes[battlerIn2])
-        return TRUE;
-    if (partyIndex == gBattleStruct->monToSwitchIntoId[battlerIn1]
-            || partyIndex == gBattleStruct->monToSwitchIntoId[battlerIn2])
-        return TRUE;
     return FALSE;
 }

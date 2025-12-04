@@ -1135,7 +1135,61 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    if (DoAttackCanceler() != CANCELER_RESULT_SUCCESS)
+    struct BattleContext ctx = {0};
+    ctx.battlerAtk = gBattlerAttacker;
+    ctx.battlerDef = gBattlerTarget;
+    ctx.currentMove = gCurrentMove;
+
+    enum BattleMoveEffects moveEffect = GetMoveEffect(ctx.currentMove);
+
+    if (!IsBattlerAlive(gBattlerAttacker) && !IsExplosionEffect(moveEffect))
+    {
+        gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+        gBattlescriptCurrInstr = BattleScript_MoveEnd;
+        return;
+    }
+
+    // With how attackcanceler works right now we only need attacker and target abilities. Might change in the future
+    ctx.abilities[ctx.battlerAtk] = GetBattlerAbility(ctx.battlerAtk);
+    ctx.abilities[ctx.battlerDef] = GetBattlerAbility(ctx.battlerDef);
+
+    if (AtkCanceler_MoveSuccessOrder(&ctx) != MOVE_STEP_SUCCESS)
+        return;
+
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_OFF
+     && ctx.abilities[ctx.battlerAtk] == ABILITY_PARENTAL_BOND
+     && IsMoveAffectedByParentalBond(gCurrentMove, gBattlerAttacker)
+     && !(gAbsentBattlerFlags & (1u << gBattlerTarget))
+     && GetActiveGimmick(gBattlerAttacker) != GIMMICK_Z_MOVE)
+    {
+        gSpecialStatuses[gBattlerAttacker].parentalBondState = PARENTAL_BOND_1ST_HIT;
+        gMultiHitCounter = 2;
+        PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+        return;
+    }
+
+    if (CanAbilityBlockMove(
+            ctx.battlerAtk,
+            ctx.battlerDef,
+            ctx.abilities[ctx.battlerAtk],
+            ctx.abilities[ctx.battlerDef],
+            ctx.currentMove,
+            RUN_SCRIPT))
+        return;
+
+    if (GetMoveNonVolatileStatus(ctx.currentMove) == MOVE_EFFECT_PARALYSIS)
+    {
+        if (CanAbilityAbsorbMove(
+                ctx.battlerAtk,
+                ctx.battlerDef,
+                ctx.abilities[ctx.battlerDef],
+                ctx.currentMove,
+                GetBattleMoveType(ctx.currentMove),
+                RUN_SCRIPT))
+            return;
+    }
+
+    if (IsPowderMoveBlocked(&ctx))
         return;
 
     if (gBattleStruct->magicBounceActive && !gBattleStruct->bouncedMoveIsUsed)
@@ -5916,8 +5970,7 @@ static void Cmd_moveend(void)
                     MoveValuesCleanUp();
 
                     // Edge cases for moves that shouldn't repeat their own script
-                    if (moveEffect == EFFECT_EXPLOSION
-                     || moveEffect == EFFECT_MISTY_EXPLOSION
+                    if (IsExplosionEffect(moveEffect)
                      || moveEffect == EFFECT_MAGNITUDE
                      || moveEffect == EFFECT_SYNCHRONOISE
                      || gBattleMoveEffects[moveEffect].battleScript == BattleScript_EffectTwoTurnsAttack)

@@ -72,6 +72,6 @@ bool32 IsWaldaPhraseEmpty(void);
 
 void ChooseMonFromStorage();
 u32 CountPartyNonEggMons(void);
-void RemoveSelectedPcMon(struct Pokemon *mon);
+void ChooseBoxMon(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

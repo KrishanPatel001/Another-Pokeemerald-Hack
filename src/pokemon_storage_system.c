@@ -2686,21 +2686,19 @@ static void Task_OnSelectedMon(u8 taskId)
             break;
         case MENU_SELECT:
             PlaySE(SE_SELECT);
-            struct BoxPokemon *boxmon = GetCursorBoxMon();
             if (sInPartyMenu)
             {
-                gSpecialVar_0x8004 = sCursorPosition;
+                gSpecialVar_Result = GetBoxMonData(&gPlayerParty[sCursorPosition].box, MON_DATA_SPECIES);
+                gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[sCursorPosition]);
             }
             else
             {
-                gSpecialVar_0x8004 = PC_MON_CHOSEN;
-                gSpecialVar_MonBoxPos = sCursorPosition;
+                gSpecialVar_Result = GetBoxMonDataAt(StorageGetCurrentBox(), sCursorPosition, MON_DATA_SPECIES);
                 gSpecialVar_MonBoxId = StorageGetCurrentBox();
+                gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[0]);
             }
-            if (IsBoxMonExcluded(boxmon))
-                gSpecialVar_Result = FALSE;
-            else
-                gSpecialVar_Result = TRUE;
+            gSpecialVar_MonBoxPos = sCursorPosition;
+            gSpecialVar_0x8004 = sCursorPosition;
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
             break;
@@ -3660,10 +3658,7 @@ static void Task_OnCloseBoxPressed(u8 taskId)
             UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
             if (sStorage->boxOption == OPTION_SELECT_MON)
-            {
-                gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
-                gSpecialVar_Result = FALSE;
-            }
+                gSpecialVar_0x8004 = 0xFF;
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
         }
@@ -3738,10 +3733,7 @@ static void Task_OnBPressed(u8 taskId)
             UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
             if (sStorage->boxOption == OPTION_SELECT_MON)
-            {
-                gSpecialVar_0x8004  = PARTY_NOTHING_CHOSEN;
-                gSpecialVar_Result  = FALSE;
-            }
+                gSpecialVar_0x8004  = 0xFF;
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
         }
@@ -7754,7 +7746,7 @@ static bool8 SetMenuTexts_Mon(void)
         }
         break;
     case OPTION_SELECT_MON:
-        if (species != SPECIES_NONE && CanBoxMonBeSelected(GetCursorBoxMon()))
+        if (species != SPECIES_NONE)
             SetMenuText(MENU_SELECT);
         else
             return FALSE;
@@ -10093,14 +10085,9 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     sJustOpenedBag = FALSE;
 }
 
-void ChooseMonFromStorage(void)
+// Used as a script special for showing a box mon to various npcs (e.g. in-game trades, move deleter)
+void ChooseBoxMon(void)
 {
+    gSpecialVar_MonBoxId = 0xFF;
     EnterPokeStorage(OPTION_SELECT_MON);
-}
-
-void RemoveSelectedPcMon(struct Pokemon *mon)
-{
-    struct BoxPokemon *boxmon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
-    BoxMonToMon(boxmon, mon);
-    ZeroBoxMonData(boxmon);
 }

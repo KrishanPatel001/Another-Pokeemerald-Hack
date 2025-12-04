@@ -6,7 +6,8 @@ BattleFrontier_Lounge5_EventScript_NatureGirl::
 	faceplayer
 	msgbox BattleFrontier_Lounge5_Text_NatureGirlGreeting, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
-	chooseboxmon
+	fadescreen FADE_TO_BLACK
+	special ChooseBoxMon
 	waitstate
 	lock
 	faceplayer

@@ -278,6 +278,17 @@ void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon)
         TransferEggMoves();
 }
 
+static void StoreBoxMonInDaycare(struct BoxPokemon *mon, struct DaycareMon *daycareMon)
+{
+
+    daycareMon->mon = *mon;
+    daycareMon->steps = 0;
+    ZeroBoxMonData(mon);
+
+    if (P_EGG_MOVE_TRANSFER >= GEN_8)
+        TransferEggMoves();
+}
+
 static void StorePokemonInEmptyDaycareSlot(struct Pokemon *mon, struct DayCare *daycare)
 {
     s8 slotId = Daycare_FindEmptySpot(daycare);
@@ -286,19 +297,16 @@ static void StorePokemonInEmptyDaycareSlot(struct Pokemon *mon, struct DayCare *
 
 void StoreSelectedPokemonInDaycare(void)
 {
-    struct Pokemon *mon;
-    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    u8 monId = GetCursorSelectionMonId();
+    if(gSpecialVar_MonBoxId == 0xFF)
     {
-        mon = Alloc(sizeof(struct Pokemon));
-        RemoveSelectedPcMon(mon);
+        StorePokemonInEmptyDaycareSlot(&gPlayerParty[monId], &gSaveBlock1Ptr->daycare);
     }
     else
     {
-        mon = &gPlayerParty[gSpecialVar_0x8004];
+        s8 slotId = Daycare_FindEmptySpot(&gSaveBlock1Ptr->daycare);
+        StoreBoxMonInDaycare(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos), &gSaveBlock1Ptr->daycare.mons[slotId]);
     }
-    StorePokemonInEmptyDaycareSlot(mon, &gSaveBlock1Ptr->daycare);
-    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
-        Free(mon);
 }
 
 // Shifts the second daycare Pokémon slot into the first slot.
@@ -1256,9 +1264,17 @@ static void _GetDaycareMonNicknames(struct DayCare *daycare)
 
 u16 GetSelectedMonNicknameAndSpecies(void)
 {
-    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
-    GetBoxMonNickname(boxmon, gStringVar1);
-    return GetBoxMonData(boxmon, MON_DATA_SPECIES);
+    if(gSpecialVar_MonBoxId == 0xFF)
+    {
+        GetBoxMonNickname(&gPlayerParty[GetCursorSelectionMonId()].box, gStringVar1);
+        return GetBoxMonData(&gPlayerParty[GetCursorSelectionMonId()].box, MON_DATA_SPECIES);
+    }
+    else
+    {
+        GetBoxMonNickname(&gPokemonStoragePtr->boxes[gSpecialVar_MonBoxId][gSpecialVar_MonBoxPos], gStringVar1);
+        return GetBoxMonData(&gPokemonStoragePtr->boxes[gSpecialVar_MonBoxId][gSpecialVar_MonBoxPos], MON_DATA_SPECIES);
+    }
+    
 }
 
 void GetDaycareMonNicknames(void)

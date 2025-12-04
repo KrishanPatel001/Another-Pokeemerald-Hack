@@ -6,8 +6,8 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother::
 	lock
 	faceplayer
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot, MSGBOX_DEFAULT
-	setvar VAR_0x8009, SPECIES_SEEDOT
-	chooseboxmon SELECT_PC_MON_TRADE
+	fadescreen FADE_TO_BLACK
+	special ChooseBoxMon
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot
 	special CompareSeedotSize
@@ -50,8 +50,8 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_LotadBrother::
 	lock
 	faceplayer
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad, MSGBOX_DEFAULT
-	setvar VAR_0x8009, SPECIES_LOTAD
-	chooseboxmon SELECT_PC_MON_TRADE
+	fadescreen FADE_TO_BLACK
+	special ChooseBoxMon
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad
 	special CompareLotadSize

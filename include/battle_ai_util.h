@@ -90,7 +90,7 @@ bool32 CanAiPredictMove(u32 battlerId);
 bool32 IsAiBattlerAssumingStab(u32 battlerId);
 bool32 IsAiBattlerAssumingStatusMoves(u32 battlerId);
 bool32 IsAiBattlerPredictingAbility(u32 battlerId);
-bool32 ShouldRecordStatusMove(enum Move move);
+bool32 ShouldRecordStatusMove(u32 move);
 void ClearBattlerMoveHistory(u32 battlerId);
 void RecordLastUsedMoveBy(u32 battlerId, enum Move move);
 void RecordAllMoves(u32 battler);

@@ -479,14 +479,14 @@ void Ai_InitPartyStruct(void)
     }
 
     // Find fainted mons
-    for (u32 monIndex = 0; monIndex < PARTY_SIZE; monIndex++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES) == SPECIES_NONE)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
             continue;
 
-        mon = &gPlayerParty[monIndex];
-        if (GetMonData(&gPlayerParty[monIndex], MON_DATA_HP) == 0)
-            gAiPartyData->mons[B_SIDE_PLAYER][monIndex].isFainted = TRUE;
+        mon = &gPlayerParty[i];
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+            gAiPartyData->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
 
         if (isOmniscient || hasPartyKnowledge)
             gAiPartyData->mons[B_SIDE_PLAYER][monIndex].species = GetMonData(mon, MON_DATA_SPECIES);

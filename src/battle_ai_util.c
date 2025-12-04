@@ -6,6 +6,7 @@
 #include "battle_ai_field_statuses.h"
 #include "battle_ai_util.h"
 #include "battle_ai_main.h"
+#include "battle_ai_switch_items.h"
 #include "battle_controllers.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
@@ -137,9 +138,9 @@ bool32 AI_RandLessThan(u32 val)
 
 bool32 IsAiFlagPresent(u64 flag)
 {
-    for (u32 battlerIndex = 0; battlerIndex < MAX_BATTLERS_COUNT; battlerIndex++)
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        if (gAiThinkingStruct->aiFlags[battlerIndex] & flag)
+        if (gAiThinkingStruct->aiFlags[i] & flag)
             return TRUE;
     }
 
@@ -189,9 +190,9 @@ bool32 CanAiPredictMove(u32 battlerId)
 bool32 IsBattlerPredictedToSwitch(u32 battler)
 {
     // Check for prediction flag on AI, whether they're using those predictions this turn, and whether the AI thinks the player should switch
-    for (u32 battlerIndex = 0; battlerIndex < MAX_BATTLERS_COUNT; battlerIndex++)
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        if (gAiThinkingStruct->aiFlags[battlerIndex] & AI_FLAG_PREDICT_SWITCH)
+        if (gAiThinkingStruct->aiFlags[i] & AI_FLAG_PREDICT_SWITCH)
         {
             if (gAiLogicData->predictingSwitch && gAiLogicData->shouldSwitch & (1u << battler))
                 return TRUE;
@@ -212,12 +213,7 @@ enum Move GetIncomingMove(u32 battler, u32 opposingBattler, struct AiLogicData *
 enum Move GetIncomingMoveSpeedCheck(u32 battler, u32 opposingBattler, struct AiLogicData *aiData)
 {
     if (aiData->predictingMove && CanAiPredictMove(battler))
-    {
-        // Ignore moves that don't do damage or only have priority one time
-        if (GetMovePower(aiData->predictedMove[opposingBattler]) != 0 && GetMoveEffect(aiData->predictedMove[opposingBattler]) != EFFECT_FIRST_TURN_ONLY)
-            return aiData->predictedMove[opposingBattler];
-    }
-
+        return aiData->predictedMove[opposingBattler];
     return MOVE_NONE;
 }
 

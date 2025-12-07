@@ -1052,8 +1052,7 @@ struct moveWithPP {
 #define Environment(environment) Environment_(__LINE__, environment)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
-void SetVarForTest(u32 sourceLine, u16 varId, u16 value);
-void TestSetConfig(u32 sourceLine, enum ConfigTag configTag, u32 value);
+void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value);
 void TieBreakScore(u32 sourceLine, enum RandomTag rngTag, enum ScoreTieResolution scoreTieRes, u32 value);
 void TieBreakTarget(u32 sourceLine, enum TargetTieResolution targetTieRes, u32 value);
 void ClearFlagAfterTest(void);

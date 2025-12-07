@@ -694,12 +694,12 @@ static u32 BattleTest_RandomUniform(enum RandomTag tag, u32 lo, u32 hi, bool32 (
         case SCORE_TIE_HI:
             return (DATA.trial.scoreTieCount - 1);
         case SCORE_TIE_RANDOM:
-            return RandomUniformTrials(tag, lo, hi, reject, caller);
-        case SCORE_TIE_CHOSEN:
-            if (DATA.scoreTieOverride >= DATA.trial.scoreTieCount)
-                return (DATA.trial.scoreTieCount - 1);
+            if (DATA.trial.scoreTieCount == 0)
+                return 0; // Failsafe
             else
-                return DATA.scoreTieOverride;
+                return RandomUniformTrials(tag, lo, hi, reject, caller);
+        case SCORE_TIE_CHOSEN:
+            return DATA.scoreTieOverride;
         default:
             return 0;
         }
@@ -709,17 +709,17 @@ static u32 BattleTest_RandomUniform(enum RandomTag tag, u32 lo, u32 hi, bool32 (
         case TARGET_TIE_HI:
             return (DATA.trial.targetTieCount - 1);
         case TARGET_TIE_RANDOM:
-            return RandomUniformTrials(tag, lo, hi, reject, caller);
-        case TARGET_TIE_CHOSEN:
-            if (DATA.targetTieOverride >= DATA.trial.targetTieCount)
-                return (DATA.trial.targetTieCount - 1);
+            if (DATA.trial.targetTieCount == 0)
+                return 0; // Failsafe
             else
-                return DATA.targetTieOverride;
+                return RandomUniformTrials(tag, lo, hi, reject, caller);
+        case TARGET_TIE_CHOSEN:
+            return DATA.targetTieOverride;
         default:
             return 0;
         }
     default:
-    if (tag && tag == STATE->rngTag)
+    if (tag == STATE->rngTag)
         return RandomUniformTrials(tag, lo, hi, reject, caller);
     }
 
@@ -1983,6 +1983,22 @@ void TestSetConfig(u32 sourceLine, enum ConfigTag configTag, u32 value)
 {
     INVALID_IF(!STATE->runGiven, "WITH_CONFIG outside of GIVEN");
     SetConfig(configTag, value);
+}
+
+void TieBreakScore(u32 sourceLine, enum RandomTag rngTag, enum ScoreTieResolution scoreTieRes, u32 value)
+{
+    INVALID_IF((rngTag != RNG_AI_SCORE_TIE_DOUBLES_MOVE && rngTag != RNG_AI_SCORE_TIE_SINGLES), "TIE_BREAK_SCORE requires RNG_AI_SCORE_TIE_SINGLES or RNG_AI_SCORE_TIE_DOUBLES_MOVE");
+    DATA.scoreTieResolution = scoreTieRes;
+    DATA.scoreTieTag = rngTag;
+    if (scoreTieRes == SCORE_TIE_CHOSEN)
+        DATA.scoreTieOverride = value;
+}
+
+void TieBreakTarget(u32 sourceLine, enum TargetTieResolution targetTieRes, u32 value)
+{
+    DATA.targetTieResolution = targetTieRes;
+    if (targetTieRes == TARGET_TIE_CHOSEN)
+        DATA.targetTieOverride = value;
 }
 
 void TieBreakScore(u32 sourceLine, enum RandomTag rngTag, enum ScoreTieResolution scoreTieRes, u32 value)

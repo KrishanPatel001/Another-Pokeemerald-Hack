@@ -302,8 +302,6 @@ bool32 IsPartyFullyHealedExceptBattler(u32 battler);
 bool32 PartyHasMoveCategory(u32 battlerId, enum DamageCategory category);
 bool32 SideHasMoveCategory(u32 battlerId, enum DamageCategory category);
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId);
-u32 GetActiveBattlerIds(u32 battler, u32 *battlerIn1, u32 *battlerIn2);
-bool32 IsPartyMonOnFieldOrChosenToSwitch(u32 partyIndex, u32 battlerIn1, u32 battlerIn2);
 
 // score increases
 enum AIScore IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
@@ -329,12 +327,10 @@ enum Move GetIncomingMove(u32 battler, u32 opposingBattler, struct AiLogicData *
 enum Move GetIncomingMoveSpeedCheck(u32 battler, u32 opposingBattler, struct AiLogicData *aiData);
 bool32 IsNaturalEnemy(u32 speciesAttacker, u32 speciesTarget);
 bool32 AI_OpponentCanFaintAiWithMod(u32 battler, u32 healAmount);
-void SetBattlerFieldStatusForSwitchin(u32 battler);
-bool32 ShouldInstructPartner(u32 battlerDef, enum Move move);
-bool32 CanMoveBeBouncedBack(u32 battler, enum Move move);
 
 // Switching and item helpers
 bool32 AiExpectsToFaintPlayer(u32 battler);
+
 
 // These are for the purpose of not doubling up on moves during double battles.
 // Used in GetAIEffectGroup for move effects and GetAIEffectGroupFromMove for additional effects

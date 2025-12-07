@@ -34,24 +34,8 @@ struct IncomingHealInfo
 };
 static bool32 CanUseSuperEffectiveMoveAgainstOpponents(u32 battler);
 static bool32 FindMonWithFlagsAndSuperEffective(u32 battler, u16 flags, u32 moduloPercent);
-static bool32 ShouldUseItem(u32 battler);
-struct IncomingHealInfo
-{
-    u16 healAmount:16;
-    u16 wishCounter:8;
-    u16 hasHealing:1;
-    u16 healBeforeHazards:1;
-    u16 healAfterHazards:1;
-    u16 healEndOfTurn:1;
-    u16 curesStatus:1;
-};
-
-static bool32 AiExpectsToFaintPlayer(u32 battler);
-static bool32 AI_ShouldHeal(u32 battler, u32 healAmount);
-static bool32 AI_OpponentCanFaintAiWithMod(u32 battler, u32 healAmount);
 static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon);
 static bool32 CanAbilityTrapOpponent(enum Ability ability, u32 opponent);
-static u32 GetHPHealAmount(u8 itemEffectParam, struct Pokemon *mon);
 static u32 GetBattleMonTypeMatchup(struct BattlePokemon opposingBattleMon, struct BattlePokemon battleMon);
 static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler, const struct IncomingHealInfo *healInfo, u32 originalHp);
 static void GetIncomingHealInfo(u32 battler, struct IncomingHealInfo *healInfo);
@@ -1453,35 +1437,11 @@ bool32 IsSwitchinValid(u32 battler)
     return TRUE;
 }
 
-// Gets hazard damage
-static u32 GetSwitchinHazardsDamage(u32 battler)
+// If there are two(or more) mons to choose from, always choose one that has baton pass
+// as most often it can't do much on its own.
+static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u8 invalidMons, int aliveCount, u32 battler, u32 opposingBattler)
 {
-    u8 tSpikesLayers;
-    enum HoldEffect heldItemEffect = gAiLogicData->holdEffects[battler];
-    u32 maxHP = gBattleMons[battler].maxHP;
-    enum Ability ability = gAiLogicData->abilities[battler];
-    u32 status = gBattleMons[battler].status1;
-    u32 spikesDamage = 0, tSpikesDamage = 0, hazardDamage = 0;
-    enum BattleSide side = GetBattlerSide(battler);
-
-    // Check ways mon might avoid all hazards
-    if (ability != ABILITY_MAGIC_GUARD || (heldItemEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS &&
-        !((gFieldStatuses & STATUS_FIELD_MAGIC_ROOM) || ability == ABILITY_KLUTZ)))
-    {
-        // Stealth Rock
-        if (IsHazardOnSide(side, HAZARDS_STEALTH_ROCK) && heldItemEffect != HOLD_EFFECT_HEAVY_DUTY_BOOTS)
-            hazardDamage += GetStealthHazardDamage(TYPE_SIDE_HAZARD_POINTED_STONES, battler);
-        // G-Max Steelsurge
-        if (IsHazardOnSide(side, HAZARDS_STEELSURGE) && heldItemEffect != HOLD_EFFECT_HEAVY_DUTY_BOOTS)
-            hazardDamage += GetStealthHazardDamage(TYPE_SIDE_HAZARD_SHARP_STEEL, battler);
-        // Spikes
-        if (IsHazardOnSide(side, HAZARDS_SPIKES) && AI_IsBattlerGrounded(battler))
-        {
-            spikesDamage = maxHP / ((5 - gSideTimers[GetBattlerSide(battler)].spikesAmount) * 2);
-            if (spikesDamage == 0)
-                spikesDamage = 1;
-            hazardDamage += spikesDamage;
-        }
+    int i, j, bits = 0;
 
     for (i = firstId; i < lastId; i++)
     {
@@ -1602,7 +1562,7 @@ static u32 GetFirstNonInvalidMon(u32 firstId, u32 lastId, u32 invalidMons)
     return PARTY_SIZE;
 }
 
-bool32 IsMonGrounded(enum HoldEffect heldItemEffect, enum Ability ability, enum Type type1, enum Type type2)
+bool32 IsSwitchinGrounded(enum HoldEffect heldItemEffect, enum Ability ability, enum Type type1, enum Type type2)
 {
     // List that makes mon not grounded
     if (type1 == TYPE_FLYING || type2 == TYPE_FLYING || ability == ABILITY_LEVITATE
@@ -1640,7 +1600,7 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
         if (IsHazardOnSide(side, HAZARDS_STEELSURGE) && heldItemEffect != HOLD_EFFECT_HEAVY_DUTY_BOOTS)
             hazardDamage += GetStealthHazardDamageByTypesAndHP(TYPE_SIDE_HAZARD_SHARP_STEEL, defType1, defType2, battleMon->maxHP);
         // Spikes
-        if (IsHazardOnSide(side, HAZARDS_TOXIC_SPIKES) && IsMonGrounded(heldItemEffect, ability, defType1, defType2))
+        if (IsHazardOnSide(side, HAZARDS_TOXIC_SPIKES) && IsSwitchinGrounded(heldItemEffect, ability, defType1, defType2))
         {
             spikesDamage = maxHP / ((5 - gSideTimers[GetBattlerSide(battler)].spikesAmount) * 2);
             if (spikesDamage == 0)
@@ -1657,7 +1617,7 @@ static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon
             && !IsMistyTerrainAffected(battler, ability, gAiLogicData->holdEffects[battler], gFieldStatuses)
             && !IsAbilityStatusProtected(battler, ability)
             && heldItemEffect != HOLD_EFFECT_CURE_PSN && heldItemEffect != HOLD_EFFECT_CURE_STATUS
-            && AI_IsBattlerGrounded(battler)))
+            && IsSwitchinGrounded(heldItemEffect, ability, defType1, defType2)))
         {
             tSpikesLayers = gSideTimers[GetBattlerSide(battler)].toxicSpikesAmount;
             if (tSpikesLayers == 1)
@@ -1866,7 +1826,7 @@ static u32 GetSwitchinStatusDamage(u32 battler)
         && !(heldItemEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS
             && (((gFieldStatuses & STATUS_FIELD_MAGIC_ROOM) || ability == ABILITY_KLUTZ)))
         && heldItemEffect != HOLD_EFFECT_CURE_PSN && heldItemEffect != HOLD_EFFECT_CURE_STATUS
-        && AI_IsBattlerGrounded(battler)))
+        && IsSwitchinGrounded(heldItemEffect, ability, defType1, defType2)))
     {
         if (tSpikesLayers == 1)
         {
@@ -2694,208 +2654,6 @@ u32 AI_SelectRevivalBlessingMon(u32 battler)
             bestMonId = i;
         }
     }
-
-    if (bestMonId == PARTY_SIZE)
-        bestMonId = GetFirstFaintedPartyIndex(battler);
-
-    return bestMonId;
-}
-
-static bool32 AiExpectsToFaintPlayer(u32 battler)
-{
-    s32 firstId = 0, lastId = 0;
-    u32 opposingBattler = 0;
-    struct Pokemon *party = GetBattlerParty(battler);
-    u32 bestMonId = PARTY_SIZE;
-    s32 bestScore = -1;
-
-    if (IsDoubleBattle())
-    {
-        opposingBattler = BATTLE_OPPOSITE(battler);
-        if (gAbsentBattlerFlags & (1u << opposingBattler))
-            opposingBattler ^= BIT_FLANK;
-    }
-    else
-    {
-        opposingBattler = GetOppositeBattler(battler);
-    }
-
-    // Save existing battler data
-    struct AiLogicData *savedAiLogicData = AllocSaveAiLogicData();
-    struct BattlePokemon *savedBattleMons = AllocSaveBattleMons();
-
-    GetAIPartyIndexes(battler, &firstId, &lastId);
-
-        switch (GetItemBattleUsage(item))
-        {
-        case EFFECT_ITEM_HEAL_AND_CURE_STATUS:
-            healAmount = GetHPHealAmount(itemEffects[GetItemEffectParamOffset(battler, item, 4, ITEM4_HEAL_HP)], GetBattlerMon(battler));
-            shouldUse = AI_ShouldHeal(battler, healAmount);
-            break;
-        case EFFECT_ITEM_RESTORE_HP:
-            healAmount = GetHPHealAmount(itemEffects[GetItemEffectParamOffset(battler, item, 4, ITEM4_HEAL_HP)], GetBattlerMon(battler));
-            shouldUse = AI_ShouldHeal(battler, healAmount);
-            break;
-        case EFFECT_ITEM_CURE_STATUS:
-            if ((itemEffects[3] & ITEM3_SLEEP && gBattleMons[battler].status1 & STATUS1_SLEEP)
-             || (itemEffects[3] & ITEM3_POISON && gBattleMons[battler].status1 & STATUS1_PSN_ANY)
-             || (itemEffects[3] & ITEM3_BURN && gBattleMons[battler].status1 & STATUS1_BURN)
-             || (itemEffects[3] & ITEM3_FREEZE && gBattleMons[battler].status1 & STATUS1_ICY_ANY)
-             || (itemEffects[3] & ITEM3_PARALYSIS && gBattleMons[battler].status1 & STATUS1_PARALYSIS)
-             || (itemEffects[3] & ITEM3_CONFUSION && gBattleMons[battler].volatiles.confusionTurns > 0))
-                shouldUse = ShouldCureStatusWithItem(battler, battler, gAiLogicData);
-            break;
-        case EFFECT_ITEM_INCREASE_STAT:
-            if (gDisableStructs[battler].isFirstTurn || !AI_OpponentCanFaintAiWithMod(battler, 0))
-            {
-                if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_FORCE_SETUP_FIRST_TURN)
-                {
-                    shouldUse = TRUE;
-                    break;
-                }
-
-                enum StatChange statChange = STAT_CHANGE_ATK;
-
-                if (B_X_ITEMS_BUFF >= GEN_7)
-                    statChange = STAT_CHANGE_ATK_2;
-
-                statChange = statChange + itemEffects[1] - STAT_ATK;
-
-                if (IsBattlerAlive(LEFT_FOE(battler)) && IncreaseStatUpScore(battler, LEFT_FOE(battler), statChange) > NO_INCREASE)
-                    shouldUse = TRUE;
-
-                if (IsBattlerAlive(RIGHT_FOE(battler)) && IncreaseStatUpScore(battler, RIGHT_FOE(battler), statChange) > NO_INCREASE)
-                    shouldUse = TRUE;
-
-                break;
-            }
-            break;
-        case EFFECT_ITEM_INCREASE_ALL_STATS:
-            if (gAiLogicData->abilities[battler] == ABILITY_CONTRARY)
-                break;
-            if (gDisableStructs[battler].isFirstTurn || !AI_OpponentCanFaintAiWithMod(battler, 0))
-            {
-                if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_FORCE_SETUP_FIRST_TURN)
-                {
-                    shouldUse = TRUE;
-                    break;
-                }
-
-                if (IsBattlerAlive(LEFT_FOE(battler)))
-                {
-                    if (ShouldRaiseAnyStat(battler, LEFT_FOE(battler)))
-                        shouldUse = TRUE;
-                    else
-                        break;
-                }
-
-                if (IsBattlerAlive(RIGHT_FOE(battler)))
-                {
-                    if (ShouldRaiseAnyStat(battler, RIGHT_FOE(battler)))
-                        shouldUse = TRUE;
-                    else
-                        break;
-                }
-            }
-            break;
-        case EFFECT_ITEM_SET_FOCUS_ENERGY:
-            if (!gDisableStructs[battler].isFirstTurn
-                || gBattleMons[battler].volatiles.dragonCheer
-                || gBattleMons[battler].volatiles.focusEnergy
-                || AI_OpponentCanFaintAiWithMod(battler, 0))
-            {
-                break;
-            }
-            else
-            {
-                if (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_FORCE_SETUP_FIRST_TURN)
-                {
-                    shouldUse = TRUE;
-                    break;
-                }
-
-                if (gAiLogicData->abilities[battler] == ABILITY_SUPER_LUCK
-                 || gAiLogicData->abilities[battler] == ABILITY_SNIPER
-                 || gAiLogicData->holdEffects[battler] == HOLD_EFFECT_SCOPE_LENS
-                 || HasMoveWithFlag(battler, GetMoveCriticalHitStage))
-                    shouldUse = TRUE;
-            }
-            break;
-        case EFFECT_ITEM_SET_MIST:
-            battlerSide = GetBattlerSide(battler);
-            if (gDisableStructs[battler].isFirstTurn && !(gSideStatuses[battlerSide] & SIDE_STATUS_MIST))
-                shouldUse = TRUE;
-            break;
-        case EFFECT_ITEM_REVIVE:
-            gBattleStruct->itemPartyIndex[battler] = GetFirstFaintedPartyIndex(battler);
-            if (gBattleStruct->itemPartyIndex[battler] != PARTY_SIZE) // Revive if possible.
-                shouldUse = TRUE;
-            break;
-        case EFFECT_ITEM_USE_POKE_FLUTE:
-            if (gBattleMons[battler].status1 & STATUS1_SLEEP)
-                shouldUse = TRUE;
-            break;
-        default:
-            return FALSE;
-        }
-        if (shouldUse)
-        {
-            // Set selected party ID to current battler if none chosen.
-            if (gBattleStruct->itemPartyIndex[battler] == PARTY_SIZE)
-                gBattleStruct->itemPartyIndex[battler] = gBattlerPartyIndexes[battler];
-            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
-            gBattleStruct->chosenItem[battler] = item;
-            gBattleHistory->trainerItems[i] = 0;
-            return shouldUse;
-        }
-    }
-
-        bool32 isAceMon = IsAceMon(battler, monIndex);
-
-        InitializeSwitchinCandidate(battler, &party[monIndex]);
-        gBattleMons[battler].hp = gBattleMons[battler].maxHP / 2; // Revival Blessing restores half HP
-        gBattleMons[battler].status1 = 0;
-
-        // Avoid reviving something that will immediately faint to hazards
-        if (GetSwitchinHazardsDamage(battler) >= gBattleMons[battler].hp)
-            continue;
-
-        s32 bestDamage = 0;
-        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-        {
-            enum Move aiMove = gBattleMons[battler].moves[moveIndex];
-            if (aiMove == MOVE_NONE || gBattleMons[battler].pp[moveIndex] == 0)
-                continue;
-
-            s32 damage = AI_GetDamage(battler, opposingBattler, moveIndex, AI_ATTACKING, gAiLogicData);
-            if (damage > bestDamage)
-                bestDamage = damage;
-        }
-
-        u32 typeMatchup = GetBattlerTypeMatchup(opposingBattler, battler);
-        s32 score = bestDamage + gBattleMons[battler].maxHP;
-
-        // Reviving the ace is usually high value. give it a small bonus but still let matchup/coverage decide
-        if (isAceMon)
-            score += gBattleMons[battler].maxHP / 3;
-
-        // Prefer mons that don't face a terrible defensive matchup on entry
-        if (typeMatchup < UQ_4_12(1.0))
-            score += gBattleMons[battler].maxHP / 4;
-        else if (typeMatchup > UQ_4_12(4.0))
-            score -= gBattleMons[battler].maxHP / 4;
-
-        if (score > bestScore)
-        {
-            bestScore = score;
-            bestMonId = monIndex;
-        }
-    }
-
-    // Restore battler data
-    FreeRestoreAiLogicData(savedAiLogicData);
-    FreeRestoreBattleMons(savedBattleMons);
-    SetBattlerAiData(battler, gAiLogicData);
 
     if (bestMonId == PARTY_SIZE)
         bestMonId = GetFirstFaintedPartyIndex(battler);

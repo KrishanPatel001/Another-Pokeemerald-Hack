@@ -133,10 +133,7 @@ void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(u32 battler);
 void Ai_UpdateFaintData(u32 battler);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
-void ResetDynamicAiFunctions(void);
+void ResetDynamicAiFunc(void);
 void AI_TrySwitchOrUseItem(u32 battler);
-void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef, u32 weather, u32 fieldStatus);
-
-extern AiSwitchFunc gDynamicAiSwitchFunc;
 
 #endif // GUARD_BATTLE_AI_MAIN_H

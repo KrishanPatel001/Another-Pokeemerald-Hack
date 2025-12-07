@@ -35,7 +35,7 @@ struct IncomingHealInfo
 static bool32 CanUseSuperEffectiveMoveAgainstOpponents(u32 battler);
 static bool32 FindMonWithFlagsAndSuperEffective(u32 battler, u16 flags, u32 moduloPercent);
 static u32 GetSwitchinHazardsDamage(u32 battler, struct BattlePokemon *battleMon);
-static bool32 CanAbilityTrapOpponent(enum Ability ability, u32 opponent);
+static bool32 AI_CanSwitchinAbilityTrapOpponent(enum Ability ability, u32 opponent);
 static u32 GetBattleMonTypeMatchup(struct BattlePokemon opposingBattleMon, struct BattlePokemon battleMon);
 static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler, const struct IncomingHealInfo *healInfo, u32 originalHp);
 static void GetIncomingHealInfo(u32 battler, struct IncomingHealInfo *healInfo);
@@ -2364,8 +2364,8 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int firstId, int lastId, 
                 }
 
                 // If mon can trap
-                if ((AI_CanSwitchinAbilityTrapOpponent(gAiLogicData->abilities[battler], opposingBattler)
-                    || (AI_CanSwitchinAbilityTrapOpponent(gAiLogicData->abilities[opposingBattler], opposingBattler) && gAiLogicData->abilities[battler] == ABILITY_TRACE))
+                if ((AI_CanSwitchinAbilityTrapOpponent(gAiLogicData->switchinCandidate.battleMon.ability, opposingBattler)
+                    || (AI_CanSwitchinAbilityTrapOpponent(gAiLogicData->abilities[opposingBattler], opposingBattler) && gAiLogicData->switchinCandidate.battleMon.ability == ABILITY_TRACE))
                     && canSwitchinWin1v1)
                     trapperIds |= (1u << i);
             }

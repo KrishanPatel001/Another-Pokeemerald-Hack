@@ -138,7 +138,8 @@ struct DisableStruct
     u8 tryEjectPack:1;
     u8 octolockedBy:3;
     u8 paradoxBoostedStat:4;
-    u8 padding2:2;
+    u8 unableToUseMove:1; // for end of turn checks only, for individual actions use the BattleStruct member
+    u8 padding:1;
 };
 
 // Fully Cleared each turn after end turn effects are done. A few things are cleared before end turn effects
@@ -161,19 +162,14 @@ struct ProtectStruct
     u32 shellTrap:1;
     u32 eatMirrorHerb:1;
     u32 activateOpportunist:2; // 2 - to copy stats. 1 - stats copied (do not repeat). 0 - no stats to copy
-    u32 usedAllySwitch:1;
-    u32 lashOutAffected:1;
-    u32 assuranceDoubled:1;
-    u32 forcedSwitch:1;
-    u32 myceliumMight:1;
-    u32 survivedOHKO:1; // Used to keep track of effects that allow focus punch when surviving moves like Fissure
-    u32 padding1:1;
+    u16 usedAllySwitch:1;
+    u16 lashOutAffected:1;
+    u16 assuranceDoubled:1;
+    u16 forcedSwitch:1;
+    u16 myceliumMight:1;
     // End of 32-bit bitfield
     u16 helpingHand:3;
-    u16 assuranceDoubled:1;
-    u16 myceliumMight:1;
-    u16 forcedSwitch:1;
-    u16 padding:10;
+    u16 padding:13;
     // End of 16-bit bitfield
     u16 physicalDmg;
     u16 specialDmg;
@@ -685,7 +681,8 @@ struct BattleStruct
     u8 anyMonHasTransformed:1; // Only used in battle_tv.c
     u8 sleepClauseNotBlocked:1;
     u8 isSkyBattle:1;
-    u8 unused:5;
+    u8 unableToUseMove:1; // for the current action only, to check if the battler failed to act at end turn use the DisableStruct member
+    u8 unused:4;
     u8 sortedBattlers[MAX_BATTLERS_COUNT];
     void (*savedCallback)(void);
     u16 chosenItem[MAX_BATTLERS_COUNT];
@@ -1233,7 +1230,19 @@ static inline bool32 IsDoubleBattle(void)
     return (gBattleTypeFlags & BATTLE_TYPE_MORE_THAN_TWO_BATTLERS);
 }
 
-static inline bool32 IsSpreadMove(enum MoveTarget moveTarget)
+static inline bool32 IsSpreadMove(u32 moveTarget)
+{
+    return IsDoubleBattle() && (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY);
+}
+
+static inline bool32 IsDoubleSpreadMove(void)
+{
+    return gBattleStruct->numSpreadTargets > 1
+        && !gBattleStruct->unableToUseMove
+        && IsSpreadMove(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove));
+}
+
+static inline bool32 IsBattlerInvalidForSpreadMove(u32 battlerAtk, u32 battlerDef, u32 moveTarget)
 {
     if (!IsDoubleBattle())
         return FALSE;

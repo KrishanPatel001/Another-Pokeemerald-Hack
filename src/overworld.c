@@ -419,7 +419,17 @@ void Overworld_ResetStateAfterDigEscRope(void)
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE
 void Overworld_ResetBattleFlagsAndVars(void)
 {
-    ResetStartingStatuses();
+    #if B_VAR_STARTING_STATUS != 0
+        VarSet(B_VAR_STARTING_STATUS, 0);
+    #endif
+
+    #if B_VAR_STARTING_STATUS_HAZARDS != 0
+        VarSet(B_VAR_STARTING_STATUS_HAZARDS, 0);
+    #endif
+
+    #if B_VAR_STARTING_STATUS_TIMER != 0
+        VarSet(B_VAR_STARTING_STATUS_TIMER, 0);
+    #endif
 
     #if B_VAR_WILD_AI_FLAGS != 0
         VarSet(B_VAR_WILD_AI_FLAGS,0);

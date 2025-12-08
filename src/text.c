@@ -52,11 +52,8 @@ static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
 
-static struct TextPrinter *AllocateTextPrinter(void);
-static u32 GetNumTextPrinters(void);
-static void FreeFinishedTextPrinters(void);
-
-static EWRAM_DATA struct TextPrinter *sFirstTextPrinter = NULL;
+static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
+static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
 static EWRAM_DATA u16 sFontHalfRowLookupTable[0x100];
 static EWRAM_DATA union TextColor sLastTextColor;
@@ -626,19 +623,6 @@ bool32 IsTextPrinterActiveOnSprite(u32 spriteId)
     return FALSE;
 }
 
-static u32 RenderFont(struct TextPrinter *textPrinter)
-{
-    u32 ret;
-    u16 (*fontFunction)(struct TextPrinter *x) = gFonts[textPrinter->printerTemplate.fontId].fontFunction;
-
-    do
-    {
-        ret = fontFunction(textPrinter);
-    } while (ret == RENDER_REPEAT);
-
-    return ret;
-}
-
 void GenerateFontHalfRowLookupTable(union TextColor color)
 {
     if (color.asU32 == sLastTextColor.asU32)
@@ -648,23 +632,25 @@ void GenerateFontHalfRowLookupTable(union TextColor color)
 
     sLastTextColor = color;
 
+    u8 *colors = color.asArray;
+
     u8 quarterRows[16] = {
-        color.background << 4 | color.background,
-        color.foreground << 4 | color.background,
-        color.shadow << 4     | color.background,
-        color.accent << 4     | color.background,
-        color.background << 4 | color.foreground,
-        color.foreground << 4 | color.foreground,
-        color.shadow << 4     | color.foreground,
-        color.accent << 4     | color.foreground,
-        color.background << 4 | color.shadow,
-        color.foreground << 4 | color.shadow,
-        color.shadow << 4     | color.shadow,
-        color.accent << 4     | color.shadow,
-        color.background << 4 | color.accent,
-        color.foreground << 4 | color.accent,
-        color.shadow << 4     | color.accent,
-        color.accent << 4     | color.accent,
+        colors[0] << 4 | colors[0],
+        colors[1] << 4 | colors[0],
+        colors[2] << 4 | colors[0],
+        colors[3] << 4 | colors[0],
+        colors[0] << 4 | colors[1],
+        colors[1] << 4 | colors[1],
+        colors[2] << 4 | colors[1],
+        colors[3] << 4 | colors[1],
+        colors[0] << 4 | colors[2],
+        colors[1] << 4 | colors[2],
+        colors[2] << 4 | colors[2],
+        colors[3] << 4 | colors[2],
+        colors[0] << 4 | colors[3],
+        colors[1] << 4 | colors[3],
+        colors[2] << 4 | colors[3],
+        colors[3] << 4 | colors[3],
     };
 
     u8 *current = (u8 *)sFontHalfRowLookupTable;
@@ -679,14 +665,22 @@ void GenerateFontHalfRowLookupTable(union TextColor color)
     }
 }
 
-union TextColor SaveTextColors(void)
+void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor, u8 *accentColor)
 {
-    return sLastTextColor;
+    *bgColor = sLastTextColor.background;
+    *fgColor = sLastTextColor.foreground;
+    *shadowColor = sLastTextColor.shadow;
+    *accentColor = sLastTextColor.accent;
 }
 
-void RestoreTextColors(union TextColor color)
+void RestoreTextColors(u8 *bgColor, u8 *fgColor, u8 *shadowColor, u8 *accentColor)
 {
-    GenerateFontHalfRowLookupTable(color);
+    GenerateFontHalfRowLookupTable((union TextColor) {
+        .background = *bgColor,
+        .foreground = *fgColor,
+        .shadow = *shadowColor,
+        .accent = *accentColor}
+    );
 }
 
 void DecompressGlyphTile(const void *src_, void *dest_)
@@ -1472,12 +1466,9 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_FILL_WINDOW:
-                if (textPrinter->printerTemplate.type == WINDOW_TEXT_PRINTER)
-                {
-                    FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.color.background));
-                    textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
-                    textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
-                }
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.color.background));
+                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+                textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_PAUSE_MUSIC:
                 m4aMPlayStop(&gMPlayInfo_BGM);
@@ -2010,8 +2001,9 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
     int strPos;
     int temp;
     int temp2;
+    u8 colorBackup[4];
 
-    union TextColor savedTextColors = SaveTextColors();
+    SaveTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2], &colorBackup[3]);
 
     union TextColor textColor = {
         .background = TEXT_COLOR_TRANSPARENT,
@@ -2123,7 +2115,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
     }
     while (temp != EOS);
 
-    RestoreTextColors(savedTextColors);
+    RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2], &colorBackup[3]);
     return 1;
 }
 

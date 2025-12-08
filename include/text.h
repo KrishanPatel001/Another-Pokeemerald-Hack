@@ -61,6 +61,17 @@ enum {
     FONTATTR_COLOR_SHADOW,
 };
 
+union TextColor {
+    struct {
+        u8 background;
+        u8 foreground;
+        u8 shadow;
+        u8 accent;
+    };
+    u32 asU32;
+    u8 asArray[4];
+};
+
 enum PACKED TextPrinterType
 {
     WINDOW_TEXT_PRINTER,
@@ -94,8 +105,6 @@ struct TextPrinterTemplate
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 firstSpriteInRow;
-    u8 firstSprite;
     union {
         struct {
             DEPRECATED("Use color.background instead") u8 bgColor;
@@ -189,11 +198,10 @@ void AddSpriteTextPrinterParameterized4(u8 spriteId, u8 fontId, u8 left, u8 top,
 void AddSpriteTextPrinterParameterized6(u8 spriteId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const union TextColor color, s8 speed, const u8 *str);
 bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
-bool32 IsTextPrinterActiveOnWindow(u32 windowId);
-bool32 IsTextPrinterActiveOnSprite(u32 spriteId);
+bool32 IsTextPrinterActive(u8 id);
 void GenerateFontHalfRowLookupTable(union TextColor color);
-union TextColor SaveTextColors(void);
-void RestoreTextColors(union TextColor color);
+void SaveTextColors(u8 *bgColor, u8 *fgColor, u8 *shadowColor, u8* accentColor);
+void RestoreTextColors(u8 *bgColor, u8 *fgColor, u8 *shadowColor, u8 *accentColor);
 void DecompressGlyphTile(const void *src_, void *dest_);
 u32 CopyGlyphToVRAM(struct TextPrinter *textPrinter);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);

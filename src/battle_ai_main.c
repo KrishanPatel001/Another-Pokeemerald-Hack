@@ -4241,18 +4241,7 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                     case MOVE_NEUTRAL_COMPARISON:
                         break;
                     }
-                    switch (CompareMoveSelfSacrifice(battlerAtk, battlerDef, moves[currId], moves[compareId]))
-                    {
-                    case MOVE_WON_COMPARISON:
-                        tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_AVOID_SELF_SACRIFICE);
-                        break;
-                    case MOVE_LOST_COMPARISON:
-                        tempMoveScores[compareId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_AVOID_SELF_SACRIFICE);
-                        break;
-                    case MOVE_NEUTRAL_COMPARISON:
-                        break;
-                    }
-                    switch (CompareMoveEffects(moves[currId], moves[compareId], battlerAtk, battlerDef, noOfHits[currId]))
+                    switch (CompareMoveEffects(moves[currId], moves[i], battlerAtk, battlerDef, noOfHits[currId]))
                     {
                     case MOVE_WON_COMPARISON:
                         tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_EFFECT);

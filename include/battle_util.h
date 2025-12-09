@@ -454,16 +454,7 @@ bool32 IsAllowedToUseBag(void);
 bool32 IsAnyTargetTurnDamaged(u32 battlerAtk);
 bool32 IsAnyTargetAffected(void);
 bool32 IsMimikyuDisguised(u32 battler);
-bool32 IsDoubleSpreadMove(void);
-bool32 IsBattlerInvalidForSpreadMove(u32 battlerAtk, u32 battlerDef);
 void SetStartingStatus(enum StartingStatus status);
 void ResetStartingStatuses(void);
-bool32 IsUsableWhileAsleepEffect(enum BattleMoveEffects effect);
-void SetWrapTurns(u32 battler, enum HoldEffect holdEffect);
-bool32 ChangeOrderTargetAfterAttacker(void);
-void TryUpdateEvolutionTracker(enum EvolutionConditions evolutionCondition, u32 upAmount, enum Move usedMove);
-bool32 CanUseMoveConsecutively(u32 battler);
-void TryResetConsecutiveUseCounter(u32 battler);
-void SetOrClearRageVolatile(void);
 
 #endif // GUARD_BATTLE_UTIL_H

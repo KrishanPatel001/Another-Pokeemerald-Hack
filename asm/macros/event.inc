@@ -2628,7 +2628,7 @@
 	callnative DoFacilityTrainerBattle
 	.byte \facility
 	.endm
-	
+
 @ Follower NPCs
 
 	@ Sets an existing NPC up to follow the player.

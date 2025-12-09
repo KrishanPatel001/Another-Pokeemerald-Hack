@@ -212,7 +212,12 @@ enum Move GetIncomingMove(u32 battler, u32 opposingBattler, struct AiLogicData *
 enum Move GetIncomingMoveSpeedCheck(u32 battler, u32 opposingBattler, struct AiLogicData *aiData)
 {
     if (aiData->predictingMove && CanAiPredictMove(battler))
-        return aiData->predictedMove[opposingBattler];
+    {
+        // Ignore moves that don't do damage or only have priority one time
+        if (GetMovePower(aiData->predictedMove[opposingBattler]) != 0 && GetMoveEffect(aiData->predictedMove[opposingBattler]) != EFFECT_FIRST_TURN_ONLY)
+            return aiData->predictedMove[opposingBattler];
+    }
+        
     return MOVE_NONE;
 }
 

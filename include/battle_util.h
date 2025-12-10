@@ -155,6 +155,7 @@ struct BattleContext
     u32 fixedBasePower:8;
     u32 weather:16;
     u32 unused:2;
+    u32 fieldStatuses;
 
     u32 move:13;
     u32 chosenMove:13; // May be different to 'move', e.g. for Z moves.
@@ -381,9 +382,9 @@ bool32 IsGrassyTerrainAffected(u32 battler, enum Ability ability, enum HoldEffec
 bool32 IsElectricTerrainAffected(u32 battler, enum Ability ability, enum HoldEffect holdEffect, u32 fieldStatuses);
 bool32 IsAnyTerrainAffected(u32 battler, enum Ability ability, enum HoldEffect holdEffect, u32 fieldStatuses);
 bool32 IsBattlerTerrainAffected(u32 battler, enum Ability ability, enum HoldEffect holdEffect, u32 fieldStatuses, u32 terrainFlag);
-enum Stat GetHighestStatId(u32 battler);
-enum Stat GetParadoxHighestStatId(u32 battler);
-enum Stat GetParadoxBoostedStatId(u32 battler);
+u32 GetHighestStatId(u32 battler);
+u32 GetParadoxHighestStatId(u32 battler);
+u32 GetParadoxBoostedStatId(u32 battler);
 
 bool32 CanBeSlept(u32 battlerAtk, u32 battlerDef, enum Ability abilityDef, enum SleepClauseBlock isBlockedBySleepClause);
 bool32 CanBePoisoned(u32 battlerAtk, u32 battlerDef, enum Ability abilityAtk, enum Ability abilityDef);

@@ -2028,7 +2028,7 @@ static u32 GetSwitchinCandidate(u32 switchinCategory, u32 battler, int firstId, 
         if (switchinCategory & (1 << i))
             return i;
     }
-    
+
     return PARTY_SIZE;
 }
 

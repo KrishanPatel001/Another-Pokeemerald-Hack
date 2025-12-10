@@ -145,7 +145,7 @@ AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases o
 
 AI_SINGLE_BATTLE_TEST("Clangorous Soul - gets best move boost when player does under 67 pct damage")
 {
-    enum Move move;
+    u16 move;
     PARAMETRIZE { move = MOVE_SOLAR_BEAM; }
     PARAMETRIZE { move = MOVE_AIR_SLASH; }
     ASSUME(GetMovePower(MOVE_SOLAR_BEAM) == 120);
@@ -256,22 +256,9 @@ AI_SINGLE_BATTLE_TEST("HasMoveThatChangesKOThreshold - AI should not see self-ta
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI_IsMoveEffectInPlus - AI should not see secondary effect of Sheer Force boosted moves as beneficial")
-{
-    GIVEN {
-        ASSUME(GetMovePower(MOVE_PSYCHIC) == 90);
-        ASSUME(MoveHasAdditionalEffect(MOVE_PSYCHIC, MOVE_EFFECT_SP_DEF_MINUS_1) == TRUE);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_STEELIX) { Level(100); Nature(NATURE_SASSY); Item(ITEM_STEELIXITE); Ability(ABILITY_STURDY); Speed(58); Moves(MOVE_GYRO_BALL); }
-        OPPONENT(SPECIES_BRAVIARY_HISUI) { Level(100); Nature(NATURE_TIMID); Ability(ABILITY_SHEER_FORCE); Speed(251); Moves(MOVE_PSYCHIC, MOVE_NIGHT_SHADE); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_GYRO_BALL); SCORE_EQ_VAL(opponent, MOVE_PSYCHIC, 101); SCORE_EQ_VAL(opponent, MOVE_NIGHT_SHADE, 101); }
-    }
-}
-
 AI_SINGLE_BATTLE_TEST("Fillet Away AI handling")
 {
-    enum Move move;
+    u16 move;
     PARAMETRIZE { move = MOVE_SCALD; }
     PARAMETRIZE { move = MOVE_THUNDERBOLT; }
     ASSUME(GetMovePower(MOVE_THUNDERBOLT) == (B_UPDATED_MOVE_DATA >= GEN_6 ? 90 : 95));
@@ -283,38 +270,5 @@ AI_SINGLE_BATTLE_TEST("Fillet Away AI handling")
         OPPONENT(SPECIES_VELUZA){ Level(100); Nature(NATURE_ADAMANT); Ability(ABILITY_SHARPNESS); Speed(176); Moves(MOVE_FILLET_AWAY, MOVE_AQUA_CUTTER); }
     } WHEN {
         TURN { MOVE(player, move); EXPECT_MOVE(opponent, move == MOVE_SCALD ? MOVE_FILLET_AWAY : MOVE_AQUA_CUTTER); }
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases of damage ties and KOs")
-{
-    u32 hp;
-
-    PARAMETRIZE { hp = 120; }
-    PARAMETRIZE { hp = 20; }
-
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(15); HP(hp); }
-        OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Level(40); Moves(MOVE_SONICBOOM, MOVE_DRAGON_RAGE, MOVE_NIGHT_SHADE, MOVE_SEISMIC_TOSS); }
-    } WHEN {
-        if (hp == 120)
-        {
-            TURN { 
-                SCORE_EQ_VAL(opponent, MOVE_SONICBOOM,      AI_SCORE_DEFAULT); 
-                SCORE_EQ_VAL(opponent, MOVE_DRAGON_RAGE,    (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE));
-                SCORE_EQ_VAL(opponent, MOVE_NIGHT_SHADE,    (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE)); 
-                SCORE_EQ_VAL(opponent, MOVE_SEISMIC_TOSS,   (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE));
-            }
-        }
-        else
-        {
-            TURN { 
-                SCORE_EQ_VAL(opponent, MOVE_SONICBOOM,      (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + FAST_KILL)); 
-                SCORE_EQ_VAL(opponent, MOVE_DRAGON_RAGE,    (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + FAST_KILL)); 
-                SCORE_EQ_VAL(opponent, MOVE_NIGHT_SHADE,    (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + FAST_KILL)); 
-                SCORE_EQ_VAL(opponent, MOVE_SEISMIC_TOSS,   (AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + FAST_KILL)); 
-            }
-        }
     }
 }

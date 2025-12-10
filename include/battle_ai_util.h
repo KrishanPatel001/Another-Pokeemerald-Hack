@@ -184,8 +184,8 @@ u32 GetCurrDamageHpPercent(u32 battlerAtk, u32 battlerDef, enum DamageCalcContex
 uq4_12_t AI_GetMoveEffectiveness(enum Move move, u32 battlerAtk, u32 battlerDef);
 enum Move *GetMovesArray(u32 battler);
 bool32 IsConfusionMoveEffect(enum BattleMoveEffects moveEffect);
-bool32 HasMove(u32 battlerId, enum Move move);
-u32 GetBattlerMoveIndexWithEffect(u32 battler, enum BattleMoveEffects effect);
+bool32 HasMove(u32 battlerId, u32 move);
+u32 GetIndexInMoveArray(u32 battler, u32 move);
 bool32 HasPhysicalBestMove(u32 battlerAtk, u32 battlerDef, enum DamageCalcContext calcContext);
 bool32 HasOnlyMovesWithCategory(u32 battlerId, enum DamageCategory category, bool32 onlyOffensive);
 bool32 HasMoveWithCategory(u32 battler, enum DamageCategory category);
@@ -303,15 +303,15 @@ bool32 SideHasMoveCategory(u32 battlerId, enum DamageCategory category);
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId);
 
 // score increases
-enum AIScore IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
-enum AIScore IncreaseStatUpScoreContrary(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
-enum AIScore IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, enum Stat stat);
-void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, enum Move move, s32 *score);
-void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, enum Move move, s32 *score);
-void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, enum Move move, s32 *score);
-void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, enum Move move, s32 *score);
-void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, enum Move move, s32 *score);
-void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, enum Move move, s32 *score);
+u32 IncreaseStatUpScore(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
+u32 IncreaseStatUpScoreContrary(u32 battlerAtk, u32 battlerDef, enum StatChange statId);
+u32 IncreaseStatDownScore(u32 battlerAtk, u32 battlerDef, enum Stat stat);
+void IncreasePoisonScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
+void IncreaseBurnScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
+void IncreaseParalyzeScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
+void IncreaseSleepScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
+void IncreaseConfusionScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
+void IncreaseFrostbiteScore(u32 battlerAtk, u32 battlerDef, u32 move, s32 *score);
 bool32 HasHPForDamagingSetup(u32 battlerAtk, u32 battlerDef, u32 hpThreshold);
 
 s32 AI_TryToClearStats(u32 battlerAtk, u32 battlerDef, bool32 isDoubleBattle);

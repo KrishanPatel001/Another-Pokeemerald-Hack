@@ -1963,9 +1963,9 @@ u32 SwitchinChangeBattleTerrain(u32 newTerrain, u32 fieldStatus)
     return fieldStatus;
 }
 
-u32 AI_GetSwitchinFieldStatus(u32 battler)
+u32 AI_GetSwitchinFieldStatus(struct BattlePokemon battleMon)
 {
-    enum Ability ability = gBattleMons[battler].ability;
+    enum Ability ability = battleMon.ability;
     u32 startingFieldStatus = gFieldStatuses;
     // Switchin will introduce new terrain
     switch(ability)
@@ -4590,8 +4590,9 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
         SetBattlerFieldStatusForSwitchin(battlerDef);
         gAiThinkingStruct->saved[battlerAtk].saved = FALSE;
     }
-
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, effectiveness, NO_GIMMICK, NO_GIMMICK, AI_GetSwitchinWeather(switchinCandidate), gFieldStatuses);
+        
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, effectiveness, NO_GIMMICK, NO_GIMMICK, AI_GetSwitchinWeather(switchinCandidate), AI_GetSwitchinFieldStatus(switchinCandidate));
+    
     // restores original gBattleMon struct
     FreeRestoreBattleMons(savedBattleMons);
 

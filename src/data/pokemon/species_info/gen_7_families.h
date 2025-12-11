@@ -6107,7 +6107,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             gShinyOverworldPalette_Cosmog
         )
         .isRestrictedLegendary = TRUE,
-        .teachingType = TM_ILLITERATE,
+        .tmIlliterate = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sCosmogLevelUpLearnset,
@@ -6177,7 +6177,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             gShinyOverworldPalette_Cosmoem
         )
         .isRestrictedLegendary = TRUE,
-        .teachingType = TM_ILLITERATE,
+        .tmIlliterate = TRUE,
         .isFrontierBanned = TRUE,
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sCosmoemLevelUpLearnset,

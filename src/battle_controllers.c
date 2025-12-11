@@ -65,7 +65,7 @@ bool32 IsAiVsAiBattle(void)
 bool32 BattlerIsPlayer(u32 battlerId)
 {
     return (gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_PLAYER
-        || gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_RECORDED_PLAYER);    
+        || gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_RECORDED_PLAYER);
     return (gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_PLAYER
          || gBattlerBattleController[battlerId] == BATTLE_CONTROLLER_RECORDED_PLAYER);
 }
@@ -109,10 +109,10 @@ bool32 BattlerHasAi(u32 battlerId)
     default:
         break;
     }
-    
+
     if (IsAiVsAiBattle())
         return TRUE;
-    
+
     return FALSE;
 }
 

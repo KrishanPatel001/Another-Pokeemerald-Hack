@@ -3695,7 +3695,7 @@ static u32 GetFirstBattlerOnSide(u32 side)
     return GetBattlerAtPosition(side == B_SIDE_PLAYER ? B_POSITION_PLAYER_LEFT : B_POSITION_OPPONENT_LEFT);
 }
 
-static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16 *timer)
+static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16 *timer, u16 time)
 {
     if (!(gFieldStatuses & flag))
     {
@@ -3904,7 +3904,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
                         B_MSG_SET_TAILWIND,
                         B_ANIM_TAILWIND,
                         &gSideTimers[B_SIDE_OPPONENT].tailwindTimer, gStartingStatuses.tailwindOpponent ? 0 : (B_TAILWIND_TURNS >= GEN_5 ? 4 : 3));
-            gStartingStatuses.tailwindOpponent = FALSE;
+            gStartingStatuses.tailwindOpponentTemporary = gStartingStatuses.tailwindOpponent = FALSE;
         }
         else if (gStartingStatuses.rainbowPlayer || gStartingStatuses.rainbowPlayerTemporary)
         {
@@ -3967,89 +3967,121 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
             gStartingStatuses.swampOpponentTemporary = gStartingStatuses.swampOpponent = FALSE;
         }
         // Hazards - Spikes
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SPIKES_PLAYER_L1)
+        else if (gStartingStatuses.spikesPlayerL1)
         {
             effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_PLAYER, 1, B_MSG_SET_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SPIKES_PLAYER_L1;
+            gStartingStatuses.spikesPlayerL1 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SPIKES_PLAYER_L2)
+        else if (gStartingStatuses.spikesPlayerL2)
         {
             effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_PLAYER, 2, B_MSG_SET_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SPIKES_PLAYER_L2;
+            gStartingStatuses.spikesPlayerL2 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SPIKES_PLAYER_L3)
+        else if (gStartingStatuses.spikesPlayerL3)
         {
             effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_PLAYER, 3, B_MSG_SET_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SPIKES_PLAYER_L3;
+            gStartingStatuses.spikesPlayerL3 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SPIKES_OPPONENT_L1)
+        else if (gStartingStatuses.spikesOpponentL1)
         {
             effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_OPPONENT, 1, B_MSG_SET_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SPIKES_OPPONENT_L1;
+            gStartingStatuses.spikesOpponentL1 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SPIKES_OPPONENT_L2)
+        else if (gStartingStatuses.spikesOpponentL2)
         {
             effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_OPPONENT, 2, B_MSG_SET_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SPIKES_OPPONENT_L2;
+            gStartingStatuses.spikesOpponentL2 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SPIKES_OPPONENT_L3)
+        else if (gStartingStatuses.spikesOpponentL3)
         {
             effect = SetStartingHazardStatus(HAZARDS_SPIKES, B_SIDE_OPPONENT, 3, B_MSG_SET_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SPIKES_OPPONENT_L3;
+            gStartingStatuses.spikesOpponentL3 = FALSE;
+            if (effect)
+                return TRUE;
         }
         // Hazards - Toxic Spikes
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_TOXIC_SPIKES_PLAYER_L1)
+        else if (gStartingStatuses.toxicSpikesPlayerL1)
         {
             effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_PLAYER, 1, B_MSG_SET_POISON_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_TOXIC_SPIKES_PLAYER_L1;
+            gStartingStatuses.toxicSpikesPlayerL1 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_TOXIC_SPIKES_PLAYER_L2)
+        else if (gStartingStatuses.toxicSpikesPlayerL2)
         {
             effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_PLAYER, 2, B_MSG_SET_POISON_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_TOXIC_SPIKES_PLAYER_L2;
+            gStartingStatuses.toxicSpikesPlayerL2 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_TOXIC_SPIKES_OPPONENT_L1)
+        else if (gStartingStatuses.toxicSpikesOpponentL1)
         {
             effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_OPPONENT, 1, B_MSG_SET_POISON_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_TOXIC_SPIKES_OPPONENT_L1;
+            gStartingStatuses.toxicSpikesOpponentL1 = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_TOXIC_SPIKES_OPPONENT_L2)
+        else if (gStartingStatuses.toxicSpikesOpponentL2)
         {
             effect = SetStartingHazardStatus(HAZARDS_TOXIC_SPIKES, B_SIDE_OPPONENT, 2, B_MSG_SET_POISON_SPIKES);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_TOXIC_SPIKES_OPPONENT_L2;
+            gStartingStatuses.toxicSpikesOpponentL2 = FALSE;
+            if (effect)
+                return TRUE;
         }
         // Hazards - Sticky Web
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_STICKY_WEB_PLAYER)
+        else if (gStartingStatuses.stickyWebPlayer)
         {
             effect = SetStartingHazardStatus(HAZARDS_STICKY_WEB, B_SIDE_PLAYER, 1, B_MSG_SET_STICKY_WEB);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_STICKY_WEB_PLAYER;
+            gStartingStatuses.stickyWebPlayer = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_STICKY_WEB_OPPONENT)
+        else if (gStartingStatuses.stickyWebOpponent)
         {
             effect = SetStartingHazardStatus(HAZARDS_STICKY_WEB, B_SIDE_OPPONENT, 1, B_MSG_SET_STICKY_WEB);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_STICKY_WEB_OPPONENT;
+            gStartingStatuses.stickyWebOpponent = FALSE;
+            if (effect)
+                return TRUE;
         }
         // Hazards - Stealth Rock
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_STEALTH_ROCK_PLAYER)
+        else if (gStartingStatuses.stealthRockPlayer)
         {
             effect = SetStartingHazardStatus(HAZARDS_STEALTH_ROCK, B_SIDE_PLAYER, 1, B_MSG_SET_STEALTH_ROCK);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_STEALTH_ROCK_PLAYER;
+            gStartingStatuses.stealthRockPlayer = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_STEALTH_ROCK_OPPONENT)
+        else if (gStartingStatuses.stealthRockOpponent)
         {
             effect = SetStartingHazardStatus(HAZARDS_STEALTH_ROCK, B_SIDE_OPPONENT, 1, B_MSG_SET_STEALTH_ROCK);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_STEALTH_ROCK_OPPONENT;
+            gStartingStatuses.stealthRockOpponent = FALSE;
+            if (effect)
+                return TRUE;
         }
         // Hazards - Steelsurge
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SHARP_STEEL_PLAYER)
+        else if (gStartingStatuses.sharpSteelPlayer)
         {
             effect = SetStartingHazardStatus(HAZARDS_STEELSURGE, B_SIDE_PLAYER, 1, B_MSG_SET_SHARP_STEEL);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SHARP_STEEL_PLAYER;
+            gStartingStatuses.sharpSteelPlayer = FALSE;
+            if (effect)
+                return TRUE;
         }
-        else if (gBattleStruct->startingStatus & STARTING_STATUS_SHARP_STEEL_OPPONENT)
+        else if (gStartingStatuses.sharpSteelOpponent)
         {
             effect = SetStartingHazardStatus(HAZARDS_STEELSURGE, B_SIDE_OPPONENT, 1, B_MSG_SET_SHARP_STEEL);
-            gBattleStruct->startingStatus &= ~STARTING_STATUS_SHARP_STEEL_OPPONENT;
+            gStartingStatuses.sharpSteelOpponent = FALSE;
+            if (effect)
+                return TRUE;
         }
         if (effect)
         {
@@ -12049,6 +12081,23 @@ void SetOrClearRageVolatile(void)
         gBattleMons[gBattlerAttacker].volatiles.rage = TRUE;
     else
         gBattleMons[gBattlerAttacker].volatiles.rage = FALSE;
+}
+
+#define UNPACK_STARTING_STATUS_TO_EWRAM(_enum, _fieldName, ...) case _enum: gStartingStatuses._fieldName = TRUE; break;
+
+void SetStartingStatus(enum StartingStatus status)
+{
+    switch (status)
+    {
+    STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_EWRAM);
+    }
+}
+
+#define UNPACK_STARTING_STATUS_RESET(_enum, _fieldName, ...) gStartingStatuses._fieldName = FALSE;
+
+void ResetStartingStatuses(void)
+{
+    STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_RESET);
 }
 
 #define UNPACK_STARTING_STATUS_TO_EWRAM(_enum, _fieldName, ...) case _enum: gStartingStatuses._fieldName = TRUE; break;

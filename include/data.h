@@ -88,29 +88,12 @@ enum TrainerBattleType
     TRAINER_BATTLE_TYPE_DOUBLES,
 };
 
-
 #define UNPACK_STARTING_STATUSES_STRUCT(_enum, _fieldName, _typeMaxValue, ...) INVOKE_WITH_(UNPACK_STARTING_STATUSES_STRUCT_, _fieldName, UNPACK_B(_typeMaxValue));
 #define UNPACK_STARTING_STATUSES_STRUCT_(_fieldName, _type, ...) _type FIRST(__VA_OPT__(_fieldName:BIT_SIZE(FIRST(__VA_ARGS__)),) _fieldName)
 
 struct StartingStatuses
 {
     STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUSES_STRUCT)
-    // Expands to:
-    // u32 electricTerrain:1;
-    // u32 mistyTerrain:1;
-    // u32 grassyTerrain:1;
-    // u32 psychicTerrain:1;
-    // u32 trickRoom:1;
-    // u32 magicRoom:1;
-    // u32 wonderRoom:1;
-    // u32 tailwindPlayer:1;
-    // u32 tailwindOpponent:1;
-    // u32 rainbowPlayer:1;
-    // u32 rainbowOpponent:1;
-    // u32 seaOfFirePlayer:1;
-    // u32 seaOfFireOpponent:1;
-    // u32 swampPlayer:1;
-    // u32 swampOpponent:1;
 };
 
 struct Trainer

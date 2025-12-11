@@ -3721,8 +3721,7 @@ static void DoBattleIntro(void)
                 statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
                 statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
             }
-            if (B_VAR_STARTING_STATUS_HAZARDS != 0)
-                gBattleStruct->startingStatus |= (u32)VarGet(B_VAR_STARTING_STATUS_HAZARDS) << STARTING_HAZARD_SHIFT;
+            STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
             gBattleMainFunc = TryDoEventsBeforeFirstTurn;
         }
         break;

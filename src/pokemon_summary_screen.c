@@ -1273,12 +1273,6 @@ void ShowSelectMoveBoxPokemonSummaryScreen(struct BoxPokemon *mons, u8 monIndex,
     sMonSummaryScreen->newMove = newMove;
 }
 
-void ShowPokemonSummaryScreenHandleDeoxys(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
-{
-    ShowPokemonSummaryScreen(mode, mons, monIndex, maxMonIndex, callback);
-    sMonSummaryScreen->handleDeoxys = TRUE;
-}
-
 static void MainCB2(void)
 {
     RunTasks();

@@ -1040,7 +1040,7 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, enum Move mo
     enum Ability abilityAtk = gAiLogicData->abilities[battlerAtk];
     u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
     bool32 aiIsFaster = AI_IsFaster(battlerAtk, battlerDef, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY);
-    
+
     switch (GetMoveEffect(move))
     {
     case EFFECT_ABSORB:
@@ -3518,7 +3518,7 @@ enum AIPivot ShouldPivot(u32 battlerAtk, u32 battlerDef, u32 move)
 #define BATTLE_TYPE_CANT_KNOCK_OFF (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK \
                                   | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_SECRET_BASE \
                                   | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0))
-bool32 CanKnockOffItem(u32 fromBattler, u32 battler, enum Item item)
+bool32 CanKnockOffItem(u32 fromBattler, u32 battler, u32 item)
 {
     if (item == ITEM_NONE)
         return FALSE;
@@ -3979,7 +3979,7 @@ bool32 ShouldAbsorb(u32 battlerAtk, u32 battlerDef, u32 move)
         return TRUE;
     if (ShouldDrainHPToWithstandHit(battlerAtk, battlerDef, currHP, healAmount))
         return TRUE;
-    
+
     return FALSE;
 }
 
@@ -4565,9 +4565,9 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
         SetBattlerFieldStatusForSwitchin(battlerDef);
         gAiThinkingStruct->saved[battlerAtk].saved = FALSE;
     }
-        
+
     dmg = AI_CalcDamage(move, battlerAtk, battlerDef, effectiveness, NO_GIMMICK, NO_GIMMICK, AI_GetSwitchinWeather(switchinCandidate), AI_GetSwitchinFieldStatus(switchinCandidate));
-    
+
     // restores original gBattleMon struct
     FreeRestoreBattleMons(savedBattleMons);
 
@@ -5014,16 +5014,16 @@ bool32 HasHPForDamagingSetup(u32 battlerAtk, u32 battlerDef, u32 hpThreshold)
         return TRUE;
 
     if (bestMoveIsPhysical
-     && gAiLogicData->abilities[battlerAtk] == ABILITY_ICE_FACE 
+     && gAiLogicData->abilities[battlerAtk] == ABILITY_ICE_FACE
      && gBattleMons[battlerAtk].species == SPECIES_EISCUE_ICE
      && !IsMoldBreakerTypeAbility(battlerDef, gAiLogicData->abilities[battlerDef])) // ice face will absorb the hit, safe to use setup
         return TRUE;
-    
+
     if (gAiLogicData->abilities[battlerAtk] == ABILITY_DISGUISE
      && IsMimikyuDisguised(battlerAtk)
      && !IsMoldBreakerTypeAbility(battlerDef, gAiLogicData->abilities[battlerDef])) // disguise will absorb the hit, safe to use setup
         return TRUE;
-    
+
     return FALSE;
 }
 

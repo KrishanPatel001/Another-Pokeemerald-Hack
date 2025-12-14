@@ -2011,7 +2011,8 @@ void TryClearRageAndFuryCutter(void)
     s32 i;
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (!MoveHasAdditionalEffect(gChosenMoveByBattler[i], MOVE_EFFECT_RAGE))
+        u32 effect = GetMoveEffect(gChosenMoveByBattler[i]);
+        if (gBattleMons[i].volatiles.rage && effect != EFFECT_RAGE)
             gBattleMons[i].volatiles.rage = FALSE;
     }
 }

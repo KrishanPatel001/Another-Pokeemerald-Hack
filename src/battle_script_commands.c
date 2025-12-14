@@ -8722,6 +8722,49 @@ u32 IsAbilityStatusProtected(u32 battler, enum Ability ability)
         || IsFlowerVeilProtected(battler);
 }
 
+static bool32 IsRototillerAffected(u32 battler, u32 move)
+{
+    if (!IsBattlerAlive(battler))
+        return FALSE;
+    if (!IsBattlerGrounded(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler)))
+        return FALSE;   // Only grounded battlers affected
+    if (!IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
+        return FALSE;   // Only grass types affected
+    if (IsSemiInvulnerable(battler, CHECK_ALL))
+        return FALSE;   // Rototiller doesn't affected semi-invulnerable battlers
+    if (BlocksPrankster(move, gBattlerAttacker, battler, FALSE))
+        return FALSE;
+    return TRUE;
+}
+
+static bool32 IsElectricAbilityAffected(u32 battler, enum Ability ability)
+{
+    u32 moveType;
+
+    if (gBattleStruct->dynamicMoveType == 0)
+        moveType = GetMoveType(gCurrentMove);
+    else if (!(gBattleStruct->dynamicMoveType & F_DYNAMIC_TYPE_IGNORE_PHYSICALITY))
+        moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
+    else
+        moveType = GetMoveType(gCurrentMove);
+
+    if (moveType == TYPE_ELECTRIC
+     && (ability != ABILITY_LIGHTNING_ROD || B_REDIRECT_ABILITY_IMMUNITY >= GEN_5)
+     && GetBattlerAbility(battler) == ability)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 IsTeatimeAffected(u32 battler)
+{
+    if (GetItemPocket(gBattleMons[battler].item) != POCKET_BERRIES)
+        return FALSE;   // Only berries
+    if (IsSemiInvulnerable(battler, CHECK_ALL))
+        return FALSE;   // Teatime doesn't affected semi-invulnerable battlers
+    return TRUE;
+}
+
 #define COURTCHANGE_SWAP(status, structField, temp)                     \
 {                                                                       \
     temp = gSideStatuses[B_SIDE_PLAYER];                                \
@@ -9376,6 +9419,11 @@ static u32 ChangeStatBuffs(u32 battler, s8 statValue, enum Stat statId, union St
                     gSpecialStatuses[battler].statLowered = TRUE;
                 }
             }
+            return STAT_CHANGE_DIDNT_WORK;
+        }
+        else if (effect != EFFECT_CURSE
+                 && !flags.notProtectAffected && JumpIfMoveAffectedByProtect(gCurrentMove, gBattlerTarget, TRUE, BattleScript_ButItFailed))
+        {
             return STAT_CHANGE_DIDNT_WORK;
         }
         else if ((battlerHoldEffect == HOLD_EFFECT_CLEAR_AMULET || CanAbilityPreventStatLoss(battlerAbility))
@@ -16630,7 +16678,10 @@ void BS_GetRototillerTargets(void)
 
     for (u32 battler = 0; battler < gBattlersCount; battler++)
     {
+        gSpecialStatuses[battler].rototillerAffected = FALSE;
         if (IsRototillerAffected(battler, gCurrentMove))
+        {
+            gSpecialStatuses[battler].rototillerAffected = TRUE;
             count++;
         else
             gBattleStruct->moveResultFlags[battler] = MOVE_RESULT_NO_EFFECT;

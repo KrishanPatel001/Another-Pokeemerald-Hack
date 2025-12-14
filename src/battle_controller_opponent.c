@@ -370,7 +370,7 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
 static void OpponentHandleDrawTrainerPic(u32 battler)
 {
     s16 xPos;
-    enum TrainerPicID trainerPicId;
+    u32 trainerPicId;
 
     // Sets Multibattle test opponent sprites to not be Hiker
     if (IsMultibattleTest())

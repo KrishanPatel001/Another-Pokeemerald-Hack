@@ -2540,6 +2540,17 @@ u32 GetBattlerMoveIndexWithEffect(u32 battler, enum BattleMoveEffects effect)
     return MAX_MON_MOVES;
 }
 
+u32 GetBattlerMoveIndexWithEffect(u32 battler, enum BattleMoveEffects effect)
+{
+    u16 *moves = GetMovesArray(battler);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (GetMoveEffect(moves[i]) == effect)
+            return i;
+    }
+    return MAX_MON_MOVES;
+}
+
 bool32 HasPhysicalBestMove(u32 battlerAtk, u32 battlerDef, enum DamageCalcContext calcContext)
 {
     u32 atkBestMoves[MAX_MON_MOVES] = {0};
@@ -2930,6 +2941,17 @@ bool32 HasUsableWhileAsleepMove(u32 battler)
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
         if (moves[moveIndex] != MOVE_NONE && moves[moveIndex] != MOVE_UNAVAILABLE && IsUsableWhileAsleepEffect(GetMoveEffect(moves[moveIndex])))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 HasUsableWhileAsleepMove(u32 battler)
+{
+    u16 *moves = GetMovesArray(battler);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE && IsUsableWhileAsleepEffect(GetMoveEffect(moves[i])))
             return TRUE;
     }
     return FALSE;

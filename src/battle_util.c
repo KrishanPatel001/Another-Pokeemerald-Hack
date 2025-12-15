@@ -2087,7 +2087,7 @@ static enum MoveCanceler CancelerRecharge(struct BattleContext *ctx)
             enum BattleMoveEffects moveEffect = GetMoveEffect(ctx->move);
             if (gBattleMons[ctx->battlerAtk].status1 & STATUS1_SLEEP)
             {
-                if (moveEffect != EFFECT_SNORE && moveEffect != EFFECT_SLEEP_TALK)
+                if (!IsUsableWhileAsleepEffect(moveEffect))
                 {
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                     return MOVE_STEP_FAILURE;
@@ -12114,4 +12114,17 @@ void SetStartingStatus(enum StartingStatus status)
 void ResetStartingStatuses(void)
 {
     STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_RESET);
+}
+
+bool32 IsUsableWhileAsleepEffect(enum BattleMoveEffects effect)
+{
+    // All moves usable while asleep like Snore, Sleep Talk, etc.
+    switch (effect)
+    {
+    case EFFECT_SNORE:
+    case EFFECT_SLEEP_TALK:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }

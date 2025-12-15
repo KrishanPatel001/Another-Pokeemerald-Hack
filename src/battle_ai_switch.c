@@ -281,11 +281,11 @@ static inline bool32 CanBattlerWin1v1(u32 hitsToKOAI, u32 hitsToKOPlayer, bool32
 static bool32 ShouldSwitchIfHasBadOdds(u32 battler)
 {
     //Variable initialization
-    enum BattlerPosition opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
+    s32 i;
+    u32 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
     u32 opposingBattler = GetBattlerAtPosition(opposingPosition);
-    enum Move *playerMoves = GetMovesArray(opposingBattler);
-    enum Move aiMove, playerMove, bestPlayerPriorityMove = MOVE_NONE, bestPlayerMove = MOVE_NONE, expectedMove = MOVE_NONE;
-    enum Ability aiAbility = gAiLogicData->abilities[battler];
+    u16 *playerMoves = GetMovesArray(opposingBattler);
+    u32 aiMove, playerMove, bestPlayerPriorityMove = MOVE_NONE, bestPlayerMove = MOVE_NONE, expectedMove = MOVE_NONE, aiAbility = gAiLogicData->abilities[battler];
     bool32 hasStatusMove = FALSE, hasSuperEffectiveMove = FALSE;
     u32 typeMatchup;
     enum BattleMoveEffects aiMoveEffect;
@@ -306,7 +306,7 @@ static bool32 ShouldSwitchIfHasBadOdds(u32 battler)
         playerMove = SMART_SWITCHING_OMNISCIENT ? gBattleMons[opposingBattler].moves[moveIndex] : playerMoves[moveIndex];
         if (playerMove != MOVE_NONE && !IsBattleMoveStatus(playerMove) && GetMoveEffect(playerMove) != EFFECT_FOCUS_PUNCH && gBattleMons[opposingBattler].pp[moveIndex] > 0)
         {
-            hitsToKOAI = GetNoOfHitsToKOBattler(opposingBattler, battler, moveIndex, AI_DEFENDING, CONSIDER_ENDURE);
+            hitsToKOAI = GetNoOfHitsToKOBattler(opposingBattler, battler, i, AI_DEFENDING, CONSIDER_ENDURE);
             if (hitsToKOAI < minHitsToKOAI && !AI_DoesChoiceEffectBlockMove(opposingBattler, playerMove))
             {
                 bestPlayerMove = playerMove;
@@ -352,7 +352,7 @@ static bool32 ShouldSwitchIfHasBadOdds(u32 battler)
                     hasSuperEffectiveMove = TRUE;
 
                 // Check if can win 1v1
-                hitsToKOPlayer = GetNoOfHitsToKOBattler(battler, opposingBattler, moveIndex, AI_ATTACKING, CONSIDER_ENDURE);
+                hitsToKOPlayer = GetNoOfHitsToKOBattler(battler, opposingBattler, i, AI_ATTACKING, CONSIDER_ENDURE);
                 if (!canBattlerWin1v1 ) // Once we can win a 1v1 we don't need to track this, but want to run the rest of the function to keep the runtime the same regardless of when we find the winning move
                 {
                     isBattlerFirst = AI_IsFaster(battler, opposingBattler, aiMove, expectedMove, CONSIDER_PRIORITY);
@@ -364,7 +364,7 @@ static bool32 ShouldSwitchIfHasBadOdds(u32 battler)
     }
 
     // Calculate type advantage
-    typeMatchup = GetBattlerTypeMatchup(opposingBattler, battler);
+    typeMatchup = GetBattleMonTypeMatchup(gBattleMons[opposingBattler], gBattleMons[battler]);
 
     // Check if current mon can 1v1 in spite of bad matchup, and don't switch out if it can
     if (canBattlerWin1v1)

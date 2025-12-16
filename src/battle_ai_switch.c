@@ -1100,7 +1100,7 @@ static bool32 CanMonSurviveHazardSwitchin(u32 battler)
 
 static bool32 ShouldSwitchIfEncored(u32 battler)
 {
-    enum Move encoredMove = gBattleMons[battler].volatiles.encoredMove;
+    u32 encoredMove = gBattleMons[battler].volatiles.encoredMove;
     u32 opposingBattler = GetOppositeBattler(battler);
 
     // Only use this if AI_FLAG_SMART_SWITCHING is set for the trainer

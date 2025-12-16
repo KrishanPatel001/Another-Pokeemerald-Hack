@@ -958,8 +958,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 changeType)
 
         if (changeType == SPECIES_GFX_CHANGE_TRANSFORM)
         {
-            personalityValue = gTransformedPersonalities[battlerAtk];
-            isShiny = gTransformedShininess[battlerAtk];
+            personalityValue = gBattleMons[battlerAtk].volatiles.transformedMonPID;
+            isShiny = gBattleMons[battlerAtk].volatiles.isTransformedMonShiny;
         }
         else
         {

@@ -332,8 +332,8 @@ static bool32 HandleEndTurnFirstEventBlock(u32 battler)
     case FIRST_EVENT_BLOCK_THRASH:
         if (gBattleMons[battler].volatiles.rampageTurns && gBattleMons[battler].volatiles.semiInvulnerable != STATE_SKY_DROP)
         {
-            gBattleMons[battler].volatiles.lockConfusionTurns--;
-            if (gDisableStructs[battler].unableToUseMove)
+            gBattleMons[battler].volatiles.rampageTurns--;
+            if (gBattleMons[battler].volatiles.unableToUseMove)
             {
                 CancelMultiTurnMoves(battler, SKY_DROP_IGNORE);
             }
@@ -1240,7 +1240,7 @@ static bool32 HandleEndTurnThirdEventBlock(u32 battler)
             {
                 gBattlerAttacker = battler;
                 gBattleMons[battler].volatiles.uproarTurns--;  // uproar timer goes down
-                if (gDisableStructs[battler].unableToUseMove)
+                if (gBattleMons[battler].volatiles.unableToUseMove)
                 {
                     CancelMultiTurnMoves(battler, SKY_DROP_IGNORE);
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_UPROAR_ENDS;

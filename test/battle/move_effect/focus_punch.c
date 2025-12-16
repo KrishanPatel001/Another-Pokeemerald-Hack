@@ -73,7 +73,7 @@ DOUBLE_BATTLE_TEST("Focus Punch activation is based on Speed")
 
 SINGLE_BATTLE_TEST("Focus Punch activates when Focus Band/Focus Sash blocks OHKO move")
 {
-    enum Item item;
+    u32 item;
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_FOCUS_BAND; }
     PARAMETRIZE { item = ITEM_FOCUS_SASH; }
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Focus Punch activates when Focus Band/Focus Sash blocks OHKO
 
 SINGLE_BATTLE_TEST("Focus Punch activates when Disguise block a OHKO move (Gen8+)")
 {
-    enum Move move;
+    u32 move;
     bool32 activate;
     PARAMETRIZE { move = MOVE_WATER_GUN; activate = FALSE; }
     PARAMETRIZE { move = MOVE_FISSURE; activate = TRUE; }
@@ -139,8 +139,7 @@ SINGLE_BATTLE_TEST("Focus Punch activates when Disguise block a OHKO move (Gen8+
 
 SINGLE_BATTLE_TEST("Focus Punch does not activate when Focus Band/Focus Sash/Sturdy prevent getting one-shot by an attack")
 {
-    enum Item item;
-    enum Ability ability;
+    u32 item, ability;
     PARAMETRIZE { item = ITEM_NONE; ability = ABILITY_STURDY; }
     PARAMETRIZE { item = ITEM_FOCUS_BAND; ability = ABILITY_SHADOW_TAG; }
     PARAMETRIZE { item = ITEM_FOCUS_SASH; ability = ABILITY_SHADOW_TAG; }
@@ -186,7 +185,7 @@ SINGLE_BATTLE_TEST("Focus Punch activates when the user's Substitute is hit")
 
 SINGLE_BATTLE_TEST("Focus Punch uses PP when losing focus (Gen 3-4)")
 {
-    enum Move move;
+    u32 move;
     bool32 activate;
     PARAMETRIZE { move = MOVE_SCRATCH; activate = FALSE; }
     PARAMETRIZE { move = MOVE_LEER; activate = TRUE; }
@@ -211,7 +210,7 @@ SINGLE_BATTLE_TEST("Focus Punch uses PP when losing focus (Gen 3-4)")
 
 SINGLE_BATTLE_TEST("Focus Punch doesn't use PP when losing focus (Gen 5+)")
 {
-    enum Move move;
+    u32 move;
     bool32 activate;
     PARAMETRIZE { move = MOVE_SCRATCH; activate = FALSE; }
     PARAMETRIZE { move = MOVE_LEER; activate = TRUE; }

@@ -850,8 +850,8 @@ const u16 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny,
 const u16 *GetMonSpritePalFromSpeciesAndPersonalityIsEgg(u16 species, bool32 isShiny, u32 personality, bool32 isEgg);
 const u16 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale);
 const u16 *GetMonSpritePalFromSpeciesIsEgg(u16 species, bool32 isShiny, bool32 isFemale, bool32 isEgg);
-bool32 IsMoveHM(enum Move move);
-bool32 CannotForgetMove(enum Move move);
+bool32 IsMoveHM(u16 move);
+bool32 CannotForgetMove(u16 move);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetMonFlavorRelation(struct Pokemon *mon, enum Flavor flavor);
 s8 GetFlavorRelationByPersonality(u32 personality, enum Flavor flavor);

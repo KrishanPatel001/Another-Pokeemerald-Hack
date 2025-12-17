@@ -4484,9 +4484,6 @@ static void InitBoxMonSprites(u8 boxId)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
                 sStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j, isEgg);
-
-                if (ShouldBoxmonSpriteBeTransparent(boxId, boxPosition))
-                    sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
             }
             else
             {
@@ -4510,7 +4507,7 @@ static void CreateBoxMonIconAtPos(u8 boxPosition)
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS), isEgg);
-        if (ShouldBoxmonSpriteBeTransparent(StorageGetCurrentBox(), boxPosition))
+        if (sStorage->boxOption == OPTION_MOVE_ITEMS)
             sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
@@ -4600,7 +4597,30 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
     u8 iconsCreated = 0;
     u8 boxPosition = column;
 
-    for (i = 0; i < IN_BOX_ROWS; i++)
+    if (sStorage->boxOption != OPTION_MOVE_ITEMS)
+    {
+        for (i = 0; i < IN_BOX_ROWS; i++)
+        {
+            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
+            {
+                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
+                                                                            sStorage->boxPersonalities[boxPosition],
+                                                                            x, y, 2, subpriority,
+                                                                            sStorage->boxIsEgg[boxPosition]);
+                if (sStorage->boxMonsSprites[boxPosition] != NULL)
+                {
+                    sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
+                    sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
+                    sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                    sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
+                    iconsCreated++;
+                }
+            }
+            boxPosition += IN_BOX_COLUMNS;
+            y += 24;
+        }
+    }
+    else
     {
         if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
         {
@@ -4610,13 +4630,20 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                                                                         sStorage->boxIsEgg[boxPosition]);
             if (sStorage->boxMonsSprites[boxPosition] != NULL)
             {
-                sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
-                sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
-                sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
-                sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
-                if (ShouldBoxmonSpriteBeTransparent(sStorage->incomingBoxId, boxPosition))
-                    sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
-                iconsCreated++;
+                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
+                                                                            sStorage->boxPersonalities[boxPosition],
+                                                                            x, y, 2, subpriority,
+                                                                            sStorage->boxIsEgg[boxPosition]);
+                if (sStorage->boxMonsSprites[boxPosition] != NULL)
+                {
+                    sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
+                    sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
+                    sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                    sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
+                    if (GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
+                        sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                    iconsCreated++;
+                }
             }
         }
         boxPosition += IN_BOX_COLUMNS;

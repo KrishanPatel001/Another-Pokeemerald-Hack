@@ -5588,10 +5588,10 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId)
 
 const u16 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
-    bool32 isEgg = GetMonData(mon, MON_DATA_IS_EGG);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+    bool32 isEgg = GetMonData(mon, MON_DATA_IS_EGG, NULL);
     return GetMonSpritePalFromSpeciesAndPersonalityIsEgg(species, isShiny, personality, isEgg);
 }
 

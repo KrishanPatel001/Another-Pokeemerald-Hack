@@ -1,4 +1,3 @@
-#if P_FAMILY_MANAPHY
 [EGG_ID_MANAPHY] =
 {
     .eggIcon = gMonEggIcon_Manaphy,
@@ -8,4 +7,3 @@
     .eggHatchPal = gMonHatchPal_Manaphy,
     .eggIconPalIndex = 2,
 },
-#endif //P_FAMILY_MANAPHY

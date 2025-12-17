@@ -32,8 +32,16 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_TERRAIN_BOOST] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectExplosion,
         .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
+    },
+
+    [EFFECT_MISTY_EXPLOSION] =
+    {
+        .battleScript = BattleScript_EffectExplosion,
+        .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
     },
 
     [EFFECT_DREAM_EATER] =
@@ -216,7 +224,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_OHKO] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectOHKO,
+        .battleTvScore = 7,
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
+    },
+
+    [EFFECT_SHEER_COLD] =
+    {
+        .battleScript = BattleScript_EffectOHKO,
         .battleTvScore = 7,
         .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
     },
@@ -334,7 +349,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_TRANSFORM] =
     {
         .battleScript = BattleScript_EffectTransform,
-        .battleTvScore = 0, // Natural 0
+        .battleTvScore = 0, // TODO: Assign points
         .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE,
     },
 
@@ -407,6 +422,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectSubstitute,
         .battleTvScore = 4,
         .battleFactoryStyle = FACTORY_STYLE_UNPREDICTABLE,
+    },
+
+    [EFFECT_RAGE] =
+    {
+        .battleScript = BattleScript_EffectRage,
+        .battleTvScore = 2,
     },
 
     [EFFECT_MIMIC] =
@@ -649,6 +670,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_SANDSTORM] =
+    {
+        .battleScript = BattleScript_EffectSandstorm,
+        .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER,
+        .encourageEncore = TRUE,
+    },
+
     [EFFECT_ENDURE] =
     {
         .battleScript = BattleScript_EffectEndure,
@@ -768,7 +797,15 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleTvScore = 1,
     },
 
-    [EFFECT_WEATHER] =
+    [EFFECT_RAIN_DANCE] =
+    {
+        .battleScript = BattleScript_EffectRainDance,
+        .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_SUNNY_DAY] =
     {
         .battleScript = BattleScript_EffectWeather,
         .battleTvScore = 4,
@@ -795,6 +832,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectPsychUp,
         .battleTvScore = 7,
         .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_MIRROR_COAT] =
+    {
+        .battleScript = BattleScript_EffectMirrorCoat,
+        .battleTvScore = 6,
+        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
         .encourageEncore = TRUE,
     },
 
@@ -893,6 +938,14 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectOverwriteAbility,
         .battleTvScore = 0, // TODO: Assign points
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_HAIL] =
+    {
+        .battleScript = BattleScript_EffectHail,
+        .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER,
         .encourageEncore = TRUE,
     },
 
@@ -2037,6 +2090,13 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_ATTACK_UP_USER_ALLY] =
+    {
+        .battleScript = BattleScript_EffectAttackUpUserAlly,
+        .battleTvScore = 0, // TODO: Assign points
+        .battleFactoryStyle = FACTORY_STYLE_PREPARATION,
+    },
+
     [EFFECT_SHELL_TRAP] =
     {
         .battleScript = BattleScript_EffectShellTrap,
@@ -2053,6 +2113,13 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectRevivalBlessing,
         .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_SNOWSCAPE] =
+    {
+        .battleScript = BattleScript_EffectSnow,
+        .battleTvScore = 4,
+        .battleFactoryStyle = FACTORY_STYLE_WEATHER,
     },
 
     [EFFECT_TAKE_HEART] =

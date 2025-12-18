@@ -482,7 +482,7 @@ static void OpponentHandleChooseMove(u32 battler)
     }
     else // Wild pokemon - use random move
     {
-        enum Move move;
+        u32 move;
         do
         {
             chosenMoveIndex = Random() & (MAX_MON_MOVES - 1);

@@ -1094,7 +1094,7 @@
 	.endm
 
 	.macro unused_0xCC
-	.byte B_SCR_OP_UNUSED_0XCC
+	.byte 0xcc
 	.endm
 
 	.macro curestatuswithmove failInstr:req

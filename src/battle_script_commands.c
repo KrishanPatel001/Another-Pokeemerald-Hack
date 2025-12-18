@@ -959,21 +959,21 @@ static void ValidateSavedBattlerCounts(void)
 static bool32 NoTargetPresent(u8 battler, u32 move)
 {
     if (!IsBattlerAlive(gBattlerTarget))
-        gBattlerTarget = GetBattleMoveTarget(move, NO_TARGET_OVERRIDE);
+        gBattlerTarget = GetBattleMoveTarget(move, TARGET_NONE);
 
     switch (GetBattlerMoveTargetType(battler, move))
     {
-    case MOVE_TARGET_SELECTED:
-    case MOVE_TARGET_DEPENDS:
-    case MOVE_TARGET_RANDOM:
+    case TARGET_SELECTED:
+    case TARGET_DEPENDS:
+    case TARGET_RANDOM:
         if (!IsBattlerAlive(gBattlerTarget))
             return TRUE;
         break;
-    case MOVE_TARGET_BOTH:
+    case TARGET_BOTH:
         if (!IsBattlerAlive(gBattlerTarget) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)))
             return TRUE;
         break;
-    case MOVE_TARGET_FOES_AND_ALLY:
+    case TARGET_FOES_AND_ALLY:
         if (!IsBattlerAlive(gBattlerTarget) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)))
             return TRUE;
         break;
@@ -1191,7 +1191,30 @@ static void Cmd_attackcanceler(void)
         BattleScriptCall(BattleScript_MagicBounce);
         return;
     }
-    else if (gBattleStruct->magicCoatActive && !gBattleStruct->bouncedMoveIsUsed)
+
+    u32 isBounceable = MoveCanBeBouncedBack(gCurrentMove);
+    bool32 bounceActive = (gProtectStructs[gBattlerTarget].bounceMove && IsBattlerAlive(gBattlerTarget));
+
+    if (!bounceActive
+        && !gBattleStruct->bouncedMoveIsUsed
+        && isBounceable
+        && GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) == TARGET_OPPONENTS_FIELD)
+    {
+        u32 partner = BATTLE_PARTNER(gBattlerTarget);
+
+        if (partner < gBattlersCount
+            && GetBattlerSide(partner) == GetBattlerSide(gBattlerTarget)
+            && gProtectStructs[partner].bounceMove
+            && IsBattlerAlive(partner))
+        {
+            gBattlerTarget = partner;
+            bounceActive = TRUE;
+        }
+    }
+
+    if (bounceActive
+        && isBounceable
+        && !gBattleStruct->bouncedMoveIsUsed)
     {
         gBattleStruct->bouncedMoveIsUsed = TRUE;
         gBattleStruct->magicCoatActive = FALSE;
@@ -1209,7 +1232,7 @@ static void Cmd_attackcanceler(void)
             gBattleStruct->bouncedMoveIsUsed = TRUE;
         }
         else if (IsDoubleBattle()
-              && GetBattlerMoveTargetType(battler, gCurrentMove) == MOVE_TARGET_OPPONENTS_FIELD
+              && GetBattlerMoveTargetType(battler, gCurrentMove) == TARGET_OPPONENTS_FIELD
               && GetBattlerAbility(BATTLE_PARTNER(gBattlerTarget)) == ABILITY_MAGIC_BOUNCE)
         {
             gBattlerTarget = battler = BATTLE_PARTNER(gBattlerTarget);
@@ -1327,8 +1350,12 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
 
     for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
     {
-        if (gBattleStruct->calculatedSpreadMoveAccuracy)
-            break;
+        u32 battlerDef,
+            numTargets = 0,
+            numMisses = 0,
+            moveType = GetBattleMoveType(move),
+            moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
+        bool32 calcSpreadMove = IsSpreadMove(moveTarget, CHECK_BATTLE_TYPE) && !IsBattleMoveStatus(move);
 
         if (!calcSpreadMove && battlerDef != gBattlerTarget)
             continue;
@@ -1489,7 +1516,7 @@ static void Cmd_damagecalc(void)
     ctx.randomFactor = TRUE;
     ctx.updateFlags = TRUE;
 
-    if (IsSpreadMove(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove)))
+    if (IsSpreadMove(moveTarget, CHECK_BATTLE_TYPE))
     {
         for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
         {
@@ -1509,9 +1536,7 @@ static void Cmd_damagecalc(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 
-    if (gSpecialStatuses[gBattlerAttacker].gemBoost
-     && gBattleMons[gBattlerAttacker].item
-     && IsAnyTargetAffected())
+    if (!IsSpreadMove(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove), CHECK_BATTLE_TYPE)) // Handled in CANCELER_MULTI_TARGET_MOVES for Spread Moves
     {
         struct BattleContext ctx = {0};
         ctx.battlerAtk = gBattlerAttacker;
@@ -1540,7 +1565,7 @@ static void Cmd_typecalc(void)
     u32 affectionScore;
     u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
     enum BattleMoveEffects moveEffect = GetMoveEffect(gCurrentMove);
-    bool32 calcSpreadMoveDamage = IsSpreadMove(moveTarget) && !IsBattleMoveStatus(gCurrentMove);
+    bool32 calcSpreadMoveDamage = IsSpreadMove(moveTarget, CHECK_BATTLE_TYPE) && !IsBattleMoveStatus(gCurrentMove);
     u32 enduredHit = 0;
 
     for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
@@ -1786,7 +1811,9 @@ static bool32 ProcessPreAttackAnimationFuncs(void)
         {
             for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
             {
-                if (IsBattlerInvalidForSpreadMove(gBattlerAttacker, battlerDef))
+                if (IsBattlerInvalidForSpreadMove(gBattlerAttacker, battlerDef, moveTarget)
+                 || (battlerDef == BATTLE_PARTNER(gBattlerAttacker) && moveTarget != TARGET_FOES_AND_ALLY)
+                 || gBattleStruct->noResultString[battlerDef] == WILL_FAIL)
                     continue;
                 if (TryStrongWindsWeakenAttack(battlerDef, moveType))
                     return TRUE;
@@ -1795,7 +1822,9 @@ static bool32 ProcessPreAttackAnimationFuncs(void)
 
         for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
         {
-            if (IsBattlerInvalidForSpreadMove(gBattlerAttacker, battlerDef))
+            if (IsBattlerInvalidForSpreadMove(gBattlerAttacker, battlerDef, moveTarget)
+             || (battlerDef == BATTLE_PARTNER(gBattlerAttacker) && moveTarget != TARGET_FOES_AND_ALLY)
+             || gBattleStruct->noResultString[battlerDef] == WILL_FAIL)
                 continue;
             if (TryTeraShellDistortTypeMatchups(battlerDef))
                 return TRUE;
@@ -1855,7 +1884,6 @@ static void Cmd_attackanimation(void)
         if (gBattleScripting.animTargetsHit)
         {
             if (moveTarget == TARGET_BOTH
-             || moveTarget == TARGET_ALL_BATTLERS
              || moveTarget == TARGET_FOES_AND_ALLY
              || moveTarget == TARGET_DEPENDS)
             {
@@ -1864,8 +1892,8 @@ static void Cmd_attackanimation(void)
             }
         }
 
-        // handle special move animations.
-        if (GetMoveAnimationScript(gCurrentMove) == gBattleAnimMove_ExpandingForce && moveTarget == TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_SIDE, BATTLE_OPPOSITE(gBattlerAttacker) > 1))
+        // handle special move animations
+        if (GetMoveEffect(gCurrentMove) == EFFECT_EXPANDING_FORCE && moveTarget == TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_SIDE, BATTLE_OPPOSITE(gBattlerAttacker) > 1))
             gBattleScripting.animTurn = 1;
 
         if (!(moveResultFlags & MOVE_RESULT_NO_EFFECT) || moveTarget == TARGET_ALL_BATTLERS)
@@ -5336,7 +5364,7 @@ static u32 GetNextTarget(u32 moveTarget, bool32 excludeCurrent)
 
         if (!(excludeCurrent && battler == gBattlerTarget)
          && !gBattleStruct->battlerState[gBattlerAttacker].targetsDone[battler]
-         && (!IsBattlerAlly(battler, gBattlerAttacker) || moveTarget == MOVE_TARGET_FOES_AND_ALLY))
+         && (!IsBattlerAlly(battler, gBattlerAttacker) || moveTarget == TARGET_FOES_AND_ALLY))
             break;
     }
     return battler;
@@ -6126,10 +6154,8 @@ static void Cmd_moveend(void)
 
             gBattleStruct->battlerState[gBattlerAttacker].targetsDone[gBattlerTarget] = TRUE;
             if (!gBattleStruct->unableToUseMove
-                && IsDoubleBattle()
-                && !gProtectStructs[gBattlerAttacker].chargingTurn
-                && (moveTarget == MOVE_TARGET_BOTH
-                    || moveTarget == MOVE_TARGET_FOES_AND_ALLY))
+             && IsSpreadMove(moveTarget, CHECK_BATTLE_TYPE)
+             && !gProtectStructs[gBattlerAttacker].chargingTurn)
             {
                 u32 nextTarget = GetNextTarget(moveTarget, FALSE);
 
@@ -11571,7 +11597,7 @@ static void Cmd_selectfirstvalidtarget(void)
 
     for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
     {
-        if (gBattlerTarget == gBattlerAttacker && GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) != TARGET_ALL_BATTLERS)
+        if (gBattlerTarget == gBattlerAttacker && GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) != TARGET_USER)
             continue;
         if (IsBattlerAlive(gBattlerTarget))
             break;
@@ -13832,19 +13858,25 @@ bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)
         && GetMoveEffect(move) != EFFECT_TWO_TURNS_ATTACK
         && !IsMultiHitMove(move))
     {
-        SET_STATCHANGER(STAT_DEF, abs(gBattleMons[battler].volatiles.stockpileDef), TRUE);
-        gBattleMons[battler].volatiles.stockpileDef = 0;
-        BattleScriptCall(cmd->statChangeInstr);
-    }
-    else if (gBattleMons[battler].volatiles.stockpileSpDef)
-    {
-        SET_STATCHANGER(STAT_SPDEF, abs(gBattleMons[battler].volatiles.stockpileSpDef), TRUE);
-        gBattleMons[battler].volatiles.stockpileSpDef = 0;
-        BattleScriptCall(cmd->statChangeInstr);
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->nextInstr;
+        if (IsDoubleBattle())
+        {
+            switch (GetBattlerMoveTargetType(battler, move))
+            {
+            // Both foes are alive, spread move strikes once
+            case TARGET_BOTH:
+                if (CountAliveMonsInBattle(BATTLE_ALIVE_SIDE, gBattlerTarget) >= 2)
+                    return FALSE;
+                break;
+            // Either both foes or one foe and its ally are alive; spread move strikes once
+            case TARGET_FOES_AND_ALLY:
+                if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER, gBattlerAttacker) >= 2)
+                    return FALSE;
+                break;
+            default:
+            break;
+            }
+        }
+        return TRUE;
     }
 }
 

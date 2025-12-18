@@ -530,8 +530,8 @@ static void BattleTest_Run(void *data)
             }
         }
 
-        if (((DATA.explicitSpeeds[B_TRAINER_0] + DATA.explicitSpeeds[B_TRAINER_2]) != (revisedPlayerExplicitSpeeds + revisedPartnerExplicitSpeeds)
-         || (DATA.explicitSpeeds[B_TRAINER_1] + DATA.explicitSpeeds[B_TRAINER_3]) != (revisedOpponentAExplicitSpeeds + revisedOpponentBExplicitSpeeds)))
+        if (((DATA.explicitSpeeds[B_POSITION_PLAYER_LEFT] + DATA.explicitSpeeds[B_POSITION_PLAYER_RIGHT]) != (revisedPlayerExplicitSpeeds + revisedPartnerExplicitSpeeds)
+         || (DATA.explicitSpeeds[B_POSITION_OPPONENT_LEFT] + DATA.explicitSpeeds[B_POSITION_OPPONENT_RIGHT]) != (revisedOpponentAExplicitSpeeds + revisedOpponentBExplicitSpeeds)))
 
         {
             Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LSpeed required for all PLAYERs and OPPONENTs");
@@ -2094,12 +2094,12 @@ void OpenPokemonMulti(u32 sourceLine, enum BattleTrainer trainer, u32 species)
             *partySize = 3;
         party = DATA.recordedBattle.playerParty;
     }
-    else if (trainer == B_TRAINER_1) // MULTI_OPPONENT_A
+    else if (position == B_POSITION_OPPONENT_LEFT) // MULTI_OPPONENT_A
     {
         partySize = &DATA.opponentPartySize;
         party = DATA.recordedBattle.opponentParty;
     }
-    else // MULTI_OPPONENT_B - B_TRAINER_3
+    else // MULTI_OPPONENT_B
     {
         partySize = &DATA.opponentPartySize;
         if ((*partySize == 0) || (*partySize == 1) || (*partySize == 2))
@@ -2672,7 +2672,7 @@ s32 MoveGetTarget(s32 battlerId, enum Move moveId, struct MoveContext *ctx, u32 
         {
             target = BATTLE_OPPOSITE(battlerId);
         }
-        else if (moveTarget == TARGET_SELECTED || moveTarget == TARGET_SMART || moveTarget == TARGET_OPPONENT)
+        else if (moveTarget == TARGET_SELECTED || moveTarget == TARGET_OPPONENT)
         {
             // In AI Doubles not specified target allows any target for EXPECT_MOVE.
             if (GetBattleTest()->type != BATTLE_TEST_AI_DOUBLES)
@@ -2682,10 +2682,7 @@ s32 MoveGetTarget(s32 battlerId, enum Move moveId, struct MoveContext *ctx, u32 
 
             target = BATTLE_OPPOSITE(battlerId);
         }
-        else if (moveTarget == TARGET_USER
-              || moveTarget == TARGET_ALL_BATTLERS
-              || moveTarget == TARGET_FIELD
-              || moveTarget == TARGET_USER_AND_ALLY)
+        else if (moveTarget == TARGET_USER || moveTarget == TARGET_ALL_BATTLERS || moveTarget == TARGET_FIELD)
         {
             target = battlerId;
         }

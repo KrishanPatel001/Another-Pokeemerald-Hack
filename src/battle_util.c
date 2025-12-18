@@ -423,6 +423,7 @@ static bool32 HandleMoveTargetRedirection(void)
 {
     u32 redirectorOrderNum = MAX_BATTLERS_COUNT;
     enum MoveTarget moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
+    enum Type moveType = GetBattleMoveType(gCurrentMove);
     enum BattleMoveEffects moveEffect = GetMoveEffect(gCurrentMove);
     enum BattleSide side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
 
@@ -437,24 +438,17 @@ static bool32 HandleMoveTargetRedirection(void)
     }
 
     if (IsAffectedByFollowMe(gBattlerAttacker, side, gCurrentMove)
-     && (moveTarget == TARGET_SELECTED || moveTarget == TARGET_SMART || moveEffect == EFFECT_REFLECT_DAMAGE)
+     && moveTarget == TARGET_SELECTED
      && !IsBattlerAlly(gBattlerAttacker, gSideTimers[side].followmeTarget))
     {
         gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = gSideTimers[side].followmeTarget; // follow me moxie fix
         return TRUE;
     }
-
-    enum Type moveType = GetBattleMoveType(gCurrentMove);
-    enum Ability ability = GetBattlerAbility(gBattleStruct->moveTarget[gBattlerAttacker]);
-    bool32 currTargetCantAbsorb = ((ability != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
-                                || (ability != ABILITY_STORM_DRAIN && moveType == TYPE_WATER));
-
-    if (currTargetCantAbsorb
-     && IsDoubleBattle()
-     && gSideTimers[side].followmeTimer == 0
-     && moveTarget != TARGET_USER
-     && moveTarget != TARGET_ALL_BATTLERS
-     && moveTarget != TARGET_FIELD)
+    else if (IsDoubleBattle()
+           && gSideTimers[side].followmeTimer == 0
+           && (!IsBattleMoveStatus(gCurrentMove) || (moveTarget != TARGET_USER && moveTarget != TARGET_ALL_BATTLERS && moveTarget != TARGET_FIELD))
+           && ((ability != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
+            || (ability != ABILITY_STORM_DRAIN && moveType == TYPE_WATER)))
     {
         // Find first battler that redirects the move (in turn order)
         enum Ability abilityAtk = GetBattlerAbility(gBattlerAttacker);
@@ -490,53 +484,6 @@ static bool32 HandleMoveTargetRedirection(void)
     return FALSE;
 }
 
-void DetermineTarget(enum MoveTarget moveTarget, bool32 overwriteTarget)
-{
-    if (HandleMoveTargetRedirection())
-        return;
-
-    if (IsDoubleBattle() && moveTarget == TARGET_RANDOM)
-    {
-        gBattlerTarget = SetRandomTarget(gBattlerAttacker);
-        if (gAbsentBattlerFlags & (1u << gBattlerTarget)
-            && !IsBattlerAlly(gBattlerAttacker, gBattlerTarget))
-        {
-            gBattlerTarget = GetPartnerBattler(gBattlerTarget);
-        }
-    }
-    else if (moveTarget == TARGET_ALLY)
-    {
-        if (IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)) && !gProtectStructs[BATTLE_PARTNER(gBattlerAttacker)].usedAllySwitch)
-            gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
-        else
-            gBattlerTarget = gBattlerAttacker;
-    }
-    else if (IsDoubleBattle() && moveTarget == TARGET_FOES_AND_ALLY)
-    {
-        for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
-        {
-            if (gBattlerTarget == gBattlerAttacker)
-                continue;
-            if (IsBattlerAlive(gBattlerTarget))
-                break;
-        }
-    }
-    else if (moveTarget == TARGET_USER || moveTarget == TARGET_USER_AND_ALLY)
-    {
-        gBattlerTarget = gBattlerAttacker;
-    }
-    else if (overwriteTarget)
-    {
-        gBattlerTarget = gBattleStruct->moveTarget[gBattlerAttacker];
-        if (!IsBattlerAlive(gBattlerTarget)
-        && moveTarget != TARGET_OPPONENTS_FIELD
-        && IsDoubleBattle()
-        && (!IsBattlerAlly(gBattlerAttacker, gBattlerTarget)))
-        {
-            gBattlerTarget = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerTarget)));
-        }
-    }
-}
 
 static bool32 WasOriginalTargetAlly(enum MoveTarget target)
 {
@@ -594,7 +541,7 @@ void HandleAction_UseMove(void)
         gBattleMons[gBattlerAttacker].volatiles.encoredMove = MOVE_NONE;
         gBattleMons[gBattlerAttacker].volatiles.encoredMovePos = 0;
         gBattleMons[gBattlerAttacker].volatiles.encoreTimer = 0;
-        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
+        gBattleStruct->moveTarget[gBattlerAttacker] = GetBattleMoveTarget(gCurrentMove, TARGET_NONE);
     }
     else if (gBattleMons[gBattlerAttacker].moves[gCurrMovePos] != gChosenMoveByBattler[gBattlerAttacker])
     {
@@ -638,6 +585,50 @@ void HandleAction_UseMove(void)
     moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
     DetermineTarget(moveTarget, TRUE);
 
+    if (!HandleMoveTargetRedirection())
+    {
+        if (IsDoubleBattle() && moveTarget == TARGET_RANDOM)
+        {
+            gBattlerTarget = SetRandomTarget(gBattlerAttacker);
+            if (gAbsentBattlerFlags & (1u << gBattlerTarget)
+                && !IsBattlerAlly(gBattlerAttacker, gBattlerTarget))
+            {
+                gBattlerTarget = GetPartnerBattler(gBattlerTarget);
+            }
+        }
+        else if (moveTarget == TARGET_ALLY)
+        {
+            if (IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)) && !gProtectStructs[BATTLE_PARTNER(gBattlerAttacker)].usedAllySwitch)
+                gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
+            else
+                gBattlerTarget = gBattlerAttacker;
+        }
+        else if (IsDoubleBattle() && moveTarget == TARGET_FOES_AND_ALLY)
+        {
+            for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
+            {
+                if (gBattlerTarget == gBattlerAttacker)
+                    continue;
+                if (IsBattlerAlive(gBattlerTarget))
+                    break;
+            }
+        }
+        else if (moveTarget == TARGET_USER)
+        {
+            gBattlerTarget = gBattlerAttacker;
+        }
+        else
+        {
+            gBattlerTarget = gBattleStruct->moveTarget[gBattlerAttacker];
+            if (!IsBattlerAlive(gBattlerTarget)
+            && moveTarget != TARGET_OPPONENTS_FIELD
+            && IsDoubleBattle()
+            && (!IsBattlerAlly(gBattlerAttacker, gBattlerTarget)))
+            {
+                gBattlerTarget = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerTarget)));
+            }
+        }
+    }
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE && gProtectStructs[gBattlerAttacker].palaceUnableToUseMove)
     {
@@ -2168,7 +2159,7 @@ static enum MoveCanceler CancelerObedience(struct BattleContext *ctx)
         case DISOBEYS_RANDOM_MOVE:
             gCurrentMove = gCalledMove = gBattleMons[ctx->battlerAtk].moves[gCurrMovePos];
             BattleScriptCall(BattleScript_IgnoresAndUsesRandomMove);
-            gBattlerTarget = GetBattleMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+            gBattlerTarget = GetBattleMoveTarget(gCalledMove, TARGET_NONE);
             return MOVE_STEP_BREAK;
         }
     }
@@ -2404,7 +2395,7 @@ static enum MoveCanceler CancelerBide(struct BattleContext *ctx)
                 gCurrentMove = MOVE_BIDE;
                 gBattlerTarget = gBideTarget[ctx->battlerAtk];
                 if (gAbsentBattlerFlags & (1u << ctx->battlerDef))
-                    gBattlerTarget = GetBattleMoveTarget(MOVE_BIDE, MOVE_TARGET_SELECTED + 1);
+                    gBattlerTarget = GetBattleMoveTarget(MOVE_BIDE, TARGET_NONE);
                 gBattlescriptCurrInstr = BattleScript_BideAttack;
                 return MOVE_STEP_BREAK; // Jumps to a different script but no failure
             }
@@ -2575,9 +2566,9 @@ static enum MoveCanceler CancelerPPDeduction(struct BattleContext *ctx)
     if (gBattleStruct->submoveAnnouncement == SUBMOVE_SUCCESS)
         movePosition = gChosenMovePos;
 
-    if (moveTarget == MOVE_TARGET_BOTH
-     || moveTarget == MOVE_TARGET_FOES_AND_ALLY
-     || moveTarget == MOVE_TARGET_ALL_BATTLERS
+    if (IsSpreadMove(moveTarget, IGNORE_BATTLE_TYPE)
+     || moveTarget == TARGET_ALL_BATTLERS
+     || moveTarget == TARGET_FIELD
      || MoveForcesPressure(ctx->move))
     {
         for (u32 i = 0; i < gBattlersCount; i++)
@@ -2586,7 +2577,7 @@ static enum MoveCanceler CancelerPPDeduction(struct BattleContext *ctx)
                 ppToDeduct += (GetBattlerAbility(i) == ABILITY_PRESSURE);
         }
     }
-    else if (moveTarget != MOVE_TARGET_OPPONENTS_FIELD)
+    else if (moveTarget != TARGET_OPPONENTS_FIELD)
     {
         if (ctx->battlerAtk != ctx->battlerDef && ctx->abilityDef == ABILITY_PRESSURE)
              ppToDeduct++;
@@ -2629,7 +2620,7 @@ static enum MoveCanceler CancelerPPDeduction(struct BattleContext *ctx)
         else
         {
             gBattleStruct->submoveAnnouncement = SUBMOVE_NO_EFFECT;
-            gBattlerTarget = GetBattleMoveTarget(ctx->move, NO_TARGET_OVERRIDE);
+            gBattlerTarget = GetBattleMoveTarget(ctx->move, TARGET_NONE);
             gBattleScripting.animTurn = 0;
             gBattleScripting.animTargetsHit = 0;
 
@@ -2983,7 +2974,7 @@ static enum MoveCanceler CancelerMultiTargetMoves(struct BattleContext *ctx)
     u32 moveTarget = GetBattlerMoveTargetType(ctx->battlerAtk, ctx->move);
     enum Ability abilityAtk = ctx->abilityAtk;
 
-    if (IsSpreadMove(moveTarget))
+    if (IsSpreadMove(moveTarget, CHECK_BATTLE_TYPE))
     {
         for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
         {
@@ -2995,7 +2986,7 @@ static enum MoveCanceler CancelerMultiTargetMoves(struct BattleContext *ctx)
             if (ctx->battlerAtk == battlerDef
              || !IsBattlerAlive(battlerDef)
              || (GetMoveEffect(ctx->move) == EFFECT_SYNCHRONOISE && !DoBattlersShareType(ctx->battlerAtk, battlerDef))
-             || (moveTarget == MOVE_TARGET_BOTH && ctx->battlerAtk == BATTLE_PARTNER(battlerDef))
+             || (moveTarget == TARGET_BOTH && ctx->battlerAtk == BATTLE_PARTNER(battlerDef))
              || IsBattlerProtected(ctx->battlerAtk, battlerDef, ctx->move)) // Missing Invulnerable check
             {
                 gBattleStruct->moveResultFlags[battlerDef] = MOVE_RESULT_NO_EFFECT;
@@ -3017,7 +3008,7 @@ static enum MoveCanceler CancelerMultiTargetMoves(struct BattleContext *ctx)
                 gBattleStruct->noResultString[battlerDef] = CAN_DAMAGE;
             }
         }
-        if (moveTarget == MOVE_TARGET_BOTH)
+        if (moveTarget == TARGET_BOTH)
             gBattleStruct->numSpreadTargets = CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER_SIDE, ctx->battlerAtk);
         else
             gBattleStruct->numSpreadTargets = CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER, ctx->battlerAtk);
@@ -3507,14 +3498,34 @@ bool32 CanMoveBeBlockedByTarget(struct BattleContext *ctx, s32 movePriority)
         || CanAbilityAbsorbMove(ctx);
 }
 
-bool32 CanPsychicTerrainProtectTarget(struct BattleContext *ctx, s32 movePriority)
-{
-    if (movePriority <= 0
-     || !IsPsychicTerrainAffected(ctx->battlerDef, ctx->abilityDef, ctx->holdEffectDef, gFieldStatuses)
-     || IsBattlerAlly(ctx->battlerAtk, ctx->battlerDef)
-     || GetMoveTarget(ctx->move) == TARGET_ALL_BATTLERS
-     || GetMoveTarget(ctx->move) == TARGET_OPPONENTS_FIELD)
-        return FALSE;
+    switch (abilityDef)
+    {
+    case ABILITY_SOUNDPROOF:
+        if (IsSoundMove(move))
+        {
+            enum MoveTarget target = GetBattlerMoveTargetType(battlerAtk, move);
+            if (target != TARGET_USER && target != TARGET_ALL_BATTLERS)
+                battleScriptBlocksMove = BattleScript_SoundproofProtected;
+        }
+        break;
+    case ABILITY_BULLETPROOF:
+        if (IsBallisticMove(move))
+            battleScriptBlocksMove = BattleScript_SoundproofProtected;
+        break;
+    case ABILITY_GOOD_AS_GOLD:
+        if (IsBattleMoveStatus(move))
+        {
+            enum MoveTarget target = GetBattlerMoveTargetType(battlerAtk, move);
+            if (target != TARGET_OPPONENTS_FIELD
+             && target != TARGET_ALL_BATTLERS
+             && target != TARGET_FIELD
+             && target != TARGET_USER)
+                battleScriptBlocksMove = BattleScript_GoodAsGoldActivates;
+        }
+        break;
+    default:
+        break;
+    }
 
     if (ctx->runScript)
         BattleScriptCall(BattleScript_MoveUsedPsychicTerrainPrevents);
@@ -3527,20 +3538,21 @@ bool32 CanPsychicTerrainProtectTarget(struct BattleContext *ctx, s32 movePriorit
               && BlocksPrankster(move, battlerAtk, battlerDef, TRUE)
               && !(IsBattleMoveStatus(move) && (abilityDef == ABILITY_MAGIC_BOUNCE || gProtectStructs[battlerDef].bounceMove)))
         {
-            if (option == RUN_SCRIPT && !IsSpreadMove(GetBattlerMoveTargetType(battlerAtk, move)))
+            if (option == RUN_SCRIPT && !IsSpreadMove(GetBattlerMoveTargetType(battlerAtk, move), CHECK_BATTLE_TYPE))
                 CancelMultiTurnMoves(battlerAtk, SKY_DROP_ATTACKCANCELER_CHECK); // Don't cancel moves that can hit two targets bc one target might not be protected
             battleScriptBlocksMove = BattleScript_DoesntAffectTargetAtkString;
         }
         else if (IsPsychicTerrainAffected(battlerDef, abilityDef, GetBattlerHoldEffect(battlerDef), gFieldStatuses) // Not an ability but similar conditions
               && !IsBattlerAlly(battlerAtk, battlerDef)
-              && GetMoveTarget(move) != MOVE_TARGET_ALL_BATTLERS
-              && GetMoveTarget(move) != MOVE_TARGET_OPPONENTS_FIELD)
+              && GetMoveTarget(move) != TARGET_ALL_BATTLERS
+              && GetMoveTarget(move) != TARGET_FIELD
+              && GetMoveTarget(move) != TARGET_OPPONENTS_FIELD)
         {
             battleScriptBlocksMove = BattleScript_MoveUsedPsychicTerrainPrevents;
             if (option == RUN_SCRIPT)
             {
                 gMultiHitCounter = 0; // Prevent multi-hit moves from hitting more than once after move has been absorbed.
-                if (!IsSpreadMove(GetBattlerMoveTargetType(battlerAtk, move)))
+                if (!IsSpreadMove(GetBattlerMoveTargetType(battlerAtk, move), CHECK_BATTLE_TYPE))
                     CancelMultiTurnMoves(battlerAtk, SKY_DROP_ATTACKCANCELER_CHECK); // Don't cancel moves that can hit two targets bc one target might not be protected
                 gBattlescriptCurrInstr = BattleScript_MoveUsedPsychicTerrainPrevents;
                 return TRUE; // Early return since we don't want to set remaining values
@@ -3582,12 +3594,15 @@ static bool32 IsPowderMoveBlocked(struct BattleContext *ctx)
 bool32 CanAbilityAbsorbMove(struct BattleContext *ctx)
 {
     const u8 *battleScript = NULL;
+    enum Stat statId = 0;
+    u32 statAmount = 1;
+    enum MoveTarget target = GetBattlerMoveTargetType(battlerAtk, move);
 
     switch (ctx->abilityDef)
     {
     case ABILITY_VOLT_ABSORB:
-        if (ctx->moveType == TYPE_ELECTRIC)
-            battleScript = AbsorbedByDrainHpAbility(ctx->battlerDef);
+        if (moveType == TYPE_ELECTRIC && target != TARGET_ALL_BATTLERS && target != TARGET_FIELD)
+            effect = MOVE_ABSORBED_BY_DRAIN_HP_ABILITY;
         break;
     case ABILITY_WATER_ABSORB:
     case ABILITY_DRY_SKIN:
@@ -3599,12 +3614,18 @@ bool32 CanAbilityAbsorbMove(struct BattleContext *ctx)
             battleScript = AbsorbedByDrainHpAbility(ctx->battlerDef);
         break;
     case ABILITY_MOTOR_DRIVE:
-        if (ctx->moveType == TYPE_ELECTRIC)
-            battleScript = AbsorbedByStatIncreaseAbility(ctx->battlerDef, ctx->abilityDef, STAT_SPEED, 1);
+        if (moveType == TYPE_ELECTRIC && target != TARGET_ALL_BATTLERS && target != TARGET_FIELD)
+        {
+            effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
+            statId = STAT_SPEED;
+        }
         break;
     case ABILITY_LIGHTNING_ROD:
-        if (GetConfig(CONFIG_REDIRECT_ABILITY_IMMUNITY) >= GEN_5 && ctx->moveType == TYPE_ELECTRIC)
-            battleScript = AbsorbedByStatIncreaseAbility(ctx->battlerDef, ctx->abilityDef, STAT_SPATK, 1);
+        if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && moveType == TYPE_ELECTRIC && target != TARGET_ALL_BATTLERS)
+        {
+            effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
+            statId = STAT_SPATK;
+        }
         break;
     case ABILITY_STORM_DRAIN:
         if (GetConfig(CONFIG_REDIRECT_ABILITY_IMMUNITY) >= GEN_5 && ctx->moveType == TYPE_WATER)
@@ -3619,8 +3640,11 @@ bool32 CanAbilityAbsorbMove(struct BattleContext *ctx)
             battleScript = AbsorbedByStatIncreaseAbility(ctx->battlerDef, ctx->abilityDef, STAT_DEF, 2);
         break;
     case ABILITY_WIND_RIDER:
-        if (IsWindMove(ctx->move))
-            battleScript = AbsorbedByStatIncreaseAbility(ctx->battlerDef, ctx->abilityDef, STAT_ATK, 1);
+        if (IsWindMove(move) && target != TARGET_USER)
+        {
+            effect = MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY;
+            statId = STAT_ATK;
+        }
         break;
     case ABILITY_FLASH_FIRE:
         if (ctx->moveType == TYPE_FIRE && (B_FLASH_FIRE_FROZEN >= GEN_5 || !(gBattleMons[ctx->battlerDef].status1 & STATUS1_FREEZE)))
@@ -6797,10 +6821,10 @@ u32 SetRandomTarget(u32 battlerAtk)
     return target;
 }
 
-u32 GetBattleMoveTarget(enum Move move, enum MoveTarget moveTarget)
+u32 GetBattleMoveTarget(u32 move, enum MoveTarget moveTarget)
 {
     u32 targetBattler = 0;
-    enum BattleSide side;
+    u32 side;
     enum Type moveType = GetBattleMoveType(move);
 
     if (moveTarget == TARGET_NONE)
@@ -6809,7 +6833,6 @@ u32 GetBattleMoveTarget(enum Move move, enum MoveTarget moveTarget)
     switch (moveTarget)
     {
     case TARGET_SELECTED:
-    case TARGET_SMART:
     case TARGET_OPPONENT:
         side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
         if (IsAffectedByFollowMe(gBattlerAttacker, side, move))
@@ -7101,7 +7124,7 @@ bool32 IsBattlerProtected(struct BattleContext *ctx)
         isProtected = TRUE;
     else if (MoveIgnoresProtect(ctx->move))
         isProtected = FALSE;
-    else if (IsSideProtected(ctx->battlerDef, PROTECT_WIDE_GUARD) && IsSpreadMove(GetBattlerMoveTargetType(ctx->battlerAtk, ctx->move)))
+    else if (IsSideProtected(battlerDef, PROTECT_WIDE_GUARD) && IsSpreadMove(GetBattlerMoveTargetType(battlerAtk, move), CHECK_BATTLE_TYPE))
         isProtected = TRUE;
     else if (gProtectStructs[ctx->battlerDef].protected == PROTECT_NORMAL)
         isProtected = TRUE;
@@ -10673,9 +10696,9 @@ u32 GetBattlerMoveTargetType(u32 battler, u32 move)
 {
     enum BattleMoveEffects effect = GetMoveEffect(move);
     if (effect == EFFECT_CURSE && !IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
-        return MOVE_TARGET_USER;
+        return TARGET_USER;
     if (effect == EFFECT_EXPANDING_FORCE && IsPsychicTerrainAffected(battler, GetBattlerAbility(battler), GetBattlerHoldEffect(battler), gFieldStatuses))
-        return MOVE_TARGET_BOTH;
+        return TARGET_BOTH;
     if (effect == EFFECT_TERA_STARSTORM && gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR)
         return TARGET_BOTH;
 
@@ -11194,24 +11217,7 @@ void UpdateStallMons(void)
 {
     if (IsBattlerTurnDamaged(gBattlerTarget) || GetMoveCategory(gCurrentMove) == DAMAGE_CATEGORY_STATUS)
         return;
-
-    struct BattleContext ctx = {0};
-    ctx.battlerAtk = gBattlerAttacker;
-    ctx.battlerDef = gBattlerTarget;
-    ctx.move = ctx.chosenMove = gCurrentMove;
-    ctx.moveType = GetBattleMoveType(gCurrentMove); //  Probably doesn't handle dynamic move types right now
-    ctx.abilityAtk = GetBattlerAbility(ctx.battlerAtk);
-    ctx.abilityDef = GetBattlerAbility(ctx.battlerDef);
-    ctx.holdEffectAtk = GetBattlerHoldEffect(ctx.battlerAtk);
-    ctx.holdEffectDef = GetBattlerHoldEffect(ctx.battlerDef);
-
-    if (IsBattlerProtected(&ctx))
-        return;
-
-    enum MoveTarget target = GetBattlerMoveTargetType(ctx.battlerAtk, ctx.move);
-    if (!IsDoubleBattle()
-     || target == TARGET_SELECTED
-     || target == TARGET_SMART)
+    if (!IsDoubleBattle() || GetMoveTarget(gCurrentMove) == TARGET_SELECTED)
     {
         if (CanMoveBeBlockedByTarget(&ctx, GetChosenMovePriority(ctx.battlerAtk, ctx.abilityAtk)))
         {

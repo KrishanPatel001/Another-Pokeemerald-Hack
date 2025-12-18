@@ -703,18 +703,20 @@ enum BattleEnvironments
 // Indicator for the party summary bar to display an empty slot.
 #define HP_EMPTY_SLOT 0xFFFF
 
+ // (TARGET_USER | TARGET_ALLY)
+
+
 enum MoveTarget
 {
     TARGET_NONE,
     TARGET_SELECTED,
-    TARGET_SMART, // Like target select but can also smartly redirect to partner. Works only with strikeCount > 1 moves
     TARGET_DEPENDS,
     TARGET_OPPONENT,
     TARGET_RANDOM,
     TARGET_BOTH,
     TARGET_USER,
     TARGET_ALLY,
-    TARGET_USER_AND_ALLY,
+    TARGET_USER_AND_ALLY, // TODO: No functionality yet but would be used for howl in the future
     TARGET_USER_OR_ALLY, // Acupressure
     TARGET_FOES_AND_ALLY,
     TARGET_FIELD, // Moves that target the field, e.g. Rain Dance

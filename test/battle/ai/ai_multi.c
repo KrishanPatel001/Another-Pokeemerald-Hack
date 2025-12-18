@@ -5,7 +5,7 @@
 AI_MULTI_BATTLE_TEST("AI will only explode and kill everything on the field with Risky or Will Suicide (multi)")
 {
     ASSUME(GetMoveTarget(MOVE_EXPLOSION) == TARGET_FOES_AND_ALLY);
-    ASSUME(IsExplosionMove(MOVE_EXPLOSION));
+    ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
 
     u32 aiFlags;
     u32 battler;
@@ -35,7 +35,7 @@ AI_MULTI_BATTLE_TEST("AI will only explode and kill everything on the field with
 AI_ONE_VS_TWO_BATTLE_TEST("AI will only explode and kill everything on the field with Risky or Will Suicide (1v2)")
 {
     ASSUME(GetMoveTarget(MOVE_EXPLOSION) == TARGET_FOES_AND_ALLY);
-    ASSUME(IsExplosionMove(MOVE_EXPLOSION));
+    ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
 
     u32 aiFlags;
     u32 battler;
@@ -99,7 +99,7 @@ AI_TWO_VS_ONE_BATTLE_TEST("AI partner makes sensible move selections in battle (
 AI_TWO_VS_ONE_BATTLE_TEST("Battler 3 has Battler 1 AI flags set correctly (2v1)")
 {
     ASSUME(GetMoveTarget(MOVE_EXPLOSION) == TARGET_FOES_AND_ALLY);
-    ASSUME(IsExplosionMove(MOVE_EXPLOSION));
+    ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
 
     u32 aiFlags;
     u32 battler;

@@ -13,7 +13,6 @@
 #include "battle_z_move.h"
 #include "caps.h"
 #include "data.h"
-#include "frontier_util.h"
 #include "daycare.h"
 #include "dexnav.h"
 #include "event_data.h"
@@ -5466,7 +5465,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
         species = GetBoxMonDataAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, MON_DATA_SPECIES_OR_EGG);
         level = GetBoxMonLevelAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
     }
-    
+
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
     int i, j, k;
 
@@ -5480,7 +5479,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
         else
             learnedMoves[i] = GetBoxMonDataAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, MON_DATA_MOVE1 + i);
     }
-        
+
     for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
     {
         u16 moveLevel;

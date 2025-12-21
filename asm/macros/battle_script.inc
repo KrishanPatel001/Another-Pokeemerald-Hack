@@ -893,11 +893,11 @@
 	.endm
 
 	.macro unused_0xA1
-	.byte B_SCR_OP_UNUSED_0XA1
+	.byte 0xa1
 	.endm
 
 	.macro unused_0xA2
-	.byte B_SCR_OP_UNUSED_0XA2
+	.byte 0xa2
 	.endm
 
 	.macro disablelastusedattack failInstr:req

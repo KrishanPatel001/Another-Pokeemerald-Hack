@@ -208,16 +208,6 @@
     F(COUNTER_TRY_HIT_PARTNER,   counterTryHitPartner,    (u32, GEN_COUNT - 1)) \
 
 
-#define POKEMON_CONFIG_DEFINITIONS(F) \
-    F(POKERUS_ENABLED,           pokerusEnabled,          (u32, TRUE))          \
-    F(POKERUS_SPREAD_ADJACENCY,  pokerusSpreadAdjacency,  (u32, GEN_COUNT - 1)) \
-    F(POKERUS_SPREAD_DAYS_LEFT,  pokerusSpreadDaysLeft,   (u32, GEN_COUNT - 1)) \
-    F(POKERUS_INFECT_AGAIN,      pokerusInfectAgain,      (u32, GEN_COUNT - 1)) \
-    F(POKERUS_INFECT_EGG,        pokerusInfectEgg,        (u32, TRUE))          \
-    F(POKERUS_HERD_IMMUNITY,     pokerusHerdImmunity,     (u32, TRUE))          \
-    F(POKERUS_WEAK_VARIANT,      pokerusWeakVariant,      (u32, TRUE))          \
-
-
 #define GET_CONFIG_MAXIMUM(_typeMaxValue, ...) INVOKE_WITH_B(GET_CONFIG_MAXIMUM_, _typeMaxValue)
 #define GET_CONFIG_MAXIMUM_(_type, ...) FIRST(__VA_OPT__(FIRST(__VA_ARGS__),) MAX_BITS((sizeof(_type) * 8)))
 

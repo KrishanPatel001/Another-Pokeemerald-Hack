@@ -835,14 +835,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
-    [EFFECT_MIRROR_COAT] =
-    {
-        .battleScript = BattleScript_EffectMirrorCoat,
-        .battleTvScore = 6,
-        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
-        .encourageEncore = TRUE,
-    },
-
     [EFFECT_EARTHQUAKE] =
     {
         .battleScript = BattleScript_EffectHit,

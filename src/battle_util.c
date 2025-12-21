@@ -319,7 +319,7 @@ static s32 CalcBeatUpDamage(struct BattleContext *ctx)
     return dmg;
 }
 
-enum DamageCategory GetReflectDamageMoveDamageCategory(u32 battler, enum Move move)
+static enum DamageCategory GetReflectDamageMoveDamageCategory(u32 battler, u32 move)
 {
     u32 damageCategories = GetMoveReflectDamage_DamageCategories(move);
 
@@ -335,7 +335,7 @@ enum DamageCategory GetReflectDamageMoveDamageCategory(u32 battler, enum Move mo
         return DAMAGE_CATEGORY_PHYSICAL;
 }
 
-static bool32 ShouldTeraShellDistortTypeMatchups(enum Move move, u32 battlerDef, enum Ability abilityDef)
+static bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef, enum Ability abilityDef)
 {
     if (!gSpecialStatuses[battlerDef].distortedTypeMatchups
      && gBattleMons[battlerDef].species == SPECIES_TERAPAGOS_TERASTAL
@@ -437,8 +437,18 @@ static bool32 HandleMoveTargetRedirection(void)
             gBattleStruct->moveTarget[gBattlerAttacker] = gProtectStructs[gBattlerAttacker].specialBattlerId;
     }
 
+    if (moveEffect == EFFECT_REFLECT_DAMAGE)
+    {
+        enum DamageCategory reflectCategory = GetReflectDamageMoveDamageCategory(gBattlerAttacker, gCurrentMove);
+        
+        if (reflectCategory == DAMAGE_CATEGORY_PHYSICAL)
+            gBattleStruct->moveTarget[gBattlerAttacker] = gProtectStructs[gBattlerAttacker].physicalBattlerId;
+        else
+            gBattleStruct->moveTarget[gBattlerAttacker] = gProtectStructs[gBattlerAttacker].specialBattlerId;
+    }
+
     if (IsAffectedByFollowMe(gBattlerAttacker, side, gCurrentMove)
-     && moveTarget == TARGET_SELECTED
+     && (moveTarget == TARGET_SELECTED || moveEffect == EFFECT_REFLECT_DAMAGE)
      && !IsBattlerAlly(gBattlerAttacker, gSideTimers[side].followmeTarget))
     {
         gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = gSideTimers[side].followmeTarget; // follow me moxie fix
@@ -2684,11 +2694,25 @@ static enum MoveCanceler CancelerMoveFailure(struct BattleContext *ctx)
         if (gBattleMons[ctx->battlerAtk].hp <= max(1, GetNonDynamaxMaxHP(ctx->battlerAtk) / 3))
             battleScript = BattleScript_ButItFailed;
         break;
-    case EFFECT_COUNTER:
-    case EFFECT_MIRROR_COAT:
-    case EFFECT_METAL_BURST:
-        // TODO: Needs a refactor because the moves currently don't work according to new gens
+    case EFFECT_REFLECT_DAMAGE:
+    {
+        enum DamageCategory reflectCategory = GetReflectDamageMoveDamageCategory(ctx->battlerAtk, ctx->move);
+        if (IsBattlerAlly(ctx->battlerAtk, ctx->battlerDef))
+            battleScript = BattleScript_ButItFailed;
+        // Counter / Metal Burst and took physical damage
+        else if (reflectCategory == DAMAGE_CATEGORY_PHYSICAL
+              && gProtectStructs[ctx->battlerAtk].physicalDmg > 0
+              && (GetConfig(CONFIG_COUNTER_TRY_HIT_PARTNER) >= GEN_5 || gBattleMons[gProtectStructs[ctx->battlerAtk].physicalBattlerId].hp))
+            break;
+        // Mirror Coat / Metal Burst and took special damage
+        else if (reflectCategory == DAMAGE_CATEGORY_SPECIAL
+              && gProtectStructs[ctx->battlerAtk].specialDmg > 0
+              && (GetConfig(CONFIG_COUNTER_TRY_HIT_PARTNER) >= GEN_5 || gBattleMons[gProtectStructs[ctx->battlerAtk].specialBattlerId].hp))
+            break;
+        else
+            battleScript = BattleScript_ButItFailed;
         break;
+    }
     case EFFECT_DESTINY_BOND:
         if (DoesDestinyBondFail(ctx->battlerAtk))
             battleScript = BattleScript_ButItFailed;
@@ -9014,28 +9038,14 @@ s32 DoFixedDamageMoveCalc(struct BattleContext *ctx)
             u32 percentMultiplier = GetMoveReflectDamage_DamagePercent(ctx->move);
             enum DamageCategory reflectCategory = GetReflectDamageMoveDamageCategory(ctx->battlerAtk, ctx->move);
             s32 baseDamage;
-
+            
             if (reflectCategory == DAMAGE_CATEGORY_PHYSICAL)
                 baseDamage = gProtectStructs[ctx->battlerAtk].physicalDmg;
             else
                 baseDamage = gProtectStructs[ctx->battlerAtk].specialDmg;
-
+        
             dmg = (baseDamage - 1) * percentMultiplier / 100;
         }
-        break;
-    case EFFECT_ENDEAVOR:
-        if (GetNonDynamaxHP(ctx->battlerDef) <= gBattleMons[ctx->battlerAtk].hp)
-        {
-            dmg = 0;
-            gBattleStruct->moveResultFlags[ctx->battlerDef] |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-        }
-        else
-        {
-            dmg = GetNonDynamaxHP(ctx->battlerDef) - gBattleMons[ctx->battlerAtk].hp;
-        }
-        break;
-    case EFFECT_OHKO:
-        dmg = gBattleMons[ctx->battlerDef].hp;
         break;
     default:
         break;

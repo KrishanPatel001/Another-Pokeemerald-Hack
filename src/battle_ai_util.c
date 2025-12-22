@@ -2525,17 +2525,6 @@ enum Move *GetMovesArray(u32 battler)
 
 u32 GetBattlerMoveIndexWithEffect(u32 battler, enum BattleMoveEffects effect)
 {
-    enum Move *moves = GetMovesArray(battler);
-    for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-    {
-        if (GetMoveEffect(moves[moveIndex]) == effect)
-            return moveIndex;
-    }
-    return MAX_MON_MOVES;
-}
-
-u32 GetBattlerMoveIndexWithEffect(u32 battler, enum BattleMoveEffects effect)
-{
     u16 *moves = GetMovesArray(battler);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {

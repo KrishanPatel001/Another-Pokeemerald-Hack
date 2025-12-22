@@ -818,7 +818,7 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, u32 move)
     if (GetMoveEffect(move) != EFFECT_HIT_ESCAPE)
         return FALSE;
 
-    moveIndex = GetIndexInMoveArray(battlerAtk, move);
+    moveIndex = GetMoveIndex(battlerAtk, move);
     if (moveIndex >= MAX_MON_MOVES)
         return FALSE;
 

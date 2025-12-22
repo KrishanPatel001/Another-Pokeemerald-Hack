@@ -811,7 +811,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     Cmd_settoxicspikes,                          //0xD5
     Cmd_setgastroacid,                           //0xD6
     Cmd_setyawn,                                 //0xD7
-    Cmd_setdamagetohealthdifference,             //0xD8
+    Cmd_unused0xd8,                              //0xD8
     Cmd_setroom,                                 //0xD9
     Cmd_tryswapabilities,                        //0xDA
     Cmd_tryimprison,                             //0xDB

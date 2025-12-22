@@ -1153,7 +1153,7 @@
 	.endm
 
 	.macro Cmd_unused0xd8
-	.byte B_SCR_OP_UNUSED0XD8
+	.byte 0xd8
 	.endm
 
 	.macro setroom

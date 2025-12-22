@@ -440,7 +440,7 @@ static bool32 HandleMoveTargetRedirection(void)
     if (moveEffect == EFFECT_REFLECT_DAMAGE)
     {
         enum DamageCategory reflectCategory = GetReflectDamageMoveDamageCategory(gBattlerAttacker, gCurrentMove);
-        
+
         if (reflectCategory == DAMAGE_CATEGORY_PHYSICAL)
             gBattleStruct->moveTarget[gBattlerAttacker] = gProtectStructs[gBattlerAttacker].physicalBattlerId;
         else
@@ -9038,13 +9038,24 @@ s32 DoFixedDamageMoveCalc(struct BattleContext *ctx)
             u32 percentMultiplier = GetMoveReflectDamage_DamagePercent(ctx->move);
             enum DamageCategory reflectCategory = GetReflectDamageMoveDamageCategory(ctx->battlerAtk, ctx->move);
             s32 baseDamage;
-            
+
             if (reflectCategory == DAMAGE_CATEGORY_PHYSICAL)
                 baseDamage = gProtectStructs[ctx->battlerAtk].physicalDmg;
             else
                 baseDamage = gProtectStructs[ctx->battlerAtk].specialDmg;
-        
+
             dmg = (baseDamage - 1) * percentMultiplier / 100;
+        }
+        break;
+    case EFFECT_ENDEAVOR:
+        if (GetNonDynamaxHP(ctx->battlerDef) <= gBattleMons[ctx->battlerAtk].hp)
+        {
+            dmg = 0;
+            gBattleStruct->moveResultFlags[ctx->battlerDef] |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+        }
+        else
+        {
+            dmg = GetNonDynamaxHP(ctx->battlerDef) - gBattleMons[ctx->battlerAtk].hp;
         }
         break;
     default:

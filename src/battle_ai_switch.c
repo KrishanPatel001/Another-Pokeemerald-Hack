@@ -803,7 +803,7 @@ static bool32 ShouldSwitchIfBadlyStatused(u32 battler)
     return FALSE;
 }
 
-static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
+static bool32 GetHitEscapeTransformState(u32 battlerAtk, u32 move)
 {
     u32 moveIndex;
     bool32 hasValidTarget = FALSE;
@@ -818,7 +818,7 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
     if (GetMoveEffect(move) != EFFECT_HIT_ESCAPE)
         return FALSE;
 
-    moveIndex = GetMoveIndex(battlerAtk, move);
+    moveIndex = GetIndexInMoveArray(battlerAtk, move);
     if (moveIndex >= MAX_MON_MOVES)
         return FALSE;
 
@@ -826,15 +826,6 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
     if ((moveType == TYPE_WATER && (AI_GetWeather() & B_WEATHER_SUN_PRIMAL))
      || (moveType == TYPE_FIRE && (AI_GetWeather() & B_WEATHER_RAIN_PRIMAL)))
         return FALSE;
-
-    struct BattleContext ctx = {0};
-    ctx.aiCalc = TRUE;
-    ctx.battlerAtk = battlerAtk;
-    ctx.move = ctx.chosenMove = move;
-    ctx.moveType = moveType;
-    ctx.holdEffectAtk = gAiLogicData->holdEffects[battlerAtk];
-    ctx.abilityAtk = gAiLogicData->abilities[battlerAtk];
-
 
     for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
     {
@@ -849,11 +840,8 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
             move
         );
 
-        ctx.battlerDef = battlerDef;
-        ctx.holdEffectDef = gAiLogicData->holdEffects[battlerDef];
-        ctx.abilityDef = abilityDef;
-
-        if (AI_CanMoveBeBlockedByTarget(&ctx))
+        if (CanAbilityAbsorbMove(battlerAtk, battlerDef, abilityDef, move, moveType, AI_CHECK)
+         || CanAbilityBlockMove(battlerAtk, battlerDef, gAiLogicData->abilities[battlerAtk], abilityDef, move, AI_CHECK))
         {
             if ((moveType == TYPE_WATER && abilityDef == ABILITY_STORM_DRAIN)
              || (moveType == TYPE_ELECTRIC && abilityDef == ABILITY_LIGHTNING_ROD))
@@ -864,7 +852,7 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
 
         if (gAiLogicData->effectiveness[battlerAtk][battlerDef][moveIndex] > UQ_4_12(0.0))
         {
-            enum Move predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
+            u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
 
             hasValidTarget = TRUE;
             if (!AI_IsFaster(battlerAtk, battlerDef, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY))
@@ -917,11 +905,11 @@ static bool32 ShouldSwitchIfAbilityBenefit(u32 battler)
 
         case ABILITY_ZERO_TO_HERO:
         {
-            enum Move hitEscapeMove = MOVE_NONE;
+            u32 hitEscapeMove = MOVE_NONE;
 
             for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
             {
-                enum Move move = gBattleMons[battler].moves[moveIndex];
+                u32 move = gBattleMons[battler].moves[moveIndex];
 
                 if (move != MOVE_NONE && GetMoveEffect(move) == EFFECT_HIT_ESCAPE)
                 {
@@ -1342,7 +1330,7 @@ bool32 ShouldStayInToUseMove(u32 battler)
              && !GetHitEscapeTransformState(battler, aiMove))
                 continue;
 
-            if (gAiBattleData->finalScore[battler][opposingBattler][moveIndex] > AI_GOOD_SCORE_THRESHOLD)
+            if (gAiBattleData->finalScore[battler][opposingBattler][i] > AI_GOOD_SCORE_THRESHOLD)
                 return TRUE;
         }
     }

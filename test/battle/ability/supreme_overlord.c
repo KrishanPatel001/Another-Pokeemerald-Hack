@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Supreme Overlord's message displays correctly after all batt
 {
     GIVEN {
         ASSUME(IsExplosionMove(MOVE_EXPLOSION));
-        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1);}
         PLAYER(SPECIES_KINGAMBIT) { Ability(ABILITY_SUPREME_OVERLORD); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

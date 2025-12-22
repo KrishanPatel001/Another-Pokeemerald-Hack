@@ -498,6 +498,7 @@ extern const u8 BattleScript_AlreadyBurned[];
 extern const u8 BattleScript_PrintAbilityMadeIneffective[];
 extern const u8 BattleScript_ItDoesntAffectFoe[];
 extern const u8 BattleScript_FirstTurnSwitchInEvents[];
+extern const u8 BattleScript_Explosion[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

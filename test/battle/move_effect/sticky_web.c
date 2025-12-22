@@ -50,13 +50,13 @@ DOUBLE_BATTLE_TEST("Sticky Web lowers Speed by 1 in a double battle after Explos
 {
     GIVEN {
         ASSUME(IsExplosionMove(MOVE_EXPLOSION));
-        PLAYER(SPECIES_WOBBUFFET) { Speed(5); }
-        PLAYER(SPECIES_WOBBUFFET) { HP(1500); Speed(10); }
-        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
-        OPPONENT(SPECIES_WYNAUT) { Speed(10); }
-        OPPONENT(SPECIES_ALAKAZAM) { Speed(100); }
+        PLAYER(SPECIES_WOBBUFFET) {Speed(5);}
+        PLAYER(SPECIES_WOBBUFFET) {HP(1500); Speed(10);}
+        PLAYER(SPECIES_WOBBUFFET) {Speed(10);}
+        OPPONENT(SPECIES_WOBBUFFET) {HP(1); Speed(1);}
+        OPPONENT(SPECIES_WOBBUFFET) {HP(1); Speed(1);}
+        OPPONENT(SPECIES_WYNAUT) {Speed(10);}
+        OPPONENT(SPECIES_ALAKAZAM) {Speed(100);}
     } WHEN {
         TURN { MOVE(playerRight, MOVE_STICKY_WEB); MOVE(playerLeft, MOVE_EXPLOSION); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); SEND_OUT(opponentRight, 3); }
         TURN {}

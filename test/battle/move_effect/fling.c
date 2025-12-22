@@ -139,9 +139,9 @@ SINGLE_BATTLE_TEST("Fling - Item is lost even when there is no target")
 {
     GIVEN {
         ASSUME(IsExplosionMove(MOVE_SELF_DESTRUCT));
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_RAZOR_CLAW); Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+        PLAYER(SPECIES_WOBBUFFET) {Item(ITEM_RAZOR_CLAW); Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
+        OPPONENT(SPECIES_WOBBUFFET) {Speed(5); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SELF_DESTRUCT); MOVE(player, MOVE_FLING); SEND_OUT(opponent, 1); }
         TURN { MOVE(player, MOVE_FLING); }

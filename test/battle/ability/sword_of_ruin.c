@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Sword of Ruin's message displays correctly after all battler
 {
     GIVEN {
         ASSUME(IsExplosionMove(MOVE_EXPLOSION));
-        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1);}
         PLAYER(SPECIES_CHIEN_PAO);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

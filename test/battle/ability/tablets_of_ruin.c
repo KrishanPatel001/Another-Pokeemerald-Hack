@@ -34,7 +34,7 @@ SINGLE_BATTLE_TEST("Tablets of Ruin's message displays correctly after all battl
 {
     GIVEN {
         ASSUME(IsExplosionMove(MOVE_EXPLOSION));
-        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1);}
         PLAYER(SPECIES_WO_CHIEN);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

@@ -32,16 +32,8 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_TERRAIN_BOOST] =
     {
-        .battleScript = BattleScript_EffectExplosion,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
-        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
-    },
-
-    [EFFECT_MISTY_EXPLOSION] =
-    {
-        .battleScript = BattleScript_EffectExplosion,
-        .battleTvScore = 0, // TODO: Assign points
-        .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
     },
 
     [EFFECT_DREAM_EATER] =

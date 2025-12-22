@@ -1433,6 +1433,27 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
         }
     }
 
+    if (IsExplosionMove(move))
+    {
+        if (!aiData->shouldConsiderExplosion)
+            ADJUST_SCORE(-5);
+        if (effectiveness == UQ_4_12(0.0))
+        {
+            ADJUST_SCORE(-10);
+        }
+        else if (IsAbilityOnField(ABILITY_DAMP) && !DoesBattlerIgnoreAbilityChecks(battlerAtk, aiData->abilities[battlerAtk], move))
+        {
+            ADJUST_SCORE(-10);
+        }
+        else if (CountUsablePartyMons(battlerAtk) == 0 && LAST_MON_PREFERS_NOT_SACRIFICE)
+        {
+            if (CountUsablePartyMons(battlerDef) != 0)
+                ADJUST_SCORE(-10);
+            else
+                ADJUST_SCORE(-1);
+        }
+    }
+
     // check move effects
     switch (moveEffect)
     {
@@ -1442,26 +1463,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
             break;
         default:
             break;  // check move damage
-        case EFFECT_EXPLOSION:
-        case EFFECT_MISTY_EXPLOSION:
-            if (!aiData->shouldConsiderExplosion)
-                ADJUST_SCORE(-5);
-            if (effectiveness == UQ_4_12(0.0))
-            {
-                ADJUST_SCORE(-5);
-            }
-            if (DoesPartnerHaveSameMoveEffect(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove))
-            {
-                ADJUST_SCORE(-10);
-            }
-            else if (CountUsablePartyMons(battlerAtk) == 0 && LAST_MON_PREFERS_NOT_SACRIFICE)
-            {
-                if (CountUsablePartyMons(battlerDef) != 0)
-                    ADJUST_SCORE(-10);
-                else
-                    ADJUST_SCORE(-1);
-            }
-            break;
         case EFFECT_FINAL_GAMBIT:
             if (!aiData->shouldConsiderFinalGambit)
             {
@@ -3171,7 +3172,7 @@ static s32 AI_TryToFaint(u32 battlerAtk, u32 battlerDef, enum Move move, s32 sco
         return score; // status moves aren't accounted here
 
     if (CanIndexMoveFaintTarget(battlerAtk, battlerDef, movesetIndex, AI_ATTACKING)
-        && (!IsSelfSacrificeEffect(effect) || ShouldConsiderSelfSacrificeDamageEffect(battlerAtk, battlerDef, effect, aiIsFaster)))
+        && (!IsSelfSacrificeEffect(move) || ShouldConsiderSelfSacrificeDamageEffect(battlerAtk, battlerDef, move, aiIsFaster)))
     {
         if (aiIsFaster)
             ADJUST_SCORE(FAST_KILL);
@@ -4058,8 +4059,8 @@ static enum MoveComparisonResult CompareResistBerryEffects(u32 battlerAtk, u32 b
 
 static enum MoveComparisonResult CompareMoveSelfSacrifice(u32 battlerAtk, u32 battlerDef, u16 move1, u16 move2)
 {
-    bool32 selfSacrifice1 = IsSelfSacrificeEffect(GetMoveEffect(move1));
-    bool32 selfSacrifice2 = IsSelfSacrificeEffect(GetMoveEffect(move2));
+    bool32 selfSacrifice1 = IsSelfSacrificeEffect(move1);
+    bool32 selfSacrifice2 = IsSelfSacrificeEffect(move2);
 
     if (selfSacrifice1 && !selfSacrifice2)
         return MOVE_LOST_COMPARISON;
@@ -4130,8 +4131,7 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                     tempMoveScores[compareId] = 0;
                 }
                 // Decided against using self sacrifice effect this turn
-                enum BattleMoveEffects effect = GetMoveEffect(moves[i]);
-                if (IsSelfSacrificeEffect(effect) && !ShouldConsiderSelfSacrificeDamageEffect(battlerAtk, battlerDef, effect, moveIsFaster[i]))
+                if (IsSelfSacrificeEffect(moves[i]) && !ShouldConsiderSelfSacrificeDamageEffect(battlerAtk, battlerDef, moves[i], moveIsFaster[i]))
                 {
                     noOfHits[i] = gBattleMons[battlerDef].maxHP;
                     tempMoveScores[i] = 0;
@@ -4413,7 +4413,7 @@ static s32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, enum Move move
         break;
     }
     case EFFECT_MEMENTO:
-        if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_WILL_SUICIDE && gBattleMons[battlerDef].statStages[STAT_EVASION] < 7)
+        if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_WILL_SUICIDE && gBattleMons[battlerDef].statStages[STAT_EVASION] <= DEFAULT_STAT_STAGE)
             ADJUST_SCORE(DECENT_EFFECT);
         break;
     case EFFECT_FINAL_GAMBIT:
@@ -4978,7 +4978,7 @@ static s32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, enum Move move
 
             enum BattleMoveEffects predictedEffect = GetMoveEffect(predictedMove);
             if ((AI_IsFaster(battlerAtk, battlerDef, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY))
-             && (IsExplosionEffect(predictedEffect) || predictedEffect == EFFECT_PROTECT))
+             && (IsExplosionMove(predictedMove) || predictedEffect == EFFECT_PROTECT))
                 ADJUST_SCORE(GOOD_EFFECT);
             else if (predictedEffect == EFFECT_SEMI_INVULNERABLE && !IsSemiInvulnerable(battlerDef, CHECK_ALL))
                 ADJUST_SCORE(GOOD_EFFECT);

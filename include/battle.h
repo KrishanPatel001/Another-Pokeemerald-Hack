@@ -484,8 +484,8 @@ struct BattleVideo {
 
 struct Wish
 {
-    u16 counter;
-    u8 partyId;
+    u16 counter[MAX_BATTLERS_COUNT];
+    u8 partyId[MAX_BATTLERS_COUNT];
 };
 
 struct FutureSight
@@ -537,7 +537,7 @@ struct PartyState
     u32 timesGotHit:5;
     u32 changedSpecies:11; // For forms when multiple mons can change into the same pokemon.
     u32 sentOut:1;
-    u32 isKnockedOff:1;
+    u32 knockedOffItem;
     u32 padding:8;
     u16 usedHeldItem;
 };
@@ -568,7 +568,7 @@ struct BattleStruct
     struct PartyState partyState[NUM_BATTLE_SIDES][PARTY_SIZE];
     struct EventStates eventState;
     struct FutureSight futureSight[MAX_BATTLERS_COUNT];
-    struct Wish wish[MAX_BATTLERS_COUNT];
+    struct Wish wish;
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u32 expShareExpValue;
     u32 expValue;

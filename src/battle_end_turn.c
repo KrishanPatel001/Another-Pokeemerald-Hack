@@ -246,7 +246,6 @@ static bool32 HandleEndTurnFutureSight(u32 battler)
         gBattlerTarget = battler;
         gBattlerAttacker = gBattleStruct->futureSight[battler].battlerIndex;
         gCurrentMove = gBattleStruct->futureSight[battler].move;
-        gBattleStruct->eventState.atkCanceler = CANCELER_TARGET_FAILURE;
 
         if (!IsFutureSightAttackerInParty(gBattlerAttacker, gBattlerTarget, gCurrentMove))
             SetTypeBeforeUsingMove(gCurrentMove, gBattlerAttacker);
@@ -264,13 +263,13 @@ static bool32 HandleEndTurnWish(u32 battler)
 
     gBattleStruct->eventState.endTurnBattler++;
 
-    if (gBattleStruct->wish[battler].counter > 0 && --gBattleStruct->wish[battler].counter == 0 && IsBattlerAlive(battler))
+    if (gBattleStruct->wish.counter[battler] > 0 && --gBattleStruct->wish.counter[battler] == 0 && IsBattlerAlive(battler))
     {
         s32 wishHeal = 0;
         gBattlerTarget = battler;
-        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, battler, gWishFutureKnock.wishPartyId[battler])
-        if (B_WISH_HP_SOURCE >= GEN_5)
-            wishHeal = GetMonData(&GetBattlerParty(battler)[gWishFutureKnock.wishPartyId[battler]], MON_DATA_MAX_HP) / 2;
+        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, battler, gBattleStruct->wish.partyId[battler])
+        if (GetConfig(CONFIG_WISH_HP_SOURCE) >= GEN_5)
+            wishHeal = GetMonData(&GetBattlerParty(battler)[gBattleStruct->wish.partyId[battler]], MON_DATA_MAX_HP) / 2;
         else
             wishHeal = GetNonDynamaxMaxHP(battler) / 2;
 

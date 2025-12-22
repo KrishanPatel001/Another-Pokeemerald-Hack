@@ -749,7 +749,7 @@
 	.endm
 
 	.macro stockpile
-	.byte B_SCR_OP_STOCKPILE
+	.byte 0x85
 	.endm
 
 	.macro stockpiletobasedamage

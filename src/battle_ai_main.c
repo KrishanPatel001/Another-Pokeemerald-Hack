@@ -548,14 +548,14 @@ void Ai_InitPartyStruct(void)
     }
 
     // Find fainted mons
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (u32 monIndex = 0; monIndex < PARTY_SIZE; monIndex++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+        if (GetMonData(&gPlayerParty[monIndex], MON_DATA_SPECIES) == SPECIES_NONE)
             continue;
 
-        mon = &gPlayerParty[i];
-        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
-            gAiPartyData->mons[B_SIDE_PLAYER][i].isFainted = TRUE;
+        mon = &gPlayerParty[monIndex];
+        if (GetMonData(&gPlayerParty[monIndex], MON_DATA_HP) == 0)
+            gAiPartyData->mons[B_SIDE_PLAYER][monIndex].isFainted = TRUE;
 
         if (isOmniscient || hasPartyKnowledge)
             gAiPartyData->mons[B_SIDE_PLAYER][monIndex].species = GetMonData(mon, MON_DATA_SPECIES);
@@ -573,7 +573,7 @@ void Ai_InitPartyStruct(void)
 
 void Ai_UpdateSwitchInData(u32 battler)
 {
-    enum BattleSide side = GetBattlerSide(battler);
+    u32 side = GetBattlerSide(battler);
     struct AiPartyMon *aiMon = &gAiPartyData->mons[side][gBattlerPartyIndexes[battler]];
 
     // See if the switched-in mon has been already in battle
@@ -613,7 +613,7 @@ void RecordMovesBasedOnStab(u32 battler)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        enum Move playerMove = gBattleMons[battler].moves[moveIndex];
+        u32 playerMove = gBattleMons[battler].moves[moveIndex];
         if (IsSpeciesOfType(gBattleMons[battler].species, GetMoveType(playerMove)) && GetMovePower(playerMove != 0))
             RecordKnownMove(battler, playerMove);
     }
@@ -623,7 +623,7 @@ void RecordStatusMoves(u32 battler)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        enum Move playerMove = gBattleMons[battler].moves[moveIndex];
+        u32 playerMove = gBattleMons[battler].moves[moveIndex];
         if (ShouldRecordStatusMove(playerMove))
             RecordKnownMove(battler, playerMove);
     }
@@ -674,8 +674,8 @@ static u32 Ai_SetMoveAccuracy(struct AiLogicData *aiData, u32 battlerAtk, u32 ba
 
 void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef, u32 weather, u32 fieldStatus)
 {
-    enum Move move;
-    enum Move *moves = GetMovesArray(battlerAtk);
+    u32 move;
+    u16 *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -957,8 +957,8 @@ static u32 ChooseMoveOrAction_Doubles(u32 battler)
             gBattleTestRunnerState->data.trial.scoreTieCount = mostViableMovesNo;
 #endif
 
-            actionOrMoveIndex[i] = mostViableMovesIndices[RandomUniform(RNG_AI_SCORE_TIE_DOUBLES_MOVE, 0, mostViableMovesNo - 1)];
-            bestMovePointsForTarget[i] = mostViableMovesScores[0];
+            actionOrMoveIndex[battlerIndex] = mostViableMovesIndices[RandomUniform(RNG_AI_SCORE_TIE_DOUBLES_MOVE, 0, mostViableMovesNo - 1)];
+            bestMovePointsForTarget[battlerIndex] = mostViableMovesScores[0];
 
             // Don't use a move against ally if it has less than 100 points.
             if (battlerIndex == BATTLE_PARTNER(battler) && bestMovePointsForTarget[battlerIndex] < AI_SCORE_DEFAULT)
@@ -1176,9 +1176,9 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
     bool32 isBattle1v1 = IsBattle1v1();
     bool32 hasTwoOpponents = HasTwoOpponents(battlerAtk);
     bool32 hasPartner = HasPartner(battlerAtk);
-    u32 weather = AI_GetWeather();
-    enum Move predictedMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
-    enum Move predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
+    u32 weather;
+    u32 predictedMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
+    u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
     enum Ability abilityAtk = aiData->abilities[battlerAtk];
     enum Ability abilityDef = aiData->abilities[battlerDef];
     s32 atkPriority = GetBattleMovePriority(battlerAtk, abilityAtk, move);
@@ -1222,7 +1222,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
     // Don't use anything but super effective thawing moves if target is frozen if any other attack available
     if (((GetMoveType(move) == TYPE_FIRE && GetMovePower(move) != 0) || CanBurnHitThaw(move)) && effectiveness < UQ_4_12(2.0) && (gBattleMons[battlerDef].status1 & STATUS1_ICY_ANY))
     {
-        enum Move aiMove;
+        u32 aiMove;
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             aiMove = gBattleMons[battlerAtk].moves[moveIndex];
@@ -4116,13 +4116,17 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
         {
             if (moves[compareId] != MOVE_NONE && GetMovePower(moves[compareId]) != 0)
             {
-                noOfHits[i] = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, i, AI_ATTACKING, CONSIDER_ENDURE);
-                moveIsFaster[i] = AI_IsFaster(battlerAtk, battlerDef, moves[i], predictedMoveSpeedCheck, CONSIDER_PRIORITY);
-                isTwoTurnNotSemiInvulnerableMove[i] = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, moves[i]);
-                tempMoveScores[i] = AI_SCORE_DEFAULT;
-                if (ShouldUseSpreadDamageMove(battlerAtk,moves[i], i, noOfHits[i]))
+                noOfHits[compareId] = GetNoOfHitsToKOBattler(battlerAtk, battlerDef, compareId, AI_ATTACKING, CONSIDER_ENDURE);
+                moveIsFaster[compareId] = AI_IsFaster(battlerAtk, battlerDef, moves[compareId], predictedMoveSpeedCheck, CONSIDER_PRIORITY);
+                isTwoTurnNotSemiInvulnerableMove[compareId] = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, moves[compareId]);
+                tempMoveScores[compareId] = AI_SCORE_DEFAULT;
+                if (ShouldUseSpreadDamageMove(battlerAtk,moves[compareId], compareId, noOfHits[compareId]))
                 {
-                    noOfHits[i] = -1;
+                    noOfHits[compareId] = -1;
+                }
+                else if (noOfHits[compareId] < leastHits && noOfHits[compareId] != 0)
+                {
+                    leastHits = noOfHits[compareId];
                 }
                 // Decided against using self sacrifice effect this turn
                 if (IsSelfSacrificeEffect(moves[compareId]) && !ShouldConsiderSelfSacrificeDamageEffect(battlerAtk, battlerDef, moves[compareId], moveIsFaster[compareId]))
@@ -4130,17 +4134,12 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                     noOfHits[compareId] = gBattleMons[battlerDef].maxHP;
                     tempMoveScores[compareId] = 0;
                 }
-                // Decided against using self sacrifice effect this turn
-                if (IsSelfSacrificeEffect(moves[i]) && !ShouldConsiderSelfSacrificeDamageEffect(battlerAtk, battlerDef, moves[i], moveIsFaster[i]))
-                {
-                    noOfHits[i] = gBattleMons[battlerDef].maxHP;
-                    tempMoveScores[i] = 0;
-                }
             }
             else
             {
                 noOfHits[compareId] = -1;
                 tempMoveScores[compareId] = 0;
+                isTwoTurnNotSemiInvulnerableMove[compareId] = FALSE;
             }
         }
 
@@ -4164,23 +4163,29 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                 if (noOfHits[currId] == noOfHits[compareId])
                 {
                     multipleBestMoves = TRUE;
+                    // We need to make sure it's the current move which is objectively better.
+                    if (isTwoTurnNotSemiInvulnerableMove[compareId] && !isTwoTurnNotSemiInvulnerableMove[currId])
+                        tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_NOT_CHARGING);
+                    else if (!isTwoTurnNotSemiInvulnerableMove[compareId] && isTwoTurnNotSemiInvulnerableMove[currId])
+                        tempMoveScores[compareId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_NOT_CHARGING);
+
                     // Comparing KOs
                     if (noOfHits[currId] == 1)
                     {
                         // If one move is berry-resisted, use the other one
-                        switch (CompareResistBerryEffects(battlerAtk, battlerDef, moves[currId], currId, moves[i], i))
+                        switch (CompareResistBerryEffects(battlerAtk, battlerDef, moves[currId], currId, moves[compareId], compareId))
                         {
                         case MOVE_WON_COMPARISON:
                             tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
                             break;
                         case MOVE_LOST_COMPARISON:
-                            tempMoveScores[i] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
+                            tempMoveScores[compareId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_RESIST_BERRY);
                             break;
                         case MOVE_NEUTRAL_COMPARISON:
                             break;
                         }
                         // Use priority to get fast KO if outsped
-                        switch (CompareMoveSpeeds(battlerAtk, battlerDef, moveIsFaster[currId], moveIsFaster[i]))
+                        switch (CompareMoveSpeeds(battlerAtk, battlerDef, moveIsFaster[currId], moveIsFaster[compareId]))
                         {
                         case MOVE_WON_COMPARISON:
                             tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_SPEED);
@@ -4204,17 +4209,6 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                             break;
                         }
                     }
-                    switch (CompareMoveTwoTurnEffect(battlerAtk, moves[currId], moves[compareId]))
-                    {
-                    case MOVE_WON_COMPARISON:
-                        tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_NOT_CHARGING);
-                        break;
-                    case MOVE_LOST_COMPARISON:
-                        tempMoveScores[compareId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_NOT_CHARGING);
-                        break;
-                    case MOVE_NEUTRAL_COMPARISON:
-                        break;
-                    }
                     switch (CompareMoveAccuracies(battlerAtk, battlerDef, currId, compareId))
                     {
                     case MOVE_WON_COMPARISON:
@@ -4226,18 +4220,18 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
                     case MOVE_NEUTRAL_COMPARISON:
                         break;
                     }
-                    switch (CompareMoveSelfSacrifice(battlerAtk, battlerDef, moves[currId], moves[i]))
+                    switch (CompareMoveSelfSacrifice(battlerAtk, battlerDef, moves[currId], moves[compareId]))
                     {
                     case MOVE_WON_COMPARISON:
                         tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_AVOID_SELF_SACRIFICE);
                         break;
                     case MOVE_LOST_COMPARISON:
-                        tempMoveScores[i] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_AVOID_SELF_SACRIFICE);
+                        tempMoveScores[compareId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_AVOID_SELF_SACRIFICE);
                         break;
                     case MOVE_NEUTRAL_COMPARISON:
                         break;
                     }
-                    switch (CompareMoveEffects(moves[currId], moves[i], battlerAtk, battlerDef, noOfHits[currId]))
+                    switch (CompareMoveEffects(moves[currId], moves[compareId], battlerAtk, battlerDef, noOfHits[currId]))
                     {
                     case MOVE_WON_COMPARISON:
                         tempMoveScores[currId] += MathUtil_Exponent(MAX_MON_MOVES, PRIORITY_EFFECT);
@@ -4318,7 +4312,6 @@ static s32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, enum Move move
     bool32 hasPartner = HasPartner(battlerAtk);
     enum MoveTarget moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
     bool32 moveTargetsBothOpponents = hasTwoOpponents && (IsSpreadMove(moveTarget, IGNORE_BATTLE_TYPE) || moveTarget == TARGET_ALL_BATTLERS || moveTarget == TARGET_FIELD);
-    u32 i;
 
     // The AI should understand that while Dynamaxed, status moves function like Protect.
     if (GetActiveGimmick(battlerAtk) == GIMMICK_DYNAMAX && GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
@@ -5890,6 +5883,12 @@ static s32 AI_CalcAdditionalEffectScore(u32 battlerAtk, u32 battlerDef, enum Mov
     {
         const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(move, effectId);
 
+        if (aiData->abilities[battlerAtk] == ABILITY_SHEER_FORCE)
+        {
+            if ((additionalEffect->chance > 0) != additionalEffect->sheerForceOverride)
+                continue;
+        }
+
         // Only consider effects with a guaranteed chance to happen
         if (!MoveEffectIsGuaranteed(battlerAtk, aiData->abilities[battlerAtk], additionalEffect))
             continue;
@@ -6086,15 +6085,15 @@ static s32 AI_CalcAdditionalEffectScore(u32 battlerAtk, u32 battlerDef, enum Mov
                     ADJUST_SCORE(GOOD_EFFECT);
                 break;
             case MOVE_EFFECT_THROAT_CHOP:
-                for (i = 0; i < MAX_MON_MOVES; i++)
+                for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
                 {
-                    if (defBestMoves[i] == MOVE_NONE)
+                    if (defBestMoves[moveIndex] == MOVE_NONE)
                     {
                         break;
                     }
                     else
                     {
-                        if (IsSoundMove(defBestMoves[i]))
+                        if (IsSoundMove(defBestMoves[moveIndex]))
                         {
                             u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, aiData);
 

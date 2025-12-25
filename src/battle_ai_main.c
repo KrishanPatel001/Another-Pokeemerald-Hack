@@ -420,10 +420,9 @@ static void SetupRandomRollsForAIMoveSelection(u32 battler)
 void AI_TrySwitchOrUseItem(u32 battler)
 {
     struct Pokemon *party;
-    u8 battlerIn1, battlerIn2;
+    u32 battlerIn1, battlerIn2;
     s32 firstId;
     s32 lastId; // + 1
-    u8 battlerPosition = GetBattlerPosition(battler);
     party = GetBattlerParty(battler);
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
@@ -437,30 +436,14 @@ void AI_TrySwitchOrUseItem(u32 battler)
                 s32 monToSwitchId = gAiLogicData->mostSuitableMonId[battler];
                 if (monToSwitchId == PARTY_SIZE)
                 {
-                    if (!IsDoubleBattle())
-                    {
-                        battlerIn1 = GetBattlerAtPosition(battlerPosition);
-                        battlerIn2 = battlerIn1;
-                    }
-                    else
-                    {
-                        battlerIn1 = GetBattlerAtPosition(battlerPosition);
-                        battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(battlerPosition));
-                    }
-
+                    GetActiveBattlerIds(battler, &battlerIn1, &battlerIn2);
                     GetAIPartyIndexes(battler, &firstId, &lastId);
 
                     for (monToSwitchId = (lastId-1); monToSwitchId >= firstId; monToSwitchId--)
                     {
                         if (!IsValidForBattle(&party[monToSwitchId]))
                             continue;
-                        if (monToSwitchId == gBattlerPartyIndexes[battlerIn1])
-                            continue;
-                        if (monToSwitchId == gBattlerPartyIndexes[battlerIn2])
-                            continue;
-                        if (monToSwitchId == gBattleStruct->monToSwitchIntoId[battlerIn1])
-                            continue;
-                        if (monToSwitchId == gBattleStruct->monToSwitchIntoId[battlerIn2])
+                        if (IsPartyMonOnFieldOrChosenToSwitch(monToSwitchId, battlerIn1, battlerIn2))
                             continue;
                         if (IsAceMon(battler, monToSwitchId))
                             continue;

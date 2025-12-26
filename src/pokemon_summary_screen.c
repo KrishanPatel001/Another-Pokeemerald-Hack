@@ -1796,16 +1796,7 @@ static void Task_HandleInput(u8 taskId)
         {
             sMonSummaryScreen->callback = CB2_InitLearnMove;
             gRelearnMode = sMonSummaryScreen->currPageIndex;
-            gSpecialVar_MonBoxPos = sMonSummaryScreen->curMonIndex;
-            if (sMonSummaryScreen->isBoxMon)
-            {
-                gSpecialVar_0x8004 = PC_MON_CHOSEN;
-                gSpecialVar_MonBoxPos = sMonSummaryScreen->curMonIndex;
-            }
-            else
-            {
-                gSpecialVar_0x8004 = sMonSummaryScreen->curMonIndex;
-            }
+            gSpecialVar_MonBoxId = 0xFF;
             StopPokemonAnimations();
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);

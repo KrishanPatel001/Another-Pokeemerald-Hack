@@ -69,7 +69,6 @@ union TextColor {
         u8 accent;
     };
     u32 asU32;
-    u8 asArray[4];
 };
 
 enum PACKED TextPrinterType
@@ -200,8 +199,8 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 void RunTextPrinters(void);
 bool32 IsTextPrinterActive(u8 id);
 void GenerateFontHalfRowLookupTable(union TextColor color);
-void SaveTextColors(u8 *bgColor, u8 *fgColor, u8 *shadowColor, u8* accentColor);
-void RestoreTextColors(u8 *bgColor, u8 *fgColor, u8 *shadowColor, u8 *accentColor);
+union TextColor SaveTextColors(void);
+void RestoreTextColors(union TextColor color);
 void DecompressGlyphTile(const void *src_, void *dest_);
 u32 CopyGlyphToVRAM(struct TextPrinter *textPrinter);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);

@@ -106,6 +106,7 @@ void CB2_TestRunner(void);
 void Test_ExpectedResult(enum TestResult);
 void Test_ExpectLeaks(bool32);
 void Test_ExpectCrash(bool32);
+void Test_ExpectFail(u32 failLine);
 u32 SourceLine(u32 sourceLineOffset);
 u32 SourceLineOffset(u32 sourceLine);
 void SetupRiggedRng(u32 sourceLine, enum RandomTag randomTag, u32 value);

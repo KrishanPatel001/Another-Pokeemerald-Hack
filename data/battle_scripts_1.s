@@ -1084,10 +1084,7 @@ BattleScript_EffectSpectralThief::
 BattleScript_EffectSpectralThiefFromDamage:
 	damagecalc
 	adjustdamage
-	call BattleScript_Hit_RetFromAtkAnimation
-	tryfaintmon BS_TARGET
-	moveendall
-	end
+	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectPartingShot::
 	attackcanceler
@@ -1967,7 +1964,7 @@ BattleScript_EffectHealingWishGen4:
 	waitstate
 	switchineffects BS_ATTACKER
 	switchinevents
-	goto BattleScript_EffectHealingWishEnd
+	goto BattleScript_MoveEnd
 
 BattleScript_HealingWishActivates::
 	setbyte cMULTISTRING_CHOOSER, 0
@@ -3911,9 +3908,19 @@ BattleScript_StealStats::
 	waitanimation
 	printstring STRINGID_SPECTRALTHIEFSTEAL
 	waitmessage B_WAIT_TIME_LONG
-	spectralthiefprintstats
-	flushtextbox
-	return
+BattleScript_BrickBreakDoHit::
+	typecalc
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET, MOVE_DAMAGE_HP_UPDATE
+	datahpupdate BS_TARGET, MOVE_DAMAGE_HP_UPDATE
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setadditionaleffects
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectYawn::
 	attackcanceler
@@ -4918,11 +4925,6 @@ BattleScript_DmgHazardsOnBattler::
 	tryfaintmon BS_SCRIPTING
 	return
 
-BattleScript_DmgHazardsOnBattlerScriptingFainted::
-	setbyte sGIVEEXP_STATE, 0
-	getexp BS_SCRIPTING
-	return
-
 BattleScript_PrintHurtByDmgHazards::
 	printfromtable gDmgHazardsStringIds
 	waitmessage B_WAIT_TIME_LONG
@@ -5207,6 +5209,12 @@ BattleScript_FutureAttackEnd::
 	moveendfromto MOVEEND_SYMBIOSIS, MOVEEND_UPDATE_LAST_MOVES
 	moveendcase MOVEEND_COLOR_CHANGE
 	checkteamslost BattleScript_FutureAttackClearResults
+	goto BattleScript_FutureAttackClearResults
+BattleScript_FutureAttackMiss::
+	pause B_WAIT_TIME_SHORT
+	setmoveresultflags MOVE_RESULT_FAILED
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
 BattleScript_FutureAttackClearResults:
 	setmoveresultflags 0
 	clearspecialstatuses

@@ -363,8 +363,8 @@ bool32 BlocksPrankster(enum Move move, u32 battlerPrankster, u32 battlerDef, boo
 bool32 PickupHasValidTarget(u32 battler);
 bool32 CantPickupItem(u32 battler);
 bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags);
-enum MoveTarget GetBattlerMoveTargetType(u32 battler, enum Move move);
-bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, enum Move move);
+u32 GetBattlerMoveTargetType(u32 battler, u32 move);
+bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move);
 u32 GetNextTarget(u32 moveTarget, bool32 excludeCurrent);
 void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon);
 void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon);
@@ -433,6 +433,9 @@ void UpdateStallMons(void);
 bool32 TrySwitchInEjectPack(enum EjectPackTiming timing);
 bool32 TryEmergencyExit(void);
 bool32 EmergencyExitCanBeTriggered(u32 battler);
+bool32 TryTriggerSymbiosis(u32 battler, u32 ally);
+bool32 TrySymbiosis(u32 battler, u32 itemId, bool32 moveEnd);
+void BestowItem(u32 battlerAtk, u32 battlerDef);
 ARM_FUNC u32 GetBattlerVolatile(u32 battler, enum Volatile _volatile);
 void SetMonVolatile(u32 battler, enum Volatile _volatile, u32 newValue);
 bool32 ItemHealMonVolatile(u32 battler, enum Item itemId);
@@ -462,5 +465,7 @@ void SetStartingStatus(enum StartingStatus status);
 void ResetStartingStatuses(void);
 bool32 IsUsableWhileAsleepEffect(enum BattleMoveEffects effect);
 void SetWrapTurns(u32 battler, enum HoldEffect holdEffect);
+bool32 ChangeOrderTargetAfterAttacker(void);
+void TryUpdateEvolutionTracker(u32 evolutionCondition, u32 upAmount, u16 usedMove);
 
 #endif // GUARD_BATTLE_UTIL_H

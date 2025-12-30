@@ -13062,7 +13062,7 @@ void BS_TryTrainerSlideDynamaxMsg(void)
     if ((shouldSlide = ShouldDoTrainerSlide(gBattleScripting.battler, TRAINER_SLIDE_DYNAMAX)))
     {
         BattleScriptPush(cmd->nextInstr);
-
+        
         switch(gBattleScripting.battler)
         {
         case B_POSITION_OPPONENT_LEFT:

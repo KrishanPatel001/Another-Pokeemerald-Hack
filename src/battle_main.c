@@ -3816,6 +3816,29 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->eventState.faintedAction = 0;
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
+    case FIRST_TURN_EVENTS_TRAINER_SLIDE_A:
+        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
+            BattleScriptExecute(BattleScript_TrainerASlideMsgEnd2);
+        gBattleStruct->eventState.beforeFirstTurn++;
+        break;
+    case FIRST_TURN_EVENTS_TRAINER_SLIDE_B:
+        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
+        {
+            // Ensures only trainer A slide is played in single-trainer doubles (B == A / B == TRAINER_NONE) and 2v1 multibattles (B == 0xFFFF)
+            if (!((TRAINER_BATTLE_PARAM.opponentB == TRAINER_BATTLE_PARAM.opponentA) 
+            || (TRAINER_BATTLE_PARAM.opponentB == TRAINER_NONE)
+            || (TRAINER_BATTLE_PARAM.opponentB == 0xFFFF)))
+            {
+                BattleScriptExecute(BattleScript_TrainerBSlideMsgEnd2);
+            }
+        }
+        gBattleStruct->eventState.beforeFirstTurn++;
+        break;
+    case FIRST_TURN_EVENTS_TRAINER_SLIDE_PARTNER:
+        if (ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT), TRAINER_SLIDE_BEFORE_FIRST_TURN))
+            BattleScriptExecute(BattleScript_TrainerPartnerSlideMsgEnd2);
+        gBattleStruct->eventState.beforeFirstTurn++;
+        break;
     case FIRST_TURN_EVENTS_END:
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
@@ -3849,8 +3872,6 @@ static void TryDoEventsBeforeFirstTurn(void)
             BattleScriptExecute(BattleScript_ArenaTurnBeginning);
         }
 
-        if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_BEFORE_FIRST_TURN)))
-            BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
         gBattleStruct->eventState.beforeFirstTurn = 0;
         break;
     }

@@ -785,8 +785,8 @@ struct BattleTestData
     u8 gender;
     u8 nature;
     bool8 isShiny;
-    enum Ability forcedAbilities[MAX_BATTLE_TRAINERS][PARTY_SIZE];
-    u8 chosenGimmick[MAX_BATTLE_TRAINERS][PARTY_SIZE];
+    enum Ability forcedAbilities[NUM_BATTLE_SIDES][PARTY_SIZE];
+    u8 chosenGimmick[MAX_BATTLERS_COUNT][PARTY_SIZE];
     u8 forcedEnvironment;
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
@@ -1052,13 +1052,14 @@ struct moveWithPP {
 #define Environment(environment) Environment_(__LINE__, environment)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
-void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value);
+void SetVarForTest(u32 sourceLine, u16 varId, u16 value);
+void TestSetConfig(u32 sourceLine, enum ConfigTag configTag, u32 value);
 void TieBreakScore(u32 sourceLine, enum RandomTag rngTag, enum ScoreTieResolution scoreTieRes, u32 value);
 void TieBreakTarget(u32 sourceLine, enum TargetTieResolution targetTieRes, u32 value);
 void ClearFlagAfterTest(void);
 void ClearVarAfterTest(void);
-void OpenPokemon(u32 sourceLine, enum BattleTrainer trainer, u32 species);
-void OpenPokemonMulti(u32 sourceLine, enum BattleTrainer trainer, u32 species);
+void OpenPokemon(u32 sourceLine, enum BattlerPosition position, u32 species);
+void OpenPokemonMulti(u32 sourceLine, enum BattlerPosition position, u32 species);
 void ClosePokemon(u32 sourceLine);
 
 void RNGSeed_(u32 sourceLine, rng_value_t seed);

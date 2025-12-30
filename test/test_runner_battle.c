@@ -2035,7 +2035,7 @@ void ClearVarAfterTest(void)
     }
 }
 
-void OpenPokemon(u32 sourceLine, enum BattleTrainer trainer, u32 species)
+void OpenPokemon(u32 sourceLine, enum BattlerPosition position, u32 species)
 {
     s32 i, data;
     u8 *partySize;
@@ -2173,13 +2173,13 @@ void ClosePokemon(u32 sourceLine)
 
 static void SetGimmick(u32 sourceLine, u32 battler, u32 partyIndex, enum Gimmick gimmick)
 {
-    enum Gimmick currentGimmick = DATA.chosenGimmick[GetBattlerTrainer(battler)][partyIndex];
+    enum Gimmick currentGimmick = DATA.chosenGimmick[battler][partyIndex];
     if (!((currentGimmick == GIMMICK_ULTRA_BURST && gimmick == GIMMICK_Z_MOVE)
        || (currentGimmick == GIMMICK_Z_MOVE && gimmick == GIMMICK_ULTRA_BURST)))
     {
         INVALID_IF(currentGimmick != GIMMICK_NONE && currentGimmick != gimmick, "Cannot set %s because %s already set", sGimmickIdentifiers[gimmick], sGimmickIdentifiers[currentGimmick]);
     }
-    DATA.chosenGimmick[GetBattlerTrainer(battler)][partyIndex] = gimmick;
+    DATA.chosenGimmick[battler][partyIndex] = gimmick;
 }
 
 void Gender_(u32 sourceLine, u32 gender)
@@ -2426,7 +2426,7 @@ void DynamaxLevel_(u32 sourceLine, s16 dynamaxLevel)
     INVALID_IF(!DATA.currentMon, "DynamaxLevel outside of PLAYER/OPPONENT");
     SetMonData(DATA.currentMon, MON_DATA_DYNAMAX_LEVEL, &dynamaxLevel);
     if (dynamaxLevel >= 0)
-        SetGimmick(sourceLine, DATA.battleTrainer, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
+        SetGimmick(sourceLine, DATA.currentPosition, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
 }
 
 void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor)
@@ -3481,9 +3481,9 @@ u32 TestRunner_Battle_GetForcedEnvironment(void)
     return DATA.forcedEnvironment;
 }
 
-u32 TestRunner_Battle_GetChosenGimmick(enum BattleTrainer trainer, u32 partyIndex)
+u32 TestRunner_Battle_GetChosenGimmick(u32 battler, u32 partyIndex)
 {
-    return DATA.chosenGimmick[trainer][partyIndex];
+    return DATA.chosenGimmick[battler][partyIndex];
 }
 
 // TODO: Consider storing the last successful i and searching from i+1

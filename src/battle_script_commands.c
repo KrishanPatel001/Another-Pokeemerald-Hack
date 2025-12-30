@@ -953,6 +953,7 @@ static bool32 NoTargetPresent(u8 battler, u32 move)
     switch (GetBattlerMoveTargetType(battler, move))
     {
     case TARGET_SELECTED:
+    case TARGET_SMART:
     case TARGET_DEPENDS:
     case TARGET_RANDOM:
         if (!IsBattlerAlive(gBattlerTarget))
@@ -1331,20 +1332,36 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
 
         numTargets++;
 
-        struct BattleCalcValues cv = {0};
-        cv.move = gCurrentMove;
-        cv.battlerAtk = gBattlerAttacker;
-        cv.battlerDef = battlerDef;
-        cv.abilities[gBattlerAttacker] = abilityAtk;
-        cv.abilities[battlerDef] = GetBattlerAbility(battlerDef);
-        cv.holdEffects[gBattlerAttacker] = holdEffectAtk;
-        cv.holdEffects[battlerDef] = GetBattlerHoldEffect(battlerDef);
+            u32 holdEffectDef = GetBattlerHoldEffect(battlerDef);
+            u32 accuracy = GetTotalAccuracy(gBattlerAttacker,
+                                            battlerDef,
+                                            move,
+                                            abilityAtk,
+                                            abilityDef,
+                                            holdEffectAtk,
+                                            holdEffectDef);
 
-        if (DoesMoveMissTarget(&cv))
-        {
-            gBattleStruct->moveResultFlags[battlerDef] |= MOVE_RESULT_MISSED;
-            gBattleCommunication[MISS_TYPE] = B_MSG_MISSED;
-            numMisses++;
+            if (!RandomPercentage(RNG_ACCURACY, accuracy))
+            {
+                gBattleStruct->moveResultFlags[battlerDef] = MOVE_RESULT_MISSED;
+                gBattleStruct->missStringId[battlerDef] = gBattleCommunication[MISS_TYPE] = B_MSG_MISSED;
+                numMisses++;
+
+                if (holdEffectAtk == HOLD_EFFECT_BLUNDER_POLICY)
+                    gBattleStruct->blunderPolicy = TRUE;    // Only activates from missing through acc/evasion checks
+
+                if (moveTarget == TARGET_SMART
+                    && !IsAffectedByFollowMe(gBattlerAttacker, GetBattlerSide(battlerDef), gCurrentMove)
+                    && !recalcDragonDarts // So we don't jump back and forth between targets
+                    && CanTargetPartner(gBattlerAttacker, battlerDef)
+                    && !TargetFullyImmuneToCurrMove(gBattlerAttacker, BATTLE_PARTNER(battlerDef)))
+                {
+                    // Smart target to partner if miss
+                    numMisses = 0; // Other dart might hit
+                    gBattlerTarget = BATTLE_PARTNER(battlerDef);
+                    AccuracyCheck(TRUE, nextInstr, failInstr, move);
+                    return;
+                }
 
                 if (GetMovePower(move) != 0)
                 {

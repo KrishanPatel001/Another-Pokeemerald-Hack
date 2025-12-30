@@ -258,7 +258,7 @@ static inline u32 GetMoveAccuracy(enum Move moveId)
 static inline enum MoveTarget GetMoveTarget(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
-    enum MoveTarget target = gMovesInfo[moveId].target;
+    u32 target = gMovesInfo[moveId].target;
     assertf(target != TARGET_SMART || gMovesInfo[moveId].strikeCount > 1, "Smart target requires strikeCount > 1: %S", gMovesInfo[moveId].name);
     return target;
 }

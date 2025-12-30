@@ -347,7 +347,7 @@ static bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef, enum 
     return FALSE;
 }
 
-bool32 IsUnnerveBlocked(u32 battler, enum Item itemId)
+bool32 IsUnnerveBlocked(u32 battler, u32 itemId)
 {
     if (GetItemPocket(itemId) != POCKET_BERRIES)
         return FALSE;
@@ -386,7 +386,7 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler)
     return FALSE;
 }
 
-static inline bool32 IsDragonDartsSecondHit(u32 battlerAtk, enum Move move)
+static inline bool32 IsDragonDartsSecondHit(u32 battlerAtk, u32 move)
 {
     if (GetBattlerMoveTargetType(battlerAtk, move) != TARGET_SMART)
         return FALSE;
@@ -397,7 +397,7 @@ static inline bool32 IsDragonDartsSecondHit(u32 battlerAtk, enum Move move)
     return FALSE;
 }
 
-bool32 IsAffectedByFollowMe(u32 battlerAtk, enum BattleSide defSide, enum Move move)
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move)
 {
     enum Ability ability = GetBattlerAbility(battlerAtk);
     enum BattleMoveEffects effect = GetMoveEffect(move);
@@ -448,7 +448,7 @@ static bool32 HandleMoveTargetRedirection(void)
     }
 
     if (IsAffectedByFollowMe(gBattlerAttacker, side, gCurrentMove)
-     && (moveTarget == TARGET_SELECTED || moveEffect == EFFECT_REFLECT_DAMAGE)
+     && (moveTarget == TARGET_SELECTED || moveTarget == TARGET_SMART || moveEffect == EFFECT_REFLECT_DAMAGE)
      && !IsBattlerAlly(gBattlerAttacker, gSideTimers[side].followmeTarget))
     {
         gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = gSideTimers[side].followmeTarget; // follow me moxie fix
@@ -2963,7 +2963,7 @@ static enum MoveCanceler CancelerMultihitMoves(struct BattleContext *ctx)
         {
             gMultiHitCounter = GetMoveStrikeCount(ctx->move);
 
-            if (GetMoveEffect(ctx->move) == EFFECT_DRAGON_DARTS
+            if (GetBattlerMoveTargetType(ctx->battlerAtk, ctx->move) == TARGET_SMART
              && !IsAffectedByFollowMe(ctx->battlerAtk, GetBattlerSide(ctx->battlerDef), ctx->move)
              && CanTargetPartner(ctx->battlerAtk, ctx->battlerDef)
              && TargetFullyImmuneToCurrMove(ctx->battlerAtk, ctx->battlerDef))
@@ -11425,7 +11425,12 @@ void UpdateStallMons(void)
 {
     if (IsBattlerTurnDamaged(gBattlerTarget) || GetMoveCategory(gCurrentMove) == DAMAGE_CATEGORY_STATUS)
         return;
-    if (!IsDoubleBattle() || GetMoveTarget(gCurrentMove) == TARGET_SELECTED)
+
+    enum MoveTarget target = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
+
+    if (!IsDoubleBattle()
+     || target == TARGET_SELECTED
+     || target == TARGET_SMART)
     {
         if (CanMoveBeBlockedByTarget(&ctx, GetChosenMovePriority(ctx.battlerAtk, ctx.abilityAtk)))
         {

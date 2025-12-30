@@ -1487,7 +1487,6 @@ s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler, enum Move aiMoveConsidered, e
 
 bool32 CanEndureHit(u32 battler, u32 battlerTarget, enum Move move)
 {
-    enum BattleMoveEffects effect = GetMoveEffect(move);
     if (!AI_BattlerAtMaxHp(battlerTarget) || IsMultiHitMove(move) || gAiLogicData->abilities[battler]  == ABILITY_PARENTAL_BOND)
         return FALSE;
     if (GetMoveStrikeCount(move) > 1 && !(AI_GetBattlerMoveTargetType(battler, move) == TARGET_SMART && !HasTwoOpponents(battler)))
@@ -6335,6 +6334,7 @@ bool32 ShouldInstructPartner(u32 partner, u32 move)
     switch (type)
     {
     case TARGET_SELECTED:
+    case TARGET_SMART:
     case TARGET_DEPENDS:
     case TARGET_RANDOM:
     case TARGET_BOTH:
@@ -6357,6 +6357,7 @@ bool32 CanMoveBeBouncedBack(u32 battler, u32 move)
     switch (type)
     {
     case TARGET_SELECTED:
+    case TARGET_SMART:
     case TARGET_OPPONENTS_FIELD:
     case TARGET_BOTH:
         return TRUE;

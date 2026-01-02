@@ -2760,10 +2760,6 @@ Cry_Absol::
 	.align 2
 Cry_AbsolMega::
 	.incbin "sound/direct_sound_samples/cries/absol_mega.bin"
-
-	.align 2
-Cry_AbsolMegaZ::
-	.incbin "sound/direct_sound_samples/cries/absol_mega_z.bin"
 .endif @ P_MODIFIED_MEGA_CRIES
 .endif @ P_FAMILY_ABSOL
 
@@ -3243,10 +3239,6 @@ Cry_Lucario::
 	.align 2
 Cry_LucarioMega::
 	.incbin "sound/direct_sound_samples/cries/lucario_mega.bin"
-
-	.align 2
-Cry_LucarioMegaZ::
-	.incbin "sound/direct_sound_samples/cries/lucario_mega_z.bin"
 .endif @ P_MODIFIED_MEGA_CRIES
 .endif @ P_FAMILY_RIOLU
 

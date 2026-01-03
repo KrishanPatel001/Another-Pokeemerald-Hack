@@ -4950,13 +4950,9 @@ static void ShowRelearnPrompt(void)
     && !FlagGet(P_FLAG_EGG_MOVES)
     && !FlagGet(P_FLAG_TUTOR_MOVES)))
     {
-        relearnText = sText_Relearn;
-        relearnTextXPos = 0;
-    }
-    else
-    {
-        switch (gMoveRelearnerState)
-        {
+        case MOVE_RELEARNER_LEVEL_UP_MOVES:
+            relearnText = sText_Relearn_LevelUp;
+            break;
         case MOVE_RELEARNER_EGG_MOVES:
             relearnText = sText_Relearn_Egg;
             break;
@@ -4967,8 +4963,7 @@ static void ShowRelearnPrompt(void)
             relearnText = sText_Relearn_Tutor;
             break;
         default:
-        case MOVE_RELEARNER_LEVEL_UP_MOVES:
-            relearnText = sText_Relearn_LevelUp;
+            relearnText = sText_Relearn;
             break;
         }
         relearnTextXPos = GetStringRightAlignXOffset(FONT_NORMAL, relearnText, 0);

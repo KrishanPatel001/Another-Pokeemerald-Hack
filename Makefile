@@ -450,8 +450,10 @@ clean-teachables_intermediates:
 clean-generated: clean-teachables_intermediates
 	@rm -f $(AUTO_GEN_TARGETS)
 	@echo "rm -f <AUTO_GEN_TARGETS>"
-	@rm -Rf $(LEARNSET_HELPERS_BUILD_DIR)
-	@echo "rm -Rf <LEARNSET_HELPERS_BUILD_DIR>"
+
+clean-teachables: clean-teachables_intermediates
+	rm -f $(ALL_LEARNABLES_JSON)
+	@touch $(C_SUBDIR)/pokemon.c
 
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
 $(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member

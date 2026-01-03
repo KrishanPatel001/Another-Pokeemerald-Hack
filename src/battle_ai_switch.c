@@ -935,38 +935,31 @@ static bool32 CanUseSuperEffectiveMoveAgainstOpponent(u32 battler, u32 opposingB
 {
     enum Move move;
 
-    if (!IsBattlerAlive(opposingBattler))
+    if (gAbsentBattlerFlags & (1u << opposingBattler))
         return FALSE;
 
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-        {
-            move = gBattleMons[battler].moves[moveIndex];
-            if (move == MOVE_NONE || AI_DoesChoiceEffectBlockMove(battler, move))
-                continue;
+        move = gBattleMons[battler].moves[moveIndex];
+        if (move == MOVE_NONE || AI_DoesChoiceEffectBlockMove(battler, move))
+            continue;
 
-            if (gAiLogicData->effectiveness[battler][opposingBattler][moveIndex] >= UQ_4_12(2.0))
-                return TRUE;
-        }
+        if (gAiLogicData->effectiveness[battler][opposingBattler][moveIndex] >= UQ_4_12(2.0))
+            return TRUE;
     }
     return FALSE;
 }
 
-    opposingBattler = BATTLE_PARTNER(opposingPosition);
+static bool32 CanUseSuperEffectiveMoveAgainstOpponents(u32 battler)
+{
+    u32 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
+    u32 opposingBattler = GetBattlerAtPosition(opposingPosition);
 
-    if (!(gAbsentBattlerFlags & (1u << opposingBattler)))
-    {
-        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-        {
-            move = gBattleMons[battler].moves[moveIndex];
-            if (move == MOVE_NONE || AI_DoesChoiceEffectBlockMove(battler, move))
-                continue;
+    if (CanUseSuperEffectiveMoveAgainstOpponent(battler, opposingBattler))
+        return TRUE;
 
-            if (gAiLogicData->effectiveness[battler][opposingBattler][moveIndex] >= UQ_4_12(2.0))
-                return TRUE;
-        }
-    }
+    if (IsDoubleBattle() && CanUseSuperEffectiveMoveAgainstOpponent(battler, BATTLE_PARTNER(opposingPosition)))
+        return TRUE;
 
     return FALSE;
 }

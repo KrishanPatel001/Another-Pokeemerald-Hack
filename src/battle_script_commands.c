@@ -1256,10 +1256,26 @@ static void Cmd_setchargingturn(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static bool32 ShouldSkipAccuracyCalcPastFirstHit(u32 battlerAtk, enum Ability abilityAtk, enum HoldEffect holdEffectAtk, u32 moveEffect)
+static void SetOrClearRageVolatile(void)
 {
-    if (gSpecialStatuses[battlerAtk].parentalBondState == PARENTAL_BOND_2ND_HIT)
-        return TRUE;
+    if (GetConfig(CONFIG_RAGE_BUILDS) <= GEN_3 && MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_RAGE))
+        gBattleMons[gBattlerAttacker].volatiles.rage = TRUE;
+    else
+        gBattleMons[gBattlerAttacker].volatiles.rage = FALSE;
+}
+
+static bool32 JumpIfMoveAffectedByProtect(u32 move, u32 battler, u32 shouldJump, const u8 *failInstr)
+{
+    bool32 affected = IsBattlerProtected(gBattlerAttacker, battler, move);
+    if (affected)
+    {
+        gBattleStruct->moveResultFlags[battler] |= MOVE_RESULT_MISSED;
+        SetOrClearRageVolatile();
+        if (shouldJump)
+            JumpIfMoveFailed(7, move, GetBattleMoveType(move), failInstr);
+    }
+    return affected;
+}
 
     if (!gSpecialStatuses[battlerAtk].multiHitOn)
         return FALSE;
@@ -1389,8 +1405,11 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
         gBattleStruct->battlerState[gBattlerAttacker].stompingTantrumTimer = 2;
     }
 
-    if (calcSpreadMove)
-        gBattleStruct->calculatedSpreadMoveAccuracy = TRUE;
+        if (numTargets == numMisses)
+        {
+            SetOrClearRageVolatile();
+            gBattleStruct->battlerState[gBattlerAttacker].stompingTantrumTimer = 2;
+        }
 
     if (gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_MISSED)
     {

@@ -715,7 +715,7 @@
 	.endm
 
 	.macro setfieldweather
-	.byte B_SCR_OP_SETFIELDWEATHER
+	.byte 0x7d
 	.endm
 
 	.macro setreflect

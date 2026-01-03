@@ -1159,7 +1159,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
     bool32 isBattle1v1 = IsBattle1v1();
     bool32 hasTwoOpponents = HasTwoOpponents(battlerAtk);
     bool32 hasPartner = HasPartner(battlerAtk);
-    u32 weather;
+    u32 weather = AI_GetWeather();
     u32 predictedMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
     u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
     enum Ability abilityAtk = aiData->abilities[battlerAtk];
@@ -1394,27 +1394,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
     // heal block check
     if (gBattleMons[battlerAtk].volatiles.healBlock && IsHealBlockPreventingMove(battlerAtk, move))
         return 0; // Can't even select heal blocked move
-
-    if (IsExplosionMove(move))
-    {
-        if (!aiData->shouldConsiderExplosion)
-            ADJUST_SCORE(-5);
-        if (effectiveness == UQ_4_12(0.0))
-        {
-            ADJUST_SCORE(-10);
-        }
-        else if (IsAbilityOnField(ABILITY_DAMP) && !DoesBattlerIgnoreAbilityChecks(battlerAtk, aiData->abilities[battlerAtk], move))
-        {
-            ADJUST_SCORE(-10);
-        }
-        else if (CountUsablePartyMons(battlerAtk) == 0 && LAST_MON_PREFERS_NOT_SACRIFICE)
-        {
-            if (CountUsablePartyMons(battlerDef) != 0)
-                ADJUST_SCORE(-10);
-            else
-                ADJUST_SCORE(-1);
-        }
-    }
 
     if (IsExplosionMove(move))
     {
@@ -2023,13 +2002,6 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
                     ADJUST_SCORE(-10);
             }
             break;
-        case EFFECT_WEATHER_AND_SWITCH:
-            if (CountUsablePartyMons(battlerAtk) == 0)
-            {
-                ADJUST_SCORE(-10);
-                break;
-            }
-            // fallthrough
         case EFFECT_WEATHER:
             switch (GetMoveWeatherType(move))
             {
@@ -2085,6 +2057,13 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
                 ADJUST_SCORE(-6);
             break;
         case EFFECT_HIT_ESCAPE:
+            break;
+        case EFFECT_WEATHER_AND_SWITCH:
+            if (CountUsablePartyMons(battlerAtk) == 0)
+                ADJUST_SCORE(-10);
+            else if (weather & (B_WEATHER_ICY_ANY | B_WEATHER_PRIMAL_ANY)
+             || (HasPartner(battlerAtk) && AreMovesEquivalent(battlerAtk, BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove)))
+                ADJUST_SCORE(-8);
             break;
         case EFFECT_BELLY_DRUM:
         case EFFECT_FILLET_AWAY:
@@ -4736,7 +4715,7 @@ static s32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, enum Move move
         //fallthrough
     case EFFECT_HIT_ESCAPE:
     case EFFECT_PARTING_SHOT:
-    case EFFECT_CHILLY_RECEPTION:
+    case EFFECT_WEATHER_AND_SWITCH:
         switch (ShouldPivot(battlerAtk, battlerDef, move))
         {
         case DONT_PIVOT:
@@ -6880,7 +6859,7 @@ static s32 AI_PredictSwitch(u32 battlerAtk, u32 battlerDef, enum Move move, s32 
     case EFFECT_TELEPORT:
     case EFFECT_HIT_ESCAPE:
     case EFFECT_PARTING_SHOT:
-    case EFFECT_CHILLY_RECEPTION:
+    case EFFECT_WEATHER_AND_SWITCH:
     case EFFECT_BOLT_BEAK:
     case EFFECT_LIGHT_SCREEN:
     case EFFECT_REFLECT:

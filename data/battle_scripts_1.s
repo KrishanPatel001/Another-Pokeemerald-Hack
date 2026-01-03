@@ -221,49 +221,6 @@ BattleScript_SyrupBombEndTurn::
 BattleScript_SyrupBombTurnDmgEnd:
 	end2
 
-BattleScript_EffectChillyReception::
-	printstring STRINGID_PKMNTELLCHILLINGRECEPTIONJOKE
-	waitmessage B_WAIT_TIME_LONG
-	attackcanceler
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_EffectChillyReceptionBlockedByPrimalSun
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_EffectChillyReceptionBlockedByPrimalRain
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_EffectChillyReceptionBlockedByStrongWinds
-	call BattleScript_EffectChillyReceptionPlayAnimation
-    #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_HAIL
-	setfieldweather BATTLE_WEATHER_HAIL
-    #else
-	setfieldweather BATTLE_WEATHER_SNOW
-    #endif
-	call BattleScript_MoveWeatherChangeRet
-	goto BattleScript_MoveSwitch
-BattleScript_EffectChillyReceptionPlayAnimation:
-	attackanimation
-	waitanimation
-	return
-BattleScript_EffectChillyReceptionBlockedByPrimalSun:
-	call BattleScript_EffectChillyReceptionTrySwitchWeatherFailed
-	call BattleScript_ExtremelyHarshSunlightWasNotLessened
-	goto BattleScript_MoveSwitch
-BattleScript_EffectChillyReceptionBlockedByPrimalRain:
-	call BattleScript_EffectChillyReceptionTrySwitchWeatherFailed
-	call BattleScript_NoReliefFromHeavyRain
-	goto BattleScript_MoveSwitch
-BattleScript_EffectChillyReceptionBlockedByStrongWinds:
-	call BattleScript_EffectChillyReceptionTrySwitchWeatherFailed
-	call BattleScript_MysteriousAirCurrentBlowsOn
-	goto BattleScript_MoveSwitch
-BattleScript_EffectChillyReceptionTrySwitchWeatherFailed:
-	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
-	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ButItFailed
-	call BattleScript_EffectChillyReceptionPlayAnimation
-	return
-
-BattleScript_CheckPrimalWeather:
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
-	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
-	return
-
 BattleScript_MoveSwitchPursuitEnd:
 	call BattleScript_MoveSwitchPursuitRet
 	end
@@ -3310,12 +3267,6 @@ BattleScript_PerishSongNotAffected:
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_PerishSongLoopIncrement
 
-BattleScript_EffectSandstorm::
-	attackcanceler
-	call BattleScript_CheckPrimalWeather
-	setfieldweather BATTLE_WEATHER_SANDSTORM
-	goto BattleScript_MoveWeatherChange
-
 BattleScript_EffectSwagger::
 	attackcanceler
 	jumpifsubstituteblocks BattleScript_MakeMoveMissed
@@ -3429,22 +3380,18 @@ BattleScript_EffectShoreUp::
 
 BattleScript_EffectWeather::
 	attackcanceler
-BattleScript_EffectWeatherSetWeather:
 	setfieldweather
 	attackanimation
 	waitanimation
 	call BattleScript_MoveWeatherChangeRet
 	goto BattleScript_MoveEnd
 
-BattleScript_ChillyReceptionMessage::
+BattleScript_EffectWeatherAndSwitch::
 	printstring STRINGID_PKMNTELLCHILLINGRECEPTIONJOKE
 	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_EffectWeatherAndSwitch::
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_EffectWeather
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_EffectWeather
 	attackcanceler
-	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_EffectWeatherSetWeather
-	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_EffectWeatherSetWeather
 	setfieldweather
 	clearmoveresultflags MOVE_RESULT_NO_EFFECT
 	attackanimation
@@ -3452,6 +3399,17 @@ BattleScript_EffectWeatherAndSwitch::
 	call BattleScript_MoveWeatherChangeRet
 	moveendall
 	goto BattleScript_MoveSwitch
+
+BattleScript_MoveWeatherChangeRet::
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_FailOnPrimalWeather::
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	return
 
 BattleScript_MoveWeatherChangeRet::
 	printfromtable gMoveWeatherChangeStringIds
@@ -6117,15 +6075,6 @@ BattleScript_ItemSteal::
 	tryactivateabilitywithabilityshield BS_ATTACKER, FALSE
 	return
 
-BattleScript_DrizzleActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNMADEITRAIN
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
 BattleScript_AbilityRaisesDefenderStat::
 	pause B_WAIT_TIME_SHORT
 	statbuffchange BS_TARGET, STAT_CHANGE_ONLY_CHECKING, BattleScript_AbilityCantRaiseDefenderStat
@@ -6304,24 +6253,6 @@ BattleScript_HealerActivates::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
-BattleScript_SandstreamActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNSXWHIPPEDUPSANDSTORM
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
-BattleScript_SandSpitActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_ASANDSTORMKICKEDUP
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
 BattleScript_ShedSkinActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_PKMNSXCUREDYPROBLEM
@@ -6447,46 +6378,11 @@ BattleScript_SupersweetSyrupWontDecrease:
 	printstring STRINGID_STATSWONTDECREASE
 	goto BattleScript_SupersweetSyrupEffect_WaitString
 
-BattleScript_DroughtActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNSXINTENSIFIEDSUN
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
-BattleScript_DesolateLandActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_EXTREMELYHARSHSUNLIGHT
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
 BattleScript_PrimalWeatherBlocksMove::
 	pause B_WAIT_TIME_SHORT
 	printfromtable gPrimalWeatherBlocksStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_PrimordialSeaActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_HEAVYRAIN
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
-BattleScript_DeltaStreamActivates::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_MYSTERIOUSAIRCURRENT
-	waitstate
-	playanimation BS_ATTACKER, B_ANIM_STRONG_WINDS
-	return
 
 BattleScript_ProtosynthesisActivates::
 	call BattleScript_AbilityPopUpScripting
@@ -6591,24 +6487,6 @@ BattleScript_MimicryActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_BATTLERTYPECHANGEDTO
 	waitmessage B_WAIT_TIME_SHORT
-	return
-
-BattleScript_SnowWarningActivatesHail::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_SNOWWARNINGHAIL
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
-	return
-
-BattleScript_SnowWarningActivatesSnow::
-	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_SNOWWARNINGSNOW
-	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_SNOW_CONTINUES
-	call BattleScript_ActivateWeatherAbilities
 	return
 
 BattleScript_ActivateTerrainEffects:

@@ -748,7 +748,13 @@ static inline u32 GetMoveWeatherType(enum Move move)
     return gMovesInfo[move].argument.overwriteAbility;
 }
 
-static inline const struct AdditionalEffect *GetMoveAdditionalEffectById(enum Move moveId, u32 effect)
+static inline u32 GetMoveWeatherType(u32 move)
+{
+    assertf(gMovesInfo[move].effect == EFFECT_WEATHER || gMovesInfo[move].effect == EFFECT_WEATHER_AND_SWITCH, "not a move that sets weather: %S", gMovesInfo[move].name);
+    return gMovesInfo[SanitizeMoveId(move)].argument.weatherType;
+}
+
+static inline const struct AdditionalEffect *GetMoveAdditionalEffectById(u32 moveId, u32 effect)
 {
     return &gMovesInfo[SanitizeMoveId(moveId)].additionalEffects[effect];
 }

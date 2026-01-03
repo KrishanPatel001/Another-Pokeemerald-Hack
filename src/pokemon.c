@@ -1723,7 +1723,7 @@ u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, enum Move move)
     s32 i;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        enum Move existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
+        enum Move existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, NULL);
         if (existingMove == MOVE_NONE)
         {
             u32 pp = GetMovePP(move);
@@ -1839,48 +1839,10 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon) //Credit: AsparagusEdua
     }
 }
 
-void GiveMonDefaultMove(struct Pokemon *mon, u32 slot)
-{
-    GiveBoxMonDefaultMove(&mon->box, slot);
-}
-
-void GiveBoxMonDefaultMove(struct BoxPokemon *boxMon, u32 slot)
-{
-    enum Move move = MOVE_NONE;
-    u32 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
-    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-    s32 level = GetLevelFromBoxMonExp(boxMon);
-    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-    {
-        s32 j;
-        bool32 alreadyKnown = FALSE;
-
-        if (learnset[i].level > level)
-            break;
-        if (learnset[i].level == 0)
-            continue;
-
-        for (j = 0; j < slot; j++)
-        {
-            if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + j) == learnset[i].move)
-            {
-                alreadyKnown = TRUE;
-                break;
-            }
-        }
-        if (!alreadyKnown)
-            move = learnset[i].move;
-    }
-
-    SetBoxMonData(boxMon, MON_DATA_MOVE1 + slot, &move);
-    u32 pp = GetMovePP(move);
-    SetBoxMonData(boxMon, MON_DATA_PP1 + slot, &pp);
-}
-
 enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u32 level)
 {
     enum Move retVal = MOVE_NONE;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
     // since you can learn more than one move per level
@@ -3969,9 +3931,9 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                             {
                                 enum Move move;
                                 u32 ppBonus;
-                                dataUnsigned = GetMonData(mon, MON_DATA_PP1 + temp2);
-                                move = GetMonData(mon, MON_DATA_MOVE1 + temp2);
-                                ppBonus = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), temp2);
+                                dataUnsigned = GetMonData(mon, MON_DATA_PP1 + temp2, NULL);
+                                move = GetMonData(mon, MON_DATA_MOVE1 + temp2, NULL);
+                                ppBonus = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), temp2);
                                 if (dataUnsigned != ppBonus)
                                 {
                                     dataUnsigned += itemEffect[itemEffectParam];
@@ -3987,9 +3949,9 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                         {
                             // Heal PP for one move
                             enum Move move;
-                            dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex);
-                            move = GetMonData(mon, MON_DATA_MOVE1 + moveIndex);
-                            u32 ppBonus = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), moveIndex);
+                            dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex, NULL);
+                            move = GetMonData(mon, MON_DATA_MOVE1 + moveIndex, NULL);
+                            u32 ppBonus = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                             if (dataUnsigned != ppBonus)
                             {
                                 dataUnsigned += itemEffect[itemEffectParam++];
@@ -5424,7 +5386,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
-u8 CanLearnTeachableMove(u16 species, u16 move)
+u8 CanLearnTeachableMove(u16 species, enum Move move)
 {
     const u16 *teachableLearnset = GetSpeciesTeachableLearnset(species);
     if (species == SPECIES_EGG)
@@ -5572,7 +5534,7 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
     if (!P_TM_MOVES_RELEARNER)
         return 0;
 
-    u32 learnedMoves[MAX_MON_MOVES] = {0};
+    enum Move learnedMoves[MAX_MON_MOVES] = {MOVE_NONE};
     u32 numMoves = 0;
     u32 species = GetMonData(mon, MON_DATA_SPECIES);
     u16 allMoves[NUM_ALL_MACHINES];
@@ -5581,7 +5543,7 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
     for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
     {
         enum TMHMItemId item = GetTMHMItemId(i + 1);
-        u32 move = GetTMHMMoveId(i + 1);
+        enum Move move = GetTMHMMoveId(i + 1);
 
         if (move == MOVE_NONE)
             continue;
@@ -5635,7 +5597,7 @@ u32 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
 
     for (u32 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
     {
-        u32 move = gTutorMoves[i];
+        enum Move move = gTutorMoves[i];
 
         if (!CanLearnTeachableMove(species, move))
             continue;
@@ -5666,7 +5628,7 @@ u32 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves)
     return numMoves;
 }
 
-static inline bool32 DoesMonHaveMove(const u16 *moves, u16 move)
+static inline bool32 DoesMonHaveMove(const u16 *moves, enum Move move)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -5751,7 +5713,7 @@ bool32 HasRelearnerTMMoves(struct Pokemon *mon)
     if (species == SPECIES_EGG)
         return FALSE;
 
-    u16 learnedMoves[MAX_MON_MOVES];
+    enum Move learnedMoves[MAX_MON_MOVES];
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
@@ -5759,7 +5721,7 @@ bool32 HasRelearnerTMMoves(struct Pokemon *mon)
     for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
     {
         enum TMHMItemId item = GetTMHMItemId(i + 1);
-        u32 move = GetTMHMMoveId(i + 1);
+        enum Move move = GetTMHMMoveId(i + 1);
 
         if (move == MOVE_NONE)
             continue;
@@ -5795,7 +5757,7 @@ bool32 HasRelearnerTutorMoves(struct Pokemon *mon)
 
     for (u32 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
     {
-        u32 move = gTutorMoves[i];
+        enum Move move = gTutorMoves[i];
 
         if (!CanLearnTeachableMove(species, move))
             continue;
@@ -5821,8 +5783,8 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 {
-    u16 learnedMoves[MAX_MON_MOVES];
-    u16 moves[MAX_LEVEL_UP_MOVES];
+    enum Move learnedMoves[MAX_MON_MOVES];
+    enum Move moves[MAX_LEVEL_UP_MOVES];
     u8 numMoves = 0;
     u16 species;
     u8 level;

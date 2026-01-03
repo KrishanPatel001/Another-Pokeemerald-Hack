@@ -22,7 +22,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static enum MaxPowerTier GetMaxPowerTier(enum Move move);
+static u32 GetMaxPowerTier(enum Move move);
 
 struct GMaxMove
 {
@@ -353,7 +353,7 @@ u32 GetMaxMovePower(enum Move move)
     }
 }
 
-static enum MaxPowerTier GetMaxPowerTier(enum Move move)
+static u32 GetMaxPowerTier(enum Move move)
 {
     u32 strikeCount = GetMoveStrikeCount(move);
     if (strikeCount >= 2 && strikeCount <= 5)

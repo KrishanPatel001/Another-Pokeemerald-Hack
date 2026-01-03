@@ -118,8 +118,8 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves against semi-in
 {
     enum Move move = MOVE_NONE;
     bool32 shouldWork = FALSE;
-    PARAMETRIZE { move = MOVE_SOLAR_BEAM; shouldWork = FALSE; }
-    PARAMETRIZE { move = MOVE_FLY; shouldWork = TRUE; }
+    PARAMETRIZE { move = MOVE_SOLAR_BEAM; shouldWork = FALSE;}
+    PARAMETRIZE { move = MOVE_FLY; shouldWork = TRUE;}
     GIVEN {
         WITH_CONFIG(CONFIG_TOXIC_NEVER_MISS, GEN_6);
         ASSUME(IsSpeciesOfType(SPECIES_SHROODLE, TYPE_POISON));

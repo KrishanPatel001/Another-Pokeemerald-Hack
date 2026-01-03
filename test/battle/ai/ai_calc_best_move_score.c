@@ -145,7 +145,7 @@ AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases o
 
 AI_SINGLE_BATTLE_TEST("Clangorous Soul - gets best move boost when player does under 67 pct damage")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_SOLAR_BEAM; }
     PARAMETRIZE { move = MOVE_AIR_SLASH; }
     ASSUME(GetMovePower(MOVE_SOLAR_BEAM) == 120);
@@ -258,7 +258,7 @@ AI_SINGLE_BATTLE_TEST("HasMoveThatChangesKOThreshold - AI should not see self-ta
 
 AI_SINGLE_BATTLE_TEST("Fillet Away AI handling")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_SCALD; }
     PARAMETRIZE { move = MOVE_THUNDERBOLT; }
     ASSUME(GetMovePower(MOVE_THUNDERBOLT) == (B_UPDATED_MOVE_DATA >= GEN_6 ? 90 : 95));

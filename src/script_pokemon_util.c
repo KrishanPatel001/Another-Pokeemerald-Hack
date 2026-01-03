@@ -515,7 +515,12 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, e
     return GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
 }
 
-#define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
+u32 ScriptGiveMon(u16 species, u8 level, u16 item)
+{
+    u8 evs[NUM_STATS]        = {0, 0, 0, 0, 0, 0};
+    u8 ivs[NUM_STATS]        = {MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1,   // We pass "MAX_PER_STAT_IVS + 1" here to ensure that
+                                MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
+    enum Move moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
 #define ADD_MOVE_IF_NOT_DEFAULT(i, move)               \
     if (move && move != MOVE_DEFAULT)                  \
@@ -594,32 +599,25 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
             ivs[selectedIvs[i]] = MAX_PER_STAT_IVS;
         }
     }
-
-    enum Move move1          = PARSE_FLAG(17, MOVE_DEFAULT);
-    enum Move move2          = PARSE_FLAG(18, MOVE_DEFAULT);
-    enum Move move3          = PARSE_FLAG(19, MOVE_DEFAULT);
-    enum Move move4          = PARSE_FLAG(20, MOVE_DEFAULT);
+    hpIv                     = PARSE_FLAG(11, hpIv);
+    atkIv                    = PARSE_FLAG(12, atkIv);
+    defIv                    = PARSE_FLAG(13, defIv);
+    speedIv                  = PARSE_FLAG(14, speedIv);
+    spAtkIv                  = PARSE_FLAG(15, spAtkIv);
+    spDefIv                  = PARSE_FLAG(16, spDefIv);
+    enum Move move1          = PARSE_FLAG(17, MOVE_NONE);
+    enum Move move2          = PARSE_FLAG(18, MOVE_NONE);
+    enum Move move3          = PARSE_FLAG(19, MOVE_NONE);
+    enum Move move4          = PARSE_FLAG(20, MOVE_NONE);
     enum ShinyMode shinyMode = PARSE_FLAG(21, SHINY_MODE_RANDOM);
     bool8 gmaxFactor         = PARSE_FLAG(22, FALSE);
     enum Type teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
     u8 dmaxLevel             = PARSE_FLAG(24, 0);
 
-    enum Move moves[MAX_MON_MOVES];
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        moves[i] = MOVE_NONE;
+    u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
+    u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
+    enum Move moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
 
-    i = 0;
-    //Reorder moves to put non-default moves first, default moves second and empty moves last
-    ADD_MOVE_IF_NOT_DEFAULT(i, move1)
-    ADD_MOVE_IF_NOT_DEFAULT(i, move2)
-    ADD_MOVE_IF_NOT_DEFAULT(i, move3)
-    ADD_MOVE_IF_NOT_DEFAULT(i, move4)
-    ADD_MOVE_IF_DEFAULT(i, move1)
-    ADD_MOVE_IF_DEFAULT(i, move2)
-    ADD_MOVE_IF_DEFAULT(i, move3)
-    ADD_MOVE_IF_DEFAULT(i, move4)
-
-    enum GeneratedMonOrigin origin;
     if (side == 0)
     {
         Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);

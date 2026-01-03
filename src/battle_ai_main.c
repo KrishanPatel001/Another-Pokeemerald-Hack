@@ -596,7 +596,7 @@ void RecordMovesBasedOnStab(u32 battler)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        u32 playerMove = gBattleMons[battler].moves[moveIndex];
+        enum Move playerMove = gBattleMons[battler].moves[moveIndex];
         if (IsSpeciesOfType(gBattleMons[battler].species, GetMoveType(playerMove)) && GetMovePower(playerMove != 0))
             RecordKnownMove(battler, playerMove);
     }
@@ -606,7 +606,7 @@ void RecordStatusMoves(u32 battler)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        u32 playerMove = gBattleMons[battler].moves[moveIndex];
+        enum Move playerMove = gBattleMons[battler].moves[moveIndex];
         if (ShouldRecordStatusMove(playerMove))
             RecordKnownMove(battler, playerMove);
     }
@@ -657,8 +657,8 @@ static u32 Ai_SetMoveAccuracy(struct AiLogicData *aiData, u32 battlerAtk, u32 ba
 
 void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef, u32 weather, u32 fieldStatus)
 {
-    u32 move;
-    u16 *moves = GetMovesArray(battlerAtk);
+    enum Move move;
+    enum Move *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
@@ -1160,7 +1160,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
     bool32 hasTwoOpponents = HasTwoOpponents(battlerAtk);
     bool32 hasPartner = HasPartner(battlerAtk);
     u32 weather = AI_GetWeather();
-    u32 predictedMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
+    enum Move predictedMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
     u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
     enum Ability abilityAtk = aiData->abilities[battlerAtk];
     enum Ability abilityDef = aiData->abilities[battlerDef];
@@ -3167,12 +3167,12 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
     u32 battlerAtkPartner = BATTLE_PARTNER(battlerAtk);
     struct AiLogicData *aiData = gAiLogicData;
     enum Ability atkPartnerAbility = aiData->abilities[BATTLE_PARTNER(battlerAtk)];
-    enum HoldEffect atkPartnerHoldEffect = aiData->holdEffects[BATTLE_PARTNER(battlerAtk)];
+    u32 atkPartnerHoldEffect = aiData->holdEffects[BATTLE_PARTNER(battlerAtk)];
     enum BattleMoveEffects partnerEffect = GetMoveEffect(aiData->partnerMove);
     bool32 partnerProtecting = IsAllyProtectingFromMove(battlerAtk, move, aiData->partnerMove) && !MoveIgnoresProtect(move);
     bool32 partnerHasBadAbility = (gAbilitiesInfo[atkPartnerAbility].aiRating < 0);
     enum Move predictedMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
-    enum Move predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
+    u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
 
     SetTypeBeforeUsingMove(move, battlerAtk);
     moveType = GetBattleMoveType(move);
@@ -3783,7 +3783,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
                 break;
             case EFFECT_INSTRUCT:
                 {
-                    u32 instructedMove = aiData->lastUsedMove[battlerAtkPartner];
+                    enum Move instructedMove = aiData->lastUsedMove[battlerAtkPartner];
                     if (AI_IsFaster(battlerAtk, battlerAtkPartner, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY))
                         instructedMove = aiData->partnerMove;
 
@@ -4021,7 +4021,7 @@ static enum MoveComparisonResult CompareResistBerryEffects(u32 battlerAtk, u32 b
     return MOVE_NEUTRAL_COMPARISON;
 }
 
-static enum MoveComparisonResult CompareMoveSelfSacrifice(u32 battlerAtk, u32 battlerDef, u16 move1, u16 move2)
+static enum MoveComparisonResult CompareMoveSelfSacrifice(u32 battlerAtk, u32 battlerDef, enum Move move1, enum Move move2)
 {
     bool32 selfSacrifice1 = IsSelfSacrificeEffect(move1);
     bool32 selfSacrifice2 = IsSelfSacrificeEffect(move2);
@@ -4033,7 +4033,7 @@ static enum MoveComparisonResult CompareMoveSelfSacrifice(u32 battlerAtk, u32 ba
     return MOVE_NEUTRAL_COMPARISON;
 }
 
-static enum MoveComparisonResult CompareMoveTwoTurnEffect(u32 battlerAtk, u16 move1, u16 move2)
+static enum MoveComparisonResult CompareMoveTwoTurnEffect(u32 battlerAtk, enum Move move1, enum Move move2)
 {
     bool32 twoTurn1 = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, move1);
     bool32 twoTurn2 = IsTwoTurnNotSemiInvulnerableMove(battlerAtk, move2);
@@ -4045,7 +4045,7 @@ static enum MoveComparisonResult CompareMoveTwoTurnEffect(u32 battlerAtk, u16 mo
     return MOVE_NEUTRAL_COMPARISON;
 }
 
-static inline bool32 ShouldUseSpreadDamageMove(u32 battlerAtk, u32 move, u32 moveIndex, u32 hitsToFaintOpposingBattler)
+static inline bool32 ShouldUseSpreadDamageMove(u32 battlerAtk, enum Move move, u32 moveIndex, u32 hitsToFaintOpposingBattler)
 {
     u32 partnerBattler = BATTLE_PARTNER(battlerAtk);
     u32 noOfHitsToFaintPartner = GetNoOfHitsToKOBattler(battlerAtk, partnerBattler, moveIndex, AI_ATTACKING, CONSIDER_ENDURE);
@@ -4078,7 +4078,7 @@ static void AI_CompareDamagingMoves(u32 battlerAtk, u32 battlerDef)
     bool32 multipleBestMoves = FALSE;
     s32 noOfHits[MAX_MON_MOVES];
     s32 leastHits = 1000;
-    u16 *moves = GetMovesArray(battlerAtk);
+    enum Move *moves = GetMovesArray(battlerAtk);
     u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
     bool32 moveIsFaster[MAX_MON_MOVES];
 
@@ -4282,7 +4282,7 @@ static s32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, enum Move move
 
     s32 score = 0;
     enum Move predictedMove = GetIncomingMove(battlerAtk, battlerDef, aiData);
-    enum Move predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, aiData);
+    u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, aiData);
     enum Type predictedType = GetMoveType(predictedMove);
     u32 predictedMoveSlot = GetMoveSlot(GetMovesArray(battlerDef), predictedMove);
     bool32 isBattle1v1 = IsBattle1v1();
@@ -5853,7 +5853,7 @@ static s32 AI_CalcAdditionalEffectScore(u32 battlerAtk, u32 battlerDef, enum Mov
     enum Move predictedMove = GetIncomingMove(battlerAtk, battlerDef, aiData);
     bool32 hasPartner = HasPartner(battlerAtk);
     u32 additionalEffectCount = GetMoveAdditionalEffectCount(move);
-    u32 defBestMoves[MAX_MON_MOVES] = {0};
+    enum Move defBestMoves[MAX_MON_MOVES] = {MOVE_NONE};
 
     // Set battlerDef best dmg moves
     GetBestDmgMovesFromBattler(battlerDef, battlerAtk, AI_DEFENDING, defBestMoves);

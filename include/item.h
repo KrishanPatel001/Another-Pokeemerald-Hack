@@ -128,7 +128,7 @@ static inline enum TMHMIndex GetItemTMHMIndex(enum Item item)
     }
 }
 
-static inline enum Move GetItemTMHMMoveId(enum Item item)
+static inline enum Move GetItemTMHMMoveId(u16 item)
 {
     switch (item)
     {
@@ -145,7 +145,7 @@ static inline enum Move GetItemTMHMMoveId(enum Item item)
     }
 }
 
-static inline enum Item GetTMHMItemIdFromMoveId(enum Move move)
+static inline enum TMHMItemId GetTMHMItemIdFromMoveId(enum Move move)
 {
     switch (move)
     {

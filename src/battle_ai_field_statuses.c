@@ -50,10 +50,10 @@ static bool32 HasBattlerTerrainBoostMove(u32 battler, u32 terrain)
     if (!IsBattlerAlive(battler))
         return FALSE;
 
-    u16 *moves = GetMovesArray(battler);
+    enum Move *moves = GetMovesArray(battler);
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        u32 move = moves[moveIndex];
+        enum Move move = moves[moveIndex];
         if (GetMoveEffect(move) == EFFECT_TERRAIN_BOOST
          && GetMoveTerrainBoost_Terrain(move) == terrain)
             return TRUE;
@@ -217,7 +217,7 @@ static bool32 IsLightSensitiveMove(enum Move move)
 
 static bool32 HasLightSensitiveMove(u32 battler)
 {
-    u16 *moves = GetMovesArray(battler);
+    enum Move *moves = GetMovesArray(battler);
 
     for (u32 battlerIndex = 0; battlerIndex < MAX_MON_MOVES; battlerIndex++)
     {
@@ -491,10 +491,10 @@ static enum FieldEffectOutcome BenefitsFromTrickRoom(u32 battler)
     // First checking if we have enough priority for one pokemon to disregard Trick Room entirely.
     if (!(gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN))
     {
-        u16* aiMoves = GetMovesArray(battler);
+        enum Move *aiMoves = GetMovesArray(battler);
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
-            u16 move = aiMoves[moveIndex];
+            enum Move move = aiMoves[moveIndex];
             if (GetBattleMovePriority(battler, gAiLogicData->abilities[battler], move) > 0 && !(GetMovePriority(move) > 0 && IsBattleMoveStatus(move)))
             {
                 return FIELD_EFFECT_POSITIVE;
@@ -509,7 +509,7 @@ static enum FieldEffectOutcome BenefitsFromTrickRoom(u32 battler)
     return FIELD_EFFECT_POSITIVE;
 }
 
-s32 CalcWeatherScore(u32 battlerAtk, u32 battlerDef, u32 move, struct AiLogicData *aiData)
+s32 CalcWeatherScore(u32 battlerAtk, u32 battlerDef, enum Move move, struct AiLogicData *aiData)
 {
     s32 score = 0;
 

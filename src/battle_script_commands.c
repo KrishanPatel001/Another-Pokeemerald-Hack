@@ -330,7 +330,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
 static void RemoveAllWeather(void);
 static void RemoveAllTerrains(void);
 static bool32 CanAbilityPreventStatLoss(enum Ability abilityDef);
-static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u8 *failInstr, u16 move);
+static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u8 *failInstr, enum Move move);
 static void ResetValuesForCalledMove(void);
 static bool32 CanAbilityShieldActivateForBattler(u32 battler);
 
@@ -945,7 +945,7 @@ static const struct PickupItem sPickupTable[] =
 
 #undef _
 
-static bool32 NoTargetPresent(u8 battler, u32 move)
+static bool32 NoTargetPresent(u8 battler, enum Move move)
 {
     if (!IsBattlerAlive(gBattlerTarget))
         gBattlerTarget = GetBattleMoveTarget(move, TARGET_NONE);
@@ -972,7 +972,7 @@ static bool32 NoTargetPresent(u8 battler, u32 move)
     return FALSE;
 }
 
-bool32 ProteanTryChangeType(u32 battler, enum Ability ability, u32 move, enum Type moveType)
+bool32 ProteanTryChangeType(u32 battler, enum Ability ability, enum Move move, enum Type moveType)
 {
       if ((ability == ABILITY_PROTEAN || ability == ABILITY_LIBERO)
          && !gBattleMons[gBattlerAttacker].volatiles.usedProteanLibero
@@ -987,7 +987,7 @@ bool32 ProteanTryChangeType(u32 battler, enum Ability ability, u32 move, enum Ty
     return FALSE;
 }
 
-bool32 IsMoveNotAllowedInSkyBattles(u32 move)
+bool32 IsMoveNotAllowedInSkyBattles(enum Move move)
 {
     return (gBattleStruct->isSkyBattle && IsMoveSkyBattleBanned(gCurrentMove));
 }
@@ -1220,7 +1220,7 @@ static void Cmd_attackcanceler(void)
     }
 }
 
-static void JumpIfMoveFailed(u32 adder, u32 move, u32 moveType, const u8 *failInstr)
+static void JumpIfMoveFailed(u32 adder, enum Move move, enum Type moveType, const u8 *failInstr)
 {
     if (gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
     {
@@ -1264,7 +1264,7 @@ static void SetOrClearRageVolatile(void)
         gBattleMons[gBattlerAttacker].volatiles.rage = FALSE;
 }
 
-static bool32 JumpIfMoveAffectedByProtect(u32 move, u32 battler, u32 shouldJump, const u8 *failInstr)
+static bool32 JumpIfMoveAffectedByProtect(enum Move move, u32 battler, u32 shouldJump, const u8 *failInstr)
 {
     bool32 affected = IsBattlerProtected(gBattlerAttacker, battler, move);
     if (affected)
@@ -1277,8 +1277,10 @@ static bool32 JumpIfMoveAffectedByProtect(u32 move, u32 battler, u32 shouldJump,
     return affected;
 }
 
-    if (!gSpecialStatuses[battlerAtk].multiHitOn)
-        return FALSE;
+static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u8 *failInstr, enum Move move)
+{
+    if (move == ACC_CURR_MOVE)
+        move = gCurrentMove;
 
     if (move == NO_ACC_CALC_CHECK_LOCK_ON)
     {
@@ -7387,7 +7389,7 @@ u32 IsAbilityStatusProtected(u32 battler, enum Ability ability)
         || IsFlowerVeilProtected(battler);
 }
 
-static bool32 IsRototillerAffected(u32 battler, u32 move)
+static bool32 IsRototillerAffected(u32 battler, enum Move move)
 {
     if (!IsBattlerAlive(battler))
         return FALSE;
@@ -12288,7 +12290,7 @@ static bool32 CriticalCapture(u32 odds)
     return FALSE;
 }
 
-bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)
+bool32 IsMoveAffectedByParentalBond(enum Move move, u32 battler)
 {
     if (move != MOVE_NONE && move != MOVE_UNAVAILABLE && move != MOVE_STRUGGLE
         && !IsMoveParentalBondBanned(move)

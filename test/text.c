@@ -69,8 +69,7 @@ TEST("Move names fit on TMs & HMs Bag Screen")
 {
     const u32 fontId = FONT_NARROWER, widthPx = 61;
     enum Move move = MOVE_NONE;
-
-    for (enum TMHMIndex tm = 1; tm <= NUM_ALL_MACHINES; tm++)
+    for (i = 1; i < MOVES_COUNT; i++)
     {
         u32 tmMove = GetTMHMMoveId(tm);
         PARAMETRIZE_LABEL("%S", GetMoveName(tmMove)) { move = tmMove; }

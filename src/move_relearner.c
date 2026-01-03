@@ -838,7 +838,7 @@ static void DoMoveRelearnerMain(void)
             }
             else
             {
-                u16 move;
+                enum Move move;
                 if(gSpecialVar_MonBoxId == 0xFF)
                 {
                     move = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_MOVE1 + sMoveRelearnerStruct->moveSlot);

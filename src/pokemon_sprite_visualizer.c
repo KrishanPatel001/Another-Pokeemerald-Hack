@@ -346,93 +346,31 @@ const u8 gFrontAnimNames[][34] =
     [ANIM_SHAKE_GLOW_PURPLE_SLOW]            = _("SHAKE GLOW PURPLE SLOW"),
 };
 
-#define MOVE_BACKGROUND_NAME_LENGTH 28
-const u8 gMoveBackgroundNames[BG_COUNT][MOVE_BACKGROUND_NAME_LENGTH] =
+const u8 gBattleEnvironmentBackgroundNames[][17] =
 {
-    [BG_NONE]                      = _("None"),
-    [BG_DARK]                      = _("Dark"),
-    [BG_GHOST]                     = _("Ghost"),
-    [BG_PSYCHIC]                   = _("Psychic"),
-    [BG_IMPACT_OPPONENT]           = _("Impact - Opponent"),
-    [BG_IMPACT_PLAYER]             = _("Impact - Player"),
-    [BG_IMPACT_CONTESTS]           = _("Impact - Contests"),
-    [BG_DRILL]                     = _("Drill"),
-    [BG_DRILL_CONTESTS]            = _("Drill - Contests"),
-    [BG_HIGHSPEED_OPPONENT]        = _("High-Speed - Opponent"),
-    [BG_HIGHSPEED_PLAYER]          = _("High-Speed - Player"),
-    [BG_THUNDER]                   = _("Thunder"),
-    [BG_GUILLOTINE_OPPONENT]       = _("Guillotine - Opponent"),
-    [BG_GUILLOTINE_PLAYER]         = _("Guillotine - Player"),
-    [BG_GUILLOTINE_CONTESTS]       = _("Guillotine - Contests"),
-    [BG_ICE]                       = _("Ice"),
-    [BG_COSMIC]                    = _("Cosmic"),
-    [BG_IN_AIR]                    = _("In Air"),
-    [BG_SKY]                       = _("Sky"),
-    [BG_SKY_CONTESTS]              = _("Sky - Contests"),
-    [BG_AURORA]                    = _("Aurora"),
-    [BG_FISSURE]                   = _("Fissure"),
-    [BG_BUG_OPPONENT]              = _("Bug - Opponent"),
-    [BG_BUG_PLAYER]                = _("Bug - Player"),
-    [BG_SOLAR_BEAM_OPPONENT]       = _("Solar Beam - Opponent"),
-    [BG_SOLAR_BEAM_PLAYER]         = _("Solar Beam - Player"),
-    [BG_SOLAR_BEAM_CONTESTS]       = _("Solar Beam - Contests"),
-    [BG_MAGMA_STORM]               = _("Magma Storm"),
-    [BG_GIGA_IMPACT_OPPONENT]      = _("Giga Impact - Opponent"),
-    [BG_GIGA_IMPACT_PLAYER]        = _("Giga Impact - Player"),
-    [BG_GIGA_IMPACT_CONTESTS]      = _("Giga Impact - Contests"),
-    [BG_TRICK_ROOM]                = _("Trick Room"),
-    [BG_ROCK_WRECKER]              = _("Rock Wrecker"),
-    [BG_SPACIAL_REND_OPPONENT]     = _("Spacial Rend - Opponent"),
-    [BG_SPACIAL_REND_PLAYER]       = _("Spacial Rend - Player"),
-    [BG_DARK_VOID]                 = _("Dark Void"),
-    [BG_WATER]                     = _("Water"),
-    [BG_NIGHTMARE]                 = _("Nightmare"),
-    [BG_LEAF_STORM]                = _("Leaf Storm"),
-    [BG_FIRE]                      = _("Fire"),
-    [BG_FIRE_2]                    = _("Fire 2"),
-    [BG_WATER_2]                   = _("Water 2"),
-    [BG_POISON]                    = _("Poison"),
-    [BG_AEROBLAST]                 = _("Aeroblast"),
-    [BG_HURRICANE]                 = _("Hurricane"),
-    [BG_ELECTRIC_TERRAIN]          = _("Electric Terrain"),
-    [BG_GRASSY_TERRAIN]            = _("Grassy Terrain"),
-    [BG_MISTY_TERRAIN]             = _("Misty Terrain"),
-    [BG_PSYCHIC_TERRAIN]           = _("Psychic Terrain"),
-    [BG_FOCUS_BLAST]               = _("Focus Blast"),
-    [BG_GUNK_SHOT]                 = _("Gunk Shot"),
-    [BG_HYDRO_CANNON]              = _("Hydro Cannon"),
-    [BG_WONDER_ROOM]               = _("Wonder Room"),
-    [BG_MAGIC_ROOM]                = _("Magic Room"),
-    [BG_HYPERSPACE_FURY]           = _("Hyperspace Fury"),
-    [BG_BOLT_STRIKE]               = _("Bolt Strike"),
-    [BG_ZMOVE_ACTIVATE]            = _("Z-Move Activate"),
-    [BG_TECTONIC_RAGE]             = _("Tectonic Rage"),
-    [BG_ROCK_FIELD_DAY]            = _("Rock Field - Day"),
-    [BG_ROCK_FIELD_AFTERNOON]      = _("Rock Field - Afternoon"),
-    [BG_ROCK_FIELD_NIGHT]          = _("Rock Field - Night"),
-    [BG_ZMOVE_MOUNTAIN]            = _("Z-Move Mountain"),
-    [BG_NEVERENDING_NIGHTMARE]     = _("Never-Ending Nightmare"),
-    [BG_WATER_PULSE]               = _("Water Pulse"),
-    [BG_INFERNO_OVERDRIVE]         = _("Inferno Overdrive"),
-    [BG_BLOOM_DOOM]                = _("Bloom Doom"),
-    [BG_SHATTERED_PSYCHE]          = _("Shattered Psyche"),
-    [BG_TWINKLE_TACKLE]            = _("Twinkle Tackle"),
-    [BG_BLACK_HOLE_ECLIPSE]        = _("Black Hole Eclipse"),
-    [BG_SOULSTEALING_7STAR_STRIKE] = _("Soul-Stealing 7-Star Strike"),
-    [BG_MALICIOUS_MOONSAULT]       = _("Malicious Moonsault"),
-    [BG_CLANGOROUS_SOULBLAZE]      = _("Clangorous Soulblaze"),
-    [BG_SNUGGLE_FOREVER]           = _("Snuggle Forever"),
-    [BG_MAX_LIGHTNING]             = _("Max Lightning"),
-    [BG_GARBAGE_FALLS]             = _("Garbage Falls"),
-    [BG_HYPER_BEAM]                = _("Hyper Beam"),
-    [BG_DYNAMAX_CANNON]            = _("Dynamax Cannon"),
-    [BG_AURA_SPHERE]               = _("Aura Sphere"),
-    [BG_STEEL_BEAM_OPPONENT]       = _("Steel Beam - Opponent"),
-    [BG_STEEL_BEAM_PLAYER]         = _("Steel Beam - Player"),
-    [BG_CHLOROBLAST]               = _("Chloroblast"),
-    [BG_RAINBOW_PLAYER]            = _("Rainbow - Player"),
-    [BG_RAINBOW_OPPONENT]          = _("Rainbow - Opponent"),
-    [BG_SWAMP]                     = _("Swamp"),
+    [BATTLE_ENVIRONMENT_GRASS]      = _("GRASS           "),
+    [BATTLE_ENVIRONMENT_LONG_GRASS] = _("LONG GRASS      "),
+    [BATTLE_ENVIRONMENT_SAND]       = _("SAND            "),
+    [BATTLE_ENVIRONMENT_UNDERWATER] = _("UNDERWATER      "),
+    [BATTLE_ENVIRONMENT_WATER]      = _("WATER           "),
+    [BATTLE_ENVIRONMENT_POND]       = _("POND            "),
+    [BATTLE_ENVIRONMENT_MOUNTAIN]   = _("MOUNTAIN        "),
+    [BATTLE_ENVIRONMENT_CAVE]       = _("CAVE            "),
+    [BATTLE_ENVIRONMENT_BUILDING]   = _("BUILDING        "),
+    [BATTLE_ENVIRONMENT_PLAIN]      = _("PLAIN           "),
+    [BATTLE_ENVIRONMENT_FRONTIER]   = _("FRONTIER        "),
+    [BATTLE_ENVIRONMENT_GYM]        = _("GYM             "),
+    [BATTLE_ENVIRONMENT_LEADER]     = _("LEADER          "),
+    [BATTLE_ENVIRONMENT_MAGMA]      = _("MAGMA           "),
+    [BATTLE_ENVIRONMENT_AQUA]       = _("AQUA            "),
+    [BATTLE_ENVIRONMENT_SIDNEY]     = _("SIDNEY          "),
+    [BATTLE_ENVIRONMENT_PHOEBE]     = _("PHOEBE          "),
+    [BATTLE_ENVIRONMENT_GLACIA]     = _("GLACIA          "),
+    [BATTLE_ENVIRONMENT_DRAKE]      = _("DRAKE           "),
+    [BATTLE_ENVIRONMENT_CHAMPION]   = _("CHAMPION        "),
+    [BATTLE_ENVIRONMENT_GROUDON]    = _("GROUDON         "),
+    [BATTLE_ENVIRONMENT_KYOGRE]     = _("KYOGRE          "),
+    [BATTLE_ENVIRONMENT_RAYQUAZA]   = _("RAYQUAZA        "),
 };
 
 const u8 sShadowSizeLabels[][4] =
@@ -966,69 +904,45 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer 
 //Battle background functions
 static void LoadBattleBg(enum BattleEnvironments battleEnvironment)
 {
-    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleEnvironment].background.tileset, (void *)(BG_CHAR_ADDR(BACKGROUND_3_CHAR_BASE)));
-    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleEnvironment].background.tilemap, (void *)(BG_SCREEN_ADDR(BACKGROUND_3_MAP_BASE)));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleEnvironment].background.tileset, (void *)(BG_CHAR_ADDR(2)));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleEnvironment].background.tilemap, (void *)(BG_SCREEN_ADDR(26)));
     LoadPalette(gBattleEnvironmentInfo[battleEnvironment].background.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
 }
 
 static void PrintBattleBgName(u8 battleEnvironment)
 {
-    u8 fontId = FONT_SMALL;
-    FillWindowPixelRect(WIN_BOTTOM_RIGHT, PIXEL_FILL(0), 0, 24, 80, gFonts[fontId].maxLetterHeight);
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, gBattleEnvironmentInfo[battleEnvironment].name, 0, 24, 0, NULL);
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
+    u8 fontId = 0;
+    u8 text[30+1];
+
+    StringCopy(text, gBattleEnvironmentBackgroundNames[data->battleEnvironment]);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 0, 24, 0, NULL);
 }
 
 static void UpdateBattleBg(u8 taskId, bool8 increment)
 {
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
 
-    if (increment) {
-        data->battleEnvironment = (data->battleEnvironment + 1) % (BATTLE_ENVIRONMENT_RAYQUAZA + 1); // Can use BATTLE_ENVIRONMENT_COUNT once the remaining environments have sprites
-    }
-    else
+    if (data->battleEnvironment == BATTLE_ENVIRONMENT_GRASS)
     {
-        if (data->battleEnvironment == BATTLE_ENVIRONMENT_GRASS)
+        if (increment)
+            data->battleEnvironment += 1;
+        else
             data->battleEnvironment = BATTLE_ENVIRONMENT_RAYQUAZA;
+    }
+    else if (data->battleEnvironment == BATTLE_ENVIRONMENT_RAYQUAZA)
+    {
+        if (increment)
+            data->battleEnvironment = BATTLE_ENVIRONMENT_GRASS;
         else
             data->battleEnvironment -= 1;
     }
-
-    PrintBattleBgName(data->battleEnvironment);
-    LoadBattleBg(data->battleEnvironment);
-}
-
-//Move background functions
-static void LoadMoveBackground(u8 moveBackground)
-{
-    DecompressDataWithHeaderVram(gBattleAnimBackgroundTable[moveBackground].tilemap, (void *)BG_SCREEN_ADDR(BACKGROUND_3_MAP_BASE));
-    DecompressDataWithHeaderVram(gBattleAnimBackgroundTable[moveBackground].image, (void *)BG_CHAR_ADDR(BACKGROUND_3_CHAR_BASE));
-    LoadPalette(gBattleAnimBackgroundTable[moveBackground].palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
-    //Fill text area with white to avoid overlap with backgrounds
-    CpuFill32(0x11111111, (void *)(BG_CHAR_ADDR(BACKGROUND_1_CHAR_BASE) + TILE_OFFSET_4BPP(1)), TILE_SIZE_4BPP);
-    CpuFill32(0xF001F001, (void *)(BG_SCREEN_ADDR(BACKGROUND_1_MAP_BASE) + sizeof(u16) * 32 * TEXT_AREA_Y), sizeof(u16) * 32 * TEXT_AREA_HEIGHT);
-}
-
-static void PrintMoveBackgroundName(u8 moveBackground)
-{
-    FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
-    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, FONT_SMALL, gMoveBackgroundNames[moveBackground], 0, 0, 0, NULL);
-}
-
-static void UpdateMoveBackground(u8 taskId, bool8 increment)
-{
-    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
-
-    if (increment)
-    {
-        data->moveBackground = (data->moveBackground + 1) % BG_COUNT;
-        if (data->moveBackground == BG_NONE)
-            data->moveBackground = BG_DARK;
-    }
     else
     {
-        data->moveBackground -= 1;
-        if (data->moveBackground == BG_NONE)
-            data->moveBackground = BG_SWAMP;
+        if (increment)
+            data->battleEnvironment += 1;
+        else
+            data->battleEnvironment -= 1;
     }
 
     PrintMoveBackgroundName(data->moveBackground);
@@ -1053,12 +967,7 @@ static void DrawFollowerSprite(struct PokemonSpriteVisualizer *data)
                                                         0);
     gSprites[data->followerspriteId].oam.priority = 0;
 
-    const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, data->isShiny, data->isFemale);
-    gSprites[data->followerspriteId].oam.shape = graphicsInfo->oam->shape;
-    gSprites[data->followerspriteId].oam.size = graphicsInfo->oam->size;
-    gSprites[data->followerspriteId].images = graphicsInfo->images;
-    gSprites[data->followerspriteId].anims = graphicsInfo->anims;
-    gSprites[data->followerspriteId].subspriteTables = graphicsInfo->subspriteTables;
+    LoadBattleBg(data->battleEnvironment);
 }
 
 // *******************************

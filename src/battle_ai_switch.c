@@ -935,7 +935,7 @@ static bool32 CanUseSuperEffectiveMoveAgainstOpponent(u32 battler, u32 opposingB
 {
     enum Move move;
 
-    if (!IsBattlerAlive(battler))
+    if (!IsBattlerAlive(opposingBattler))
         return FALSE;
 
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)

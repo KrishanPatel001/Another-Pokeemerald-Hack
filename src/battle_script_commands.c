@@ -967,6 +967,8 @@ static bool32 NoTargetPresent(u8 battler, enum Move move)
         if (!IsBattlerAlive(gBattlerTarget) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)) && !IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)))
             return TRUE;
         break;
+    default:
+        break;
     }
 
     return FALSE;

@@ -12308,8 +12308,9 @@ static enum Move GetMeFirstMove(void)
 // Used for Protect, Endure and Ally switch
 void TryResetConsecutiveUseCounter(u32 battler)
 {
-    u32 lastMove = gLastResultingMoves[battler];
-    if (lastMove == MOVE_UNAVAILABLE)
+    gBattleMons[battler].volatiles.unburdenActive = FALSE;
+
+    switch (GetBattlerAbility(battler))
     {
     case ABILITY_FLASH_FIRE:
         gBattleMons[battler].volatiles.flashFireBoosted = FALSE;

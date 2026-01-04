@@ -405,7 +405,7 @@ u32 CalcSecondaryEffectChance(u32 battler, enum Ability battlerAbility, const st
 bool32 MoveEffectIsGuaranteed(u32 battler, enum Ability battlerAbility, const struct AdditionalEffect *additionalEffect);
 void GetBattlerTypes(u32 battler, bool32 ignoreTera, enum Type types[static 3]);
 enum Type GetBattlerType(u32 battler, u32 typeIndex, bool32 ignoreTera);
-bool32 CanMonParticipateInSkyBattle(struct Pokemon *mon);
+bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 void RemoveBattlerType(u32 battler, enum Type type);
 enum Type GetBattleMoveType(enum Move move);
 void TryActivateSleepClause(u32 battler, u32 indexInParty);

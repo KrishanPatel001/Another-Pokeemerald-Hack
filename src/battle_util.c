@@ -2043,9 +2043,19 @@ static enum MoveCanceler CancelerRecharge(struct BattleContext *ctx)
     return MOVE_STEP_SUCCESS;
 }
 
-            if (count < 2)
-                return TRUE;
-        }
+static enum MoveCanceler CancelerChillyReception(struct BattleContext *ctx)
+{
+    if (GetMoveEffect(ctx->move) == EFFECT_WEATHER_AND_SWITCH)
+    {
+        BattleScriptCall(BattleScript_ChillyReceptionMessage);
+        return MOVE_STEP_BREAK;
+    }
+    return MOVE_STEP_SUCCESS;
+}
+
+static enum MoveCanceler CancelerAsleepOrFrozen(struct BattleContext *ctx)
+{
+    enum MoveCanceler effect = MOVE_STEP_BREAK;
 
         if (partyIdBattlerOn1 == PARTY_SIZE)
             partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
@@ -3050,6 +3060,7 @@ static enum MoveCanceler (*const sMoveSuccessOrderCancelers[])(struct BattleCont
     [CANCELER_STANCE_CHANGE_1] = CancelerStanceChangeOne,
     [CANCELER_SKY_DROP] = CancelerSkyDrop,
     [CANCELER_RECHARGE] = CancelerRecharge,
+    [CANCELER_CHILLY_RECEPTION] = CancelerChillyReception,
     [CANCELER_ASLEEP_OR_FROZEN] = CancelerAsleepOrFrozen,
     [CANCELER_OBEDIENCE] = CancelerObedience,
     [CANCELER_POWER_POINTS] = CancelerPowerPoints,

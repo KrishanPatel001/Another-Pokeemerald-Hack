@@ -2089,7 +2089,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, enum BattlerPosition bat
     }
 }
 
-void SetMultiuseSpriteTemplateToTrainerBack(enum TrainerPicID trainerPicId, enum BattlerPosition battlerPosition)
+void SetMultiuseSpriteTemplateToTrainerBack(enum TrainerPicID trainerPicId, u8 battlerPosition)
 {
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
@@ -2108,7 +2108,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(enum TrainerPicID trainerPicId, enum
     }
 }
 
-void SetMultiuseSpriteTemplateToTrainerFront(enum TrainerPicID trainerPicId, enum BattlerPosition battlerPosition)
+void SetMultiuseSpriteTemplateToTrainerFront(enum TrainerPicID trainerPicId, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
@@ -6427,7 +6427,7 @@ enum TrainerPicID FacilityClassToPicIndex(u16 facilityClass)
     return gFacilityClassToPicIndex[facilityClass];
 }
 
-enum TrainerPicID PlayerGenderToFrontTrainerPicId(enum Gender playerGender)
+enum TrainerPicID PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
     if (playerGender != MALE)
         return FacilityClassToPicIndex(FACILITY_CLASS_MAY);

@@ -746,9 +746,9 @@ u8 GetBoxMonGender(struct BoxPokemon *boxMon);
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
 bool32 IsPersonalityFemale(u16 species, u32 personality);
 u32 GetUnownSpeciesId(u32 personality);
-void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, enum BattlerPosition battlerPosition);
-void SetMultiuseSpriteTemplateToTrainerBack(enum TrainerPicID trainerPicId, enum BattlerPosition battlerPosition);
-void SetMultiuseSpriteTemplateToTrainerFront(enum TrainerPicID trainerPicId, enum BattlerPosition battlerPosition);
+void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToTrainerBack(enum TrainerPicID trainerPicId, u8 battlerPosition);
+void SetMultiuseSpriteTemplateToTrainerFront(enum TrainerPicID trainerPicId, u8 battlerPosition);
 
 /* GameFreak called Get(Box)MonData with either 2 or 3 arguments, for
  * type safety we have a Get(Box)MonData macro which dispatches to
@@ -875,7 +875,7 @@ void StopPokemonAnimationDelayTask(void);
 void BattleAnimateBackSprite(struct Sprite *sprite, u16 species);
 u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId);
 enum TrainerPicID FacilityClassToPicIndex(u16 facilityClass);
-enum TrainerPicID PlayerGenderToFrontTrainerPicId(enum Gender playerGender);
+enum TrainerPicID PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality);
 void HandleSetPokedexFlagFromMon(struct Pokemon *mon, u32 caseId);
 bool8 HasTwoFramesAnimation(u16 species);

@@ -104,7 +104,7 @@ struct Trainer
     struct StartingStatuses startingStatus; // this trainer starts a battle with a given status. see include/constants/battle.h for values
     u8 trainerClass;
     u8 encounterMusic_gender; // last bit is gender
-    u8 trainerPic;
+    enum TrainerPicID trainerPic;
     u8 trainerName[TRAINER_NAME_LENGTH + 1];
     u8 battleType:2;
     u8 mugshotColor:6;
@@ -114,7 +114,7 @@ struct Trainer
     u8 poolPickIndex;
     u8 poolPruneIndex;
     u16 overrideTrainer;
-    u8 trainerBackPic;
+    enum TrainerPicID trainerBackPic;
 };
 
 struct TrainerClass

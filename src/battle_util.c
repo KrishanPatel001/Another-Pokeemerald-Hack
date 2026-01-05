@@ -68,7 +68,7 @@ static enum Move GetMirrorMoveMove(void);
 static enum Move GetMetronomeMove(void);
 static enum Move GetAssistMove(void);
 static enum Move GetSleepTalkMove(void);
-static enum Move GetCopyCatMove(void);
+static enum Move GetCopycatMove(void);
 static enum Move GetMeFirstMove(void);
 
 ARM_FUNC NOINLINE static uq4_12_t PercentToUQ4_12(u32 percent);
@@ -2092,7 +2092,10 @@ static enum MoveCanceler CancelerAsleepOrFrozen(struct BattleContext *ctx)
                 if (!IsUsableWhileAsleepEffect(moveEffect))
                 {
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
-                    return MOVE_STEP_FAILURE;
+                }
+                else
+                {
+                    effect = MOVE_STEP_BREAK;
                 }
             }
             return (i == PARTY_SIZE);
@@ -2490,7 +2493,7 @@ static enum MoveCanceler CancelerCallSubmove(struct BattleContext *ctx)
         battleScript = BattleScript_SleepTalkAttackstring;
         break;
     case EFFECT_COPYCAT:
-        calledMove = GetCopyCatMove();
+        calledMove = GetCopycatMove();
         break;
     case EFFECT_ME_FIRST:
         calledMove = GetMeFirstMove();
@@ -3307,7 +3310,7 @@ bool32 TryChangeBattleWeather(u32 battler, u32 battleWeatherId, enum Ability abi
         else
             gBattleStruct->weatherDuration = 5;
     }
-    
+
     if (ability != ABILITY_NONE) // Weather started by Ability
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = sBattleWeatherInfo[battleWeatherId].abilityStartMessage;
@@ -12278,7 +12281,7 @@ void TryUpdateEvolutionTracker(enum EvolutionConditions evolutionCondition, u32 
     }
 }
 
-static enum Move GetCopyCatMove(void)
+static enum Move GetCopycatMove(void)
 {
     USHRT_MAX,
     USHRT_MAX / 2,
@@ -12473,7 +12476,8 @@ void TryUpdateEvolutionTracker(u32 evolutionCondition, u32 upAmount, enum Move u
     u32 i, j;
 
     if (IsOnPlayerSide(gBattlerAttacker)
-     && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
+     && ((TESTING && IsDoubleBattle()) // To be removed when Wild Double Battles are added to tests
+     || !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_EREADER_TRAINER
                              | BATTLE_TYPE_RECORDED_LINK
                              | BATTLE_TYPE_TRAINER_HILL

@@ -1207,100 +1207,35 @@ static bool32 IsValidGender(u32 gender)
     }
 }
 
-static bool32 GenderRatioCanBe(u32 genderRatio, u32 gender)
+u32 GetMonPersonality(u16 species, u8 gender, u8 nature, u8 unownLetter)
 {
-    switch (gender)
-    {
-    case MON_MALE:
-        return genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS;
-    case MON_FEMALE:
-        return genderRatio != MON_MALE && genderRatio != MON_GENDERLESS;
-    case MON_GENDERLESS:
-        return genderRatio == MON_GENDERLESS;
-    default:
-        assertf(FALSE, "unknown gender: %d", gender);
-        return FALSE;
-    }
-}
-
-void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
-{
-    u32 personality;
-    u32 genderRatio = gSpeciesInfo[species].genderRatio;
+    u32 personality, actualLetter;
 
     assertf(IsValidGender(gender), "invalid gender: %d", gender)
     {
-        u16 actualLetter;
-
-        while (TRUE)
-        {
-            personality = Random32();
-            actualLetter = GET_UNOWN_LETTER(personality);
-
-            assertf(GenderRatioCanBe(genderRatio, gender), "genderRatio %d can't be gender %d", genderRatio, gender)
-            {
-                break;
-            }
-
-            if (nature == GetNatureFromPersonality(personality)
-             && gender == GetGenderFromSpeciesAndPersonality(species, personality)
-             && actualLetter == unownLetter - 1)
-            {
-                break;
-            }
-        }
+        gender = MON_GENDER_RANDOM;
     }
 
     assertf(nature <= NATURE_RANDOM, "invalid nature: %d", nature)
     {
-        while (TRUE)
-        {
-            personality = Random32();
-
-            assertf(GenderRatioCanBe(genderRatio, gender), "genderRatio %d can't be gender %d", genderRatio, gender)
-            {
-                break;
-            }
-
-            if (nature == GetNatureFromPersonality(personality)
-             && gender == GetGenderFromSpeciesAndPersonality(species, personality))
-            {
-                break;
-            }
-        }
+        nature = NATURE_RANDOM;
     }
 
-    CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
-}
+    assertf(unownLetter <= NUM_UNOWN_FORMS, "invalid letter: %d", unownLetter)
+    {
+        unownLetter = RANDOM_UNOWN_LETTER;
+    }
 
-// This is only used to create Wally's Ralts.
-void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
-{
-    u32 personality;
-    u32 otId;
-    u32 genderRatio = gSpeciesInfo[species].genderRatio;
-
-    while (TRUE)
+    //gender outside valid gender ratios for species is not asserted because it could be triggered by cute charm
+    do
     {
         personality = Random32();
-
-        assertf(GenderRatioCanBe(genderRatio, MON_MALE), "genderRatio %d can't be MON_MALE", genderRatio)
-        {
-            break;
-        }
-
-        if (GetGenderFromSpeciesAndPersonality(species, personality) == MON_MALE)
-            break;
+        actualLetter = GET_UNOWN_LETTER(personality);
     }
-
-    CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
-}
-
-void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality)
-{
-    CreateMon(mon, species, level, 0, TRUE, personality, OT_ID_PLAYER_ID, 0);
-    SetMonData(mon, MON_DATA_IVS, &ivs);
-    CalculateMonStats(mon);
+    while ((nature != GetNatureFromPersonality(personality) && nature != NATURE_RANDOM)
+            || (gender != GetGenderFromSpeciesAndPersonality(species, personality) && gender != MON_GENDER_RANDOM)
+            || ((actualLetter != unownLetter - 1) && unownLetter > 0));
+    return personality;
 }
 
 // This is only used to create Wally's Ralts.
@@ -1837,6 +1772,44 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon) //Credit: AsparagusEdua
         u32 pp = GetMovePP(moves[i]);
         SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
     }
+}
+
+void GiveMonDefaultMove(struct Pokemon *mon, u32 slot)
+{
+    GiveBoxMonDefaultMove(&mon->box, slot);
+}
+
+void GiveBoxMonDefaultMove(struct BoxPokemon *boxMon, u32 slot)
+{
+    enum Move move = MOVE_NONE;
+    u32 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+    s32 level = GetLevelFromBoxMonExp(boxMon);
+    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+    {
+        s32 j;
+        bool32 alreadyKnown = FALSE;
+
+        if (learnset[i].level > level)
+            break;
+        if (learnset[i].level == 0)
+            continue;
+
+        for (j = 0; j < slot; j++)
+        {
+            if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + j) == learnset[i].move)
+            {
+                alreadyKnown = TRUE;
+                break;
+            }
+        }
+        if (!alreadyKnown)
+            move = learnset[i].move;
+    }
+
+    SetBoxMonData(boxMon, MON_DATA_MOVE1 + slot, &move);
+    u32 pp = GetMovePP(move);
+    SetBoxMonData(boxMon, MON_DATA_PP1 + slot, &pp);
 }
 
 enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u32 level)
@@ -7317,16 +7290,6 @@ bool32 IsSpeciesOfType(u32 species, enum Type type)
     return FALSE;
 }
 
-struct BoxPokemon *GetSelectedBoxMonFromPcOrParty(void)
-{
-    struct BoxPokemon *boxmon;
-    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
-        boxmon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
-    else
-        boxmon = &(gPlayerParty[gSpecialVar_0x8004].box);
-    return boxmon;
-}
-
 u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
 {
     u32 sentToPc;
@@ -7340,7 +7303,7 @@ u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
                 break;
         }
         if (i >= PARTY_SIZE)
@@ -7360,12 +7323,4 @@ u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
         HandleSetPokedexFlagFromMon(mon, FLAG_SET_CAUGHT);
     }
     return sentToPc;
-}
-
-void ChangePokemonNicknameWithCallback(void (*callback)(void))
-{
-    struct BoxPokemon *boxMon = GetSelectedBoxMonFromPcOrParty();
-    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
-    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY), callback);
 }

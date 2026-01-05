@@ -47,58 +47,15 @@ const u32 gBattleEnvironmentTilemap_Building[] = INCBIN_U32("graphics/battle_env
     .palette = gBattleEnvironmentPalette_##background,          \
 }
 
-#define DEFAULT_CAMOUFLAGE_BLEND RGB_WHITE
-
-// Cave values. Used for BATTLE_ENVIRONMENT_CAVE as well as BATTLE_ENVIRONMENT_GROUDON and BATTLE_ENVIRONMENT_KYOGRE
-#if B_NATURE_POWER_MOVES >= GEN_6
-    #define CAVE_NATURE_POWER MOVE_POWER_GEM
-#elif B_NATURE_POWER_MOVES >= GEN_4
-    #define CAVE_NATURE_POWER MOVE_ROCK_SLIDE
-#else
-    #define CAVE_NATURE_POWER MOVE_SHADOW_BALL
-#endif
-#define CAVE_SECRET_POWER_ANIMATION B_SECRET_POWER_ANIMATION >= GEN_4 ? gBattleAnimMove_RockThrow : gBattleAnimMove_Bite
-#define CAVE_SECRET_POWER_EFFECT    MOVE_EFFECT_FLINCH
-#define CAVE_CAMOUFLAGE_TYPE        TYPE_ROCK
-#define CAVE_CAMOUFLAGE_BLEND       RGB(14, 9, 3)
-#define CAVE_BATTLE_INTRO_SLIDE     BattleIntroSlide1
-
-// Building values. Used for BATTLE_ENVIRONMENT_BUILDING as well as the environments that come from the vanilla MAP_BATTLE_SCENEs: BATTLE_ENVIRONMENT_PLAIN, BATTLE_ENVIRONMENT_FRONTIER, BATTLE_ENVIRONMENT_GYM, BATTLE_ENVIRONMENT_LEADER, BATTLE_ENVIRONMENT_MAGMA, BATTLE_ENVIRONMENT_AQUA, BATTLE_ENVIRONMENT_SIDNEY, BATTLE_ENVIRONMENT_PHOEBE, BATTLE_ENVIRONMENT_GLACIA, BATTLE_ENVIRONMENT_DRAKE, BATTLE_ENVIRONMENT_CHAMPION
-#define BUILDING_NATURE_POWER        B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_TRI_ATTACK : MOVE_SWIFT
 #if B_SECRET_POWER_ANIMATION >= GEN_7
     #define BUILDING_SECRET_POWER_ANIMATION gBattleAnimMove_SpitUp
 #elif B_SECRET_POWER_ANIMATION >= GEN_4
-    #define BUILDING_SECRET_POWER_ANIMATION gBattleAnimMove_BodySlam
+    #define BUILDING_SECRET_POWER_ANIMATION gBattleAnimMove_BodySlam,
 #else
-    #define BUILDING_SECRET_POWER_ANIMATION gBattleAnimMove_Strength
+    #define BUILDING_SECRET_POWER_ANIMATION gBattleAnimMove_Strength,
 #endif
-#define BUILDING_SECRET_POWER_EFFECT MOVE_EFFECT_PARALYSIS
-#define BUILDING_CAMOUFLAGE_TYPE     TYPE_NORMAL
-#define BUILDING_CAMOUFLAGE_BLEND    RGB_WHITE
-#define BUILDING_BATTLE_INTRO_SLIDE  BattleIntroSlide3
 
-// Plain values. USED for BATTLE_ENVIRONMENT_PLAIN as well as BATTLE_ENVIRONMENT_RAYQUAZA
-// (BATTLE_ENVIRONMENT_SKY_PILLAR wasn't introduced until Gen6, so Sky Pillar's roof counts as a Route which uses Plain)
-#if B_NATURE_POWER_MOVES >= GEN_6
-    #define PLAIN_NATURE_POWER MOVE_TRI_ATTACK
-#elif B_NATURE_POWER_MOVES >= GEN_4
-    #define PLAIN_NATURE_POWER MOVE_EARTHQUAKE
-#else
-    #define PLAIN_NATURE_POWER MOVE_SWIFT
-#endif
-#if B_SECRET_POWER_ANIMATION >= GEN_7
-    #define PLAIN_SECRET_POWER_ANIMATION gBattleAnimMove_SpitUp
-#elif B_SECRET_POWER_ANIMATION == GEN_6
-    #define PLAIN_SECRET_POWER_ANIMATION gBattleAnimMove_BodySlam
-#elif B_SECRET_POWER_ANIMATION >= GEN_4
-    #define PLAIN_SECRET_POWER_ANIMATION gBattleAnimMove_MudSlap
-#else
-    #define PLAIN_SECRET_POWER_ANIMATION gBattleAnimMove_Slam
-#endif
-#define PLAIN_SECRET_POWER_EFFECT (B_SECRET_POWER_EFFECT == GEN_4 || B_SECRET_POWER_EFFECT == GEN_5) ? MOVE_EFFECT_ACC_MINUS_1 : MOVE_EFFECT_PARALYSIS
-#define PLAIN_CAMOUFLAGE_TYPE     (B_CAMOUFLAGE_TYPES == GEN_4 || B_CAMOUFLAGE_TYPES == GEN_5) ? TYPE_GROUND : TYPE_NORMAL
-#define PLAIN_CAMOUFLAGE_BLEND    RGB_WHITE
-#define PLAIN_BATTLE_INTRO_SLIDE  BattleIntroSlide3
+#define BUILDING_SECRET_POWER_EFFECT MOVE_EFFECT_PARALYSIS
 
 const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] =
 {
@@ -130,7 +87,7 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
     #else
         .naturePower = MOVE_RAZOR_LEAF,
     #endif
-        .secretPowerAnimation = B_SECRET_POWER_ANIMATION >= GEN_4 ? gBattleAnimMove_NeedleArm : gBattleAnimMove_MagicalLeaf,
+        .secretPowerAnimation = gBattleAnimMove_MagicalLeaf,
         .secretPowerEffect = MOVE_EFFECT_SLEEP,
         .camouflageType = TYPE_GRASS,
         .camouflageBlend = RGB(0, 15, 2),
@@ -212,36 +169,50 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_CAVE] =
     {
-        .name = _("Cave"),
-        .naturePower = CAVE_NATURE_POWER,
-        .secretPowerAnimation = CAVE_SECRET_POWER_ANIMATION,
-        .secretPowerEffect = CAVE_SECRET_POWER_EFFECT,
-        .camouflageType = CAVE_CAMOUFLAGE_TYPE,
-        .camouflageBlend = CAVE_CAMOUFLAGE_BLEND,
+    #if B_NATURE_POWER_MOVES >= GEN_6
+        .naturePower = MOVE_POWER_GEM,
+    #elif B_NATURE_POWER_MOVES >= GEN_4
+        .naturePower = MOVE_ROCK_SLIDE,
+    #else
+        .naturePower = MOVE_SHADOW_BALL,
+    #endif
+        .secretPowerAnimation = B_SECRET_POWER_ANIMATION >= GEN_4 ? gBattleAnimMove_RockThrow : gBattleAnimMove_Bite,
+        .secretPowerEffect = MOVE_EFFECT_FLINCH,
+        .camouflageType = TYPE_ROCK,
         .background = ENVIRONMENT_BACKGROUND(Cave),
         .battleIntroSlide = CAVE_BATTLE_INTRO_SLIDE,
     },
 
     [BATTLE_ENVIRONMENT_BUILDING] =
     {
-        .name = _("Building"),
-        .naturePower = BUILDING_NATURE_POWER,
+        .naturePower = B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_TRI_ATTACK : MOVE_SWIFT,
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
+        .camouflageType = TYPE_NORMAL,
         .background = ENVIRONMENT_BACKGROUND(Building),
         .battleIntroSlide = BUILDING_BATTLE_INTRO_SLIDE,
     },
 
     [BATTLE_ENVIRONMENT_PLAIN] =
     {
-        .name = _("Plain"),
-        .naturePower = PLAIN_NATURE_POWER,
-        .secretPowerAnimation = PLAIN_SECRET_POWER_ANIMATION,
-        .secretPowerEffect = PLAIN_SECRET_POWER_EFFECT,
-        .camouflageType = PLAIN_CAMOUFLAGE_TYPE,
-        .camouflageBlend = PLAIN_CAMOUFLAGE_BLEND,
+    #if B_NATURE_POWER_MOVES >= GEN_6
+        .naturePower = MOVE_TRI_ATTACK,
+    #elif B_NATURE_POWER_MOVES >= GEN_4
+        .naturePower = MOVE_EARTHQUAKE,
+    #else
+        .naturePower = MOVE_SWIFT,
+    #endif
+    #if B_SECRET_POWER_ANIMATION >= GEN_7
+        .secretPowerAnimation = gBattleAnimMove_SpitUp,
+    #elif B_SECRET_POWER_ANIMATION >= GEN_6
+        .secretPowerAnimation = gBattleAnimMove_BodySlam,
+    #elif B_SECRET_POWER_ANIMATION >= GEN_4
+        .secretPowerAnimation = gBattleAnimMove_MudSlap,
+    #else
+        .secretPowerAnimation = gBattleAnimMove_Slam,
+    #endif
+        .secretPowerEffect = (B_SECRET_POWER_EFFECT == GEN_4 || B_SECRET_POWER_EFFECT == GEN_5) ? MOVE_EFFECT_ACC_MINUS_1 : MOVE_EFFECT_PARALYSIS,
+        .camouflageType = (B_CAMOUFLAGE_TYPES == GEN_4 || B_CAMOUFLAGE_TYPES == GEN_5) ? TYPE_GROUND : TYPE_NORMAL,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Building,
@@ -255,11 +226,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_FRONTIER] =
     {
-        .name = _("Frontier"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Building,
@@ -273,11 +241,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_GYM] =
     {
-        .name = _("Gym"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Building,
@@ -291,11 +256,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_LEADER] =
     {
-        .name = _("Leader"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Building,
@@ -309,11 +271,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_MAGMA] =
     {
-        .name = _("Magma"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,
@@ -327,11 +286,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_AQUA] =
     {
-        .name = _("Aqua"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,
@@ -345,11 +301,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_SIDNEY] =
     {
-        .name = _("Sidney"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,
@@ -363,11 +316,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_PHOEBE] =
     {
-        .name = _("Phoebe"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,
@@ -381,11 +331,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_GLACIA] =
     {
-        .name = _("Glacia"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,
@@ -399,11 +346,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_DRAKE] =
     {
-        .name = _("Drake"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,
@@ -417,11 +361,8 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
 
     [BATTLE_ENVIRONMENT_CHAMPION] =
     {
-        .name = _("Champion"),
         .secretPowerAnimation = BUILDING_SECRET_POWER_ANIMATION,
         .secretPowerEffect = BUILDING_SECRET_POWER_EFFECT,
-        .camouflageType = BUILDING_CAMOUFLAGE_TYPE,
-        .camouflageBlend = BUILDING_CAMOUFLAGE_BLEND,
         .background =
         {
             .tileset = gBattleEnvironmentTiles_Stadium,

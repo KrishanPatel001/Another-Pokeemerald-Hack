@@ -42,6 +42,12 @@ struct BattleAnimBackground
     const u32 *tilemap;
 };
 
+struct BattleAnimation
+{
+    struct CompressedSpriteSheet pic;
+    struct SpritePalette palette;
+};
+
 // Helper struct for link battles to show correct animations and transformations that can change their look
 // Used by EmitBattleAnimation and EmitMoveAnimation
 struct LinkBattleAnim

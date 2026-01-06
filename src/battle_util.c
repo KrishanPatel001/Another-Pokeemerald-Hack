@@ -4604,6 +4604,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
             }
             break;
         case ABILITY_SNOW_WARNING:
+            if (!shouldAbilityTrigger)
+                break;
             {
                 u32 weather = (GetConfig(CONFIG_SNOW_WARNING) >= GEN_9 ? BATTLE_WEATHER_SNOW : BATTLE_WEATHER_HAIL);
                 if (TryChangeBattleWeather(battler, weather, gLastUsedAbility))

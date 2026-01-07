@@ -336,7 +336,6 @@ static void ClearStatLabel(u32 length, u32 statsCoordX, u32 statsCoordY);
 u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat);
 static void TryUpdateRelearnType(enum IncrDecrUpdateValues delta);
 static void ShowRelearnPrompt(void);
-static struct BoxPokemon *GetCurrentBoxmon(void);
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -4950,9 +4949,13 @@ static void ShowRelearnPrompt(void)
     && !FlagGet(P_FLAG_EGG_MOVES)
     && !FlagGet(P_FLAG_TUTOR_MOVES)))
     {
-        case MOVE_RELEARNER_LEVEL_UP_MOVES:
-            relearnText = sText_Relearn_LevelUp;
-            break;
+        relearnText = sText_Relearn;
+        relearnTextXPos = 0;
+    }
+    else
+    {
+        switch (gMoveRelearnerState)
+        {
         case MOVE_RELEARNER_EGG_MOVES:
             relearnText = sText_Relearn_Egg;
             break;
@@ -4963,7 +4966,8 @@ static void ShowRelearnPrompt(void)
             relearnText = sText_Relearn_Tutor;
             break;
         default:
-            relearnText = sText_Relearn;
+        case MOVE_RELEARNER_LEVEL_UP_MOVES:
+            relearnText = sText_Relearn_LevelUp;
             break;
         }
         relearnTextXPos = GetStringRightAlignXOffset(FONT_NORMAL, relearnText, 0);

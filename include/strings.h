@@ -2178,5 +2178,6 @@ extern const u8 MoveRelearner_Text_LevelUpMoveLWR[];
 extern const u8 MoveRelearner_Text_EggMoveLWR[];
 extern const u8 MoveRelearner_Text_TMMoveLWR[];
 extern const u8 MoveRelearner_Text_TutorMoveLWR[];
+extern const u8 MoveRelearner_Text_MoveLWR[];
 
 #endif // GUARD_STRINGS_H

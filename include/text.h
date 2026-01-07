@@ -71,27 +71,11 @@ union TextColor {
     u32 asU32;
 };
 
-enum PACKED TextPrinterType
-{
-    WINDOW_TEXT_PRINTER,
-    SPRITE_TEXT_PRINTER,
-};
-
-union TextColor {
-    struct {
-        u8 background;
-        u8 foreground;
-        u8 shadow;
-        u8 accent;
-    };
-    u32 asU32;
-};
-
 struct TextPrinterTemplate
 {
     const u8 *currentChar;
 
-    enum TextPrinterType type;
+    enum: u8 { WINDOW_TEXT_PRINTER, SPRITE_TEXT_PRINTER } type;
     union {
         u8 windowId;
         u8 spriteId;
@@ -104,6 +88,8 @@ struct TextPrinterTemplate
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
+    u8 firstSpriteInRow;
+    u8 firstSprite;
     union {
         struct {
             DEPRECATED("Use color.background instead") u8 bgColor;
@@ -197,7 +183,8 @@ void AddSpriteTextPrinterParameterized4(u8 spriteId, u8 fontId, u8 left, u8 top,
 void AddSpriteTextPrinterParameterized6(u8 spriteId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const union TextColor color, s8 speed, const u8 *str);
 bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
-bool32 IsTextPrinterActive(u8 id);
+bool32 IsTextPrinterActiveOnWindow(u32 windowId);
+bool32 IsTextPrinterActiveOnSprite(u32 spriteId);
 void GenerateFontHalfRowLookupTable(union TextColor color);
 union TextColor SaveTextColors(void);
 void RestoreTextColors(union TextColor color);

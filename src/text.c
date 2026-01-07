@@ -52,8 +52,11 @@ static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
 
-static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
-static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
+static struct TextPrinter *AllocateTextPrinter(void);
+static u32 GetNumTextPrinters(void);
+static void FreeFinishedTextPrinters(void);
+
+static EWRAM_DATA struct TextPrinter *sFirstTextPrinter = NULL;
 
 static EWRAM_DATA u16 sFontHalfRowLookupTable[0x100];
 static EWRAM_DATA union TextColor sLastTextColor;
@@ -621,6 +624,19 @@ bool32 IsTextPrinterActiveOnSprite(u32 spriteId)
     }
 
     return FALSE;
+}
+
+bool32 IsTextPrinterActiveOnSprite(u32 spriteId)
+{
+    u32 ret;
+    u16 (*fontFunction)(struct TextPrinter *x) = gFonts[textPrinter->printerTemplate.fontId].fontFunction;
+
+    do
+    {
+        ret = fontFunction(textPrinter);
+    } while (ret == RENDER_REPEAT);
+
+    return ret;
 }
 
 void GenerateFontHalfRowLookupTable(union TextColor color)
@@ -1456,9 +1472,12 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_FILL_WINDOW:
-                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.color.background));
-                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
-                textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
+                if (textPrinter->printerTemplate.type == WINDOW_TEXT_PRINTER)
+                {
+                    FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.color.background));
+                    textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+                    textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
+                }
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_PAUSE_MUSIC:
                 m4aMPlayStop(&gMPlayInfo_BGM);
@@ -2723,44 +2742,4 @@ static void FreeFinishedTextPrinters(void)
             currentPrinter = currentPrinter->nextPrinter;
         }
     }
-}
-
-void DeactivateSingleTextPrinter(u32 id, enum TextPrinterType type)
-{
-    struct TextPrinter *currentPrinter = sFirstTextPrinter;
-    bool32 foundPrinter = FALSE;
-    //  This loop cannot exit early because a single window/sprite group can have multiple printers attached to it
-    while (currentPrinter != NULL)
-    {
-        switch (type)
-        {
-        case WINDOW_TEXT_PRINTER:
-            if (currentPrinter->printerTemplate.type == WINDOW_TEXT_PRINTER && currentPrinter->printerTemplate.windowId == id)
-            {
-                currentPrinter->isInUse = FALSE;
-                currentPrinter = NULL;
-                foundPrinter = TRUE;
-            }
-            else
-            {
-                currentPrinter = currentPrinter->nextPrinter;
-            }
-            break;
-        case SPRITE_TEXT_PRINTER:
-            if (currentPrinter->printerTemplate.type == SPRITE_TEXT_PRINTER && currentPrinter->printerTemplate.firstSprite == id)
-            {
-                currentPrinter->isInUse = FALSE;
-                currentPrinter = NULL;
-                foundPrinter = TRUE;
-            }
-            else
-            {
-                currentPrinter = currentPrinter->nextPrinter;
-            }
-            break;
-        }
-    }
-
-    if (foundPrinter)
-        FreeFinishedTextPrinters();
 }

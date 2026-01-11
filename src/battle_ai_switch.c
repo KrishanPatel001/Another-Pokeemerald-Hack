@@ -265,7 +265,7 @@ static inline bool32 CanBattlerWin1v1(u32 hitsToKOAI, u32 hitsToKOPlayer, bool32
 static bool32 ShouldSwitchIfHasBadOdds(u32 battler)
 {
     //Variable initialization
-    u32 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
+    enum BattlerPosition opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(battler));
     u32 opposingBattler = GetBattlerAtPosition(opposingPosition);
     enum Move *playerMoves = GetMovesArray(opposingBattler);
     enum Move aiMove, playerMove, bestPlayerPriorityMove = MOVE_NONE, bestPlayerMove = MOVE_NONE, expectedMove = MOVE_NONE;

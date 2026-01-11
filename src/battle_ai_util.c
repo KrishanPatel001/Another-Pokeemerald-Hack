@@ -6371,7 +6371,7 @@ bool32 CanMoveBeBouncedBack(u32 battler, enum Move move)
 u32 GetActiveBattlerIds(u32 battler, u32 *battlerIn1, u32 *battlerIn2)
 {
     u32 opposingBattler = 0;
-    u32 battlerPosition = GetBattlerPosition(battler);
+    enum BattlerPosition battlerPosition = GetBattlerPosition(battler);
     if (IsDoubleBattle())
     {
         *battlerIn1 = battler;

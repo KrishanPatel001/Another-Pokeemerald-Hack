@@ -3033,14 +3033,10 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_PSYCHIC_SURGE, ABILITY_PSYCHIC_SURGE, ABILITY_PSYCHIC_SURGE },
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_INFILTRATOR, ABILITY_PRANKSTER },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Meowstic"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_MEOWSTIC_MEGA,
-    #else
-        .cryId = CRY_MEOWSTIC,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_MEOWSTIC, //CRY_MEOWSTIC_MEGA
         .natDexNum = NATIONAL_DEX_MEOWSTIC,
         .categoryName = _("Constraint"),
         .height = 8,
@@ -3090,14 +3086,10 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_PSYCHIC_SURGE, ABILITY_PSYCHIC_SURGE, ABILITY_PSYCHIC_SURGE },
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_INFILTRATOR, ABILITY_COMPETITIVE },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Meowstic"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_MEOWSTIC_MEGA,
-    #else
-        .cryId = CRY_MEOWSTIC,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_MEOWSTIC, //CRY_MEOWSTIC_MEGA
         .natDexNum = NATIONAL_DEX_MEOWSTIC,
         .categoryName = _("Constraint"),
         .height = 8,

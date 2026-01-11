@@ -952,14 +952,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
-        .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_NONE, ABILITY_RECKLESS },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Staraptor"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_STARAPTOR_MEGA,
-    #else
-        .cryId = CRY_STARAPTOR,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_STARAPTOR, //CRY_STARAPTOR_MEGA
         .natDexNum = NATIONAL_DEX_STARAPTOR,
         .categoryName = _("Predator"),
         .height = 19,
@@ -4524,7 +4520,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .baseSpeed     = 151,
         .baseSpAttack  = 141,
         .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_FLYING),
+        .types = MON_TYPES(TYPE_DRAGON),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 300,
@@ -4539,14 +4535,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
-        .abilities = { ABILITY_AERILATE, ABILITY_AERILATE, ABILITY_AERILATE },
+        .abilities = { ABILITY_SAND_VEIL, ABILITY_NONE, ABILITY_ROUGH_SKIN },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Garchomp"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_GARCHOMP, //CRY_GARCHOMP_MEGA_Z (unreleased)
-    #else
-        .cryId = CRY_GARCHOMP,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_GARCHOMP, //CRY_GARCHOMP_MEGA_Z
         .natDexNum = NATIONAL_DEX_GARCHOMP,
         .categoryName = _("Mach"),
         .height = 19,
@@ -4815,14 +4807,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_MINDS_EYE, ABILITY_MINDS_EYE, ABILITY_MINDS_EYE },
+        .abilities = { ABILITY_STEADFAST, ABILITY_INNER_FOCUS, ABILITY_JUSTIFIED },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Lucario"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_LUCARIO_MEGA_Z,
-    #else
         .cryId = CRY_LUCARIO,
-    #endif // P_MODIFIED_MEGA_CRIES
         .natDexNum = NATIONAL_DEX_LUCARIO,
         .categoryName = _("Aura"),
         .height = 13,
@@ -6970,14 +6958,10 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .friendship = 100,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_FLASH_FIRE, ABILITY_FLASH_FIRE, ABILITY_FLASH_FIRE },
+        .abilities = { ABILITY_FLASH_FIRE, ABILITY_NONE, ABILITY_FLAME_BODY },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Heatran"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_HEATRAN_MEGA,
-    #else
-        .cryId = CRY_HEATRAN,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_HEATRAN, //CRY_HEATRAN_MEGA
         .natDexNum = NATIONAL_DEX_HEATRAN,
         .categoryName = _("Lava Dome"),
         .height = 28,
@@ -7597,11 +7581,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .abilities = { ABILITY_BAD_DREAMS, ABILITY_NONE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Darkrai"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_DARKRAI_MEGA,
-    #else
-        .cryId = CRY_DARKRAI,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_DARKRAI, //CRY_DARKRAI_MEGA
         .natDexNum = NATIONAL_DEX_DARKRAI,
         .categoryName = _("Pitch-Black"),
         .height = 30,

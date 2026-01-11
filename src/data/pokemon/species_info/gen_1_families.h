@@ -4066,7 +4066,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 110,
         .baseSpAttack  = 90,
         .baseSpDefense = 95,
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FIGHTING),
+        .types = MON_TYPES(TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = RAICHU_EXP_YIELD,
         .evYield_Speed = 3,
@@ -4075,14 +4075,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_RECKLESS, ABILITY_RECKLESS, ABILITY_RECKLESS },
+        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Raichu"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_RAICHU_MEGA_X,
-    #else
-        .cryId = CRY_RAICHU,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_RAICHU, // CRY_RAICHU_MEGA_X
         .natDexNum = NATIONAL_DEX_RAICHU,
         .categoryName = _("Mouse"),
         .height = 12,
@@ -4126,7 +4122,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 130,
         .baseSpAttack  = 160,
         .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),
+        .types = MON_TYPES(TYPE_ELECTRIC),
         .catchRate = 75,
         .expYield = RAICHU_EXP_YIELD,
         .evYield_Speed = 3,
@@ -4135,14 +4131,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_TRANSISTOR, ABILITY_TRANSISTOR, ABILITY_TRANSISTOR },
+        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Raichu"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_RAICHU_MEGA_Y,
-    #else
-        .cryId = CRY_RAICHU,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_RAICHU, // CRY_RAICHU_MEGA_Y
         .natDexNum = NATIONAL_DEX_RAICHU,
         .categoryName = _("Mouse"),
         .height = 10,

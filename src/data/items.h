@@ -7048,7 +7048,7 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark, // gItemIcon_Staraptite,
         .iconPalette = gItemIconPalette_QuestionMark, // gItemIconPalette_Staraptite,
     },
-
+    
     [ITEM_GARCHOMPITE_Z] =
     {
         .name = ITEM_NAME("Garchompite Z"),

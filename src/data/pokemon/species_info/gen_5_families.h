@@ -11481,15 +11481,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
-        .abilities = { ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY },
+        .abilities = { ABILITY_IRON_FIST, ABILITY_KLUTZ, ABILITY_NO_GUARD },
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
         .speciesName = _("Golurk"),
-    #if P_MODIFIED_MEGA_CRIES
-        .cryId = CRY_GOLURK_MEGA,
-    #else
-        .cryId = CRY_GOLURK,
-    #endif // P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_GOLURK, //CRY_GOLURK_MEGA
         .natDexNum = NATIONAL_DEX_GOLURK,
         .categoryName = _("Automaton"),
         .height = 40,

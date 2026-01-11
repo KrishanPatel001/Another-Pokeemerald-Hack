@@ -1201,7 +1201,7 @@ static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
 {
     s32 i, count;
     u32 validSpecies[3];
-    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
     u16 species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES);
 

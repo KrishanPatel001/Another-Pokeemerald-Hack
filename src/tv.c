@@ -1546,7 +1546,7 @@ void PutNameRaterShowOnTheAir(void)
             show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
             show->nameRaterShow.kind = TVSHOW_NAME_RATER_SHOW;
             show->nameRaterShow.active = TRUE;
-            show->nameRaterShow.species = GetBoxMonData(boxmon, MON_DATA_SPECIES);
+            show->nameRaterShow.species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES);
             show->nameRaterShow.random = Random() % 3;
             show->nameRaterShow.random2 = Random() % 2;
             show->nameRaterShow.randomSpecies = GetRandomDifferentSpeciesSeenByPlayer(show->nameRaterShow.species);
@@ -3274,13 +3274,32 @@ bool8 TryPutNameRaterShowOnTheAir(void)
     return TRUE;
 }
 
-static void ChangeBoxPokemonNickname_CB(void)
+void ChangePokemonNickname(void)
+{
+    void ChangePokemonNickname_CB(void);
+
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY), ChangePokemonNickname_CB);
+}
+
+void ChangePokemonNickname_CB(void)
 {
     SetBoxMonData(GetSelectedBoxMonFromPcOrParty(), MON_DATA_NICKNAME, gStringVar2);
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
-void ChangePokemonNickname(void)
+void ChangeBoxPokemonNickname(void)
+{
+    struct BoxPokemon *boxMon;
+
+    boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY), ChangeBoxPokemonNickname_CB);
+}
+
+static void ChangeBoxPokemonNickname_CB(void)
 {
     ChangePokemonNicknameWithCallback(ChangeBoxPokemonNickname_CB);
 }
@@ -3297,7 +3316,7 @@ void BufferMonNickname(void)
 void IsMonOTIDNotPlayers(void)
 {
     if(gSpecialVar_MonBoxId == 0xFF){
-        if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
+        if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID))
             gSpecialVar_Result = FALSE;
         else
             gSpecialVar_Result = TRUE;

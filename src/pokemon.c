@@ -5491,7 +5491,7 @@ u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves)
 
         if (!CanLearnTeachableMove(species, move))
             continue;
-        
+
         if (!MonKnowsMove(mon, move))
             moves[numMoves++] = move;
     }

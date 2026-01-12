@@ -500,6 +500,8 @@ extern const u8 BattleScript_ItDoesntAffectFoe[];
 extern const u8 BattleScript_FirstTurnSwitchInEvents[];
 extern const u8 BattleScript_Explosion[];
 extern const u8 BattleScript_ActivateSwitchInAbility[];
+extern const u8 BattleScript_BreakScreens[];
+extern const u8 BattleScript_StealStats[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

@@ -4078,7 +4078,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Raichu"),
-        .cryId = CRY_RAICHU, // CRY_RAICHU_MEGA_X
+    #if P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_RAICHU_MEGA_X,
+    #else
+        .cryId = CRY_RAICHU,
+    #endif // P_MODIFIED_MEGA_CRIES
         .natDexNum = NATIONAL_DEX_RAICHU,
         .categoryName = _("Mouse"),
         .height = 12,
@@ -4134,7 +4138,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Raichu"),
-        .cryId = CRY_RAICHU, // CRY_RAICHU_MEGA_Y
+    #if P_MODIFIED_MEGA_CRIES
+        .cryId = CRY_RAICHU_MEGA_Y,
+    #else
+        .cryId = CRY_RAICHU,
+    #endif // P_MODIFIED_MEGA_CRIES
         .natDexNum = NATIONAL_DEX_RAICHU,
         .categoryName = _("Mouse"),
         .height = 10,

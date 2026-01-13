@@ -1020,6 +1020,7 @@ gCryTable::
 	cry Cry_Absol
 .if P_MODIFIED_MEGA_CRIES == TRUE
 	cry Cry_AbsolMega
+	cry Cry_AbsolMegaZ
 .endif @ P_MODIFIED_MEGA_CRIES
 .endif @ P_FAMILY_ABSOL
 .if P_FAMILY_SNORUNT == TRUE
@@ -1222,6 +1223,7 @@ gCryTable::
 	cry Cry_Lucario
 .if P_MODIFIED_MEGA_CRIES == TRUE
 	cry Cry_LucarioMega
+	cry Cry_LucarioMegaZ
 .endif @ P_MODIFIED_MEGA_CRIES
 .endif @ P_FAMILY_RIOLU
 .if P_FAMILY_HIPPOPOTAS == TRUE
@@ -3574,6 +3576,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Absol
 .if P_MODIFIED_MEGA_CRIES == TRUE
 	cry_reverse Cry_AbsolMega
+	cry_reverse Cry_AbsolMegaZ
 .endif @ P_MODIFIED_MEGA_CRIES
 .endif @ P_FAMILY_ABSOL
 .if P_FAMILY_SNORUNT == TRUE
@@ -3776,6 +3779,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Lucario
 .if P_MODIFIED_MEGA_CRIES == TRUE
 	cry_reverse Cry_LucarioMega
+	cry_reverse Cry_LucarioMegaZ
 .endif @ P_MODIFIED_MEGA_CRIES
 .endif @ P_FAMILY_RIOLU
 .if P_FAMILY_HIPPOPOTAS == TRUE

@@ -1324,13 +1324,6 @@ BattleScript_EffectPsychoShiftCanWork:
 	updatestatusicon BS_ATTACKER
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSynchronoise::
-	attackcanceler
-	pause B_WAIT_TIME_MED
-	trysynchronoise BattleScript_MoveEnd
-	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	goto BattleScript_HitFromDamageCalc
-
 BattleScript_ItDoesntAffectFoe::
 	savetarget
 	copybyte gBattlerTarget, sBATTLER
@@ -2232,7 +2225,7 @@ BattleScript_EffectPlaceholder::
 BattleScript_EffectHit::
 	attackcanceler
 BattleScript_HitFromAccCheck::
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
 	setpreattackadditionaleffect
 BattleScript_HitFromDamageCalc::
 	damagecalc
@@ -2245,7 +2238,7 @@ BattleScript_MoveEnd::
 BattleScript_EffectHit_Ret::
 	attackcanceler
 BattleScript_EffectHit_RetFromAccCheck::
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
 	damagecalc
 BattleScript_Hit_RetFromAtkAnimation::
 	attackanimation
@@ -2268,7 +2261,7 @@ BattleScript_EffectNaturalGift::
 	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailed
 	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailed
 	jumpifvolatile BS_ATTACKER, VOLATILE_EMBARGO, BattleScript_ButItFailed
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
 	call BattleScript_HitFromDamageCalc
 
 BattleScript_MakeMoveMissed::
@@ -2886,7 +2879,7 @@ BattleScript_TwoTurnMovesSecondPowerHerbActivates:
 	trygulpmissile @ Edge case for Cramorant ability Gulp Missile
 BattleScript_FromTwoTurnMovesSecondTurnRet:
 	call BattleScript_TwoTurnMovesSecondTurnRet
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
 	goto BattleScript_HitFromDamageCalc
 
 BattleScript_TwoTurnMovesSecondTurn::
@@ -3024,7 +3017,7 @@ BattleScript_EffectSnore::
 	waitmessage B_WAIT_TIME_LONG
 	statusanimation BS_ATTACKER
 BattleScript_DoSnore::
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
 	goto BattleScript_HitFromDamageCalc
 
 BattleScript_EffectConversion2::
@@ -3235,17 +3228,6 @@ BattleScript_EffectPerishSong::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_PerishSongBlocked::
-	copybyte sBATTLER, gBattlerTarget
-	printstring STRINGID_PKMNSXBLOCKSY2
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_PerishSongLoopIncrement
-
-BattleScript_PerishSongNotAffected:
-	printstring STRINGID_ITDOESNTAFFECT
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_PerishSongLoopIncrement
-
 BattleScript_EffectSwagger::
 	attackcanceler
 	jumpifsubstituteblocks BattleScript_MakeMoveMissed
@@ -3323,7 +3305,7 @@ BattleScript_EffectMagnitude::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_MAGNITUDESTRENGTH
 	waitmessage B_WAIT_TIME_LONG
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
 	goto BattleScript_HitFromDamageCalc
 
 BattleScript_EffectBatonPass::
@@ -5090,12 +5072,9 @@ BattleScript_DefogClearHazards::
 BattleScript_MonTookFutureAttack::
 	printstring STRINGID_PKMNTOOKATTACK
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_FUTURE_SIGHT, BattleScript_CheckDoomDesireMiss
-	accuracycheck BattleScript_FutureAttackMiss, MOVE_FUTURE_SIGHT
-	goto BattleScript_FutureAttackAnimate
-BattleScript_CheckDoomDesireMiss::
-	accuracycheck BattleScript_FutureAttackMiss, MOVE_DOOM_DESIRE
-BattleScript_FutureAttackAnimate::
+	futuresighttargetfailure BattleScript_DoFutureAttackResult
+	jumpifmovehadnoeffect BattleScript_FutureAttackEnd
+	accuracycheck BattleScript_MoveMissedPause
 	damagecalc
 	jumpifmovehadnoeffect BattleScript_DoFutureAttackResult
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_FUTURE_SIGHT, BattleScript_FutureHitAnimDoomDesire
@@ -5122,12 +5101,6 @@ BattleScript_FutureAttackEnd::
 	moveendfromto MOVEEND_SYMBIOSIS, MOVEEND_UPDATE_LAST_MOVES
 	moveendcase MOVEEND_COLOR_CHANGE
 	checkteamslost BattleScript_FutureAttackClearResults
-	goto BattleScript_FutureAttackClearResults
-BattleScript_FutureAttackMiss::
-	pause B_WAIT_TIME_SHORT
-	setmoveresultflags MOVE_RESULT_FAILED
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
 BattleScript_FutureAttackClearResults:
 	setmoveresultflags 0
 	clearspecialstatuses
@@ -7862,12 +7835,6 @@ BattleScript_TargetAbilityStatRaiseRet::
 BattleScript_TargetAbilityStatRaiseRet_End:
 	restoreattacker
 	return
-
-@@@ MAX MOVES @@@
-BattleScript_EffectMaxMove::
-	attackcanceler
-	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
-	goto BattleScript_HitFromDamageCalc
 
 BattleScript_EffectRaiseStatAllies::
 	savetarget

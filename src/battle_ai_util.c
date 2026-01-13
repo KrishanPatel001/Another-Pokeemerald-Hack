@@ -6339,6 +6339,7 @@ bool32 ShouldInstructPartner(u32 partner, enum Move move)
     case TARGET_RANDOM:
     case TARGET_BOTH:
     case TARGET_FOES_AND_ALLY:
+    case TARGET_USER_AND_ALLY:
     case TARGET_OPPONENTS_FIELD:
         return TRUE;
     default:

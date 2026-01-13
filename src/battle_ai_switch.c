@@ -474,9 +474,9 @@ static bool32 ShouldSwitchIfAllMovesBad(u32 battler)
         for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             aiMove = gBattleMons[battler].moves[moveIndex];
-            if (gAiLogicData->effectiveness[battler][opposingBattler][moveIndex] > UQ_4_12(0.0) && aiMove != MOVE_NONE
-                && !CanAbilityAbsorbMove(battler, opposingBattler, gAiLogicData->abilities[opposingBattler], aiMove, GetBattleMoveType(aiMove), AI_CHECK)
-                && !CanAbilityBlockMove(battler, opposingBattler, gAiLogicData->abilities[battler], gAiLogicData->abilities[opposingBattler], aiMove, AI_CHECK)
+            if (aiMove != MOVE_NONE
+                && gAiLogicData->effectiveness[battler][opposingBattler][moveIndex] > UQ_4_12(0.0)
+                && !AI_CanMoveBeBlockedByTarget(&ctx)
                 && (!ALL_MOVES_BAD_STATUS_MOVES_BAD || GetMovePower(aiMove) != 0)) // If using ALL_MOVES_BAD_STATUS_MOVES_BAD, then need power to be non-zero
                 return FALSE;
         }
@@ -535,7 +535,7 @@ static bool32 FindMonThatAbsorbsOpponentsMove(u32 battler)
     u32 opposingBattler = GetOppositeBattler(battler);
     enum Move incomingMove = GetIncomingMove(battler, opposingBattler, gAiLogicData);
     enum Type incomingType = CheckDynamicMoveType(GetBattlerMon(opposingBattler), incomingMove, opposingBattler, MON_IN_BATTLE);
-    bool32 isOpposingBattlerChargingOrInvulnerable = !BreaksThroughSemiInvulnerablity(opposingBattler, incomingMove) || IsTwoTurnNotSemiInvulnerableMove(opposingBattler, incomingMove);
+    bool32 isOpposingBattlerChargingOrInvulnerable = !BreaksThroughSemiInvulnerablity(battler, opposingBattler, gAiLogicData->abilities[battler], gAiLogicData->abilities[opposingBattler], incomingMove) || IsTwoTurnNotSemiInvulnerableMove(opposingBattler, incomingMove);
 
     if (!(gAiThinkingStruct->aiFlags[battler] & AI_FLAG_SMART_SWITCHING))
         return FALSE;
@@ -827,6 +827,15 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
      || (moveType == TYPE_FIRE && (AI_GetWeather() & B_WEATHER_RAIN_PRIMAL)))
         return FALSE;
 
+    struct BattleContext ctx = {0};
+    ctx.aiCalc = TRUE;
+    ctx.battlerAtk = battlerAtk;
+    ctx.move = ctx.chosenMove = move;
+    ctx.moveType = moveType;
+    ctx.holdEffectAtk = gAiLogicData->holdEffects[battlerAtk];
+    ctx.abilityAtk = gAiLogicData->abilities[battlerAtk];
+
+
     for (u32 battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
     {
         if (!IsBattlerAlive(battlerDef) || IsBattlerAlly(battlerDef, battlerAtk))
@@ -840,8 +849,11 @@ static bool32 GetHitEscapeTransformState(u32 battlerAtk, enum Move move)
             move
         );
 
-        if (CanAbilityAbsorbMove(battlerAtk, battlerDef, abilityDef, move, moveType, AI_CHECK)
-         || CanAbilityBlockMove(battlerAtk, battlerDef, gAiLogicData->abilities[battlerAtk], abilityDef, move, AI_CHECK))
+        ctx.battlerDef = battlerDef;
+        ctx.holdEffectDef = gAiLogicData->holdEffects[battlerDef];
+        ctx.abilityDef = abilityDef;
+
+        if (AI_CanMoveBeBlockedByTarget(&ctx))
         {
             if ((moveType == TYPE_WATER && abilityDef == ABILITY_STORM_DRAIN)
              || (moveType == TYPE_ELECTRIC && abilityDef == ABILITY_LIGHTNING_ROD))
@@ -1100,7 +1112,6 @@ static bool32 ShouldSwitchIfEncored(u32 battler)
 
 static bool32 ShouldSwitchIfBadChoiceLock(u32 battler)
 {
-    enum HoldEffect holdEffect = GetBattlerHoldEffect(battler);
     enum Move lastUsedMove = gAiLogicData->lastUsedMove[battler];
     u32 opposingBattler = GetOppositeBattler(battler);
     bool32 moveAffectsTarget = TRUE;

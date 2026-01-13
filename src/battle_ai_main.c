@@ -1176,8 +1176,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, enum Move move, s32 s
         RETURN_SCORE_MINUS(10);
 
     if (!BreaksThroughSemiInvulnerablity(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move)
-     && moveEffect != EFFECT_SEMI_INVULNERABLE && AI_IsFaster(battlerAtk, battlerDef, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY)
-     && abilityAtk != ABILITY_NO_GUARD && abilityDef != ABILITY_NO_GUARD)
+     && moveEffect != EFFECT_SEMI_INVULNERABLE && AI_IsFaster(battlerAtk, battlerDef, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY))
         RETURN_SCORE_MINUS(10);
 
     if (CanTargetFaintAi(battlerDef, battlerAtk))

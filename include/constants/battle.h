@@ -406,13 +406,11 @@ enum TypeSideHazard
 #define MOVE_RESULT_NOT_VERY_EFFECTIVE    (1 << 2)
 #define MOVE_RESULT_DOESNT_AFFECT_FOE     (1 << 3)
 #define MOVE_RESULT_ONE_HIT_KO            (1 << 4)
-#define MOVE_RESULT_ONE_HIT_KO_NO_AFFECT  (1 << 5)
-#define MOVE_RESULT_ONE_HIT_KO_STURDY     (1 << 6)
-#define MOVE_RESULT_FAILED                (1 << 7)
-#define MOVE_RESULT_FOE_ENDURED           (1 << 8)
-#define MOVE_RESULT_FOE_HUNG_ON           (1 << 9)
-#define MOVE_RESULT_STURDIED              (1 << 10)
-#define MOVE_RESULT_FOE_ENDURED_AFFECTION (1 << 11)
+#define MOVE_RESULT_FAILED                (1 << 5)
+#define MOVE_RESULT_FOE_ENDURED           (1 << 6)
+#define MOVE_RESULT_FOE_HUNG_ON           (1 << 7)
+#define MOVE_RESULT_STURDIED              (1 << 8)
+#define MOVE_RESULT_FOE_ENDURED_AFFECTION (1 << 9)
 #define MOVE_RESULT_AVOIDED_ATTACK        (MOVE_RESULT_MISSED | MOVE_RESULT_FAILED)
 #define MOVE_RESULT_NO_EFFECT             (MOVE_RESULT_MISSED | MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE)
 
@@ -703,9 +701,6 @@ enum BattleEnvironments
 // Indicator for the party summary bar to display an empty slot.
 #define HP_EMPTY_SLOT 0xFFFF
 
- // (TARGET_USER | TARGET_ALLY)
-
-
 enum MoveTarget
 {
     TARGET_NONE,
@@ -717,7 +712,7 @@ enum MoveTarget
     TARGET_BOTH,
     TARGET_USER,
     TARGET_ALLY,
-    TARGET_USER_AND_ALLY, // TODO: No functionality yet but would be used for howl in the future
+    TARGET_USER_AND_ALLY,
     TARGET_USER_OR_ALLY, // Acupressure
     TARGET_FOES_AND_ALLY,
     TARGET_FIELD, // Moves that target the field, e.g. Rain Dance

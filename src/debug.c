@@ -4719,7 +4719,7 @@ void DebugNative_Party_SetFriendship(void)
 static void Debug_Display_PokerusDaysLeftInfo(s32 daysLeft, s32 strain, u32 digit, u8 windowId)
 {
     ConvertIntToDecimalStringN(gStringVar1, daysLeft, STR_CONV_MODE_LEADING_ZEROS, 2);
-
+    
     if (daysLeft == 0 && strain)
         StringCopy(gStringVar2, COMPOUND_STRING("Inactive"));
     else if (daysLeft == 0)

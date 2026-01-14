@@ -530,8 +530,8 @@ static void BattleTest_Run(void *data)
             }
         }
 
-        if (((DATA.explicitSpeeds[B_POSITION_PLAYER_LEFT] + DATA.explicitSpeeds[B_POSITION_PLAYER_RIGHT]) != (revisedPlayerExplicitSpeeds + revisedPartnerExplicitSpeeds)
-         || (DATA.explicitSpeeds[B_POSITION_OPPONENT_LEFT] + DATA.explicitSpeeds[B_POSITION_OPPONENT_RIGHT]) != (revisedOpponentAExplicitSpeeds + revisedOpponentBExplicitSpeeds)))
+        if (((DATA.explicitSpeeds[B_TRAINER_0] + DATA.explicitSpeeds[B_TRAINER_2]) != (revisedPlayerExplicitSpeeds + revisedPartnerExplicitSpeeds)
+         || (DATA.explicitSpeeds[B_TRAINER_1] + DATA.explicitSpeeds[B_TRAINER_3]) != (revisedOpponentAExplicitSpeeds + revisedOpponentBExplicitSpeeds)))
 
         {
             Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LSpeed required for all PLAYERs and OPPONENTs");
@@ -2035,7 +2035,7 @@ void ClearVarAfterTest(void)
     }
 }
 
-void OpenPokemon(u32 sourceLine, enum BattlerPosition position, u32 species)
+void OpenPokemon(u32 sourceLine, enum BattleTrainer trainer, u32 species)
 {
     s32 i, data;
     u8 *partySize;
@@ -2094,12 +2094,12 @@ void OpenPokemonMulti(u32 sourceLine, enum BattleTrainer trainer, u32 species)
             *partySize = 3;
         party = DATA.recordedBattle.playerParty;
     }
-    else if (position == B_POSITION_OPPONENT_LEFT) // MULTI_OPPONENT_A
+    else if (trainer == B_TRAINER_1) // MULTI_OPPONENT_A
     {
         partySize = &DATA.opponentPartySize;
         party = DATA.recordedBattle.opponentParty;
     }
-    else // MULTI_OPPONENT_B
+    else // MULTI_OPPONENT_B - B_TRAINER_3
     {
         partySize = &DATA.opponentPartySize;
         if ((*partySize == 0) || (*partySize == 1) || (*partySize == 2))
@@ -2173,13 +2173,13 @@ void ClosePokemon(u32 sourceLine)
 
 static void SetGimmick(u32 sourceLine, u32 battler, u32 partyIndex, enum Gimmick gimmick)
 {
-    enum Gimmick currentGimmick = DATA.chosenGimmick[battler][partyIndex];
+    enum Gimmick currentGimmick = DATA.chosenGimmick[GetBattleTrainer(battler)][partyIndex];
     if (!((currentGimmick == GIMMICK_ULTRA_BURST && gimmick == GIMMICK_Z_MOVE)
        || (currentGimmick == GIMMICK_Z_MOVE && gimmick == GIMMICK_ULTRA_BURST)))
     {
         INVALID_IF(currentGimmick != GIMMICK_NONE && currentGimmick != gimmick, "Cannot set %s because %s already set", sGimmickIdentifiers[gimmick], sGimmickIdentifiers[currentGimmick]);
     }
-    DATA.chosenGimmick[battler][partyIndex] = gimmick;
+    DATA.chosenGimmick[GetBattleTrainer(battler)][partyIndex] = gimmick;
 }
 
 void Gender_(u32 sourceLine, u32 gender)
@@ -2426,7 +2426,7 @@ void DynamaxLevel_(u32 sourceLine, s16 dynamaxLevel)
     INVALID_IF(!DATA.currentMon, "DynamaxLevel outside of PLAYER/OPPONENT");
     SetMonData(DATA.currentMon, MON_DATA_DYNAMAX_LEVEL, &dynamaxLevel);
     if (dynamaxLevel >= 0)
-        SetGimmick(sourceLine, DATA.currentPosition, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
+        SetGimmick(sourceLine, DATA.battleTrainer, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
 }
 
 void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor)
@@ -2751,7 +2751,6 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
         enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
         enum HoldEffect holdEffect = GetItemHoldEffect(item);
         u32 species = GetMonData(mon, MON_DATA_SPECIES);
-        enum BattleSide side = battlerId & BIT_SIDE;
 
         // Check invalid item usage.
         INVALID_IF(ctx->gimmick == GIMMICK_MEGA && holdEffect != HOLD_EFFECT_MEGA_STONE && species != SPECIES_RAYQUAZA, "Cannot Mega Evolve without a Mega Stone");
@@ -3485,9 +3484,9 @@ u32 TestRunner_Battle_GetForcedEnvironment(void)
     return DATA.forcedEnvironment;
 }
 
-u32 TestRunner_Battle_GetChosenGimmick(u32 battler, u32 partyIndex)
+u32 TestRunner_Battle_GetChosenGimmick(enum BattleTrainer trainer, u32 partyIndex)
 {
-    return DATA.chosenGimmick[battler][partyIndex];
+    return DATA.chosenGimmick[trainer][partyIndex];
 }
 
 // TODO: Consider storing the last successful i and searching from i+1

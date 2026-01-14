@@ -3255,7 +3255,7 @@ void SwitchInClearSetData(u32 battler, struct Volatiles *volatilesCopy)
     #if TESTING
     if (gTestRunnerEnabled)
     {
-        enum BattleTrainer trainer = GetBattlerTrainer(battler);
+        enum BattleTrainer trainer = GetBattleTrainer(battler);
         u32 partyIndex = gBattlerPartyIndexes[battler];
         if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
             gBattleMons[i].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
@@ -3460,7 +3460,7 @@ static void DoBattleIntro(void)
                 #if TESTING
                 if (gTestRunnerEnabled)
                 {
-                    enum BattleTrainer trainer = GetBattlerTrainer(battler);
+                    enum BattleTrainer trainer = GetBattleTrainer(battler);
                     u32 partyIndex = gBattlerPartyIndexes[battler];
                     if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
                         gBattleMons[battler].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
@@ -3757,7 +3757,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         {
             for (i = 0; i < gBattlersCount; ++i)
             {
-                enum BattleTrainer trainer = GetBattlerTrainer(i);
+                enum BattleTrainer trainer = GetBattleTrainer(i);
                 u32 partyIndex = gBattlerPartyIndexes[i];
                 if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
                     gBattleMons[i].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);

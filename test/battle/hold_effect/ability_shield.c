@@ -177,30 +177,6 @@ SINGLE_BATTLE_TEST("Ability Shield doesn't reactivate an ability when receiving 
 
 SINGLE_BATTLE_TEST("Ability Shield protects the user from having its ability suppressed by Gastro Acid")
 {
-
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_TRICK) == EFFECT_TRICK);
-        PLAYER(SPECIES_GYARADOS) { Ability(ABILITY_INTIMIDATE); Item(ITEM_ABILITY_SHIELD); }
-        OPPONENT(SPECIES_KOFFING) { Ability(ABILITY_NEUTRALIZING_GAS); Item(ITEM_ABILITY_SHIELD); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_TRICK); }
-    } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_NEUTRALIZING_GAS);
-        MESSAGE("Neutralizing gas filled the area!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-        MESSAGE("Gyarados's Ability is protected by the effects of its Ability Shield!");
-        ABILITY_POPUP(player, ABILITY_INTIMIDATE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRICK, player);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
-            MESSAGE("Gyarados's Ability is protected by the effects of its Ability Shield!");
-            ABILITY_POPUP(player, ABILITY_INTIMIDATE);
-        }
-    }
-}
-
-SINGLE_BATTLE_TEST("Ability Shield protects the user from having its ability suppressed by Gastro Acid")
-{
     enum Item item;
 
     PARAMETRIZE { item = ITEM_ABILITY_SHIELD; }

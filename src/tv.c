@@ -1108,7 +1108,7 @@ void TryPutPokemonTodayOnAir(void)
     u8 i;
     u16 ballsUsed;
     TVShow *show;
-    enum Language language2;
+    u32 language2;
     enum Item itemLastUsed;
 
     ballsUsed = 0;

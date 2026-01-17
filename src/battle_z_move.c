@@ -226,7 +226,7 @@ bool32 TryChangeZTrigger(u32 battler, u32 moveIndex)
     return viableZMove;
 }
 
-enum Move GetSignatureZMove(enum Move move, u32 species, u32 item)
+enum Move GetSignatureZMove(enum Move move, u32 species, enum Item item)
 {
     u32 i;
 

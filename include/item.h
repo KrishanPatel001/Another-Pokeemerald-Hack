@@ -95,7 +95,7 @@ struct ALIGNED(2) BagPocket
 
 struct TmHmIndexKey
 {
-    enum TMHMItemId itemId:16;
+    enum Item itemId;
     enum Move moveId;
 };
 
@@ -128,7 +128,7 @@ static inline enum TMHMIndex GetItemTMHMIndex(enum Item item)
     }
 }
 
-static inline enum Move GetItemTMHMMoveId(u16 item)
+static inline enum Move GetItemTMHMMoveId(enum Item item)
 {
     switch (item)
     {
@@ -145,7 +145,7 @@ static inline enum Move GetItemTMHMMoveId(u16 item)
     }
 }
 
-static inline enum TMHMItemId GetTMHMItemIdFromMoveId(enum Move move)
+static inline enum Item GetTMHMItemIdFromMoveId(enum Move move)
 {
     switch (move)
     {
@@ -237,9 +237,9 @@ const u8 *GetItemDescription(enum Item itemId);
 u8 GetItemImportance(enum Item itemId);
 u8 GetItemConsumability(enum Item itemId);
 enum Pocket GetItemPocket(enum Item itemId);
-enum ItemType GetItemType(enum Item itemId);
+u8 GetItemType(enum Item itemId);
 ItemUseFunc GetItemFieldFunc(enum Item itemId);
-enum EffectItem GetItemBattleUsage(enum Item itemId);
+u8 GetItemBattleUsage(enum Item itemId);
 u32 GetItemSecondaryId(enum Item itemId);
 u32 GetItemFlingPower(enum Item itemId);
 u32 GetItemStatus1Mask(enum Item itemId);

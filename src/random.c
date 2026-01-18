@@ -194,7 +194,8 @@ u32 RandomUniformExceptDefault(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reje
 u32 RandomWeightedArrayDefault(enum RandomTag tag, u32 sum, u32 n, const u16 *weights)
 {
     assertf(n > 0);
-    s32 i, targetSum;
+    assertf(sum <= MAX_u16);
+    u32 i, targetSum;
     targetSum = (sum * Random()) >> 16;
     for (i = 0; i < n - 1; i++)
     {

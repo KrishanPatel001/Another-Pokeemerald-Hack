@@ -1898,7 +1898,7 @@ static void PlayerHandleDrawTrainerPic(u32 battler)
     bool32 isFrontPic;
     s16 xPos, yPos;
     enum TrainerPicID trainerPicId;
-  
+
     if (IsMultibattleTest())
     {
         trainerPicId = TRAINER_PIC_BACK_BRENDAN;

@@ -3944,6 +3944,26 @@ static bool32 DoesAbilityBenefitFromSunOrRain(u32 battler, enum Ability ability,
     return FALSE;
 }
 
+static u32 GetWindAbilityScore(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData)
+{
+    u32 score = 0;
+
+    if (aiData->abilities[battlerAtk] == ABILITY_WIND_RIDER)
+    {
+        score = IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK);
+    }
+    else if (aiData->abilities[battlerAtk] == ABILITY_WIND_POWER)
+    {
+        if (gBattleMons[battlerAtk].volatiles.chargeTimer == 0
+         && HasDamagingMoveOfType(battlerAtk, TYPE_ELECTRIC))
+        {
+            score = DECENT_EFFECT;
+        }
+    }
+
+    return score;
+}
+
 static enum MoveComparisonResult CompareMoveAccuracies(u32 battlerAtk, u32 battlerDef, u32 moveSlot1, u32 moveSlot2)
 {
     u32 acc1 = gAiLogicData->moveAccuracy[battlerAtk][battlerDef][moveSlot1];

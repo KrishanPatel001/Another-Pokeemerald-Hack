@@ -268,7 +268,7 @@ static inline u32 GetMovePP(enum Move moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].pp;
 }
 
-static inline u32 GetMoveZEffect(enum Move moveId)
+static inline enum ZEffect GetMoveZEffect(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     assertf(GetMoveCategory(moveId) == DAMAGE_CATEGORY_STATUS, "not a status move: %S", gMovesInfo[moveId].name);
@@ -645,7 +645,7 @@ static inline u32 GetMoveTerrainBoost_GroundCheck(enum Move moveId)
     return gMovesInfo[moveId].argument.terrainBoost.groundCheck;
 }
 
-static inline u32 GetMoveTerrainBoost_HitsBothFoes(enum Move moveId)
+static inline bool32 GetMoveTerrainBoost_HitsBothFoes(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     assertf(gMovesInfo[moveId].effect == EFFECT_TERRAIN_BOOST, "not a terrain boosted move: %S", GetMoveName(moveId));
@@ -720,7 +720,7 @@ static inline u32 GetMoveRecoil(enum Move moveId)
     return gMovesInfo[moveId].argument.recoilPercentage;
 }
 
-static inline u32 GetMoveNonVolatileStatus(enum Move move)
+static inline enum MoveEffect GetMoveNonVolatileStatus(enum Move move)
 {
     move = SanitizeMoveId(move);
     switch (GetMoveEffect(move))

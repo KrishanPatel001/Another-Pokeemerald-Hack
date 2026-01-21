@@ -601,6 +601,3 @@ s32 CalcWeatherScore(u32 battlerAtk, u32 battlerDef, enum Move move, struct AiLo
 
     return score;
 }
-
-    return score;
-}

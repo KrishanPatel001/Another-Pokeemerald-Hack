@@ -9625,6 +9625,9 @@ s32 DoFixedDamageMoveCalc(struct BattleContext *ctx)
             dmg = GetNonDynamaxHP(ctx->battlerDef) - gBattleMons[ctx->battlerAtk].hp;
         }
         break;
+    case EFFECT_OHKO:
+        dmg = gBattleMons[ctx->battlerDef].hp;
+        break;
     default:
         break;
     }
@@ -12181,11 +12184,9 @@ void RemoveHazardFromField(enum BattleSide side, enum Hazards hazardType)
     }
 }
 
-static bool32 CanToxicSkipAccuracyCheck(u32 battlerAtk, u32 move)
+static bool32 CanMoveSkipAccuracyCheck(u32 battlerAtk, u32 move)
 {
-    if (GetConfig(CONFIG_TOXIC_NEVER_MISS) < GEN_6)
-        return FALSE;
-    return move == MOVE_TOXIC && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_POISON);
+    return MoveAlwaysHitsOnSameType(move) && IS_BATTLER_OF_TYPE(battlerAtk, GetMoveType(move));
 }
 
 bool32 CanMoveSkipAccuracyCalc(u32 battlerAtk, u32 battlerDef, enum Ability abilityAtk, enum Ability abilityDef, enum Move move, enum ResultOption option)
@@ -12195,7 +12196,7 @@ bool32 CanMoveSkipAccuracyCalc(u32 battlerAtk, u32 battlerDef, enum Ability abil
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);
 
     if ((gBattleMons[battlerDef].volatiles.lockOn && gBattleMons[battlerDef].volatiles.battlerWithSureHit == battlerAtk)
-     || CanToxicSkipAccuracyCheck(battlerAtk, move)
+     || CanMoveSkipAccuracyCheck(battlerAtk, move)
      || gBattleMons[battlerDef].volatiles.glaiveRush)
     {
         effect = TRUE;
@@ -12485,7 +12486,7 @@ bool32 BreaksThroughSemiInvulnerablity(u32 battlerAtk, u32 battlerDef, enum Abil
 
     if (state != STATE_COMMANDER)
     {
-        if (CanToxicSkipAccuracyCheck(battlerAtk, move))
+        if (CanMoveSkipAccuracyCheck(battlerAtk, move))
             return TRUE;
         if (abilityAtk == ABILITY_NO_GUARD || abilityDef == ABILITY_NO_GUARD)
             return TRUE;

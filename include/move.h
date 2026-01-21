@@ -152,7 +152,7 @@ struct MoveInfo
     bool32 dampBanned:1;
     //Other
     bool32 validApprenticeMove:1;
-    u32 padding:3;
+    u32 padding2:17;
     // end of word
 
     union {
@@ -174,7 +174,7 @@ struct MoveInfo
         } reflectDamage;
         struct {
             u16 terrain;
-            u16 percent:14;
+            u16 percent:13;
             enum TerrainGroundCheck groundCheck:2;
             u16 hitsBothFoes:1;
         } terrainBoost;
@@ -465,6 +465,29 @@ static inline bool32 MoveHas50AccuracyInSun(enum Move moveId)
 static inline bool32 MoveAlwaysHitsInHailSnow(enum Move moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].alwaysHitsInHailSnow;
+}
+
+static inline bool32 MoveAlwaysHitsOnSameType(enum Move moveId)
+{
+    #if TESTING
+    if (moveId == MOVE_TOXIC && GetConfig(CONFIG_TOXIC_NEVER_MISS) < GEN_6)
+       return FALSE;
+    #endif
+    return gMovesInfo[SanitizeMoveId(moveId)].alwaysHitsOnSameType;
+}
+
+static inline bool32 MoveHasNoEffectOnSameType(enum Move moveId)
+{
+    #if TESTING
+    if (moveId == MOVE_SHEER_COLD && GetConfig(CONFIG_SHEER_COLD_IMMUNITY) < GEN_7)
+       return FALSE;
+    #endif
+    return gMovesInfo[SanitizeMoveId(moveId)].noAffectOnSameTypeTarget;
+}
+
+static inline bool32 MoveHasIncreasedAccByTenOnSameType(enum Move moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].accIncreaseByTenOnSameType;
 }
 
 static inline bool32 IsMoveGravityBanned(enum Move moveId)

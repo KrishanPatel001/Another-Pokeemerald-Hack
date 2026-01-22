@@ -3269,7 +3269,7 @@ u8 SetFacilityPtrsGetLevel(void)
     }
 }
 
-u8 GetFrontierEnemyMonLevel(u8 lvlMode)
+u8 GetFrontierEnemyMonLevel(enum FrontierLevelMode lvlMode)
 {
     u8 level;
 

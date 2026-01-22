@@ -38,7 +38,7 @@ static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
 static void GetOpponentBattleStyle(void);
 static void RestorePlayerPartyHeldItems(void);
-static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange);
+static u16 GetFactoryMonId(enum FrontierLevelMode lvlMode, u8 challengeNum, bool8 useBetterRange);
 static enum FactoryStyle GetMoveBattleStyle(enum Move move);
 
 // Number of moves needed on the team to be considered using a certain battle style
@@ -813,11 +813,11 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
     #ifdef BUGFIX
-        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+        enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
         u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     #else
-        u8 UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+        enum FrontierLevelMode UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
         u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / FRONTIER_STAGES_PER_CHALLENGE;
     #endif

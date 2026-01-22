@@ -1091,7 +1091,7 @@ static void GetOpponentIntroSpeech(void)
 
 static void SaveCurrentWinStreak(void)
 {
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
@@ -1102,7 +1102,8 @@ static void SaveCurrentWinStreak(void)
 static void SaveBattleTowerRecord(void)
 {
     s32 i;
-    u8 lvlMode, battleMode, class;
+    enum FrontierLevelMode lvlMode;
+    u8 battleMode, class;
     struct EmeraldBattleTowerRecord *playerRecord = &gSaveBlock2Ptr->frontier.towerPlayer;
 
     ClearBattleTowerRecord(playerRecord);
@@ -1148,7 +1149,7 @@ static void SaveBattleTowerRecord(void)
 
 static void SaveTowerChallenge(void)
 {
-    u16 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     s32 challengeNum = (signed)(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE);
 
@@ -1201,7 +1202,7 @@ static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
 {
     s32 i, count;
     u32 validSpecies[3];
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
     u16 species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES);
 

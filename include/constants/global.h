@@ -34,7 +34,7 @@
 // In Gen 4 only, migrated Pokémon with Diamond, Pearl, or Platinum's ID show as "----------".
 // Gen 5 and up read Diamond, Pearl, or Platinum's ID as "Sinnoh".
 // In Gen 4 and up, migrated Pokémon with HeartGold or SoulSilver's ID show the otherwise unused "Johto" string.
-enum __attribute__((packed)) GameVersion
+enum GameVersion
 {
     VERSION_SAPPHIRE = 1,
     VERSION_RUBY = 2,
@@ -189,7 +189,7 @@ enum Gender
 #define OPTIONS_BATTLE_STYLE_SHIFT 0
 #define OPTIONS_BATTLE_STYLE_SET 1
 
-enum __attribute__((packed)) Direction
+enum Direction
 {
     DIR_NONE,
     DIR_SOUTH,

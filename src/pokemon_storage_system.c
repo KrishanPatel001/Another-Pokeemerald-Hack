@@ -2686,20 +2686,21 @@ static void Task_OnSelectedMon(u8 taskId)
             break;
         case MENU_SELECT:
             PlaySE(SE_SELECT);
+            struct BoxPokemon *boxmon = GetCursorBoxMon();
             if (sInPartyMenu)
             {
-                gSpecialVar_Result = GetBoxMonData(&gPlayerParty[sCursorPosition].box, MON_DATA_SPECIES);
-                gSpecialVar_MonBoxId = TOTAL_BOXES_COUNT;
-                gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[sCursorPosition]);
+                gSpecialVar_0x8004 = sCursorPosition;
             }
             else
             {
-                gSpecialVar_Result = GetBoxMonDataAt(StorageGetCurrentBox(), sCursorPosition, MON_DATA_SPECIES);
+                gSpecialVar_0x8004 = PC_MON_CHOSEN;
+                gSpecialVar_MonBoxPos = sCursorPosition;
                 gSpecialVar_MonBoxId = StorageGetCurrentBox();
-                gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[0]);
             }
-            gSpecialVar_MonBoxPos = sCursorPosition;
-            gSpecialVar_0x8004 = sCursorPosition;
+            if (IsBoxMonExcluded(boxmon))
+                gSpecialVar_Result = FALSE;
+            else
+                gSpecialVar_Result = TRUE;
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
             break;
@@ -3659,7 +3660,10 @@ static void Task_OnCloseBoxPressed(u8 taskId)
             UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
             if (sStorage->boxOption == OPTION_SELECT_MON)
-                gSpecialVar_0x8004 = 0xFF;
+            {
+                gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+                gSpecialVar_Result = FALSE;
+            }
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
         }
@@ -3734,7 +3738,10 @@ static void Task_OnBPressed(u8 taskId)
             UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
             if (sStorage->boxOption == OPTION_SELECT_MON)
-                gSpecialVar_0x8004  = 0xFF;
+            {
+                gSpecialVar_0x8004  = PARTY_NOTHING_CHOSEN;
+                gSpecialVar_Result  = FALSE;
+            }
             sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
             SetPokeStorageTask(Task_ChangeScreen);
         }
@@ -4485,6 +4492,9 @@ static void InitBoxMonSprites(u8 boxId)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
                 sStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j, isEgg);
+
+                if (ShouldBoxmonSpriteBeTransparent(boxId, boxPosition))
+                    sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
             }
             else
             {
@@ -4508,7 +4518,7 @@ static void CreateBoxMonIconAtPos(u8 boxPosition)
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS), isEgg);
-        if (sStorage->boxOption == OPTION_MOVE_ITEMS)
+        if (ShouldBoxmonSpriteBeTransparent(StorageGetCurrentBox(), boxPosition))
             sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
@@ -4598,30 +4608,7 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
     u8 iconsCreated = 0;
     u8 boxPosition = column;
 
-    if (sStorage->boxOption != OPTION_MOVE_ITEMS)
-    {
-        for (i = 0; i < IN_BOX_ROWS; i++)
-        {
-            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
-            {
-                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
-                                                                            sStorage->boxPersonalities[boxPosition],
-                                                                            x, y, 2, subpriority,
-                                                                            sStorage->boxIsEgg[boxPosition]);
-                if (sStorage->boxMonsSprites[boxPosition] != NULL)
-                {
-                    sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
-                    sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
-                    sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
-                    sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
-                    iconsCreated++;
-                }
-            }
-            boxPosition += IN_BOX_COLUMNS;
-            y += 24;
-        }
-    }
-    else
+    for (i = 0; i < IN_BOX_ROWS; i++)
     {
         if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
         {
@@ -4631,20 +4618,13 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                                                                         sStorage->boxIsEgg[boxPosition]);
             if (sStorage->boxMonsSprites[boxPosition] != NULL)
             {
-                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
-                                                                            sStorage->boxPersonalities[boxPosition],
-                                                                            x, y, 2, subpriority,
-                                                                            sStorage->boxIsEgg[boxPosition]);
-                if (sStorage->boxMonsSprites[boxPosition] != NULL)
-                {
-                    sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
-                    sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
-                    sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
-                    sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
-                    if (GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
-                        sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
-                    iconsCreated++;
-                }
+                sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
+                sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
+                sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
+                sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
+                if (ShouldBoxmonSpriteBeTransparent(sStorage->incomingBoxId, boxPosition))
+                    sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                iconsCreated++;
             }
         }
         boxPosition += IN_BOX_COLUMNS;
@@ -7774,7 +7754,7 @@ static bool8 SetMenuTexts_Mon(void)
         }
         break;
     case OPTION_SELECT_MON:
-        if (species != SPECIES_NONE)
+        if (species != SPECIES_NONE && CanBoxMonBeSelected(GetCursorBoxMon()))
             SetMenuText(MENU_SELECT);
         else
             return FALSE;
@@ -10113,9 +10093,14 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     sJustOpenedBag = FALSE;
 }
 
-// Used as a script special for showing a box mon to various npcs (e.g. in-game trades, move deleter)
-void ChooseBoxMon(void)
+void ChooseMonFromStorage(void)
 {
-    gSpecialVar_MonBoxId = 0xFF;
     EnterPokeStorage(OPTION_SELECT_MON);
+}
+
+void RemoveSelectedPcMon(struct Pokemon *mon)
+{
+    struct BoxPokemon *boxmon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+    BoxMonToMon(boxmon, mon);
+    ZeroBoxMonData(boxmon);
 }

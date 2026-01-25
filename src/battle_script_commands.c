@@ -1238,6 +1238,8 @@ static void Cmd_printselectionstringfromtable(void)
 {
     CMD_ARGS(const u16 *ptr);
 
+    assertf(gSelectionBattleScripts[gBattlerAttacker] != NULL, "wrong use of printselectionstringfromtable");
+
     if (gBattleControllerExecFlags == 0)
     {
         const u16 *ptr = cmd->ptr;
@@ -4914,6 +4916,8 @@ static void Cmd_jumpifabilitypresent(void)
 static void Cmd_endselectionscript(void)
 {
     CMD_ARGS();
+
+    assertf(gSelectionBattleScripts[gBattlerAttacker] != NULL, "wrong use of endselectionscript");
     gBattleStruct->battlerState[gBattlerAttacker].selectionScriptFinished = TRUE;
 }
 

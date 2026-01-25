@@ -36,6 +36,7 @@
 #include "test/battle.h"
 #include "test/test_runner_battle.h"
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleDrawTrainerPic(enum BattlerId battler);
 static void PlayerPartnerHandleTrainerSlide(enum BattlerId battler);
 static void PlayerPartnerHandleTrainerSlideBack(enum BattlerId battler);
@@ -49,6 +50,21 @@ static void PlayerPartnerHandleEndLinkBattle(enum BattlerId battler);
 static void PlayerPartnerBufferRunCommand(enum BattlerId battler);
 
 static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
+=======
+static void PlayerPartnerHandleDrawTrainerPic(u32 battler);
+static void PlayerPartnerHandleTrainerSlide(u32 battler);
+static void PlayerPartnerHandleTrainerSlideBack(u32 battler);
+static void PlayerPartnerHandleChooseAction(u32 battler);
+static void PlayerPartnerHandleChooseMove(u32 battler);
+static void PlayerPartnerHandleChoosePokemon(u32 battler);
+static void PlayerPartnerHandleIntroTrainerBallThrow(u32 battler);
+static void PlayerPartnerHandleDrawPartyStatusSummary(u32 battler);
+static void PlayerPartnerHandleEndLinkBattle(u32 battler);
+
+static void PlayerPartnerBufferRunCommand(u32 battler);
+
+static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
@@ -105,14 +121,22 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(enum Ba
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
+<<<<<<< HEAD
 void SetControllerToPlayerPartner(enum BattlerId battler)
+=======
+void SetControllerToPlayerPartner(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerBattleController[battler] = BATTLE_CONTROLLER_PLAYER_PARTNER;
     gBattlerControllerEndFuncs[battler] = PlayerPartnerBufferExecCompleted;
     gBattlerControllerFuncs[battler] = PlayerPartnerBufferRunCommand;
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerBufferRunCommand(enum BattlerId battler)
+=======
+static void PlayerPartnerBufferRunCommand(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsBattleControllerActiveOnLocal(battler))
     {
@@ -123,7 +147,11 @@ static void PlayerPartnerBufferRunCommand(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_WaitForHealthbox(enum BattlerId battler)
+=======
+static void Intro_WaitForHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 finished = FALSE;
 
@@ -152,7 +180,11 @@ static void Intro_WaitForHealthbox(enum BattlerId battler)
 }
 
 // Also used by the link partner.
+<<<<<<< HEAD
 void Controller_PlayerPartnerShowIntroHealthbox(enum BattlerId battler)
+=======
+void Controller_PlayerPartnerShowIntroHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive
         && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive
@@ -182,7 +214,11 @@ void Controller_PlayerPartnerShowIntroHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 void PlayerPartnerBufferExecCompleted(enum BattlerId battler)
+=======
+void PlayerPartnerBufferExecCompleted(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerControllerFuncs[battler] = PlayerPartnerBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -213,7 +249,11 @@ static enum TrainerPicID PlayerPartnerGetTrainerBackPicId(enum DifficultyLevel d
 // some explanation here
 // in emerald it's possible to have a tag battle in the battle frontier facilities with AI
 // which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven) that use the back pic as well as animate it
+<<<<<<< HEAD
 static void PlayerPartnerHandleDrawTrainerPic(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleDrawTrainerPic(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 isFrontPic;
     s16 xPos, yPos;
@@ -255,32 +295,52 @@ static void PlayerPartnerHandleDrawTrainerPic(enum BattlerId battler)
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleTrainerSlide(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleTrainerSlide(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(gPartnerTrainerId);
     enum TrainerPicID trainerPicId = PlayerPartnerGetTrainerBackPicId(difficulty);
     BtlController_HandleTrainerSlide(battler, trainerPicId);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleTrainerSlideBack(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleTrainerSlideBack(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleChooseAction(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleChooseAction(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     AI_TrySwitchOrUseItem(battler);
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleChooseMove(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleChooseMove(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 chosenMoveIndex;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     chosenMoveIndex = gAiBattleData->chosenMoveIndex[battler];
     gBattlerTarget = gAiBattleData->chosenTarget[battler];
+<<<<<<< HEAD
     enum MoveTarget moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[chosenMoveIndex]);
+=======
+    u32 moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[chosenMoveIndex]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (moveTarget == TARGET_USER || moveTarget == TARGET_USER_OR_ALLY)
     {
@@ -308,7 +368,11 @@ static void PlayerPartnerHandleChooseMove(enum BattlerId battler)
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleChoosePokemon(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleChoosePokemon(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 chosenMonId;
     // Choosing Revival Blessing target
@@ -323,8 +387,13 @@ static void PlayerPartnerHandleChoosePokemon(enum BattlerId battler)
         if (chosenMonId == PARTY_SIZE || !IsValidForBattle(&gPlayerParty[chosenMonId])) // just switch to the next mon
         {
             s32 firstId = (IsAiVsAiBattle()) ? 0 : (PARTY_SIZE / 2);
+<<<<<<< HEAD
             enum BattlerId battler1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
             enum BattlerId battler2 = IsDoubleBattle() ? GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT) : battler1;
+=======
+            u32 battler1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            u32 battler2 = IsDoubleBattle() ? GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT) : battler1;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
             for (chosenMonId = firstId; chosenMonId < PARTY_SIZE; chosenMonId++)
             {
@@ -351,7 +420,11 @@ static void PlayerPartnerHandleChoosePokemon(enum BattlerId battler)
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleIntroTrainerBallThrow(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleIntroTrainerBallThrow(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     const u16 *trainerPal;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(gPartnerTrainerId);
@@ -366,12 +439,20 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(enum BattlerId battler)
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Controller_PlayerPartnerShowIntroHealthbox);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleDrawPartyStatusSummary(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleDrawPartyStatusSummary(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_PLAYER, TRUE);
 }
 
+<<<<<<< HEAD
 static void PlayerPartnerHandleEndLinkBattle(enum BattlerId battler)
+=======
+static void PlayerPartnerHandleEndLinkBattle(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleOutcome = gBattleResources->bufferA[battler][1];
     FadeOutMapMusic(5);

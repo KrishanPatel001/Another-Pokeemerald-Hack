@@ -1,7 +1,11 @@
 #ifndef GUARD_TYPE_ICONS_H
 #define GUARD_TYPE_ICONS_H
 
+<<<<<<< HEAD
 void LoadTypeIcons(enum BattlerId battler);
+=======
+void LoadTypeIcons(u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #define TYPE_ICON_TAG 0x2720
 #define TYPE_ICON_TAG_2 0x2721

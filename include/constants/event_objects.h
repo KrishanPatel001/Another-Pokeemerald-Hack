@@ -4,6 +4,7 @@
 #include "constants/global.h"
 #include "constants/map_event_ids.h"
 
+<<<<<<< HEAD
 #define PLAYER_AVATAR_GFX_MALE_NORMAL     (IS_FRLG ? OBJ_EVENT_GFX_RED_NORMAL     : OBJ_EVENT_GFX_BRENDAN_NORMAL)
 #define PLAYER_AVATAR_GFX_MALE_MACH_BIKE  (IS_FRLG ? OBJ_EVENT_GFX_RED_BIKE       : OBJ_EVENT_GFX_BRENDAN_MACH_BIKE)
 #define PLAYER_AVATAR_GFX_MALE_ACRO_BIKE  (IS_FRLG ? OBJ_EVENT_GFX_RED_BIKE       : OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE)
@@ -23,6 +24,8 @@
 #define PLAYER_AVATAR_GFX_FEMALE_WATERING   (IS_FRLG ? OBJ_EVENT_GFX_GREEN_FIELD_MOVE : OBJ_EVENT_GFX_MAY_WATERING)
 #define PLAYER_AVATAR_GFX_FEMALE_VSSEEKER   (IS_FRLG ? OBJ_EVENT_GFX_GREEN_VS_SEEKER  : OBJ_EVENT_GFX_MAY_FIELD_MOVE)
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define OBJ_EVENT_GFX_BRENDAN_NORMAL               0
 #define OBJ_EVENT_GFX_BRENDAN_MACH_BIKE            1
 #define OBJ_EVENT_GFX_BRENDAN_SURFING              2
@@ -267,6 +270,7 @@
 #define OBJ_EVENT_GFX_LIGHT_SPRITE               241
 #define OBJ_EVENT_GFX_APRICORN_TREE              242
 
+<<<<<<< HEAD
 // FRLG objects
 #define OBJ_EVENT_GFX_RED_NORMAL                 243
 #define OBJ_EVENT_GFX_RED_BIKE                   244
@@ -424,6 +428,12 @@
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
 #define NUM_OBJ_EVENT_GFX                        388
+=======
+// NOTE: The maximum amount of object events has been expanded from 255 to 65535.
+// Since dynamic graphics ids still require at least 16 free values, the actual limit
+// is 65519, but even considering follower Pokémon, this should be more than enough :)
+#define NUM_OBJ_EVENT_GFX                        243
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 
 // These are dynamic object gfx ids.
@@ -553,6 +563,7 @@
 #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
+<<<<<<< HEAD
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED              0x1125
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION   0x1126
 #define OBJ_EVENT_PAL_TAG_PLAYER_GREEN            0x1127
@@ -568,6 +579,8 @@
 #define OBJ_EVENT_PAL_TAG_METEORITE               0x1137
 #define OBJ_EVENT_PAL_TAG_SEAGALLOP               0x1138
 #define OBJ_EVENT_PAL_TAG_SS_ANNE                 0x1139
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #if OW_FOLLOWERS_POKEBALLS
 // Vanilla

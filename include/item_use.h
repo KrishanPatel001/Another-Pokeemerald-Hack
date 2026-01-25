@@ -63,4 +63,14 @@ enum {
 bool32 CanThrowBall(void);
 bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon);
 
+<<<<<<< HEAD
+enum ItemTMHMOrEvolutionStone
+{
+    ITEM_IS_OTHER,
+    ITEM_IS_TM_HM,
+    ITEM_IS_EVOLUTION_STONE,
+};
+
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_ITEM_USE_H

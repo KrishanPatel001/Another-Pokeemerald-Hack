@@ -1697,7 +1697,11 @@ static void OpenContextMenu(u8 taskId)
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_KeyItemsPocket, sizeof(sContextMenuItems_KeyItemsPocket));
                 if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
                     gBagMenu->contextMenuItemsBuffer[1] = ACTION_DESELECT;
+<<<<<<< HEAD
                 if (gSpecialVar_ItemId == ITEM_MACH_BIKE || gSpecialVar_ItemId == ITEM_ACRO_BIKE || gSpecialVar_ItemId == ITEM_BICYCLE)
+=======
+                if (gSpecialVar_ItemId == ITEM_MACH_BIKE || gSpecialVar_ItemId == ITEM_ACRO_BIKE)
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 {
                     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
                         gBagMenu->contextMenuItemsBuffer[0] = ACTION_WALK;
@@ -2441,6 +2445,7 @@ void DoWallyTutorialBagMenu(void)
     GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
+<<<<<<< HEAD
 void InitOldManBag(void)
 {
     PrepareBagForWallyTutorial();
@@ -2449,6 +2454,8 @@ void InitOldManBag(void)
     GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define tTimer data[8]
 #define WALLY_BAG_DELAY 102 // The number of frames between each action Wally takes in the bag
 

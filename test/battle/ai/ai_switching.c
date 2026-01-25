@@ -403,6 +403,7 @@ AI_SINGLE_BATTLE_TEST("AI will switch out if it has no move that affects the pla
     }
 }
 
+<<<<<<< HEAD
 AI_DOUBLE_BATTLE_TEST("AI will switch out if it has no moves that affect either of the player's battlers")
 {
     PASSES_RANDOMLY(SHOULD_SWITCH_ALL_MOVES_BAD_PERCENTAGE, 100, RNG_AI_SWITCH_ALL_MOVES_BAD);
@@ -433,6 +434,8 @@ AI_DOUBLE_BATTLE_TEST("AI will not switch out if it's moves can still affect one
 }
 
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 AI_SINGLE_BATTLE_TEST("When AI switches out due to having no move that affects the player, AI will send in a mon that can hit the player, even if not ideal")
 {
     GIVEN {
@@ -1187,15 +1190,27 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has an 
     PARAMETRIZE { aiMon = SPECIES_JOLTEON; absorbingAbility = ABILITY_VOLT_ABSORB; move = MOVE_THUNDERBOLT; }
     PARAMETRIZE { aiMon = SPECIES_ELECTIVIRE; absorbingAbility = ABILITY_MOTOR_DRIVE; move = MOVE_THUNDERBOLT; }
     PARAMETRIZE { aiMon = SPECIES_MANECTRIC; absorbingAbility = ABILITY_LIGHTNING_ROD; move = MOVE_THUNDERBOLT; }
+<<<<<<< HEAD
+=======
     PARAMETRIZE { aiMon = SPECIES_ELECTIVIRE; absorbingAbility = ABILITY_MOTOR_DRIVE; move = MOVE_THUNDERBOLT; }
+>>>>>>> 11d8f44022 (Updated to upcoming)
     PARAMETRIZE { aiMon = SPECIES_AZUMARILL; absorbingAbility = ABILITY_SAP_SIPPER; move = MOVE_GIGA_DRAIN; }
     PARAMETRIZE { aiMon = SPECIES_ORTHWORM; absorbingAbility = ABILITY_EARTH_EATER; move = MOVE_EARTHQUAKE; }
     PARAMETRIZE { aiMon = SPECIES_BRONZONG; absorbingAbility = ABILITY_LEVITATE; move = MOVE_EARTHQUAKE; }
     PARAMETRIZE { aiMon = SPECIES_ELECTRODE; absorbingAbility = ABILITY_SOUNDPROOF; move = MOVE_HYPER_VOICE; }
     PARAMETRIZE { aiMon = SPECIES_CHESNAUGHT; absorbingAbility = ABILITY_BULLETPROOF; move = MOVE_SLUDGE_BOMB; }
     PARAMETRIZE { aiMon = SPECIES_BRAMBLEGHAST; absorbingAbility = ABILITY_WIND_RIDER; move = MOVE_HURRICANE; }
+<<<<<<< HEAD
+    PARAMETRIZE { aiMon = SPECIES_BRAMBLEGHAST; absorbingAbility = ABILITY_WIND_RIDER; move = MOVE_HEAT_WAVE; }
+    PARAMETRIZE { aiMon = SPECIES_SHELLDER; absorbingAbility = ABILITY_OVERCOAT; move = MOVE_MAGIC_POWDER; }
+    PARAMETRIZE { aiMon = SPECIES_SHELLDER; absorbingAbility = ABILITY_OVERCOAT; move = MOVE_STUN_SPORE; }
     GIVEN {
         WITH_CONFIG(CONFIG_REDIRECT_ABILITY_IMMUNITY, GEN_5);
+        WITH_CONFIG(CONFIG_POWDER_OVERCOAT, GEN_6);
+=======
+    GIVEN {
+        WITH_CONFIG(CONFIG_REDIRECT_ABILITY_IMMUNITY, GEN_5);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_ZIGZAGOON) { Moves(move); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH); }

@@ -40,9 +40,12 @@ struct BgConfig2
 static struct BgControl sGpuBgConfigs;
 static struct BgConfig2 sGpuBgConfigs2[NUM_BACKGROUNDS];
 static u32 sDmaBusyBitfield[NUM_BACKGROUNDS];
+<<<<<<< HEAD
 #if IS_FRLG
 static u8 gpu_tile_allocation_map_bg[0x100];
 #endif
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 COMMON_DATA u32 gWindowTileAutoAllocEnabled = 0;
 
@@ -292,6 +295,7 @@ bool32 IsInvalidBg(u32 bg)
 // From FRLG. Dummied out.
 int BgTileAllocOp(int bg, int offset, int count, int mode)
 {
+<<<<<<< HEAD
 #if IS_FRLG
     int start, end;
     int blockSize;
@@ -347,6 +351,12 @@ int BgTileAllocOp(int bg, int offset, int count, int mode)
 }
 
 void ResetBgsAndClearDma3BusyFlags(u32 enableWindowTileAutoAlloc)
+=======
+    return 0;
+}
+
+void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     int i;
     ResetBgs();
@@ -356,6 +366,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 enableWindowTileAutoAlloc)
         sDmaBusyBitfield[i] = 0;
     }
 
+<<<<<<< HEAD
     gWindowTileAutoAllocEnabled = enableWindowTileAutoAlloc;
 
 #if IS_FRLG
@@ -364,6 +375,9 @@ void ResetBgsAndClearDma3BusyFlags(u32 enableWindowTileAutoAlloc)
         gpu_tile_allocation_map_bg[i] = 0;
     }
 #endif
+=======
+    gWindowTileAutoAllocEnabled = leftoverFireRedLeafGreenVariable;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 void InitBgsFromTemplates(u32 bgMode, const struct BgTemplate *templates, u8 numTemplates)
@@ -394,9 +408,12 @@ void InitBgsFromTemplates(u32 bgMode, const struct BgTemplate *templates, u8 num
             sGpuBgConfigs2[bg].tilemap = NULL;
             sGpuBgConfigs2[bg].bg_x = 0;
             sGpuBgConfigs2[bg].bg_y = 0;
+<<<<<<< HEAD
 #if IS_FRLG
             gpu_tile_allocation_map_bg[(templates[i].charBaseIndex * (BG_CHAR_SIZE / TILE_SIZE_4BPP)) / 8] = 1;
 #endif
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
     }
 }
@@ -422,9 +439,12 @@ void InitBgFromTemplate(const struct BgTemplate *template)
         sGpuBgConfigs2[bg].tilemap = NULL;
         sGpuBgConfigs2[bg].bg_x = 0;
         sGpuBgConfigs2[bg].bg_y = 0;
+<<<<<<< HEAD
 #if IS_FRLG
         gpu_tile_allocation_map_bg[(template->charBaseIndex * (BG_CHAR_SIZE / TILE_SIZE_4BPP)) / 8] = 1;
 #endif
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 

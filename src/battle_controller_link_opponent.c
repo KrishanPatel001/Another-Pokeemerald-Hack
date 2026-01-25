@@ -31,6 +31,7 @@
 #include "recorded_battle.h"
 #include "random.h"
 
+<<<<<<< HEAD
 static void LinkOpponentHandleDrawTrainerPic(enum BattlerId battler);
 static void LinkOpponentHandleTrainerSlide(enum BattlerId battler);
 static void LinkOpponentHandleTrainerSlideBack(enum BattlerId battler);
@@ -42,6 +43,19 @@ static void LinkOpponentHandleEndLinkBattle(enum BattlerId battler);
 static void LinkOpponentBufferRunCommand(enum BattlerId battler);
 
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
+=======
+static void LinkOpponentHandleDrawTrainerPic(u32 battler);
+static void LinkOpponentHandleTrainerSlide(u32 battler);
+static void LinkOpponentHandleTrainerSlideBack(u32 battler);
+static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler);
+static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler);
+static void LinkOpponentHandleLinkStandbyMsg(u32 battler);
+static void LinkOpponentHandleEndLinkBattle(u32 battler);
+
+static void LinkOpponentBufferRunCommand(u32 battler);
+
+static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
@@ -98,14 +112,22 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(enum Bat
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
+<<<<<<< HEAD
 void SetControllerToLinkOpponent(enum BattlerId battler)
+=======
+void SetControllerToLinkOpponent(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerBattleController[battler] = BATTLE_CONTROLLER_LINK_OPPONENT;
     gBattlerControllerEndFuncs[battler] = LinkOpponentBufferExecCompleted;
     gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
 }
 
+<<<<<<< HEAD
 static void LinkOpponentBufferRunCommand(enum BattlerId battler)
+=======
+static void LinkOpponentBufferRunCommand(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsBattleControllerActiveOnLocal(battler))
     {
@@ -116,7 +138,11 @@ static void LinkOpponentBufferRunCommand(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
+=======
+static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 healthboxAnimDone = FALSE;
     bool32 twoMons = FALSE;
@@ -170,7 +196,11 @@ static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
+=======
+static void Intro_TryShinyAnimShowHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 bgmRestored = FALSE;
 
@@ -258,7 +288,11 @@ static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 void LinkOpponentBufferExecCompleted(enum BattlerId battler)
+=======
+void LinkOpponentBufferExecCompleted(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -274,6 +308,7 @@ void LinkOpponentBufferExecCompleted(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleDrawTrainerPic(enum BattlerId battler)
 {
     s16 xPos;
@@ -283,13 +318,27 @@ static void LinkOpponentHandleDrawTrainerPic(enum BattlerId battler)
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         if ((position & BIT_FLANK) != 0) // second mon
+=======
+static void LinkOpponentHandleDrawTrainerPic(u32 battler)
+{
+    s16 xPos;
+    enum TrainerPicID trainerPicId;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
+>>>>>>> 11d8f44022 (Updated to upcoming)
             xPos = 152;
         else // first mon
             xPos = 200;
 
         if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         {
+<<<<<<< HEAD
             if (position == B_POSITION_OPPONENT_LEFT)
+=======
+            if (battler == B_POSITION_OPPONENT_LEFT)
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
             else
                 trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
@@ -350,11 +399,19 @@ static void LinkOpponentHandleDrawTrainerPic(enum BattlerId battler)
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, 40, -1);
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleTrainerSlide(enum BattlerId battler)
 {
     enum TrainerPicID trainerPicId;
 
     if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT)
+=======
+static void LinkOpponentHandleTrainerSlide(u32 battler)
+{
+    enum TrainerPicID trainerPicId;
+
+    if (battler == B_POSITION_OPPONENT_LEFT)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
     else
         trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
@@ -363,28 +420,48 @@ static void LinkOpponentHandleTrainerSlide(enum BattlerId battler)
     BtlController_Complete(battler); // Possibly a bug, because execution should be completed after the slide in finishes. See Controller_WaitForTrainerPic.
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleTrainerSlideBack(enum BattlerId battler)
+=======
+static void LinkOpponentHandleTrainerSlideBack(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleIntroTrainerBallThrow(enum BattlerId battler)
+=======
+static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleIntroTrainerBallThrow(battler, 0, NULL, 0, Intro_TryShinyAnimShowHealthbox);
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleDrawPartyStatusSummary(enum BattlerId battler)
+=======
+static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_OPPONENT, TRUE);
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleLinkStandbyMsg(enum BattlerId battler)
+=======
+static void LinkOpponentHandleLinkStandbyMsg(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void LinkOpponentHandleEndLinkBattle(enum BattlerId battler)
+=======
+static void LinkOpponentHandleEndLinkBattle(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
 

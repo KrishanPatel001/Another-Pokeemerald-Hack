@@ -1042,6 +1042,10 @@ enum NationalDexOrder
     NATIONAL_DEX_PECHARUNT,
 };
 
+<<<<<<< HEAD
+=======
+#define KANTO_DEX_COUNT     NATIONAL_DEX_MEW
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define JOHTO_DEX_COUNT     NATIONAL_DEX_CELEBI
 
 #if P_GEN_9_POKEMON == TRUE
@@ -1306,6 +1310,7 @@ enum HoennDexOrder
     HOENN_DEX_DEOXYS,
 };
 
+<<<<<<< HEAD
 
 // Kanto Pokedex order
 enum KantoDexOrder
@@ -1569,6 +1574,10 @@ enum KantoDexOrder
 
 #define REGIONAL_DEX_COUNT (IS_FRLG ? KANTO_DEX_COUNT : HOENN_DEX_COUNT)
 
+=======
+#define HOENN_DEX_COUNT (HOENN_DEX_DEOXYS + 1)
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define DECAGRAMS_IN_POUND             4536
 #define CM_PER_INCH                    2.54
 #define CM_PER_INCH_FACTOR             (CM_PER_INCH * 100)

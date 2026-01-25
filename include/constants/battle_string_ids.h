@@ -712,6 +712,7 @@ enum StringID
     STRINGID_POWERCONSTRUCTPRESENCEOFMANY,
     STRINGID_POWERCONSTRUCTTRANSFORM,
     STRINGID_ABILITYSHIELDPROTECTS,
+<<<<<<< HEAD
     STRINGID_MONTOOSCAREDTOMOVE,
     STRINGID_GHOSTGETOUTGETOUT,
     STRINGID_SILPHSCOPEUNVEILED,
@@ -722,6 +723,8 @@ enum StringID
     STRINGID_PKMNANGRY,
     STRINGID_PKMNEATING,
     STRINGID_PKMNDISGUISEWASBUSTED,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     STRINGID_COUNT
 };
 
@@ -972,6 +975,7 @@ enum InobedientStringID
 // Skips the one used for Battle Palace
 #define NUM_LOAF_STRINGS (B_MSG_PRETEND_NOT_NOTICE + 1)
 
+<<<<<<< HEAD
 // gSafariReactionStringIds
 enum SafariReactionStringID
 {
@@ -981,6 +985,8 @@ enum SafariReactionStringID
     NUM_SAFARI_REACTIONS
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // gSafariGetNearStringIds
 enum SafariGetNearStringID
 {

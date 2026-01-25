@@ -157,6 +157,7 @@ SINGLE_BATTLE_TEST("Stomping Tantrum will deal double damage if user was immune 
         EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
+<<<<<<< HEAD
 
 DOUBLE_BATTLE_TEST("Stomping Tantrum will not deal double damage if spread moved failed one target")
 {
@@ -183,3 +184,5 @@ DOUBLE_BATTLE_TEST("Stomping Tantrum will not deal double damage if spread moved
         EXPECT_EQ(damage[0], damage[1]);
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

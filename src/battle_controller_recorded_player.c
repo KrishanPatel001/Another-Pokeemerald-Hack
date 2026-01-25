@@ -31,6 +31,7 @@
 #include "test/battle.h"
 #include "test/test_runner_battle.h"
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleDrawTrainerPic(enum BattlerId battler);
 static void RecordedPlayerHandleTrainerSlideBack(enum BattlerId battler);
 static void RecordedPlayerHandleChooseAction(enum BattlerId battler);
@@ -44,6 +45,21 @@ static void RecordedPlayerHandleEndLinkBattle(enum BattlerId battler);
 static void RecordedPlayerBufferRunCommand(enum BattlerId battler);
 
 static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
+=======
+static void RecordedPlayerHandleDrawTrainerPic(u32 battler);
+static void RecordedPlayerHandleTrainerSlideBack(u32 battler);
+static void RecordedPlayerHandleChooseAction(u32 battler);
+static void RecordedPlayerHandleChooseMove(u32 battler);
+static void RecordedPlayerHandleChooseItem(u32 battler);
+static void RecordedPlayerHandleChoosePokemon(u32 battler);
+static void RecordedPlayerHandleStatusAnimation(u32 battler);
+static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler);
+static void RecordedPlayerHandleDrawPartyStatusSummary(u32 battler);
+static void RecordedPlayerHandleEndLinkBattle(u32 battler);
+static void RecordedPlayerBufferRunCommand(u32 battler);
+
+static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
@@ -100,14 +116,22 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(enum B
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
+<<<<<<< HEAD
 void SetControllerToRecordedPlayer(enum BattlerId battler)
+=======
+void SetControllerToRecordedPlayer(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerBattleController[battler] = BATTLE_CONTROLLER_RECORDED_PLAYER;
     gBattlerControllerEndFuncs[battler] = RecordedPlayerBufferExecCompleted;
     gBattlerControllerFuncs[battler] = RecordedPlayerBufferRunCommand;
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerBufferRunCommand(enum BattlerId battler)
+=======
+static void RecordedPlayerBufferRunCommand(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsBattleControllerActiveOnLocal(battler))
     {
@@ -118,7 +142,11 @@ static void RecordedPlayerBufferRunCommand(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
+=======
+static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 healthboxAnimDone = FALSE;
 
@@ -184,7 +212,11 @@ static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
+=======
+static void Intro_TryShinyAnimShowHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 bgmRestored = FALSE;
 
@@ -253,7 +285,11 @@ static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 void RecordedPlayerBufferExecCompleted(enum BattlerId battler)
+=======
+void RecordedPlayerBufferExecCompleted(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerControllerFuncs[battler] = RecordedPlayerBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -269,7 +305,11 @@ void RecordedPlayerBufferExecCompleted(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleDrawTrainerPic(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleDrawTrainerPic(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 isFrontPic;
     s16 xPos, yPos;
@@ -330,12 +370,20 @@ static void RecordedPlayerHandleDrawTrainerPic(enum BattlerId battler)
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleTrainerSlideBack(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleTrainerSlideBack(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
 }
 
+<<<<<<< HEAD
 static void ChooseActionInBattlePalace(enum BattlerId battler)
+=======
+static void ChooseActionInBattlePalace(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (gBattleCommunication[4] >= gBattlersCount / 2)
     {
@@ -344,7 +392,11 @@ static void ChooseActionInBattlePalace(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleChooseAction(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleChooseAction(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
@@ -357,7 +409,11 @@ static void RecordedPlayerHandleChooseAction(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleChooseMove(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleChooseMove(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
@@ -373,7 +429,11 @@ static void RecordedPlayerHandleChooseMove(enum BattlerId battler)
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleChooseItem(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleChooseItem(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 byte1 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
     u8 byte2 = RecordedBattle_GetBattlerAction(RECORDED_ITEM_ID, battler);
@@ -384,7 +444,11 @@ static void RecordedPlayerHandleChooseItem(enum BattlerId battler)
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleChoosePokemon(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleChoosePokemon(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleStruct->monToSwitchIntoId[battler] = RecordedBattle_GetBattlerAction(RECORDED_PARTY_INDEX, battler);
     gSelectedMonPartyId = gBattleStruct->monToSwitchIntoId[battler]; // Revival Blessing
@@ -392,31 +456,53 @@ static void RecordedPlayerHandleChoosePokemon(enum BattlerId battler)
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleStatusAnimation(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleStatusAnimation(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleStatusAnimation(battler);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleIntroTrainerBallThrow(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum TrainerPicID trainerPicId;
     const u16 *trainerPal;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+<<<<<<< HEAD
         trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(battler)].gender == FEMALE ? TRAINER_BACK_PIC_PLAYER_FEMALE : TRAINER_BACK_PIC_PLAYER_MALE;
     else
         trainerPicId = gSaveBlock2Ptr->playerGender == FEMALE ? TRAINER_BACK_PIC_PLAYER_FEMALE : TRAINER_BACK_PIC_PLAYER_MALE;
+=======
+        trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(battler)].gender + TRAINER_PIC_BACK_BRENDAN;
+    else
+        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_PIC_BACK_BRENDAN;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Intro_TryShinyAnimShowHealthbox);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleDrawPartyStatusSummary(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleDrawPartyStatusSummary(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_PLAYER, TRUE);
 }
 
+<<<<<<< HEAD
 static void RecordedPlayerHandleEndLinkBattle(enum BattlerId battler)
+=======
+static void RecordedPlayerHandleEndLinkBattle(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleOutcome = gBattleResources->bufferA[battler][1];
     FadeOutMapMusic(5);

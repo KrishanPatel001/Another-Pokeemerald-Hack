@@ -73,8 +73,11 @@
 #include "constants/union_room.h"
 #include "constants/weather.h"
 
+<<<<<<< HEAD
 extern u16 gSpecialVar_ItemId;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)
 
 struct SpeciesItem
@@ -122,6 +125,7 @@ static const struct CombinedMove sCombinedMoves[2] =
 // NOTE: The order of the elements in the array below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
 
+<<<<<<< HEAD
 #define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name - 1] = NATIONAL_DEX_##name
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 
@@ -388,6 +392,10 @@ static const enum NationalDexOrder sKantoToNationalOrder[KANTO_DEX_COUNT] =
 };
 
 
+=======
+#define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // Assigns all Hoenn Dex Indexes to a National Dex Index
 static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
@@ -1138,7 +1146,10 @@ static const s8 sFriendshipEventModifiers[][3] =
     [FRIENDSHIP_EVENT_FAINT_SMALL]     = {-1, -1, -1},
     [FRIENDSHIP_EVENT_FAINT_FIELD_PSN] = {-5, -5, -10},
     [FRIENDSHIP_EVENT_FAINT_LARGE]     = {-5, -5, -10},
+<<<<<<< HEAD
     [FRIENDSHIP_EVENT_MASSAGE]         = { 3,  3,  3 },
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
@@ -2188,9 +2199,15 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, enum Move mov
     SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
+<<<<<<< HEAD
 u8 CountAliveMonsInBattle(u8 caseId, enum BattlerId battler)
 {
     enum BattlerId i;
+=======
+u8 CountAliveMonsInBattle(u8 caseId, u32 battler)
+{
+    u32 i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 retVal = 0;
 
     switch (caseId)
@@ -2221,7 +2238,11 @@ u8 CountAliveMonsInBattle(u8 caseId, enum BattlerId battler)
     return retVal;
 }
 
+<<<<<<< HEAD
 u8 GetDefaultMoveTarget(enum BattlerId battlerId)
+=======
+u8 GetDefaultMoveTarget(u8 battlerId)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 opposing = BATTLE_OPPOSITE(GetBattlerSide(battlerId));
 
@@ -3477,7 +3498,11 @@ u8 CalculatePartyCount(struct Pokemon *party)
     return partyCount;
 }
 
+<<<<<<< HEAD
 u8 CalculatePartyCountOfSide(enum BattlerId battler, struct Pokemon *party)
+=======
+u8 CalculatePartyCountOfSide(u32 battler, struct Pokemon *party)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 partyCount, partySize;
     GetAIPartyIndexes(battler, &partyCount, &partySize);
@@ -3503,7 +3528,11 @@ u8 CalculateEnemyPartyCount(void)
     return gEnemyPartyCount;
 }
 
+<<<<<<< HEAD
 u8 CalculateEnemyPartyCountInSide(enum BattlerId battler)
+=======
+u8 CalculateEnemyPartyCountInSide(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return CalculatePartyCountOfSide(battler, gEnemyParty);
 }
@@ -3867,7 +3896,11 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     memset(&dst->volatiles, 0, sizeof(struct Volatiles));
 }
 
+<<<<<<< HEAD
 void CopyPartyMonToBattleData(enum BattlerId battler, u32 partyIndex)
+=======
+void CopyPartyMonToBattleData(u32 battler, u32 partyIndex)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum BattleSide side = GetBattlerSide(battler);
     struct Pokemon *party = GetSideParty(side);
@@ -3920,7 +3953,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
     u32 temp1, temp2;
     s8 friendshipChange = 0;
     enum HoldEffect holdEffect;
+<<<<<<< HEAD
     enum BattlerId battler = MAX_BATTLERS_COUNT;
+=======
+    u8 battler = MAX_BATTLERS_COUNT;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     bool32 friendshipOnly = FALSE;
     enum Item heldItem;
     u8 effectFlags;
@@ -4357,7 +4394,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
     return retVal;
 }
 
+<<<<<<< HEAD
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, enum BattlerId battler)
+=======
+bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 status = GetMonData(mon, MON_DATA_STATUS, 0);
 
@@ -4392,7 +4433,11 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, enum BattlerId bat
     }
 }
 
+<<<<<<< HEAD
 u8 GetItemEffectParamOffset(enum BattlerId battler, enum Item itemId, u8 effectByte, u8 effectBit)
+=======
+u8 GetItemEffectParamOffset(u32 battler, enum Item itemId, u8 effectByte, u8 effectBit)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     const u8 *temp;
     const u8 *itemEffect;
@@ -5172,6 +5217,7 @@ u16 NationalPokedexNumToSpecies(enum NationalDexOrder nationalNum)
     return GET_BASE_SPECIES_ID(species);
 }
 
+<<<<<<< HEAD
 u32 NationalToRegionalOrder(enum NationalDexOrder nationalNum)
 {
     if (IS_FRLG)
@@ -5197,6 +5243,8 @@ enum KantoDexOrder NationalToKantoOrder(enum NationalDexOrder nationalNum)
     return kantoNum + 1;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 enum HoennDexOrder NationalToHoennOrder(enum NationalDexOrder nationalNum)
 {
     u16 hoennNum;
@@ -5224,6 +5272,7 @@ enum NationalDexOrder SpeciesToNationalPokedexNum(u16 species)
     return gSpeciesInfo[species].natDexNum;
 }
 
+<<<<<<< HEAD
 u32 SpeciesToRegionalPokedexNum(u16 species)
 {
     if (IS_FRLG)
@@ -5238,6 +5287,8 @@ enum KantoDexOrder SpeciesToKantoPokedexNum(u16 species)
     return NationalToKantoOrder(gSpeciesInfo[species].natDexNum);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 enum HoennDexOrder SpeciesToHoennPokedexNum(u16 species)
 {
     if (!species)
@@ -5245,6 +5296,7 @@ enum HoennDexOrder SpeciesToHoennPokedexNum(u16 species)
     return NationalToHoennOrder(gSpeciesInfo[species].natDexNum);
 }
 
+<<<<<<< HEAD
 enum NationalDexOrder RegionalToNationalOrder(u32 regionalNum)
 {
     if (IS_FRLG)
@@ -5260,6 +5312,8 @@ enum NationalDexOrder KantoToNationalOrder(enum KantoDexOrder kantoNum)
     return sKantoToNationalOrder[kantoNum - 1];
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 enum NationalDexOrder HoennToNationalOrder(enum HoennDexOrder hoennNum)
 {
     if (!hoennNum || hoennNum >= HOENN_DEX_COUNT)
@@ -5712,13 +5766,19 @@ u16 SpeciesToPokedexNum(u16 species)
     }
     else
     {
+<<<<<<< HEAD
         species = SpeciesToRegionalPokedexNum(species);
         if (species <= REGIONAL_DEX_COUNT)
+=======
+        species = SpeciesToHoennPokedexNum(species);
+        if (species <= HOENN_DEX_COUNT)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             return species;
         return 0xFFFF;
     }
 }
 
+<<<<<<< HEAD
 bool32 IsSpeciesInRegionalDex(u16 species)
 {
     if (IS_FRLG)
@@ -5734,6 +5794,8 @@ bool32 IsSpeciesInKantoDex(u16 species)
         return TRUE;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 bool32 IsSpeciesInHoennDex(u16 species)
 {
     if (SpeciesToHoennPokedexNum(species) > HOENN_DEX_COUNT)
@@ -5801,11 +5863,14 @@ u16 GetBattleBGM(void)
             return MUS_VS_RIVAL;
         case TRAINER_CLASS_ELITE_FOUR:
             return MUS_VS_ELITE_FOUR;
+<<<<<<< HEAD
         case TRAINER_CLASS_CHAMPION_FRLG:
             return MUS_RG_VS_CHAMPION;
         case TRAINER_CLASS_LEADER_FRLG:
         case TRAINER_CLASS_ELITE_FOUR_FRLG:
             return MUS_RG_VS_GYM_LEADER;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         case TRAINER_CLASS_SALON_MAIDEN:
         case TRAINER_CLASS_DOME_ACE:
         case TRAINER_CLASS_PALACE_MAVEN:
@@ -5815,18 +5880,26 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_PYRAMID_KING:
             return MUS_VS_FRONTIER_BRAIN;
         default:
+<<<<<<< HEAD
             if (GetCurrentRegion() == REGION_KANTO)
                 return MUS_RG_VS_TRAINER;
             else
                 return MUS_VS_TRAINER;
+=======
+            return MUS_VS_TRAINER;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
     }
     else
     {
+<<<<<<< HEAD
         if (GetCurrentRegion() == REGION_KANTO)
             return MUS_RG_VS_WILD;
         else
             return MUS_VS_WILD;
+=======
+        return MUS_VS_WILD;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
@@ -6189,7 +6262,11 @@ void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, 
         pan = 0;
         break;
     }
+<<<<<<< HEAD
     if (panModeAnimFlag & SKIP_FRONT_ANIM || (gBattleTypeFlags & BATTLE_TYPE_GHOST))
+=======
+    if (panModeAnimFlag & SKIP_FRONT_ANIM)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         // No animation, only check if cry needs to be played
         if (!noCry)
@@ -6319,9 +6396,15 @@ enum TrainerPicID FacilityClassToPicIndex(u16 facilityClass)
 enum TrainerPicID PlayerGenderToFrontTrainerPicId(enum Gender playerGender)
 {
     if (playerGender != MALE)
+<<<<<<< HEAD
         return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_LEAF : FACILITY_CLASS_MAY);
     else
         return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_RED : FACILITY_CLASS_BRENDAN);
+=======
+        return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
+    else
+        return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality)
@@ -6568,6 +6651,7 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
 }
 
 // Returns the current species if no form change is possible
+<<<<<<< HEAD
 u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method)
 {
     u32 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
@@ -6810,13 +6894,135 @@ u32 GetFormChangeTargetSpecies_Internal(struct FormChangeContext ctx)
         case FORM_CHANGE_OVERWORLD_WEATHER:
         case FORM_CHANGE_TERMINATOR:
             break;
+=======
+u32 GetFormChangeTargetSpecies(struct Pokemon *mon, enum FormChanges method, u32 arg)
+{
+    return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
+}
+
+// Returns the current species if no form change is possible
+u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method, u32 arg)
+{
+    u32 i;
+    u32 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    u32 targetSpecies = species;
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+    u16 heldItem;
+    enum Ability ability;
+
+    if (formChanges != NULL)
+    {
+        heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+        ability = GetAbilityBySpecies(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM));
+
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+            {
+                switch (method)
+                {
+                case FORM_CHANGE_ITEM_HOLD:
+                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                     && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
+                    {
+                        // This is to prevent reverting to base form when giving the item to the corresponding form.
+                        // Eg. Giving a Zap Plate to an Electric Arceus without an item (most likely to happen when using givemon)
+                        bool32 currentItemForm = FALSE;
+                        for (u32 j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++)
+                        {
+                            if (species == formChanges[j].targetSpecies
+                                && formChanges[j].param1 == heldItem
+                                && formChanges[j].param1 != ITEM_NONE)
+                            {
+                                currentItemForm = TRUE;
+                                break;
+                            }
+                        }
+                        if (!currentItemForm)
+                            targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    break;
+                case FORM_CHANGE_ITEM_USE:
+                    if (arg == formChanges[i].param1)
+                    {
+                        bool32 pass = TRUE;
+                        switch (formChanges[i].param2)
+                        {
+                        case DAY:
+                            if (GetTimeOfDay() == TIME_NIGHT)
+                                pass = FALSE;
+                            break;
+                        case NIGHT:
+                            if (GetTimeOfDay() != TIME_NIGHT)
+                                pass = FALSE;
+                            break;
+                        }
+
+                        if (formChanges[i].param3 != STATUS1_NONE && GetBoxMonData(boxMon, MON_DATA_STATUS) & formChanges[i].param3)
+                            pass = FALSE;
+
+                        if (pass)
+                            targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    break;
+                case FORM_CHANGE_ITEM_USE_MULTICHOICE:
+                    if (arg == formChanges[i].param1)
+                    {
+                        if (formChanges[i].param2 == gSpecialVar_Result)
+                            targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    break;
+                case FORM_CHANGE_MOVE:
+                    if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BEGIN_BATTLE:
+                case FORM_CHANGE_END_BATTLE:
+                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_END_BATTLE_ENVIRONMENT:
+                    if (gBattleEnvironment == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_WITHDRAW:
+                case FORM_CHANGE_DEPOSIT:
+                case FORM_CHANGE_FAINT:
+                case FORM_CHANGE_DAYS_PASSED:
+                    targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_STATUS:
+                    if (GetBoxMonData(boxMon, MON_DATA_STATUS) & formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_TIME_OF_DAY:
+                    switch (formChanges[i].param1)
+                    {
+                    case DAY:
+                        if (GetTimeOfDay() != TIME_NIGHT)
+                            targetSpecies = formChanges[i].targetSpecies;
+                        break;
+                    case NIGHT:
+                        if (GetTimeOfDay() == TIME_NIGHT)
+                            targetSpecies = formChanges[i].targetSpecies;
+                        break;
+                    }
+                    break;
+                default:
+                    break;
+                }
+            }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
     }
 
     return targetSpecies;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void TrySetDayLimitToFormChange(struct Pokemon *mon)
 {
     u32 i;
@@ -6973,6 +7179,7 @@ bool32 SpeciesHasGenderDifferences(u16 species)
     return FALSE;
 }
 
+<<<<<<< HEAD
 static struct PartyState *GetBattlerPartyStateByPokemon(struct Pokemon *partyMon)
 {
     if (gBattleStruct == NULL)
@@ -7022,12 +7229,43 @@ bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method)
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
         TrySetDayLimitToFormChange(mon);
         CalculateMonStats(mon);
+=======
+bool32 TryFormChange(u32 monId, enum BattleSide side, enum FormChanges method)
+{
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+
+    if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
+     || GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_EGG)
+        return FALSE;
+
+    u32 currentSpecies = GetMonData(&party[monId], MON_DATA_SPECIES);
+    u32 targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+
+    // If the battle ends, and there's not a specified species to change back to,,
+    // use the species at the start of the battle.
+    if (targetSpecies == SPECIES_NONE
+        && gBattleStruct != NULL
+        && gBattleStruct->partyState[side][monId].changedSpecies != SPECIES_NONE
+        // This is added to prevent FORM_CHANGE_END_BATTLE_ENVIRONMENT from omitting move changes
+        // at the end of the battle, as it was being counting as a successful form change.
+        && method == FORM_CHANGE_END_BATTLE)
+    {
+        targetSpecies = gBattleStruct->partyState[side][monId].changedSpecies;
+    }
+
+    if (targetSpecies != currentSpecies && targetSpecies != SPECIES_NONE)
+    {
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        CalculateMonStats(&party[monId]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return TRUE;
     }
 
     return FALSE;
 }
 
+<<<<<<< HEAD
 bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method)
 {
     if (GetBoxMonData(boxMon, MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
@@ -7050,6 +7288,8 @@ bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method)
     return FALSE;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u16 SanitizeSpeciesId(u16 species)
 {
     assertf(species <= NUM_SPECIES && (species == SPECIES_NONE || IsSpeciesEnabled(species)), "invalid species: %d", species)
@@ -7252,11 +7492,27 @@ void UpdateDaysPassedSinceFormChange(u16 days)
         SetMonData(mon, MON_DATA_DAYS_SINCE_FORM_CHANGE, &daysSinceFormChange);
 
         if (daysSinceFormChange == 0)
+<<<<<<< HEAD
             TryFormChange(mon, FORM_CHANGE_DAYS_PASSED);
     }
 }
 
 enum Type CheckDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId battler, enum MonState state)
+=======
+        {
+            u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_DAYS_PASSED, 0);
+
+            if (targetSpecies != currentSpecies && targetSpecies != SPECIES_NONE)
+            {
+                SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+                CalculateMonStats(mon);
+            }
+        }
+    }
+}
+
+enum Type CheckDynamicMoveType(struct Pokemon *mon, enum Move move, u32 battler, enum MonState state)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Type moveType = GetDynamicMoveType(mon, move, battler, state);
     if (moveType != TYPE_NONE)

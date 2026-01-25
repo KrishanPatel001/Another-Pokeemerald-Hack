@@ -4466,6 +4466,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree = {
     .anims = sAnimTable_Inanimate,
     .images = sPicTable_ApricornTree,
 };
+<<<<<<< HEAD
 
 #if IS_FRLG
 
@@ -7225,3 +7226,5 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne = {
 };
 
 #endif // IS_FRLG
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

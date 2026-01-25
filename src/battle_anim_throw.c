@@ -102,8 +102,11 @@ static void TimerBallOpenParticleAnimation(u8);
 static void PremierBallOpenParticleAnimation(u8);
 static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite);
 static void SpriteCB_PokeBlock_Throw(struct Sprite *);
+<<<<<<< HEAD
 static void GhostBallDodge(struct Sprite *sprite);
 static void GhostBallDodge2(struct Sprite *sprite);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 struct CaptureStar
 {
@@ -478,7 +481,12 @@ static const union AnimCmd *const sAnims_SafariRock[] = {
     sAnim_SafariRock,
 };
 
+<<<<<<< HEAD
 const struct SpriteTemplate sSafariRockSpriteTemplate =
+=======
+// Unused, leftover from FRLG
+static const struct SpriteTemplate sSafariRockSpriteTemplate =
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     .tileTag = ANIM_TAG_ROCKS,
     .paletteTag = ANIM_TAG_ROCKS,
@@ -497,7 +505,11 @@ void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     u8 healthBoxSpriteId;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 spriteId1, spriteId2, spriteId3, spriteId4;
 
     battler = gBattleAnimAttacker;
@@ -544,7 +556,13 @@ void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
 static void AnimTask_UnusedLevelUpHealthBox_Step(u8 taskId)
 {
     u8 spriteId1, spriteId2;
+<<<<<<< HEAD
     enum BattlerId battler = gBattleAnimAttacker;
+=======
+    u8 battler;
+
+    battler = gBattleAnimAttacker;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gTasks[taskId].data[13] += gTasks[taskId].data[1];
     gBattle_BG1_Y += (u16)gTasks[taskId].data[13] >> 8;
     gTasks[taskId].data[13] &= 0xFF;
@@ -599,7 +617,11 @@ static void AnimTask_UnusedLevelUpHealthBox_Step(u8 taskId)
     }
 }
 
+<<<<<<< HEAD
 void LoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, enum BattlerId battler)
+=======
+static void LoadHealthboxPalsForLevelUp(u8 *paletteId1, u8 *paletteId2, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 healthBoxSpriteId;
     u8 spriteId1, spriteId2;
@@ -628,7 +650,11 @@ void AnimTask_LoadHealthboxPalsForLevelUp(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
+<<<<<<< HEAD
 void FreeHealthboxPalsForLevelUp(enum BattlerId battler)
+=======
+static void FreeHealthboxPalsForLevelUp(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 healthBoxSpriteId;
     u8 spriteId1, spriteId2;
@@ -770,6 +796,7 @@ void AnimTask_FreeBallGfx(u8 taskId)
 
 void AnimTask_IsBallBlockedByTrainer(u8 taskId)
 {
+<<<<<<< HEAD
     switch (gBattleSpritesDataPtr->animationData->ballThrowCaseId)
     {
     case BALL_TRAINER_BLOCK:
@@ -782,6 +809,12 @@ void AnimTask_IsBallBlockedByTrainer(u8 taskId)
         gBattleAnimArgs[ARG_RET_ID] = 0;
         break;
     }
+=======
+    if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_TRAINER_BLOCK)
+        gBattleAnimArgs[ARG_RET_ID] = -1;
+    else
+        gBattleAnimArgs[ARG_RET_ID] = 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     DestroyAnimVisualTask(taskId);
 }
@@ -822,7 +855,11 @@ void AnimTask_ThrowBall_StandingTrainer(u8 taskId)
     u8 subpriority;
     u8 spriteId;
 
+<<<<<<< HEAD
     if (gBattleTypeFlags & BATTLE_TYPE_CATCH_TUTORIAL)
+=======
+    if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         x = 32;
         y = 11;
@@ -915,10 +952,13 @@ static void SpriteCB_Ball_Arc(struct Sprite *sprite)
         {
             sprite->callback = SpriteCB_Ball_Block;
         }
+<<<<<<< HEAD
         else if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_GHOST_DODGE)
         {
             sprite->callback = GhostBallDodge;
         }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         else
         {
             StartSpriteAnim(sprite, 1);
@@ -1353,7 +1393,11 @@ static void SpriteCB_Ball_Capture(struct Sprite *sprite)
 // Fade and unfade ball, create star animations, play sound effects
 static void SpriteCB_Ball_Capture_Step(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId *battler = &gBattleAnimTarget;
+=======
+    u8 *battler = &gBattleAnimTarget;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     sprite->sTimer++;
     if (sprite->sTimer == 40)
@@ -2260,7 +2304,11 @@ void AnimTask_SetTargetToEffectBattler(u8 taskId)
 #define sPhase  data[1] // For encircling stars
 #define sTimer  data[1] // For diagnoal stars
 
+<<<<<<< HEAD
 void TryShinyAnimation(enum BattlerId battler, struct Pokemon *mon)
+=======
+void TryShinyAnimation(u8 battler, struct Pokemon *mon)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool8 isShiny;
     u8 taskCirc, taskDgnl;
@@ -2297,7 +2345,11 @@ void TryShinyAnimation(enum BattlerId battler, struct Pokemon *mon)
 
 static void Task_ShinyStars(u8 taskId)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 x, y;
     u8 spriteId;
     u16 timer;
@@ -2370,7 +2422,11 @@ static void Task_ShinyStars(u8 taskId)
 
 static void Task_ShinyStars_Wait(u8 taskId)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (gTasks[taskId].tNumStars == 0)
     {
@@ -2605,6 +2661,7 @@ static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite)
         sprite->callback = SpriteCB_Ball_Bounce_Step;
     }
 }
+<<<<<<< HEAD
 
 // FRLG
 static void GhostBallDodge(struct Sprite *sprite)
@@ -2646,3 +2703,5 @@ void AnimTask_SafariGetReaction(u8 taskId)
 
     DestroyAnimVisualTask(taskId);
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

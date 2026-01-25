@@ -1218,7 +1218,11 @@ static void AnimCirclingFinger(struct Sprite *sprite)
 
 static void AnimBouncingMusicNote(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
     else
@@ -2097,8 +2101,12 @@ void AnimTask_Splash(u8 taskId)
     }
     else
     {
+<<<<<<< HEAD
         enum AnimBattler animBattler = gBattleAnimArgs[0];
         u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+        u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         task->data[0] = spriteId;
         task->data[1] = 0;
         task->data[2] = gBattleAnimArgs[1];
@@ -2223,7 +2231,11 @@ static void AnimBreathPuff(struct Sprite *sprite)
 // arg 2: y pixel offset
 void AnimAngerMark(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (!gBattleAnimArgs[0])
         battler = gBattleAnimAttacker;
     else
@@ -2493,12 +2505,20 @@ static void AnimPencil_Step(struct Sprite *sprite)
 
 static void AnimBlendThinRing(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler = 0;
+=======
+    u8 battler = 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     s16 x = 0;
     s16 y = 0;
     u8 r4;
 
+<<<<<<< HEAD
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
+=======
+    if (gBattleAnimArgs[2] == 0)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         battler = gBattleAnimAttacker;
     else
         battler = gBattleAnimTarget;
@@ -2538,8 +2558,13 @@ void AnimHyperVoiceRing(struct Sprite *sprite)
     s16 x = 0;
     s16 y = 0;
     u8 yCoordType;
+<<<<<<< HEAD
     enum BattlerId battler1;
     enum BattlerId battler2;
+=======
+    u8 battler1;
+    u8 battler2;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 xCoordType;
 
     if (gBattleAnimArgs[5] == 0)
@@ -3609,8 +3634,12 @@ static void AnimMovementWaves_Step(struct Sprite *sprite)
 
 void AnimTask_UproarDistortion(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     PrepareAffineAnimInTaskData(&gTasks[taskId], spriteId, sAffineAnims_UproarDistortion);
     gTasks[taskId].func = AnimTask_UproarDistortion_Step;
@@ -3624,7 +3653,11 @@ static void AnimTask_UproarDistortion_Step(u8 taskId)
 
 static void AnimJaggedMusicNote(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler = !gBattleAnimArgs[0] ? gBattleAnimAttacker : gBattleAnimTarget;
+=======
+    u8 battler = !gBattleAnimArgs[0] ? gBattleAnimAttacker : gBattleAnimTarget;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (!IsOnPlayerSide(battler))
         gBattleAnimArgs[1] *= -1;
@@ -3777,9 +3810,12 @@ void AnimTask_GetFuryCutterHitCount(u8 taskId)
     gBattleAnimArgs[ARG_RET_ID] = gAnimDisableStructPtr->furyCutterCounter;
     DestroyAnimVisualTask(taskId);
 }
+<<<<<<< HEAD
 
 void AnimTask_GetStockpileCounter(u8 taskId)
 {
     gBattleAnimArgs[ARG_RET_ID] = gAnimDisableStructPtr->stockpileCounter;
     DestroyAnimVisualTask(taskId);
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

@@ -82,6 +82,7 @@ SINGLE_BATTLE_TEST("Sitrus Berry restores HP immediately after Leech Seed damage
         HP_BAR(player);
     }
 }
+<<<<<<< HEAD
 
 SINGLE_BATTLE_TEST("Sitrus Berry restores HP before Shields Down form change")
 {
@@ -106,3 +107,5 @@ SINGLE_BATTLE_TEST("Sitrus Berry restores HP before Shields Down form change")
         EXPECT_EQ(opponent->species, SPECIES_MINIOR_METEOR);
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

@@ -645,12 +645,20 @@ static void AnimCirclingElectricShock(struct Sprite *sprite)
 // arg 6: increase battler sprite priority by 1
 void AnimSparkElectricity(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
     u32 matrixNum;
     s16 sineVal;
     enum AnimBattler animBattler = gBattleAnimArgs[4];
 
     switch (animBattler)
+=======
+    u8 battler;
+    u32 matrixNum;
+    s16 sineVal;
+
+    switch (gBattleAnimArgs[4])
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
     case ANIM_ATTACKER:
         battler = gBattleAnimAttacker;
@@ -760,7 +768,11 @@ static void AnimThunderboltOrb(struct Sprite *sprite)
 
 void AnimSparkElectricityFlashing(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     sprite->data[0] = gBattleAnimArgs[3];
     if (gBattleAnimArgs[7] & 0x8000)
@@ -800,8 +812,12 @@ static void AnimSparkElectricityFlashing_Step(struct Sprite *sprite)
 // Electricity arcs around the target. Used for Paralysis and various electric move hits
 void AnimElectricity(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[4];
     if (!InitSpritePosToAnimBattler(animBattler, sprite, FALSE))
+=======
+    if (!InitSpritePosToAnimBattler(gBattleAnimArgs[4], sprite, FALSE))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return;
     sprite->oam.tileNum += gBattleAnimArgs[3] * 4;
 
@@ -1311,8 +1327,12 @@ void AnimGrowingShockWaveOrb(struct Sprite *sprite)
 void AnimTask_ShockWaveProgressingBolt(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     enum BattlerId target = GetAnimBattlerId(animBattler);
+=======
+    u8 target = GetAnimBattlerId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     switch (task->data[0])
     {
@@ -1438,8 +1458,12 @@ static void AnimShockWaveProgressingBolt(struct Sprite *sprite)
 void AnimTask_ShockWaveLightning(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     enum BattlerId target = GetAnimBattlerId(animBattler);
+=======
+    u8 target = GetAnimBattlerId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     switch (task->data[0])
     {

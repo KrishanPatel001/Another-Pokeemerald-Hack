@@ -1394,7 +1394,11 @@ void BattleTv_ClearExplosionFaintCause(void)
     }
 }
 
+<<<<<<< HEAD
 u8 GetBattlerMoveSlotId(enum BattlerId battler, enum Move move)
+=======
+u8 GetBattlerMoveSlotId(u8 battler, enum Move move)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
     struct Pokemon *mon = GetBattlerMon(battler);

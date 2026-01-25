@@ -44,9 +44,15 @@
 #define STAT_STAGE(battler, stat) (gBattleMons[battler].statStages[stat - 1])
 
 // Function Declarations
+<<<<<<< HEAD
 static void ZMoveSelectionDisplayPpNumber(enum BattlerId battler);
 static void ZMoveSelectionDisplayPower(enum Move move, enum Move zMove);
 static void ZMoveSelectionDisplayMoveType(enum Move zMove, enum BattlerId battler);
+=======
+static void ZMoveSelectionDisplayPpNumber(u32 battler);
+static void ZMoveSelectionDisplayPower(enum Move move, enum Move zMove);
+static void ZMoveSelectionDisplayMoveType(enum Move zMove, u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Const Data
 static const struct SignatureZMove sSignatureZMoves[] =
@@ -110,6 +116,7 @@ bool32 IsZMove(enum Move move)
     return move >= FIRST_Z_MOVE && move <= LAST_Z_MOVE;
 }
 
+<<<<<<< HEAD
 bool32 CanUseZMove(enum BattlerId battler)
 {
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
@@ -118,11 +125,24 @@ bool32 CanUseZMove(enum BattlerId battler)
     // Check if Player has Z-Power Ring.
     if (!TESTING && (position == B_POSITION_PLAYER_LEFT
         || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
+=======
+bool32 CanUseZMove(u32 battler)
+{
+    enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
+
+    // Check if Player has Z-Power Ring.
+    if (!TESTING && (battler == B_POSITION_PLAYER_LEFT
+        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
         return FALSE;
 
     // Add '| BATTLE_TYPE_FRONTIER' to below if issues occur
+<<<<<<< HEAD
     if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_CATCH_TUTORIAL))
+=======
+    if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return FALSE;
 
     // Check if Trainer has already used a Z-Move.
@@ -141,7 +161,11 @@ bool32 CanUseZMove(enum BattlerId battler)
     return TRUE;
 }
 
+<<<<<<< HEAD
 enum Move GetUsableZMove(enum BattlerId battler, enum Move move)
+=======
+enum Move GetUsableZMove(u32 battler, enum Move move)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Item item = gBattleMons[battler].item;
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
@@ -159,12 +183,20 @@ enum Move GetUsableZMove(enum BattlerId battler, enum Move move)
     return MOVE_NONE;
 }
 
+<<<<<<< HEAD
 void ActivateZMove(enum BattlerId battler)
+=======
+void ActivateZMove(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     SetActiveGimmick(battler, GIMMICK_Z_MOVE);
 }
 
+<<<<<<< HEAD
 bool32 IsViableZMove(enum BattlerId battler, enum Move move)
+=======
+bool32 IsViableZMove(u32 battler, enum Move move)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Item item;
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
@@ -181,9 +213,14 @@ bool32 IsViableZMove(enum BattlerId battler, enum Move move)
             return FALSE;
     }
 
+<<<<<<< HEAD
     enum BattlerPosition position = GetBattlerPosition(battler);
     // Check if Player has Z-Power Ring.
     if ((position == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
+=======
+    // Check if Player has Z-Power Ring.
+    if ((battler == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
     {
         return FALSE;
@@ -203,7 +240,11 @@ bool32 IsViableZMove(enum BattlerId battler, enum Move move)
     return FALSE;
 }
 
+<<<<<<< HEAD
 void AssignUsableZMoves(enum BattlerId battler, enum Move *moves)
+=======
+void AssignUsableZMoves(u32 battler, enum Move *moves)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 i;
     gBattleStruct->zmove.possibleZMoves[battler] = 0;
@@ -214,7 +255,11 @@ void AssignUsableZMoves(enum BattlerId battler, enum Move *moves)
     }
 }
 
+<<<<<<< HEAD
 bool32 TryChangeZTrigger(enum BattlerId battler, u32 moveIndex)
+=======
+bool32 TryChangeZTrigger(u32 battler, u32 moveIndex)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 viableZMove = (gBattleStruct->zmove.possibleZMoves[battler] & (1u << moveIndex)) != 0;
 
@@ -259,7 +304,11 @@ enum Move GetTypeBasedZMove(enum Move move)
     return gTypesInfo[moveType].zMove;
 }
 
+<<<<<<< HEAD
 bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
+=======
+bool32 MoveSelectionDisplayZMove(enum Move zmove, u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 i;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
@@ -403,7 +452,11 @@ static void ZMoveSelectionDisplayPower(enum Move move, enum Move zMove)
     }
 }
 
+<<<<<<< HEAD
 static void ZMoveSelectionDisplayPpNumber(enum BattlerId battler)
+=======
+static void ZMoveSelectionDisplayPpNumber(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 *txtPtr;
 
@@ -417,7 +470,11 @@ static void ZMoveSelectionDisplayPpNumber(enum BattlerId battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
+<<<<<<< HEAD
 static void ZMoveSelectionDisplayMoveType(enum Move zMove, enum BattlerId battler)
+=======
+static void ZMoveSelectionDisplayMoveType(enum Move zMove, u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 *txtPtr, *end;
     enum Type zMoveType = GetBattleMoveType(zMove);

@@ -272,6 +272,7 @@ DOUBLE_BATTLE_TEST("Stockpile's Def and Sp. Def boost is lost after using Spit U
         EXPECT_MUL_EQ(results[2].dmgSpecialBefore,  UQ_4_12(1.0), results[2].dmgSpecialAfter);
     }
 }
+<<<<<<< HEAD
 
 SINGLE_BATTLE_TEST("Spit Up's Stockpile's are romoved if move is absorbed")
 {
@@ -311,3 +312,5 @@ SINGLE_BATTLE_TEST("Spit Up's Stockpile's are romoved if hit into Protect")
         EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

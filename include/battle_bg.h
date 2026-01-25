@@ -5,12 +5,18 @@ struct BattleBackground
 {
     const void *tileset;
     const void *tilemap;
+<<<<<<< HEAD
 };
 
 struct BattleBackgroundEntry
 {
     const void *tileset;
     const void *tilemap;
+=======
+    const void *entryTileset;
+    const void *entryTilemap;
+    const void *palette;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 void BattleInitBgsAndWindows(void);

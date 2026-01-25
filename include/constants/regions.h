@@ -18,6 +18,7 @@ enum Region
     REGIONS_COUNT,
 };
 
+<<<<<<< HEAD
 enum KantoSubRegion
 {
     KANTO_SUBREGION_KANTO,
@@ -27,4 +28,6 @@ enum KantoSubRegion
     KANTO_SUBREGION_COUNT
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif  // GUARD_CONSTANTS_REGIONS_H

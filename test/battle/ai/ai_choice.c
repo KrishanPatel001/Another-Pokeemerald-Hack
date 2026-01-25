@@ -256,6 +256,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon will only see choiced moves when conside
         TURN { MOVE(player, MOVE_WATER_GUN); EXPECT_SWITCH(opponent, 1); }
     }
 }
+<<<<<<< HEAD
 
 AI_DOUBLE_BATTLE_TEST("Choiced Pokémon won't switch out if they can still affect one opposing Pokémon in doubles")
 {
@@ -283,3 +284,5 @@ AI_DOUBLE_BATTLE_TEST("Choiced Pokémon won't switch out if they can still affec
             TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); SEND_OUT(playerLeft, 0); }
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

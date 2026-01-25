@@ -25,7 +25,10 @@
 #include "title_screen.h"
 #include "expansion_intro.h"
 #include "battle_anim.h"
+<<<<<<< HEAD
 #include "intro_frlg.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
 
@@ -1050,9 +1053,12 @@ static void SerialCB_CopyrightScreen(void)
 
 static u8 SetUpCopyrightScreen(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return SetUpCopyrightScreenFrlg();
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     switch (gMain.state)
     {
     case COPYRIGHT_INITIALIZE:

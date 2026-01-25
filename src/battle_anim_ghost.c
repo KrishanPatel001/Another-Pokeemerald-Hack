@@ -1,12 +1,17 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+<<<<<<< HEAD
 #include "bg.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "item_icon.h"
 #include "malloc.h"
+=======
+#include "gpu_regs.h"
+#include "item_icon.h"
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "palette.h"
 #include "constants/rgb.h"
 #include "scanline_effect.h"
@@ -828,7 +833,11 @@ static void AnimDestinyBondWhiteShadow_Step(struct Sprite *sprite)
 void AnimTask_DestinyBondWhiteShadow(u8 taskId)
 {
     struct Task *task;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    s16 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 spriteId;
     s16 baseX, baseY;
     s16 x, y;
@@ -1476,6 +1485,7 @@ void AnimTask_PulverizingPancakeWhiteShadow(u8 taskId)
 
     task->func = AnimTask_DestinyBondWhiteShadow_Step;
 }
+<<<<<<< HEAD
 
 static void AnimTask_GhostGetOut_Step3(u8 taskId)
 {
@@ -1666,3 +1676,5 @@ void AnimTask_GhostGetOut(u8 taskId)
     task->func(taskId);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

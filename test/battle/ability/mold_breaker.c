@@ -19,6 +19,7 @@ SINGLE_BATTLE_TEST("Mold Breaker cancels damage reduction from Ice Scales", s16 
     }
 }
 
+<<<<<<< HEAD
 DOUBLE_BATTLE_TEST("Mold Breaker will deactivate if user faints")
 {
     u32 move;
@@ -44,4 +45,6 @@ DOUBLE_BATTLE_TEST("Mold Breaker will deactivate if user faints")
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 TO_DO_BATTLE_TEST("TODO: Write more Mold Breaker (Ability) test titles")

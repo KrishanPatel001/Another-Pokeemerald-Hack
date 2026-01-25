@@ -51,10 +51,17 @@ static u32 GetGlyphWidth_Narrower(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
+<<<<<<< HEAD
 static struct TextPrinter *AllocateTextPrinter(void);
 static u32 GetNumTextPrinters(void);
 static void FreeFinishedTextPrinters(void);
 static void SpriteCB_TextCursor(struct Sprite *sprite);
+=======
+
+static struct TextPrinter *AllocateTextPrinter(void);
+static u32 GetNumTextPrinters(void);
+static void FreeFinishedTextPrinters(void);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static EWRAM_DATA struct TextPrinter *sFirstTextPrinter = NULL;
 
@@ -2744,6 +2751,7 @@ static void FreeFinishedTextPrinters(void)
     }
 }
 
+<<<<<<< HEAD
 // FRLG
 
 #define TAG_CURSOR 0x8000
@@ -2833,6 +2841,8 @@ void DestroyTextCursorSprite(u8 spriteId)
 
 // End FRLG
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void DeactivateSingleTextPrinter(u32 id, enum TextPrinterType type)
 {
     struct TextPrinter *currentPrinter = sFirstTextPrinter;

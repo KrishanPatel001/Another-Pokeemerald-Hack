@@ -317,6 +317,7 @@ string generate_map_events_text(Json map_data) {
                      << json_to_string(bg_event, "script") << "\n";
             }
             else if (type == "hidden_item") {
+<<<<<<< HEAD
                 string quantity = json_to_string(bg_event, "quantity", true);
                 if (quantity.empty()) {
                     quantity = "1";
@@ -325,14 +326,26 @@ string generate_map_events_text(Json map_data) {
                 if (underfoot.empty()) {
                     underfoot = "FALSE";
                 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 text << "\tbg_hidden_item_event "
                      << json_to_string(bg_event, "x") << ", "
                      << json_to_string(bg_event, "y") << ", "
                      << json_to_string(bg_event, "elevation") << ", "
                      << json_to_string(bg_event, "item") << ", "
+<<<<<<< HEAD
                      << json_to_string(bg_event, "flag") << ", "
                      << quantity << ", "
                      << underfoot << "\n";
+=======
+                     << json_to_string(bg_event, "flag");
+                if (version == "firered") {
+                    text << ", "
+                         << json_to_string(bg_event, "quantity") << ", "
+                         << json_to_string(bg_event, "underfoot");
+                }
+                text << "\n";
+>>>>>>> 11d8f44022 (Updated to upcoming)
             }
             else if (type == "secret_base") {
                 text << "\tbg_secret_base_event "
@@ -437,11 +450,16 @@ void process_event_constants(const vector<string> &map_filepaths, string output_
     write_text_file(output_ids_file, ids_file_text.str());
 }
 
+<<<<<<< HEAD
 string generate_groups_text(Json groups_data, vector<string> &invalid_maps) {
+=======
+string generate_groups_text(Json groups_data) {
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ostringstream text;
 
     text << get_generated_warning("data/maps/map_groups.json", true);
 
+<<<<<<< HEAD
     vector<string> valid_groups;
     for (auto &key : groups_data["group_order"].array_items()) {
         string group = json_to_string(key);
@@ -472,11 +490,26 @@ string generate_groups_text(Json groups_data, vector<string> &invalid_maps) {
         else
             text << "\t.4byte NULL\n";
     }
+=======
+    for (auto &key : groups_data["group_order"].array_items()) {
+        string group = json_to_string(key);
+        text << group << "::\n";
+        auto maps = groups_data[group].array_items();
+        for (Json &map_name : maps)
+            text << "\t.4byte " << json_to_string(map_name) << "\n";
+        text << "\n";
+    }
+
+    text << "\t.align 2\n" << "gMapGroups::\n";
+    for (auto &group : groups_data["group_order"].array_items())
+        text << "\t.4byte " << json_to_string(group) << "\n";
+>>>>>>> 11d8f44022 (Updated to upcoming)
     text << "\n";
 
     return text.str();
 }
 
+<<<<<<< HEAD
 string generate_connections_text(Json groups_data, vector<string> &invalid_maps, string include_path) {
     vector<Json> map_names;
 
@@ -488,6 +521,14 @@ string generate_connections_text(Json groups_data, vector<string> &invalid_maps,
                 map_names.push_back(map_name);
         }
     }
+=======
+string generate_connections_text(Json groups_data, string include_path) {
+    vector<Json> map_names;
+
+    for (auto &group : groups_data["group_order"].array_items())
+    for (auto map_name : groups_data[json_to_string(group)].array_items())
+        map_names.push_back(map_name);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     vector<Json> connections_include_order = groups_data["connections_include_order"].array_items();
 
@@ -512,6 +553,7 @@ string generate_connections_text(Json groups_data, vector<string> &invalid_maps,
     return text.str();
 }
 
+<<<<<<< HEAD
 string generate_headers_text(Json groups_data, vector<string> &invalid_maps, string include_path) {
     vector<string> map_names;
 
@@ -523,6 +565,14 @@ string generate_headers_text(Json groups_data, vector<string> &invalid_maps, str
                 map_names.push_back(json_to_string(map_name));
         }
     }
+=======
+string generate_headers_text(Json groups_data, string include_path) {
+    vector<string> map_names;
+
+    for (auto &group : groups_data["group_order"].array_items())
+    for (auto map_name : groups_data[json_to_string(group)].array_items())
+        map_names.push_back(json_to_string(map_name));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     ostringstream text;
 
@@ -534,6 +584,7 @@ string generate_headers_text(Json groups_data, vector<string> &invalid_maps, str
     return text.str();
 }
 
+<<<<<<< HEAD
 string generate_events_text(Json groups_data, vector<string> &invalid_maps, string include_path) {
     vector<string> map_names;
 
@@ -546,6 +597,14 @@ string generate_events_text(Json groups_data, vector<string> &invalid_maps, stri
                 map_names.push_back(json_to_string(map_name));
         }
     }
+=======
+string generate_events_text(Json groups_data, string include_path) {
+    vector<string> map_names;
+
+    for (auto &group : groups_data["group_order"].array_items())
+    for (auto map_name : groups_data[json_to_string(group)].array_items())
+        map_names.push_back(json_to_string(map_name));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     ostringstream text;
 
@@ -622,12 +681,17 @@ string generate_map_constants_text(string groups_filepath, Json groups_data) {
 }
 
 // Output paths are directories with trailing path separators
+<<<<<<< HEAD
 void process_groups(string groups_filepath, vector<string> &map_filepaths, string output_asm, string output_c) {
+=======
+void process_groups(string groups_filepath, string output_asm, string output_c) {
+>>>>>>> 11d8f44022 (Updated to upcoming)
     output_asm = strip_trailing_separator(output_asm); // Remove separator if existing.
     output_c = strip_trailing_separator(output_c);
 
     string err;
     Json groups_data = Json::parse(read_text_file(groups_filepath), err);
+<<<<<<< HEAD
     vector<string> invalid_maps;
 
     for (const string &filepath : map_filepaths) {
@@ -649,14 +713,23 @@ void process_groups(string groups_filepath, vector<string> &map_filepaths, strin
             invalid_maps.push_back(map_name);
         }
     }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (groups_data == Json())
         FATAL_ERROR("%s\n", err.c_str());
 
+<<<<<<< HEAD
     string groups_text = generate_groups_text(groups_data, invalid_maps);
     string connections_text = generate_connections_text(groups_data, invalid_maps, output_asm);
     string headers_text = generate_headers_text(groups_data, invalid_maps, output_asm);
     string events_text = generate_events_text(groups_data, invalid_maps, output_asm);
+=======
+    string groups_text = generate_groups_text(groups_data);
+    string connections_text = generate_connections_text(groups_data, output_asm);
+    string headers_text = generate_headers_text(groups_data, output_asm);
+    string events_text = generate_events_text(groups_data, output_asm);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     string map_header_text = generate_map_constants_text(groups_filepath, groups_data);
 
     write_text_file(output_asm + sep + "groups.inc", groups_text);
@@ -673,10 +746,13 @@ string generate_layout_headers_text(Json layouts_data) {
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
         if (layout == Json::object()) continue;
+<<<<<<< HEAD
         string layout_version = json_to_string(layout, "layout_version");
         if ((version == "emerald" && layout_version != "emerald")
          || (version == "firered" && layout_version != "frlg"))
             continue;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         string layoutName = json_to_string(layout, "name");
         string border_label = layoutName + "_Border";
         string blockdata_label = layoutName + "_Blockdata";
@@ -692,6 +768,7 @@ string generate_layout_headers_text(Json layouts_data) {
              << "\t.4byte " << blockdata_label << "\n"
              << "\t.4byte " << json_to_string(layout, "primary_tileset") << "\n"
              << "\t.4byte " << json_to_string(layout, "secondary_tileset") << "\n";
+<<<<<<< HEAD
         if (layout_version == "frlg")
             text << "\t.byte TRUE\n";
         else
@@ -707,6 +784,12 @@ string generate_layout_headers_text(Json layouts_data) {
         {
             text << "\t.2byte 0\n"
                  << "\t.byte 0\n";
+=======
+        if (version == "firered") {
+            text << "\t.byte " << json_to_string(layout, "border_width") << "\n"
+                 << "\t.byte " << json_to_string(layout, "border_height") << "\n"
+                 << "\t.2byte 0\n";
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
         text << "\n";
     }
@@ -723,6 +806,7 @@ string generate_layouts_table_text(Json layouts_data) {
          << json_to_string(layouts_data, "layouts_table_label") << "::\n";
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
+<<<<<<< HEAD
         string layout_version = json_to_string(layout, "layout_version");
         if ((version == "emerald" && layout_version != "emerald") || (version == "firered" && layout_version != "frlg")) {
             text << "\t.4byte NULL\n";
@@ -731,6 +815,11 @@ string generate_layouts_table_text(Json layouts_data) {
             if (layout_name.empty()) layout_name = "NULL";
             text << "\t.4byte " << layout_name << "\n";
         }
+=======
+        string layout_name = json_to_string(layout, "name", true);
+        if (layout_name.empty()) layout_name = "NULL";
+        text << "\t.4byte " << layout_name << "\n";
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 
     return text.str();
@@ -795,6 +884,7 @@ int main(int argc, char *argv[]) {
         process_map(filepath, layouts_filepath, output_dir);
     }
     else if (mode == "groups") {
+<<<<<<< HEAD
         if (argc < 6)
             FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file> <map_file> [additional_map_files] <output_asm_dir> <output_c_dir>\n");
 
@@ -812,6 +902,17 @@ int main(int argc, char *argv[]) {
         string output_c(argv[argc - 1]);
 
         process_groups(filepath, map_filepaths, output_asm, output_c);
+=======
+        if (argc != 6)
+            FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file> <output_asm_dir> <output_c_dir>\n");
+
+        infer_separator(argv[3]);
+        string filepath(argv[3]);
+        string output_asm(argv[4]);
+        string output_c(argv[5]);
+
+        process_groups(filepath, output_asm, output_c);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     else if (mode == "layouts") {
         if (argc != 6)

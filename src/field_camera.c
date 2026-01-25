@@ -230,14 +230,22 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x,
 
     if (metatileId > NUM_METATILES_TOTAL)
         metatileId = 0;
+<<<<<<< HEAD
     if (metatileId < GetNumMetatilesInPrimary(mapLayout))
+=======
+    if (metatileId < NUM_METATILES_IN_PRIMARY)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         metatiles = mapLayout->primaryTileset->metatiles;
     }
     else
     {
         metatiles = mapLayout->secondaryTileset->metatiles;
+<<<<<<< HEAD
         metatileId -= GetNumMetatilesInPrimary(mapLayout);
+=======
+        metatileId -= NUM_METATILES_IN_PRIMARY;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * NUM_TILES_PER_METATILE, offset);
 }
@@ -357,6 +365,7 @@ u32 InitCameraUpdateCallback(u8 trackedSpriteId)
     return 0;
 }
 
+<<<<<<< HEAD
 void CameraUpdateNoObjectRefresh(void)
 {
     int deltaX;
@@ -420,6 +429,8 @@ void CameraUpdateNoObjectRefresh(void)
     AddCameraPixelOffset(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void CameraUpdate(void)
 {
     int deltaX;

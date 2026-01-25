@@ -97,8 +97,13 @@ const struct SpriteTemplate gSlideMonToOffsetAndBackSpriteTemplate =
 // arg 4: frame delay
 void AnimTask_ShakeMon(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId;
+    spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (spriteId == SPRITE_NONE)
     {
         DestroyAnimVisualTask(taskId);
@@ -162,6 +167,7 @@ void AnimTask_ShakeMon2(u8 taskId)
 {
     u8 spriteId;
     bool8 abort = FALSE;
+<<<<<<< HEAD
     enum BattlerId battler;
     enum AnimBattler animBattler = gBattleAnimArgs[0];
 
@@ -174,6 +180,19 @@ void AnimTask_ShakeMon2(u8 taskId)
     else if (animBattler != ANIM_ATTACKER_FORCE)
     {
         switch (animBattler)
+=======
+    u8 battler;
+
+    if (gBattleAnimArgs[0] < MAX_BATTLERS_COUNT)
+    {
+        spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+        if (spriteId == SPRITE_NONE)
+            abort = TRUE;
+    }
+    else if (gBattleAnimArgs[0] != ANIM_ATTACKER_FORCE)
+    {
+        switch (gBattleAnimArgs[0])
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
         case ANIM_PLAYER_LEFT:
             battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
@@ -257,8 +276,12 @@ static void AnimTask_ShakeMon2_Step(u8 taskId)
 // arg 4: delay
 void AnimTask_ShakeMonInPlace(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (spriteId == SPRITE_NONE)
     {
         DestroyAnimVisualTask(taskId);
@@ -323,8 +346,12 @@ static void AnimTask_ShakeMonInPlace_Step(u8 taskId)
 // arg 4: duration
 void AnimTask_ShakeAndSinkMon(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (spriteId == SPRITE_NONE)
     {
@@ -376,8 +403,12 @@ void AnimTask_TranslateMonElliptical(u8 taskId)
 {
     u8 i;
     u8 wavePeriod = 1;
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleAnimArgs[4] > 5)
         gBattleAnimArgs[4] = 5;
 
@@ -469,8 +500,12 @@ static void DoVerticalDip(struct Sprite *sprite)
 {
     u8 spriteId;
     sprite->invisible = TRUE;
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[2];
     spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = 0;
     sprite->data[2] = gBattleAnimArgs[1];
@@ -592,7 +627,11 @@ static void SlideMonToOriginalPos_Step(struct Sprite *sprite)
 // arg 4: duration
 static void SlideMonToOffset(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 monSpriteId;
     if (!gBattleAnimArgs[0])
         battler = gBattleAnimAttacker;
@@ -625,7 +664,11 @@ static void SlideMonToOffset(struct Sprite *sprite)
 
 static void SlideMonToOffsetPartner(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 monSpriteId;
     if (!gBattleAnimArgs[0])
         battler = BATTLE_PARTNER(gBattleAnimAttacker);
@@ -659,7 +702,11 @@ static void SlideMonToOffsetPartner(struct Sprite *sprite)
 static void SlideMonToOffsetAndBack(struct Sprite *sprite)
 {
     u8 spriteId;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     sprite->invisible = TRUE;
 
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
@@ -718,13 +765,20 @@ static void SlideMonToOffsetAndBack_End(struct Sprite *sprite)
 void AnimTask_WindUpLunge(u8 taskId)
 {
     s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (!IsOnPlayerSide(gBattleAnimAttacker))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
     }
+<<<<<<< HEAD
     gTasks[taskId].data[0] = GetAnimBattlerSpriteId(animBattler);
+=======
+    gTasks[taskId].data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gTasks[taskId].data[1] = (gBattleAnimArgs[1] << 8) / gBattleAnimArgs[3];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
     gTasks[taskId].data[3] = gBattleAnimArgs[3];
@@ -783,12 +837,19 @@ static void AnimTask_WindUpLunge_Step2(u8 taskId)
 void AnimTask_DuckDownHop(u8 taskId)
 {
     s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (!IsOnPlayerSide(gBattleAnimAttacker))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
     }
+<<<<<<< HEAD
     gTasks[taskId].data[0] = GetAnimBattlerSpriteId(animBattler);
+=======
+    gTasks[taskId].data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gTasks[taskId].data[1] = (gBattleAnimArgs[1] << 8) / gBattleAnimArgs[3];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
     gTasks[taskId].data[3] = gBattleAnimArgs[3];
@@ -838,12 +899,20 @@ static void AnimTask_DuckDownHop_Step2(u8 taskId)
 void AnimTask_SlideOffScreen(u8 taskId)
 {
     u8 spriteId;
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     switch (animBattler)
     {
     case ANIM_ATTACKER:
     case ANIM_TARGET:
         spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    switch (gBattleAnimArgs[0])
+    {
+    case ANIM_ATTACKER:
+    case ANIM_TARGET:
+        spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         break;
     case ANIM_ATK_PARTNER:
         if (!IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
@@ -899,11 +968,18 @@ static void AnimTask_SlideOffScreen_Step(u8 taskId)
 void AnimTask_SwayMon(u8 taskId)
 {
     u8 spriteId;
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[4];
     if (!IsOnPlayerSide(gBattleAnimAttacker))
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    if (!IsOnPlayerSide(gBattleAnimAttacker))
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+
+    spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[4]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (spriteId == 0xff)
     {
         DestroyAnimVisualTask(taskId);
@@ -915,7 +991,11 @@ void AnimTask_SwayMon(u8 taskId)
     gTasks[taskId].data[3] = gBattleAnimArgs[3];
     gTasks[taskId].data[4] = spriteId;
 
+<<<<<<< HEAD
     if (animBattler == ANIM_ATTACKER)
+=======
+    if (gBattleAnimArgs[4] == 0)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gTasks[taskId].data[5] = gBattleAnimAttacker;
     else
         gTasks[taskId].data[5] = gBattleAnimTarget;
@@ -976,8 +1056,12 @@ static void AnimTask_SwayMonStep(u8 taskId)
 // arg 4: sprite object mode
 void AnimTask_ScaleMonAndRestore(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[3];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[3]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     PrepareBattlerSpriteForRotScale(spriteId, gBattleAnimArgs[4]);
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
@@ -1016,8 +1100,13 @@ static void AnimTask_ScaleMonAndRestore_Step(u8 taskId)
 
 void AnimTask_RotateMonSpriteToSide(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[2];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId;
+    spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = gBattleAnimArgs[0];
@@ -1038,10 +1127,21 @@ void AnimTask_RotateMonSpriteToSide(u8 taskId)
     }
     else
     {
+<<<<<<< HEAD
         if (animBattler == ANIM_ATTACKER)
             gTasks[taskId].data[7] = IsOnPlayerSide(gBattleAnimAttacker);
         else
             gTasks[taskId].data[7] = IsOnPlayerSide(gBattleAnimTarget);
+=======
+        if (gBattleAnimArgs[2] == ANIM_ATTACKER)
+        {
+            gTasks[taskId].data[7] = IsOnPlayerSide(gBattleAnimAttacker);
+        }
+        else
+        {
+            gTasks[taskId].data[7] = IsOnPlayerSide(gBattleAnimTarget);
+        }
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     if (gTasks[taskId].data[7])
     {
@@ -1057,6 +1157,7 @@ void AnimTask_RotateMonSpriteToSide(u8 taskId)
 // Rotates mon to side and back to original position. For Peck and when a held item activates
 void AnimTask_RotateMonToSideAndRestore(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[2];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
@@ -1066,11 +1167,29 @@ void AnimTask_RotateMonToSideAndRestore(u8 taskId)
     {
         if (!IsOnPlayerSide(gBattleAnimAttacker))
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
+    PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = gBattleAnimArgs[0];
+    if (gBattleAnimArgs[2] == ANIM_ATTACKER)
+    {
+        if (!IsOnPlayerSide(gBattleAnimAttacker))
+        {
+            gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+        }
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     else
     {
         if (!IsOnPlayerSide(gBattleAnimTarget))
+<<<<<<< HEAD
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+=======
+        {
+            gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+        }
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     if (gBattleAnimArgs[3] != 1)
     {
@@ -1221,13 +1340,21 @@ static void AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step(u8 taskId)
 
 void AnimTask_RotateVertically(u8 taskId)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     u8 spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
     gTasks[taskId].tSpriteId = spriteId;
     gTasks[taskId].tRotCurr = 0;
+<<<<<<< HEAD
     gTasks[taskId].tPlayerSide = IsOnPlayerSide(GetAnimBattlerId(animBattler));
+=======
+    gTasks[taskId].tPlayerSide = IsOnPlayerSide(GetAnimBattlerId(gBattleAnimArgs[0]));
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gTasks[taskId].tRotMax = gTasks[taskId].tPlayerSide ? 0x1FFF : 0x7FFE;
     gTasks[taskId].tRotSpeed = gBattleAnimArgs[1];
     gTasks[taskId].func = AnimTask_RotateVerticallyStep;

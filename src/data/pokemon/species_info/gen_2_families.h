@@ -276,8 +276,13 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_MeganiumMega,
         .iconPalIndex = 1,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -847,6 +852,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             "Pokémon forms a gigantic set of jaws\n"
             "with a bite 10 times as powerful\n"
             "as Mega Feraligatr's actual jaws."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_FeraligatrMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -863,6 +869,24 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Feraligatr)
         SHADOW(2, 13, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Feraligatr)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sFeraligatrLevelUpLearnset,
         .teachableLearnset = sFeraligatrTeachableLearnset,
@@ -7305,6 +7329,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             "its pincers have taken a more\n"
             "diabolical form, ripping anything\n"
             "they pierce to shreds."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_SkarmoryMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -7322,6 +7347,24 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Skarmory)
         SHADOW(2, 16, SHADOW_SIZE_M)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Skarmory)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sSkarmoryLevelUpLearnset,
         .teachableLearnset = sSkarmoryTeachableLearnset,

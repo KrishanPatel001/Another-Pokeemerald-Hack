@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 SINGLE_BATTLE_TEST("Early Bird wakes up if 1 sleep turn is preset")
 {
     GIVEN {
@@ -47,3 +48,6 @@ SINGLE_BATTLE_TEST("Early Bird reduces Rest sleep to one turn")
         MESSAGE("Doduo used Celebrate!");
     }
 }
+=======
+TO_DO_BATTLE_TEST("TODO: Write Early Bird (Ability) test titles")
+>>>>>>> 11d8f44022 (Updated to upcoming)

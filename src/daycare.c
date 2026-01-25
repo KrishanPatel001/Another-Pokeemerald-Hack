@@ -261,7 +261,16 @@ void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon)
         TakeMailFromMon(mon);
     }
 
+<<<<<<< HEAD
     TryFormChange(mon, FORM_CHANGE_DEPOSIT);
+=======
+    u32 newSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_DEPOSIT, 0);
+    if (newSpecies != GetMonData(mon, MON_DATA_SPECIES))
+    {
+        SetMonData(mon, MON_DATA_SPECIES, &newSpecies);
+        CalculateMonStats(mon);
+    }
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     daycareMon->mon = mon->box;
     daycareMon->steps = 0;
@@ -350,13 +359,31 @@ static u32 GetExpAtLevelCap(struct Pokemon *mon)
 
 static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
 {
+<<<<<<< HEAD
+=======
+    u32 species;
+    u32 newSpecies;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 experience;
     struct Pokemon pokemon;
 
     GetBoxMonNickname(&daycareMon->mon, gStringVar1);
+<<<<<<< HEAD
     BoxMonToMon(&daycareMon->mon, &pokemon);
 
     TryFormChange(&pokemon, FORM_CHANGE_WITHDRAW);
+=======
+    species = GetBoxMonData(&daycareMon->mon, MON_DATA_SPECIES);
+    BoxMonToMon(&daycareMon->mon, &pokemon);
+
+    newSpecies = GetFormChangeTargetSpecies(&pokemon, FORM_CHANGE_WITHDRAW, 0);
+    if (newSpecies != species)
+    {
+        SetMonData(&pokemon, MON_DATA_SPECIES, &newSpecies);
+        CalculateMonStats(&pokemon);
+        species = newSpecies;
+    }
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetCurrentLevelCap())
     {
@@ -379,7 +406,11 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     daycareMon->steps = 0;
     CompactPartySlots();
     CalculatePlayerPartyCount();
+<<<<<<< HEAD
     return GetMonData(&pokemon, MON_DATA_SPECIES);
+=======
+    return species;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static u16 TakeSelectedPokemonMonFromDaycareShiftSlots(struct DayCare *daycare, u8 slotId)
@@ -1213,10 +1244,13 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 
 bool8 ShouldEggHatch(void)
 {
+<<<<<<< HEAD
 #if IS_FRLG
     if (GetBoxMonData(&gSaveBlock1Ptr->route5DayCareMon.mon, MON_DATA_SANITY_HAS_SPECIES))
         gSaveBlock1Ptr->route5DayCareMon.steps++;
 #endif
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return TryProduceOrHatchEgg(&gSaveBlock1Ptr->daycare);
 }
 
@@ -1605,6 +1639,7 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
 
     return score;
 }
+<<<<<<< HEAD
 
 // Route 5 Daycare
 
@@ -1653,3 +1688,5 @@ u16 TakePokemonFromRoute5Daycare(void)
     return SPECIES_NONE;
 #endif
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

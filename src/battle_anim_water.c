@@ -1399,6 +1399,22 @@ static void AnimSmallWaterOrb(struct Sprite *sprite)
     }
 }
 
+<<<<<<< HEAD
+#define tRainState data[0]
+#define tWaterSpoutPower data[1]
+#define tDropTaskDelay data[2]
+#define tDropInitialXPos data[4]
+#define tDropXRange data[5]
+#define tDropEndYPos data[6]
+#define tDropXPos data[7]
+#define tSineTableIndex data[8]
+#define tCurrentDropSprites data[9]
+#define tDropHasHit data[10]
+#define tCreatedDropSprites data[11]
+#define tMaxDropSprites data[12]
+#define tShakeTasksCreated data[13]
+#define tDropInitialYPos data[14]
+=======
 #define tRainState data[0] 
 #define tWaterSpoutPower data[1] 
 #define tDropTaskDelay data[2] 
@@ -1413,6 +1429,7 @@ static void AnimSmallWaterOrb(struct Sprite *sprite)
 #define tMaxDropSprites data[12] 
 #define tShakeTasksCreated data[13] 
 #define tDropInitialYPos data[14] 
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 void AnimTask_BrineRain(u8 taskId)
 {
@@ -1590,6 +1607,22 @@ static void AnimWaterSpoutRainHit(struct Sprite *sprite)
     }
 }
 
+<<<<<<< HEAD
+#undef tRainState
+#undef tWaterSpoutPower
+#undef tDropTaskDelay
+#undef tDropInitialXPos
+#undef tDropXRange
+#undef tDropEndYPos
+#undef tDropXPos
+#undef tSineTableIndex
+#undef tCurrentDropSprites
+#undef tDropHasHit
+#undef tCreatedDropSprites
+#undef tMaxDropSprites
+#undef tShakeTasksCreated
+#undef tDropInitialYPos
+=======
 #undef tRainState 
 #undef tWaterSpoutPower 
 #undef tDropTaskDelay 
@@ -1604,6 +1637,7 @@ static void AnimWaterSpoutRainHit(struct Sprite *sprite)
 #undef tMaxDropSprites 
 #undef tShakeTasksCreated 
 #undef tDropInitialYPos 
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 void AnimTask_WaterSport(u8 taskId)
 {

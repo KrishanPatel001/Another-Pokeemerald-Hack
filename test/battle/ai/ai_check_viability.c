@@ -135,6 +135,7 @@ AI_SINGLE_BATTLE_TEST("AI will only use Dream Eater if target is asleep")
     }
 }
 
+<<<<<<< HEAD
 AI_SINGLE_BATTLE_TEST("AI chooses Sleep Talk only when it will not wake up with Early Bird")
 {
     enum Ability ability;
@@ -154,6 +155,8 @@ AI_SINGLE_BATTLE_TEST("AI chooses Sleep Talk only when it will not wake up with 
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Spit Up")
 {
     GIVEN {

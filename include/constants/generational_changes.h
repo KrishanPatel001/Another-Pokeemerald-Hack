@@ -86,12 +86,19 @@
     F(MINIMIZE_EVASION,          minimizeEvasion,         (u32, GEN_COUNT - 1)) \
     F(GROWTH_STAT_RAISE,         growthStatRaise,         (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(FOCUS_ENERGY_CRIT_RATIO,   focusEnergyCritRatio,    (u32, GEN_COUNT - 1)) \
+<<<<<<< HEAD
     F(PSYCH_UP_CRIT_RATIO,       psychUpCritRatio,        (u32, GEN_COUNT - 1)) \
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     /* Other move settings */ \
     F(INCINERATE_GEMS,           incinerateGems,          (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(CAN_SPITE_FAIL,            canSpiteFail,            (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(CRASH_IF_TARGET_IMMUNE,    crashIfTargetImmune,     (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(MEMENTO_FAIL,              mementoFail,             (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
+<<<<<<< HEAD
+    F(PARTING_SHOT_SWITCH,       partingShotSwitch,       (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     F(GLARE_GHOST,               glareGhost,              (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(SKILL_SWAP,                skillSwap,               (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(BRICK_BREAK,               brickBreak,              (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
@@ -121,8 +128,11 @@
     F(AFTER_YOU_TURN_ORDER,      afterYouTurnOrder,       (u32, GEN_COUNT - 1)) \
     F(QUASH_TURN_ORDER,          quashTurnOrder,          (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(DESTINY_BOND_FAIL,         destinyBondFail,         (u32, GEN_COUNT - 1)) \
+<<<<<<< HEAD
     F(FORESIGHT_FAIL,            foresightFail,           (u32, GEN_COUNT - 1)) \
     F(MIRACLE_EYE_FAIL,          miracleEyeFail,          (u32, GEN_COUNT - 1)) \
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     F(PURSUIT_TARGET,            pursuitTarget,           (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(SKIP_RECHARGE,             skipRecharge,            (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(ENCORE_TARGET,             encoreTarget,            (u32, GEN_COUNT - 1)) \

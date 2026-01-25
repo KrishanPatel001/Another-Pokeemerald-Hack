@@ -11491,6 +11491,7 @@
               }
             ]
           }
+<<<<<<< HEAD
         },
         {
           "map": "MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER",
@@ -36577,6 +36578,8 @@
               }
             ]
           }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
       ]
     },

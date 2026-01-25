@@ -4092,6 +4092,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "the air with 50 million volts of\n"
             "electricity sparking from its ears and\n"
             "forked tail."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_RaichuMegaX,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 4,
@@ -4108,6 +4109,24 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Raichu)
         SHADOW(6, 6, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Raichu)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sRaichuLevelUpLearnset,
         .teachableLearnset = sRaichuTeachableLearnset,
@@ -4152,6 +4171,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "tip of its tail and from the spiky tufts\n"
             "of fur growing out of its temples. This\n"
             "electricity forms the letter Y."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -4168,6 +4188,24 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Raichu)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Raichu)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sRaichuLevelUpLearnset,
         .teachableLearnset = sRaichuTeachableLearnset,
@@ -5204,8 +5242,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_ClefableMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -9409,6 +9452,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "has increased due to Mega Evolution,\n"
             "filling its mouth. If not careful,\n"
             "the acid will overflow and spill out."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_VictreebelMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -9425,6 +9469,24 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Victreebel)
         SHADOW(-2, 13, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Victreebel)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sVictreebelLevelUpLearnset,
         .teachableLearnset = sVictreebelTeachableLearnset,
@@ -15856,8 +15918,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_StarmieMega,
         .iconPalIndex = 2,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -20421,8 +20488,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_DragoniteMega,
         .iconPalIndex = 2,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)

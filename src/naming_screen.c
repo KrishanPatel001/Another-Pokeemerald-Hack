@@ -60,7 +60,10 @@ enum {
     GFXTAG_CURSOR_FILLED,
     GFXTAG_INPUT_ARROW,
     GFXTAG_UNDERSCORE,
+<<<<<<< HEAD
     GFXTAG_RIVAL = 255,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 enum {
@@ -72,7 +75,10 @@ enum {
     PALTAG_CURSOR,
     PALTAG_BACK_BUTTON,
     PALTAG_OK_BUTTON,
+<<<<<<< HEAD
     PALTAG_RIVAL = 255,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 enum {
@@ -188,8 +194,12 @@ EWRAM_DATA static struct NamingScreenData *sNamingScreen = NULL;
 static const u8 sPCIconOff_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_off.4bpp");
 static const u8 sPCIconOn_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_on.4bpp");
 static const u16 sKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
+<<<<<<< HEAD
 static const u16 sRival_Gfx[] = INCBIN_U16("graphics/naming_screen/rival.4bpp");
 static const u16 sRival_Pal[] = INCBIN_U16("graphics/naming_screen/rival.gbapal");
+=======
+static const u16 sRival_Pal[] = INCBIN_U16("graphics/naming_screen/rival.gbapal"); // Unused, leftover from FRLG rival
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static const u8 *const sTransferredToPCMessages[] =
 {
@@ -199,8 +209,11 @@ static const u8 *const sTransferredToPCMessages[] =
     gText_PkmnTransferredLanettesPCBoxFull
 };
 
+<<<<<<< HEAD
 
 static const u8 sText_RivalsName[] = _("RIVAL's NAME?");
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
 
 static const struct BgTemplate sBgTemplates[] =
@@ -1376,7 +1389,10 @@ static void NamingScreen_CreatePCIcon(void);
 static void NamingScreen_CreateMonIcon(void);
 static void NamingScreen_CreateWaldaDadIcon(void);
 static void NamingScreen_CreateCodeIcon(void);
+<<<<<<< HEAD
 static void NamingScreen_CreateRivalIcon(void);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static void (*const sIconFunctions[])(void) =
 {
@@ -1386,7 +1402,10 @@ static void (*const sIconFunctions[])(void) =
     NamingScreen_CreateMonIcon,
     NamingScreen_CreateWaldaDadIcon,
     NamingScreen_CreateCodeIcon,
+<<<<<<< HEAD
     NamingScreen_CreateRivalIcon,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 static void CreateInputTargetIcon(void)
@@ -1444,6 +1463,7 @@ static void NamingScreen_CreateCodeIcon(void)
     gSprites[spriteId].oam.priority = 3;
 }
 
+<<<<<<< HEAD
 static const union AnimCmd sAnim_Rival[] =
 {
     ANIMCMD_FRAME( 0, 10),
@@ -1481,6 +1501,8 @@ static void NamingScreen_CreateRivalIcon(void)
     gSprites[spriteId].oam.priority = 3;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 //--------------------------------------------------
 // Keyboard handling
 //--------------------------------------------------
@@ -1795,7 +1817,10 @@ static void (*const sDrawTextEntryBoxFuncs[])(void) =
     [NAMING_SCREEN_NICKNAME]   = DrawMonTextEntryBox,
     [NAMING_SCREEN_WALDA]      = DrawNormalTextEntryBox,
     [NAMING_SCREEN_CODE]       = DrawNormalTextEntryBox,
+<<<<<<< HEAD
     [NAMING_SCREEN_RIVAL]      = DrawNormalTextEntryBox
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 static void DrawTextEntryBox(void)
@@ -2202,6 +2227,7 @@ static const struct NamingScreenTemplate sCodeScreenTemplate =
     .title = COMPOUND_STRING("Enter code:"),
 };
 
+<<<<<<< HEAD
 static const struct NamingScreenTemplate sRivalNamingScreenTemplate =
 {
     .copyExistingString = FALSE,
@@ -2212,6 +2238,8 @@ static const struct NamingScreenTemplate sRivalNamingScreenTemplate =
     .title = sText_RivalsName,
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 {
     [NAMING_SCREEN_PLAYER]     = &sPlayerNamingScreenTemplate,
@@ -2220,7 +2248,10 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
     [NAMING_SCREEN_CODE]       = &sCodeScreenTemplate,
+<<<<<<< HEAD
     [NAMING_SCREEN_RIVAL]      = &sRivalNamingScreenTemplate,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 static const struct OamData sOam_8x8 =
@@ -2648,5 +2679,8 @@ static const struct SpritePalette sSpritePalettes[] =
     {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {}
 };
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 11d8f44022 (Updated to upcoming)

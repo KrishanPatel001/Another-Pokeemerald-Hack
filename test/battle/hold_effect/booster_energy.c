@@ -230,6 +230,23 @@ SINGLE_BATTLE_TEST("Booster Energy increases special defense by 30% if it is the
     }
 }
 
+<<<<<<< HEAD
+=======
+SINGLE_BATTLE_TEST("Booster Energy can't be flung if a Paradox species is involved")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_IRON_MOTH].isParadox == TRUE);
+        PLAYER(SPECIES_IRON_MOTH);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_BOOSTER_ENERGY); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLING); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, opponent);
+        MESSAGE("But it failed!");
+    }
+}
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 SINGLE_BATTLE_TEST("Booster Energy can't be tricked if a Paradox species is involved")
 {
     GIVEN {

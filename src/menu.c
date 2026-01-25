@@ -6,7 +6,10 @@
 #include "event_data.h"
 #include "field_name_box.h"
 #include "field_weather.h"
+<<<<<<< HEAD
 #include "gpu_regs.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "graphics.h"
 #include "main.h"
 #include "malloc.h"
@@ -61,7 +64,10 @@ static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8, u8, u8, u8, u8, 
 static void WindowFunc_ClearStdWindowAndFrameToTransparent(u8, u8, u8, u8, u8, u8);
 static void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 static void FillMenuTilemapBufferRect(u32 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height);
+<<<<<<< HEAD
 static void Task_SmoothBlendLayers(u8 taskId);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static EWRAM_DATA u8 sStartMenuWindowId = 0;
 static EWRAM_DATA u8 sMapNamePopupWindowId = 0;
@@ -559,10 +565,14 @@ u8 HofPCTopBar_AddWindow(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
     else
         palette = BG_PLTT_ID(palette);
 
+<<<<<<< HEAD
     if (IS_FRLG)
         LoadPalette(GetTextWindowPalette(2), palette, PLTT_SIZE_4BPP);
     else
         LoadPalette(sHofPC_TopBar_Pal, palette, sizeof(sHofPC_TopBar_Pal));
+=======
+    LoadPalette(sHofPC_TopBar_Pal, palette, sizeof(sHofPC_TopBar_Pal));
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return sHofPCTopBarWindowId;
 }
 
@@ -634,7 +644,11 @@ static void UNUSED HofPCTopBar_CopyToVram(void)
         CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
 }
 
+<<<<<<< HEAD
 void HofPCTopBar_Clear(void)
+=======
+static void UNUSED HofPCTopBar_Clear(void)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (sHofPCTopBarWindowId != WINDOW_NONE)
     {
@@ -934,7 +948,11 @@ u16 AddWindowParameterized(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 palet
 }
 
 // As opposed to CreateYesNoMenu, which has a hard-coded position.
+<<<<<<< HEAD
 void CreateYesNoMenuAtPos(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+=======
+static void CreateYesNoMenuAtPos(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     struct TextPrinterTemplate printer;
 
@@ -945,7 +963,11 @@ void CreateYesNoMenuAtPos(const struct WindowTemplate *window, u8 fontId, u8 lef
     printer.type = WINDOW_TEXT_PRINTER;
     printer.windowId = sYesNoWindowId;
     printer.fontId = fontId;
+<<<<<<< HEAD
     printer.x = GetMenuCursorDimensionByFont(fontId, 0) + left;
+=======
+    printer.x = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + left;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     printer.y = top;
     printer.currentX = printer.x;
     printer.currentY = printer.y;
@@ -1903,7 +1925,11 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
             if (IsNationalPokedexEnabled())
                 string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 4);
             else
+<<<<<<< HEAD
                 string = ConvertIntToDecimalStringN(string, GetRegionalPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
+=======
+                string = ConvertIntToDecimalStringN(string, GetHoennPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
+>>>>>>> 11d8f44022 (Updated to upcoming)
             *string = EOS;
             break;
         case SAVE_MENU_PLAY_TIME:
@@ -1964,6 +1990,7 @@ void HBlankCB_DoublePopupWindow(void)
         REG_BG0VOFS = 512 - offset;
     }
 }
+<<<<<<< HEAD
 
 #define tEvA data[0]
 #define tEvB data[1]
@@ -2030,3 +2057,5 @@ static void Task_SmoothBlendLayers(u8 taskId)
 #undef tEvBDelta
 #undef tEvWhich
 #undef tEvStepCount
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

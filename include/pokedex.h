@@ -6,17 +6,25 @@ extern void (*gPokedexVBlankCB)(void);
 
 void ResetPokedex(void);
 u16 GetNationalPokedexCount(u8 caseID);
+<<<<<<< HEAD
 u32 GetRegionalPokedexCount(u8 caseID);
 u16 GetHoennPokedexCount(u8 caseID);
 u16 GetKantoPokedexCount(u8 caseID);
+=======
+u16 GetHoennPokedexCount(u8 caseID);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality);
 u32 Pokedex_CreateCaughtMonSprite(u32 species, s32 x, s32 y);
 s8 GetSetPokedexFlag(enum NationalDexOrder nationalDexNo, u8 caseID);
 void DrawFootprint(u8 windowId, u16 species);
 u16 CreateMonSpriteFromNationalDexNumber(enum NationalDexOrder nationalNum, s16 x, s16 y, u16 paletteSlot);
+<<<<<<< HEAD
 bool16 HasAllRegionalMons(void);
 bool16 HasAllHoennMons(void);
 bool16 HasAllKantoMons(void);
+=======
+bool16 HasAllHoennMons(void);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);
 void CB2_OpenPokedex(void);

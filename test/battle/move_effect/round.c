@@ -112,6 +112,7 @@ DOUBLE_BATTLE_TEST("Round causes opposing Pokémon to use Round immediately")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
     }
 }
+<<<<<<< HEAD
 
 DOUBLE_BATTLE_TEST("Round usages beyond the first one has double base power even if the first attacker fainted")
 {
@@ -133,3 +134,5 @@ DOUBLE_BATTLE_TEST("Round usages beyond the first one has double base power even
         EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

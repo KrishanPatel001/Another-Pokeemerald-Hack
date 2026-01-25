@@ -561,11 +561,14 @@ static void VBlankCB(void)
 
 void CB2_InitTitleScreen(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
     {
         CB2_InitTitleScreenFrlg();
         return;
     }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     switch (gMain.state)
     {
     default:

@@ -378,6 +378,7 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x0350,
     },
+<<<<<<< HEAD
     [B_WIN_OAK_OLD_MAN] = {
         .bg = 0,
         .tilemapLeft = 2,
@@ -387,6 +388,8 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 7,
         .baseBlock = 0x090
     },
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     DUMMY_WIN_TEMPLATE
 };
 
@@ -638,7 +641,11 @@ static void LoadBattleEnvironmentGfx(u16 environment)
     // Copy to bg3
     DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].background.tileset, (void *)(BG_CHAR_ADDR(2)));
     DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].background.tilemap, (void *)(BG_SCREEN_ADDR(26)));
+<<<<<<< HEAD
     LoadPalette(gBattleEnvironmentInfo[environment].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+=======
+    LoadPalette(gBattleEnvironmentInfo[environment].background.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 // Loads the entry associated with the battle environment.
@@ -648,8 +655,13 @@ static void LoadBattleEnvironmentEntryGfx(u16 environment)
     if (environment >= NELEMS(gBattleEnvironmentInfo))
         environment = BATTLE_ENVIRONMENT_PLAIN;
     // Copy to bg1
+<<<<<<< HEAD
     DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].entry.tileset, (void *)BG_CHAR_ADDR(1));
     DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].entry.tilemap, (void *)BG_SCREEN_ADDR(28));
+=======
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].background.entryTileset, (void *)BG_CHAR_ADDR(1));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].background.entryTilemap, (void *)BG_SCREEN_ADDR(28));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static u8 GetBattleEnvironmentOverride(void)
@@ -730,8 +742,12 @@ void LoadBattleMenuWindowGfx(void)
     LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
     LoadPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
 
+<<<<<<< HEAD
     if ((gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_POKEDUDE))
     || (IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)))
+=======
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         // Load graphics for the Battle Arena referee's mid-battle messages.
         Menu_LoadStdPalAt(BG_PLTT_ID(7));
@@ -1100,7 +1116,11 @@ bool8 LoadChosenBattleElement(u8 caseId)
         DecompressDataWithHeaderVram(gBattleEnvironmentInfo[GetBattleEnvironmentOverride()].background.tilemap, (void *)(BG_SCREEN_ADDR(26)));
         break;
     case 5:
+<<<<<<< HEAD
         LoadPalette(gBattleEnvironmentInfo[GetBattleEnvironmentOverride()].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+=======
+        LoadPalette(gBattleEnvironmentInfo[GetBattleEnvironmentOverride()].background.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         break;
     case 6:
         LoadBattleMenuWindowGfx();

@@ -248,6 +248,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "It has fortified armor and a\n"
             "will to defend at all costs.\n"
             "Both are absurdly strong."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_ChesnaughtMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -264,6 +265,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Chesnaught)
         SHADOW(0, 14, SHADOW_SIZE_XL_BATTLE_ONLY)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Chesnaught)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sChesnaughtLevelUpLearnset,
         .teachableLearnset = sChesnaughtTeachableLearnset,
@@ -523,6 +542,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "dazzle its opponents before\n"
             "incinerating them with a\n"
             "huge fireball."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_DelphoxMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -540,6 +560,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Delphox)
         SHADOW(-1, 18, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Delphox)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sDelphoxLevelUpLearnset,
         .teachableLearnset = sDelphoxTeachableLearnset,
@@ -920,6 +958,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "shuriken at high speed to make it\n"
             "float, then clings to it upside\n"
             "down to catch opponents unawares."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_GreninjaMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -937,6 +976,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Greninja)
         SHADOW(-1, 18, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Greninja)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGreninjaLevelUpLearnset,
         .teachableLearnset = sGreninjaTeachableLearnset,
@@ -1915,6 +1972,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "than 18,000 degrees Fahrenheit.\n"
             "It swings around its grand, blazing\n"
             "mane as it protects its allies."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_PyroarMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -1931,6 +1989,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Pyroar)
         SHADOW(-1, 12, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Pyroar)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sPyroarLevelUpLearnset,
         .teachableLearnset = sPyroarTeachableLearnset,
@@ -2344,8 +2420,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_FloetteMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -2976,6 +3057,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "to compress or expand anything. It\n"
             "overwhelms foes by contorting space\n"
             "itself."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -2992,6 +3074,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Meowstic)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Meowstic)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMeowsticMLevelUpLearnset,
         .teachableLearnset = sMeowsticMTeachableLearnset,
@@ -3033,6 +3133,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "to compress or expand anything. It\n"
             "overwhelms foes by contorting space\n"
             "itself."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -3049,6 +3150,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Meowstic)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Meowstic)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sMeowsticFLevelUpLearnset,
         .teachableLearnset = sMeowsticFTeachableLearnset,
@@ -3820,8 +3939,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_MalamarMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -4041,8 +4165,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_BarbaracleMega,
         .iconPalIndex = 2,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -4254,6 +4383,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "regenerative power of cells to run\n"
             "wild. The liquid is deadly poison\n"
             "to everything other than itself."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_DragalgeMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -4270,6 +4400,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Dragalge)
         SHADOW(3, 16, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Dragalge)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sDragalgeLevelUpLearnset,
         .teachableLearnset = sDragalgeTeachableLearnset,
@@ -4970,8 +5118,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_HawluchaMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -7198,8 +7351,13 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_ZygardeMega,
         .iconPalIndex = 1,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)

@@ -37,7 +37,11 @@ static void SetArenaPrize(void);
 static void GiveArenaPrize(void);
 static void BufferArenaOpponentName(void);
 static void SpriteCB_JudgmentIcon(struct Sprite *sprite);
+<<<<<<< HEAD
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, enum BattlerId battler);
+=======
+static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #define JUDGMENT_STATE_FINISHED 8
 
@@ -212,8 +216,13 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         break;
     case 4:
         PlaySE(SE_ARENA_TIMEUP1);
+<<<<<<< HEAD
         ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
         ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+=======
+        ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, B_POSITION_PLAYER_LEFT);
+        ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, B_POSITION_OPPONENT_LEFT);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
         BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
@@ -221,8 +230,13 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         break;
     case 5:
         PlaySE(SE_ARENA_TIMEUP1);
+<<<<<<< HEAD
         ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
         ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+=======
+        ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, B_POSITION_PLAYER_LEFT);
+        ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, B_POSITION_OPPONENT_LEFT);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
         BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
@@ -230,8 +244,13 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         break;
     case 6:
         PlaySE(SE_ARENA_TIMEUP1);
+<<<<<<< HEAD
         ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
         ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+=======
+        ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, B_POSITION_PLAYER_LEFT);
+        ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, B_POSITION_OPPONENT_LEFT);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
         BattlePutTextOnWindow(gDisplayedStringBattle, ARENA_WIN_JUDGMENT_TITLE);
         (*state)++;
@@ -281,7 +300,11 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
     return result;
 }
 
+<<<<<<< HEAD
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, enum BattlerId battler)
+=======
+static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     int animNum = 0;
     int pointsPlayer = 0;
@@ -310,7 +333,11 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, enum BattlerId battler)
     {
         animNum = ANIM_ICON_CIRCLE;
         // +2 to score total for winning
+<<<<<<< HEAD
         if (battler != B_BATTLER_0)
+=======
+        if (battler != 0)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             gBattleTextBuff2[0] += 2;
         else
             gBattleTextBuff1[0] += 2;
@@ -319,7 +346,11 @@ static void ShowJudgmentSprite(u8 x, u8 y, u8 category, enum BattlerId battler)
     {
         animNum = ANIM_ICON_TRIANGLE;
         // +1 to score total for a tie
+<<<<<<< HEAD
         if (battler != B_BATTLER_0)
+=======
+        if (battler != 0)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             gBattleTextBuff2[0] += 1;
         else
             gBattleTextBuff1[0] += 1;
@@ -353,7 +384,11 @@ void BattleArena_InitPoints(void)
     hpAtStart[1] = gBattleMons[1].hp;
 }
 
+<<<<<<< HEAD
 void BattleArena_AddMindPoints(enum BattlerId battler)
+=======
+void BattleArena_AddMindPoints(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
 // All moves with power != 0 give 1 point, with the following exceptions:
 //    - Counter, Mirror Coat, and Bide give 0 points
@@ -376,7 +411,11 @@ void BattleArena_AddMindPoints(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 void BattleArena_AddSkillPoints(enum BattlerId battler)
+=======
+void BattleArena_AddSkillPoints(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
 
@@ -411,7 +450,11 @@ void BattleArena_AddSkillPoints(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 void BattleArena_DeductSkillPoints(enum BattlerId battler, enum StringID stringId)
+=======
+void BattleArena_DeductSkillPoints(u8 battler, enum StringID stringId)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
 
@@ -439,7 +482,11 @@ void BattleArena_DeductSkillPoints(enum BattlerId battler, enum StringID stringI
     }
 }
 
+<<<<<<< HEAD
 static void UNUSED UpdateHPAtStart(enum BattlerId battler)
+=======
+static void UNUSED UpdateHPAtStart(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u16 *hpAtStart = gBattleStruct->arenaStartHp;
 

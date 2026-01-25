@@ -1,6 +1,7 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
+<<<<<<< HEAD
 #define NUM_TILES_IN_PRIMARY_FRLG 640
 #define NUM_METATILES_IN_PRIMARY_FRLG 640
 #define NUM_PALS_IN_PRIMARY_FRLG 7
@@ -11,6 +12,13 @@
 
 #define NUM_METATILES_TOTAL 1024
 #define NUM_TILES_TOTAL 1024
+=======
+#define NUM_TILES_IN_PRIMARY 512
+#define NUM_TILES_TOTAL 1024
+#define NUM_METATILES_IN_PRIMARY 512
+#define NUM_METATILES_TOTAL 1024
+#define NUM_PALS_IN_PRIMARY 6
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define NUM_PALS_TOTAL 13
 #define MAX_MAP_DATA_SIZE 10240
 
@@ -29,9 +37,12 @@
 extern struct BackupMapLayout gBackupMapLayout;
 extern u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE];
 
+<<<<<<< HEAD
 u32 GetNumTilesInPrimary(struct MapLayout const *mapLayout);
 u32 GetNumMetatilesInPrimary(struct MapLayout const *mapLayout);
 u32 GetNumPalsInPrimary(struct MapLayout const *mapLayout);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u32 MapGridGetMetatileIdAt(int x, int y);
 u32 MapGridGetMetatileBehaviorAt(int x, int y);
 void MapGridSetMetatileIdAt(int x, int y, u16 metatile);
@@ -40,10 +51,15 @@ void GetCameraCoords(u16 *x, u16 *y);
 u8 MapGridGetCollisionAt(int x, int y);
 enum Connection GetMapBorderIdAt(int x, int y);
 bool32 CanCameraMoveInDirection(enum Direction direction);
+<<<<<<< HEAD
 u32 GetAttributeByMetatileIdAndMapLayout(u16 metatile, u8 attributeType, bool32 isFrlg);
 void GetCameraFocusCoords(u16 *x, u16 *y);
 u32 ExtractMetatileAttribute(u32 attributes, u8 attributeType, bool32 isFrlg);
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attributeType);
+=======
+u16 GetMetatileAttributesById(u16 metatile);
+void GetCameraFocusCoords(u16 *x, u16 *y);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u8 MapGridGetMetatileLayerTypeAt(int x, int y);
 u8 MapGridGetElevationAt(int x, int y);
 bool8 CameraMove(int x, int y);

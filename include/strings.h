@@ -16,8 +16,11 @@ extern const u8 gText_ExpandedPlaceholder_Kyogre[];
 extern const u8 gText_ExpandedPlaceholder_Groudon[];
 extern const u8 gText_ExpandedPlaceholder_Brendan[];
 extern const u8 gText_ExpandedPlaceholder_May[];
+<<<<<<< HEAD
 extern const u8 gText_ExpandedPlaceholder_Red[];
 extern const u8 gText_ExpandedPlaceholder_Green[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 extern const u8 gText_Lv50[];
 extern const u8 gText_OpenLevel[];
@@ -55,8 +58,11 @@ extern const u8 gText_MultiLink[];
 
 extern const u8 gText_Single[];
 extern const u8 gText_Double[];
+<<<<<<< HEAD
 extern const u8 gText_Knockout[];
 extern const u8 gText_Mixed[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 extern const u8 gText_Spicy2[];
 extern const u8 gText_Dry2[];
@@ -691,7 +697,10 @@ extern const u8 gText_SoldOut[];
 extern const u8 gText_HallOfFame[];
 extern const u8 gText_LogOff[];
 extern const u8 gText_LanettesPC[];
+<<<<<<< HEAD
 extern const u8 gText_BillsPc[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 gText_SomeonesPC[];
 extern const u8 gText_PlayersPC[];
 extern const u8 gText_WhichPCShouldBeAccessed[];
@@ -2185,6 +2194,7 @@ extern const u8 MoveRelearner_Text_TMMoveLWR[];
 extern const u8 MoveRelearner_Text_TutorMoveLWR[];
 extern const u8 MoveRelearner_Text_MoveLWR[];
 
+<<<<<<< HEAD
 extern const u8 gText_Ghost[];
 extern const u8 gText_Boulderbadge[];
 extern const u8 gText_Cascadebadge[];
@@ -2201,4 +2211,6 @@ extern const u8 gText_Boy[];
 extern const u8 gText_Girl[];
 
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_STRINGS_H

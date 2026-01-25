@@ -502,7 +502,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_SNORE] =
     {
+<<<<<<< HEAD
         .battleScript = BattleScript_EffectHit,
+=======
+        .battleScript = BattleScript_EffectSnore,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .battleTvScore = 3,
     },
 
@@ -715,7 +719,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MAGNITUDE] =
     {
+<<<<<<< HEAD
         .battleScript = BattleScript_EffectHit,
+=======
+        .battleScript = BattleScript_EffectMagnitude,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .battleTvScore = 1,
     },
 
@@ -826,7 +834,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_BEAT_UP] =
     {
+<<<<<<< HEAD
         .battleScript = BattleScript_EffectHit,
+=======
+        .battleScript = BattleScript_EffectBeatUp,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .battleTvScore = 2,
     },
 
@@ -876,7 +888,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_SPIT_UP] =
     {
+<<<<<<< HEAD
         .battleScript = BattleScript_EffectHit,
+=======
+        .battleScript = BattleScript_EffectSpitUp,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .battleTvScore = 3,
         .encourageEncore = TRUE,
     },
@@ -1198,7 +1214,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_NATURAL_GIFT] =
     {
+<<<<<<< HEAD
         .battleScript = BattleScript_EffectHit,
+=======
+        .battleScript = BattleScript_EffectNaturalGift,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
     },
@@ -2125,7 +2145,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_FICKLE_BEAM] =
     {
+<<<<<<< HEAD
         .battleScript = BattleScript_EffectHit,
+=======
+        .battleScript = BattleScript_EffectFickleBeam,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .battleTvScore = 0, // TODO: Assign points
     },
 

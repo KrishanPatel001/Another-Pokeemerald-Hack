@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 ASSUMPTIONS
 {
     ASSUME(GetMoveEffect(MOVE_MAGNITUDE) == EFFECT_MAGNITUDE);
@@ -21,3 +22,6 @@ SINGLE_BATTLE_TEST("Magnitude message is printed before failing because of Levit
         ABILITY_POPUP(opponent, ABILITY_LEVITATE);
     }
 }
+=======
+TO_DO_BATTLE_TEST("TODO: Write Magnitude (Move Effect) test titles")
+>>>>>>> 11d8f44022 (Updated to upcoming)

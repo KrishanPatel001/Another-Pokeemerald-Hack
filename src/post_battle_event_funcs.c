@@ -3,7 +3,10 @@
 #include "credits.h"
 #include "event_data.h"
 #include "hall_of_fame.h"
+<<<<<<< HEAD
 #include "hall_of_fame_frlg.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "load_save.h"
 #include "overworld.h"
 #include "script_pokemon_util.h"
@@ -91,6 +94,7 @@ bool8 SetCB2WhiteOut(void)
     SetMainCallback2(CB2_WhiteOut);
     return FALSE;
 }
+<<<<<<< HEAD
 
 bool8 EnterHallOfFame(void)
 {
@@ -135,3 +139,5 @@ bool8 EnterHallOfFame(void)
     SetMainCallback2(CB2_DoHallOfFameScreenFrlg);
     return FALSE;
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

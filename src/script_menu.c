@@ -20,7 +20,10 @@
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/script_menu.h"
+<<<<<<< HEAD
 #include "constants/seagallop.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "constants/songs.h"
 
 #include "data/script_menu.h"
@@ -749,6 +752,7 @@ static void CreatePCMultichoice(void)
 
     // Change PC name if player has met Lanette
     if (FlagGet(FLAG_SYS_PC_LANETTE))
+<<<<<<< HEAD
     {
         if (IS_FRLG)
             AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_BillsPc, x, 1, TEXT_SKIP_DRAW, NULL);
@@ -759,6 +763,11 @@ static void CreatePCMultichoice(void)
     {
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, x, 1, TEXT_SKIP_DRAW, NULL);
     }
+=======
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, x, 1, TEXT_SKIP_DRAW, NULL);
+    else
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, x, 1, TEXT_SKIP_DRAW, NULL);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, x, 17);
@@ -1154,6 +1163,7 @@ int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
 
     return adjustedLeft;
 }
+<<<<<<< HEAD
 
 // FRLG
 #define FOSSIL_PIC_PAL_NUM  13
@@ -1307,3 +1317,5 @@ u16 GetSelectedSeagallopDestination(void)
     }
     return SEAGALLOP_VERMILION_CITY;
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

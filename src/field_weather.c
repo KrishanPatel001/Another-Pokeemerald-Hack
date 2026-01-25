@@ -730,11 +730,14 @@ void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex
 
 void FadeScreen(u8 mode, s8 delay)
 {
+<<<<<<< HEAD
     FadeSelectedPals(mode, delay, PALETTES_ALL);
 }
 
 void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
 {
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 fadeColor;
     bool8 fadeOut;
     bool8 useWeatherPal;
@@ -783,7 +786,11 @@ void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
         // For cases like that, use fadescreenswapbuffers
         CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
 
+<<<<<<< HEAD
         BeginNormalPaletteFade(selectedPalettes, delay, 0, 16, fadeColor);
+=======
+        BeginNormalPaletteFade(PALETTES_ALL, delay, 0, 16, fadeColor);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
     }
     else
@@ -796,12 +803,21 @@ void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
         }
         else if (MapHasNaturalLight(gMapHeader.mapType))
         {
+<<<<<<< HEAD
             UpdateAltBgPalettes(selectedPalettes & PALETTES_BG);
             BeginTimeOfDayPaletteFade(selectedPalettes, delay, 16, 0, &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight, fadeColor);
         }
         else
         {
             BeginNormalPaletteFade(selectedPalettes, delay, 16, 0, fadeColor);
+=======
+            UpdateAltBgPalettes(PALETTES_BG);
+            BeginTimeOfDayPaletteFade(PALETTES_ALL, delay, 16, 0, &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight, fadeColor);
+        }
+        else
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, delay, 16, 0, fadeColor);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
 
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;

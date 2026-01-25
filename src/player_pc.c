@@ -29,7 +29,10 @@
 #include "task.h"
 #include "window.h"
 #include "menu_specialized.h"
+<<<<<<< HEAD
 #include "constants/layouts.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Top level PC menu options
 enum {
@@ -491,9 +494,13 @@ static void PlayerPC_TurnOff(u8 taskId)
 {
     if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
     {
+<<<<<<< HEAD
         if (gMapHeader.mapLayoutId == LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_2F_FRLG)
             ScriptContext_SetupScript(EventScript_PalletTown_PlayersHouse_2F_ShutDownPC);
         else if (gSaveBlock2Ptr->playerGender == MALE)
+=======
+        if (gSaveBlock2Ptr->playerGender == MALE)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             ScriptContext_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
         else
             ScriptContext_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC);

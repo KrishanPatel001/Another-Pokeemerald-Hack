@@ -45,7 +45,11 @@
 #define TAG_ITEM_ICON_BASE 9110 // immune to time blending
 
 #define MAX_ITEMS_SHOWN 8
+<<<<<<< HEAD
 #define SHOP_MENU_PALETTE_ID (gMapHeader.mapLayout->isFrlg ? 11 : 12)
+=======
+#define SHOP_MENU_PALETTE_ID 12
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 enum {
     WIN_BUY_SELL_QUIT,
@@ -797,11 +801,17 @@ static void BuyMenuDrawMapBg(void)
     s16 x, y;
     const struct MapLayout *mapLayout;
     u16 metatile;
+<<<<<<< HEAD
     u16 numMetatilesInPrimary;
     u8 metatileLayerType;
 
     mapLayout = gMapHeader.mapLayout;
     numMetatilesInPrimary = GetNumMetatilesInPrimary(mapLayout);
+=======
+    u8 metatileLayerType;
+
+    mapLayout = gMapHeader.mapLayout;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     x -= 4;
     y -= 4;
@@ -816,10 +826,17 @@ static void BuyMenuDrawMapBg(void)
             else
                 metatileLayerType = METATILE_LAYER_TYPE_COVERED;
 
+<<<<<<< HEAD
             if (metatile < numMetatilesInPrimary)
                 BuyMenuDrawMapMetatile(i, j, mapLayout->primaryTileset->metatiles + metatile * NUM_TILES_PER_METATILE, metatileLayerType);
             else
                 BuyMenuDrawMapMetatile(i, j, mapLayout->secondaryTileset->metatiles + ((metatile - numMetatilesInPrimary) * NUM_TILES_PER_METATILE), metatileLayerType);
+=======
+            if (metatile < NUM_METATILES_IN_PRIMARY)
+                BuyMenuDrawMapMetatile(i, j, mapLayout->primaryTileset->metatiles + metatile * NUM_TILES_PER_METATILE, metatileLayerType);
+            else
+                BuyMenuDrawMapMetatile(i, j, mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * NUM_TILES_PER_METATILE), metatileLayerType);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
     }
 }

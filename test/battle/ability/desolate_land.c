@@ -3,7 +3,11 @@
 
 ASSUMPTIONS
 {
+<<<<<<< HEAD
     ASSUME(GetMoveCategory(MOVE_WATER_GUN) != DAMAGE_CATEGORY_STATUS);
+=======
+    ASSUME(!IsBattleMoveStatus(MOVE_WATER_GUN));
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
 }
 
@@ -32,7 +36,11 @@ SINGLE_BATTLE_TEST("Desolate Land blocks damaging Water-type moves")
 DOUBLE_BATTLE_TEST("Desolate Land blocks damaging Water-type moves and prints the message only once with moves hitting multiple targets")
 {
     GIVEN {
+<<<<<<< HEAD
         ASSUME(GetMoveCategory(MOVE_SURF) != DAMAGE_CATEGORY_STATUS);
+=======
+        ASSUME(!IsBattleMoveStatus(MOVE_SURF));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
         ASSUME(GetMoveTarget(MOVE_SURF) == TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_GROUDON) {Item(ITEM_RED_ORB); {Speed(5);}}

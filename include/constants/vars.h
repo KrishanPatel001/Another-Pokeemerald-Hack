@@ -1,8 +1,11 @@
 #ifndef GUARD_CONSTANTS_VARS_H
 #define GUARD_CONSTANTS_VARS_H
 
+<<<<<<< HEAD
 #include "constants/vars_frlg.h"
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define VARS_START 0x4000
 
 // temporary vars

@@ -81,14 +81,20 @@ void SpriteCB_HideAsMoveTarget(struct Sprite *sprite);
 void SpriteCB_OpponentMonFromBall(struct Sprite *sprite);
 void SpriteCB_BattleSpriteStartSlideLeft(struct Sprite *sprite);
 void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
+<<<<<<< HEAD
 void DoBounceEffect(enum BattlerId battler, u8 which, s8 delta, s8 amplitude);
 void EndBounceEffect(enum BattlerId battler, u8 which);
+=======
+void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
+void EndBounceEffect(u8 battler, u8 which);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void SpriteCB_PlayerMonFromBall(struct Sprite *sprite);
 void SpriteCB_PlayerMonSlideIn(struct Sprite *sprite);
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
 void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
+<<<<<<< HEAD
 void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCopy);
 const u8 *FaintClearSetData(enum BattlerId battler);
 void BattleTurnPassed(void);
@@ -99,13 +105,30 @@ void SwapTurnOrder(u8 id1, u8 id2);
 u32 GetBattlerTotalSpeedStat(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect);
 s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability);
 s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Move move);
+=======
+void SwitchInClearSetData(u32 battler, struct Volatiles *volatilesCopy);
+const u8 *FaintClearSetData(u32 battler);
+void BattleTurnPassed(void);
+u8 IsRunningFromBattleImpossible(u32 battler);
+void SwitchTwoBattlersInParty(u32 battler, u32 battler2);
+void SwitchPartyOrder(u32 battler);
+void SwapTurnOrder(u8 id1, u8 id2);
+u32 GetBattlerTotalSpeedStat(u32 battler, enum Ability ability, enum HoldEffect holdEffect);
+s32 GetChosenMovePriority(u32 battler, enum Ability ability);
+s32 GetBattleMovePriority(u32 battler, enum Ability ability, enum Move move);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 s32 GetWhichBattlerFasterArgs(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
 s32 GetWhichBattlerFasterOrTies(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves);
 s32 GetWhichBattlerFaster(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
+<<<<<<< HEAD
 enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId battler, enum MonState monInBattle);
 void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler);
+=======
+enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, u32 battler, enum MonState monInBattle);
+void SetTypeBeforeUsingMove(enum Move move, u32 battlerAtk);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 bool32 IsWildMonSmart(void);
 u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer, bool32 firstTrainer, u32 battleTypeFlags);
 void ModifyPersonalityForNature(u32 *personality, u32 newNature);

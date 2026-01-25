@@ -1360,6 +1360,7 @@ static const struct SpriteFrameImage sPicTable_RubySapphireMay[] = {
 static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
     overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
 };
+<<<<<<< HEAD
 
 #if IS_FRLG
 
@@ -3029,3 +3030,5 @@ static const struct SpriteFrameImage sPicTable_MomFrlg[] = {
 };
 
 #endif // IS_FRLG
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

@@ -11,16 +11,29 @@ struct MessageStatus
 };
 
 void SetTrainerSlideMessage(enum DifficultyLevel difficulty, u32 trainerId, u32 slideId);
+<<<<<<< HEAD
 enum TrainerSlideTargets ShouldDoTrainerSlide(enum BattlerId battler, enum TrainerSlideType slideId);
 void TryInitializeFirstSTABMoveTrainerSlide(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum Type moveType);
+=======
+enum TrainerSlideTargets ShouldDoTrainerSlide(u32 battler, enum TrainerSlideType slideId);
+void TryInitializeFirstSTABMoveTrainerSlide(u32 battlerDef, u32 battlerAtk, enum Type moveType);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void TryInitializeTrainerSlidePlayerLandsFirstCriticalHit(u32 target);
 void TryInitializeTrainerSlideEnemyLandsFirstCriticalHit(u32 target);
 void TryInitializeTrainerSlidePlayerLandsFirstSuperEffectiveHit(u32 target);
 void TryInitializeTrainerSlideEnemyMonUnaffected(u32 target);
+<<<<<<< HEAD
 bool32 IsTrainerSlideInitialized(enum BattlerId battler, enum TrainerSlideType slideId);
 bool32 IsTrainerSlidePlayed(enum BattlerId battler, enum TrainerSlideType slideId);
 void InitalizeTrainerSlide(enum BattlerId battler, enum TrainerSlideType slideId);
 void MarkTrainerSlideAsPlayed(enum BattlerId battler, enum TrainerSlideType slideId);
 void MarkInitializedTrainerSlidesAsPlayed(enum BattlerId battler, enum TrainerSlideType slideId);
+=======
+bool32 IsTrainerSlideInitialized(u32 battler, enum TrainerSlideType slideId);
+bool32 IsTrainerSlidePlayed(u32 battler, enum TrainerSlideType slideId);
+void InitalizeTrainerSlide(u32 battler, enum TrainerSlideType slideId);
+void MarkTrainerSlideAsPlayed(u32 battler, enum TrainerSlideType slideId);
+void MarkInitializedTrainerSlidesAsPlayed(u32 battler, enum TrainerSlideType slideId);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #endif // GUARD_TRAINER_SLIDE_H

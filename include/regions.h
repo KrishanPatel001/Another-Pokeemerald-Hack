@@ -1,6 +1,7 @@
 #ifndef GUARD_REGIONS_H
 #define GUARD_REGIONS_H
 
+<<<<<<< HEAD
 #include "global.h"
 #include "constants/regions.h"
 
@@ -18,4 +19,14 @@ static inline enum Region GetCurrentRegion(void)
     return GetRegionForSectionId(gMapHeader.regionMapSectionId);
 }
 
+=======
+#include "constants/regions.h"
+
+static inline u32 GetCurrentRegion(void)
+{
+    // TODO: Since there's no current multi-region support, we have this constant for the purposes of regional form comparisons.
+    return REGION_HOENN;
+}
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_REGIONS_H

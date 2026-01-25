@@ -6,7 +6,10 @@
 #include "berry.h"
 #include "bg.h"
 #include "cable_club.h"
+<<<<<<< HEAD
 #include "credits_frlg.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "clock.h"
 #include "dexnav.h"
 #include "event_data.h"
@@ -76,7 +79,10 @@
 #include "constants/event_objects.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
+<<<<<<< HEAD
 #include "constants/rgb.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
@@ -186,11 +192,14 @@ static void TransitionMapMusic(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, enum MapType mapType);
 static enum Direction GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, enum MapType mapType);
 static u16 GetCenterScreenMetatileBehavior(void);
+<<<<<<< HEAD
 static bool32 SetUpScrollSceneForCredits(u8 *state, u8 unused);
 static bool8 MapLdr_Credits(void);
 static void CameraCB_CreditsPan(struct CameraObject *camera);
 static void Task_OvwldCredits_FadeOut(u8 taskId);
 static void Task_OvwldCredits_WaitFade(u8 taskId);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static void *sUnusedOverworldCallback;
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
@@ -227,10 +236,13 @@ EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
 EWRAM_DATA static u8 sHoursOverride = 0; // used to override apparent time of day hours
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
 EWRAM_DATA bool8 gExitStairsMovementDisabled = FALSE;
+<<<<<<< HEAD
 EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = MUSIC_DISABLE_OFF;
 static EWRAM_DATA const struct CreditsOverworldCmd *sCreditsOverworld_Script = NULL;
 static EWRAM_DATA s16 sCreditsOverworld_CmdLength = 0;
 static EWRAM_DATA s16 sCreditsOverworld_CmdIndex = 0;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static const struct WarpData sDummyWarpData =
 {
@@ -402,7 +414,10 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_CYCLING_ROAD);
     FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
+<<<<<<< HEAD
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
 }
@@ -413,7 +428,10 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_CYCLING_ROAD);
     FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
+<<<<<<< HEAD
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
     RunScriptImmediately(EventScript_ResetMrBriney);
@@ -425,7 +443,10 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_CYCLING_ROAD);
     FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
+<<<<<<< HEAD
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
 }
@@ -460,7 +481,10 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_CYCLING_ROAD);
     FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
+<<<<<<< HEAD
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
     if (B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE)
@@ -478,7 +502,10 @@ static void Overworld_ResetStateAfterWhiteOut(void)
 static void UpdateMiscOverworldStates(void)
 {
     FlagClear(FLAG_SYS_SAFARI_MODE);
+<<<<<<< HEAD
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ChooseAmbientCrySpecies();
     ResetCyclingRoadChallengeData();
     UpdateLocationHistoryForRoamer();
@@ -534,6 +561,7 @@ void LoadObjEventTemplatesFromHeader(void)
     // Clear map object templates
     CpuFill32(0, gSaveBlock1Ptr->objectEventTemplates, sizeof(gSaveBlock1Ptr->objectEventTemplates));
 
+<<<<<<< HEAD
     for (u32 i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
         if (gMapHeader.events->objectEvents[i].kind == OBJ_KIND_CLONE)
@@ -558,6 +586,12 @@ void LoadObjEventTemplatesFromHeader(void)
             gSaveBlock1Ptr->objectEventTemplates[i] = gMapHeader.events->objectEvents[i];
         }
     }
+=======
+    // Copy map header events to save block
+    CpuCopy32(gMapHeader.events->objectEvents,
+              gSaveBlock1Ptr->objectEventTemplates,
+              gMapHeader.events->objectEventCount * sizeof(struct ObjectEventTemplate));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 void LoadSaveblockObjEventScripts(void)
@@ -742,7 +776,11 @@ static bool32 IsWhiteoutCutscene(void)
 {
     if (OW_WHITEOUT_CUTSCENE < GEN_4)
         return FALSE;
+<<<<<<< HEAD
+    return GetHealNpcLocalId(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation)) != LOCALID_NONE;
+=======
     return GetHealNpcLocalId(GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation)) > 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 void SetWarpDestinationToLastHealLocation(void)
@@ -753,6 +791,14 @@ void SetWarpDestinationToLastHealLocation(void)
         sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
 }
 
+<<<<<<< HEAD
+void SetWarpDestinationForTeleport(void)
+{
+    sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
+}
+
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void SetLastHealLocationWarp(u8 healLocationId)
 {
     const struct HealLocation *healLocation = GetHealLocation(healLocationId);
@@ -900,7 +946,11 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
     LoadSecondaryTilesetPalette(gMapHeader.mapLayout, TRUE); // skip copying to Faded, gamma shift will take care of it
 
+<<<<<<< HEAD
     ApplyWeatherColorMapToPals(GetNumPalsInPrimary(gMapHeader.mapLayout), NUM_PALS_TOTAL - GetNumPalsInPrimary(gMapHeader.mapLayout)); // palettes [6,12]
+=======
+    ApplyWeatherColorMapToPals(NUM_PALS_IN_PRIMARY, NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY); // palettes [6,12]
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();
@@ -1022,8 +1072,11 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *pla
         return PLAYER_AVATAR_FLAG_ON_FOOT;
     else if (mapType == MAP_TYPE_UNDERWATER)
         return PLAYER_AVATAR_FLAG_UNDERWATER;
+<<<<<<< HEAD
     else if (MetatileBehavior_IsSurfableInSeafoamIslands(metatileBehavior) == TRUE)
         return PLAYER_AVATAR_FLAG_ON_FOOT;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     else if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) == TRUE)
         return PLAYER_AVATAR_FLAG_SURFING;
     else if (Overworld_IsBikingAllowed() != TRUE)
@@ -1036,6 +1089,7 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *pla
         return PLAYER_AVATAR_FLAG_ACRO_BIKE;
 }
 
+<<<<<<< HEAD
 bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior)
 {
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(metatileBehavior) != TRUE)
@@ -1051,6 +1105,8 @@ bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior)
     return FALSE;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static enum Direction GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, enum MapType mapType)
 {
     if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_OCEAN_ROUTE)
@@ -1272,6 +1328,7 @@ void Overworld_PlaySpecialMapMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
 
+<<<<<<< HEAD
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_STOP)
     {
         StopMapMusic();
@@ -1280,6 +1337,8 @@ void Overworld_PlaySpecialMapMusic(void)
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_KEEP)
         return;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (music != MUS_ABNORMAL_WEATHER && music != MUS_NONE)
     {
         if (gSaveBlock1Ptr->savedMusic)
@@ -1306,6 +1365,7 @@ void Overworld_ClearSavedMusic(void)
 
 static void TransitionMapMusic(void)
 {
+<<<<<<< HEAD
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_STOP)
     {
         StopMapMusic();
@@ -1314,6 +1374,8 @@ static void TransitionMapMusic(void)
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_KEEP)
         return;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
     {
         u16 newMusic = GetWarpDestinationMusic();
@@ -1399,6 +1461,7 @@ static void PlayAmbientCry(void)
         return;
     pan = (Random() % 88) + 212;
     volume = (Random() % 30) + 50;
+<<<<<<< HEAD
 
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_STOP)
     {
@@ -1408,6 +1471,8 @@ static void PlayAmbientCry(void)
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_KEEP)
         return;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     PlayCry_NormalNoDucking(sAmbientCrySpecies, pan, volume, CRY_PRIORITY_AMBIENT);
 }
 
@@ -1567,6 +1632,7 @@ static void InitOverworldBgs(void)
     InitStandardTextBoxWindows();
 }
 
+<<<<<<< HEAD
 static void InitOverworldBgs_NoResetHeap(void)
 {
     ResetBgsAndClearDma3BusyFlags(FALSE);
@@ -1585,6 +1651,8 @@ static void InitOverworldBgs_NoResetHeap(void)
     InitFieldMessageBox();
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void CleanupOverworldWindowsAndTilemaps(void)
 {
     ClearMirageTowerPulseBlendEffect();
@@ -1736,8 +1804,13 @@ void UpdateAltBgPalettes(u16 palettes)
     u32 i = 1;
     if (!MapHasNaturalLight(gMapHeader.mapType))
         return;
+<<<<<<< HEAD
     palettes &= ~((1 << GetNumPalsInPrimary(gMapHeader.mapLayout)) - 1) | primary->swapPalettes;
     palettes &= ((1 << GetNumPalsInPrimary(gMapHeader.mapLayout)) - 1) | (secondary->swapPalettes << GetNumPalsInPrimary(gMapHeader.mapLayout));
+=======
+    palettes &= ~((1 << NUM_PALS_IN_PRIMARY) - 1) | primary->swapPalettes;
+    palettes &= ((1 << NUM_PALS_IN_PRIMARY) - 1) | (secondary->swapPalettes << NUM_PALS_IN_PRIMARY);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     palettes &= PALETTES_MAP ^ (1 << 0); // don't blend palette 0, [13,15]
     palettes >>= 1; // start at palette 1
     if (!palettes)
@@ -1746,7 +1819,11 @@ void UpdateAltBgPalettes(u16 palettes)
     {
         if (palettes & 1)
         {
+<<<<<<< HEAD
             if (i < GetNumPalsInPrimary(gMapHeader.mapLayout))
+=======
+            if (i < NUM_PALS_IN_PRIMARY)
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 AvgPaletteWeighted(&((u16 *)primary->palettes)[i * 16], &((u16 *)primary->palettes)[((i + 9) % 16) * 16], gPlttBufferUnfaded + i * 16, gTimeBlend.altWeight);
             else
                 AvgPaletteWeighted(&((u16 *)secondary->palettes)[i * 16], &((u16 *)secondary->palettes)[((i + 9) % 16) * 16], gPlttBufferUnfaded + i * 16, gTimeBlend.altWeight);
@@ -1880,10 +1957,14 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
+<<<<<<< HEAD
     if (IS_FRLG)
         gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     else
         gFieldCallback = ExecuteTruckSequence;
+=======
+    gFieldCallback = ExecuteTruckSequence;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();
@@ -2488,6 +2569,7 @@ static void InitOverworldGraphicsRegisters(void)
     InitFieldMessageBox();
 }
 
+<<<<<<< HEAD
 static void InitOverworldGraphicsRegistersCreditsFrlg(void)
 {
     ClearScheduledBgCopiesToVram();
@@ -2520,6 +2602,8 @@ static void InitOverworldGraphicsRegistersCreditsFrlg(void)
     ChangeBgY(3, 0, 0);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void ResumeMap(bool32 a1)
 {
     ResetTasks();
@@ -3838,6 +3922,7 @@ bool8 ScrFunc_settimeofday(struct ScriptContext *ctx)
     SetTimeOfDay(ScriptReadByte(ctx));
     return FALSE;
 }
+<<<<<<< HEAD
 
 // Credits
 
@@ -4035,3 +4120,5 @@ static void Task_OvwldCredits_WaitFade(u8 taskId)
         DestroyTask(taskId);
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

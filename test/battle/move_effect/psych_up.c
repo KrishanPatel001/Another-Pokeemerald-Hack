@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 ASSUMPTIONS
 {
     ASSUME(GetMoveEffect(MOVE_PSYCH_UP) == EFFECT_PSYCH_UP);
@@ -120,3 +121,6 @@ SINGLE_BATTLE_TEST("Psych Up copies the target's critical hit ratio (Gen6+)")
         EXPECT(player->volatiles.focusEnergy);
     }
 }
+=======
+TO_DO_BATTLE_TEST("TODO: Write Psych Up (Move Effect) test titles")
+>>>>>>> 11d8f44022 (Updated to upcoming)

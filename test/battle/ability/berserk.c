@@ -14,7 +14,11 @@ SINGLE_BATTLE_TEST("Berserk activates only if the target had more than 50% of it
     PARAMETRIZE { hp = 254; activates = TRUE; }
 
     GIVEN {
+<<<<<<< HEAD
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+=======
+        ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(hp); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -37,7 +41,11 @@ SINGLE_BATTLE_TEST("Berserk raises Sp.Atk by 1")
 {
     u16 maxHp = 500;
     GIVEN {
+<<<<<<< HEAD
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+=======
+        ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(maxHp / 2 + 1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -121,7 +129,11 @@ SINGLE_BATTLE_TEST("Berserk activates before the hp can be restored on non multi
 {
     u16 maxHp = 500;
     GIVEN {
+<<<<<<< HEAD
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+=======
+        ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); MaxHP(maxHp); HP(maxHp / 2 + 1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

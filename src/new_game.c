@@ -19,7 +19,10 @@
 #include "event_data.h"
 #include "money.h"
 #include "trainer_hill.h"
+<<<<<<< HEAD
 #include "trainer_tower.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "tv.h"
 #include "coins.h"
 #include "text.h"
@@ -40,7 +43,10 @@
 #include "pokemon_jump.h"
 #include "decoration_inventory.h"
 #include "secret_base.h"
+<<<<<<< HEAD
 #include "string_util.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "player_pc.h"
 #include "field_specials.h"
 #include "berry_powder.h"
@@ -52,7 +58,10 @@
 #include "follower_npc.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
+<<<<<<< HEAD
 extern const u8 EventScript_ResetAllMapFlagsFrlg[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
@@ -134,10 +143,14 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
     else
         SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+=======
+    SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     WarpIntoMap();
 }
 
@@ -159,6 +172,7 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
+<<<<<<< HEAD
 #if IS_FRLG
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
 #endif
@@ -168,6 +182,11 @@ void NewGameInitData(void)
 #if IS_FRLG
     StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
 #endif
+=======
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
+        RtcReset();
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
@@ -210,6 +229,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
+<<<<<<< HEAD
     if (IS_FRLG)
         RunScriptImmediately(EventScript_ResetAllMapFlagsFrlg);
     else
@@ -217,6 +237,9 @@ void NewGameInitData(void)
 #if IS_FRLG
         StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
 #endif
+=======
+    RunScriptImmediately(EventScript_ResetAllMapFlags);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
@@ -226,7 +249,10 @@ void NewGameInitData(void)
     ClearMysteryGift();
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
+<<<<<<< HEAD
     ResetTrainerTowerResults();
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ResetContestLinkResults();
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetItemFlags();

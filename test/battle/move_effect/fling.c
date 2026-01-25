@@ -199,7 +199,11 @@ SINGLE_BATTLE_TEST("Fling - Item does not get blocked by Unnerve if it isn't a b
     }
 }
 
+<<<<<<< HEAD
 SINGLE_BATTLE_TEST("Fling doesn't consume the item if the user is asleep/frozen/paralyzed")
+=======
+SINGLE_BATTLE_TEST("Fling doesn't consume the item if Pokémon is asleep/frozen/paralyzed")
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 status;
     enum Item item;
@@ -514,7 +518,11 @@ SINGLE_BATTLE_TEST("Fling deals damage based on items fling power")
     }
 }
 
+<<<<<<< HEAD
 SINGLE_BATTLE_TEST("Fling deals damage based on a TM's move power if reusable or fails if breakable")
+=======
+SINGLE_BATTLE_TEST("Fling deals damage based on a TM's move power")
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s16 damage[2];
 
@@ -527,6 +535,7 @@ SINGLE_BATTLE_TEST("Fling deals damage based on a TM's move power if reusable or
         TURN { MOVE(player, MOVE_FLING); }
         TURN { MOVE(player, MOVE_EGG_BOMB); }
     } SCENE {
+<<<<<<< HEAD
         if (GetItemImportance(ITEM_TM_EARTHQUAKE) == 0) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
             HP_BAR(opponent, captureDamage: &damage[0]);
@@ -571,5 +580,35 @@ SINGLE_BATTLE_TEST("Fling doesn't fail when holding a Booster Energy and the tar
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
     } THEN {
         EXPECT(player->item == ITEM_NONE);
+=======
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EGG_BOMB, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Fling deals damage based on a TM's move power")
+{
+    s16 damage[2];
+
+    GIVEN {
+        ASSUME(GetMovePower(MOVE_EARTHQUAKE) == GetMovePower(MOVE_EGG_BOMB));
+        ASSUME(!IsSpeciesOfType(SPECIES_WOBBUFFET, TYPE_DARK));
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_TM_EARTHQUAKE); }
+        OPPONENT(SPECIES_HIPPOWDON);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FLING); }
+        TURN { MOVE(player, MOVE_EGG_BOMB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EGG_BOMB, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }

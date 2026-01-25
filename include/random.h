@@ -168,7 +168,10 @@ enum RandomTag
     RNG_QUICK_DRAW,
     RNG_QUICK_CLAW,
     RNG_TRACE,
+<<<<<<< HEAD
     RNG_FOREWARN,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     RNG_FICKLE_BEAM,
     RNG_AI_ABILITY,
     RNG_AI_SCORE_TIE_DOUBLES_MOVE,
@@ -240,7 +243,10 @@ enum RandomTag
     RNG_MAGNITUDE,
     RNG_FISHING_BITE,
     RNG_FISHING_GEN3_STICKY,
+<<<<<<< HEAD
     RNG_WILD_MON_TARGET,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     RNG_TAUNT,
 };
 

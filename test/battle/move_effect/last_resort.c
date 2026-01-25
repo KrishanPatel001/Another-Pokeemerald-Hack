@@ -92,6 +92,7 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
     }
 }
 
+<<<<<<< HEAD
 // PP needs to be deducted for Last Resort to work
 SINGLE_BATTLE_TEST("Last Resort fails if mon was paralyzed last turn")
 {
@@ -125,6 +126,8 @@ SINGLE_BATTLE_TEST("Last Resort does not fail if previous move was blocked by Da
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 SINGLE_BATTLE_TEST("Last Resort works with Sleep Talk")
 {
     GIVEN {

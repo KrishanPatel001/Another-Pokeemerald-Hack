@@ -123,6 +123,7 @@
 #define MULTI_FALLARBOR_TENT_RULES         112
 #define MULTI_TAG_MATCH_TYPE               113
 #define MULTI_BERRY_PLOT                   114
+<<<<<<< HEAD
 #define MULTI_BIKE_SHOP                    115
 #define MULTI_EEVEELUTIONS                 116
 #define MULTI_ISLAND_23                    117
@@ -169,6 +170,8 @@
 #define MULTI_HOF_EGGS_VICTORIES_QUIT                    158
 
 #define MULTI_NONE 255
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
@@ -211,6 +214,7 @@
 #define STDSTRING_BATTLE_ARENA     27
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
+<<<<<<< HEAD
 #define STDSTRING_BOULDER_BADGE    30
 #define STDSTRING_CASCADE_BADGE    31
 #define STDSTRING_THUNDER_BADGE    32
@@ -220,6 +224,8 @@
 #define STDSTRING_VOLCANO_BADGE    36
 #define STDSTRING_EARTH_BADGE      37
 #define STDSTRING_COINS            38
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Dynamic Multichoice Callbacks
 

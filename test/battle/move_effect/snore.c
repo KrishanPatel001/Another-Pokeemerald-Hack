@@ -19,7 +19,10 @@ SINGLE_BATTLE_TEST("Snore fails if not asleep")
         TURN { MOVE(player, MOVE_SNORE); }
     } SCENE {
         if (status == STATUS1_SLEEP) {
+<<<<<<< HEAD
             MESSAGE("Wobbuffet is fast asleep.");
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
             ANIMATION(ANIM_TYPE_MOVE, MOVE_SNORE, player);
             NOT MESSAGE("But it failed!");
         }

@@ -54,8 +54,13 @@ struct BattleDebugModifyArrows
 
 struct BattleDebugMenu
 {
+<<<<<<< HEAD
     enum BattlerId battlerId:3;
     enum BattlerId aiBattlerId:3;
+=======
+    u8 battlerId:2;
+    u8 aiBattlerId:2;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     u8 battlerWindowId;
 
@@ -602,7 +607,11 @@ static const u16 sBgColor[] = {RGB_WHITE};
 static void Task_DebugMenuFadeOut(u8 taskId);
 static void Task_DebugMenuProcessInput(u8 taskId);
 static void Task_DebugMenuFadeIn(u8 taskId);
+<<<<<<< HEAD
 static void PrintOnBattlerWindow(u8 windowId, enum BattlerId battler);
+=======
+static void PrintOnBattlerWindow(u8 windowId, u8 battlerId);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void UpdateWindowsOnChangedBattler(struct BattleDebugMenu *data);
 static void CreateSecondaryListMenu(struct BattleDebugMenu *data);
 static void PrintSecondaryEntries(struct BattleDebugMenu *data);
@@ -915,6 +924,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     }
 
     // items info
+<<<<<<< HEAD
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
         if (IsOnPlayerSide(battler) && IsBattlerAlive(battler))
@@ -923,6 +933,16 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
             enum HoldEffect holdEffect = gAiLogicData->holdEffects[battler];
             enum Item item = gAiLogicData->items[battler];
             u8 x = (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT) ? 83 + battler * 75 : 83 + (battler - 1) * 75;
+=======
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (IsOnPlayerSide(i) && IsBattlerAlive(i))
+        {
+            enum Ability ability = gAiLogicData->abilities[i];
+            enum HoldEffect holdEffect = gAiLogicData->holdEffects[i];
+            enum Item item = gAiLogicData->items[i];
+            u8 x = (i == B_POSITION_PLAYER_LEFT) ? 83 + (i) * 75 : 83 + (i-1) * 75;
+>>>>>>> 11d8f44022 (Updated to upcoming)
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, gAbilitiesInfo[ability].name, x, 0, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, GetItemName(item), x, 15, 0, NULL);
             AddTextPrinterParameterized(data->aiMovesWindowId, FONT_SMALL, GetHoldEffectName(holdEffect), x, 30, 0, NULL);
@@ -1311,6 +1331,7 @@ static void Task_DebugMenuFadeOut(u8 taskId)
     }
 }
 
+<<<<<<< HEAD
 static void PrintOnBattlerWindow(u8 windowId, enum BattlerId battler)
 {
     u8 text[POKEMON_NAME_LENGTH + 10];
@@ -1320,6 +1341,17 @@ static void PrintOnBattlerWindow(u8 windowId, enum BattlerId battler)
     text[2] = CHAR_HYPHEN;
     text[3] = CHAR_SPACE;
     StringCopy(&text[4], gBattleMons[battler].nickname);
+=======
+static void PrintOnBattlerWindow(u8 windowId, u8 battlerId)
+{
+    u8 text[POKEMON_NAME_LENGTH + 10];
+
+    text[0] = CHAR_0 + battlerId;
+    text[1] = CHAR_SPACE;
+    text[2] = CHAR_HYPHEN;
+    text[3] = CHAR_SPACE;
+    StringCopy(&text[4], gBattleMons[battlerId].nickname);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     FillWindowPixelBuffer(windowId, 0x11);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 0, 0, 0, NULL);

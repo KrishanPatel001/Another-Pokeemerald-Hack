@@ -882,6 +882,7 @@ static const struct SubspriteTable sOamTables_96x40[] = {
     {ARRAY_COUNT(sOamTable_96x40_3), sOamTable_96x40_3}
 };
 
+<<<<<<< HEAD
 const struct Subsprite gObjectEventSpriteOamTable_128x64_0[] = {
     {
         .x = -32,
@@ -996,6 +997,8 @@ const struct SubspriteTable gObjectEventSpriteOamTables_128x64[] = {
     {4, gObjectEventSpriteOamTable_128x64_2},
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const struct Subsprite sOamTable_88x32_0[] = {
     {
         .x = -48,

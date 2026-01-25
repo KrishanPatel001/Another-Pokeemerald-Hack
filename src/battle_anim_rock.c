@@ -443,11 +443,18 @@ void AnimRockFragment(struct Sprite *sprite)
 // args[6] - attacker or target
 void AnimParticleInVortex(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[6];
     if (IsDoubleBattle() && GetMoveTarget(gAnimMoveIndex) == TARGET_BOTH)
         InitSpritePosToAnimTargetsCentre(sprite, FALSE);
     else
         InitSpritePosToAnimBattler(animBattler, sprite, FALSE);
+=======
+    if (IsDoubleBattle() && GetMoveTarget(gAnimMoveIndex) == TARGET_BOTH)
+        InitSpritePosToAnimTargetsCentre(sprite, FALSE);
+    else
+        InitSpritePosToAnimBattler(gBattleAnimArgs[6], sprite, FALSE);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = gBattleAnimArgs[2];

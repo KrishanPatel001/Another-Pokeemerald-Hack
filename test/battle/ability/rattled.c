@@ -4,6 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(GetMoveType(MOVE_FURY_CUTTER) == TYPE_BUG);
+<<<<<<< HEAD
     ASSUME(GetMoveCategory(MOVE_FURY_CUTTER) != DAMAGE_CATEGORY_STATUS);
     ASSUME(GetMoveType(MOVE_FEINT_ATTACK) == TYPE_DARK);
     ASSUME(GetMoveCategory(MOVE_FEINT_ATTACK) != DAMAGE_CATEGORY_STATUS);
@@ -11,6 +12,15 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_SHADOW_PUNCH) != DAMAGE_CATEGORY_STATUS);
     ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
     ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+=======
+    ASSUME(!IsBattleMoveStatus(MOVE_FURY_CUTTER));
+    ASSUME(GetMoveType(MOVE_FEINT_ATTACK) == TYPE_DARK);
+    ASSUME(!IsBattleMoveStatus(MOVE_FEINT_ATTACK));
+    ASSUME(GetMoveType(MOVE_SHADOW_PUNCH) == TYPE_GHOST);
+    ASSUME(!IsBattleMoveStatus(MOVE_SHADOW_PUNCH));
+    ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
+    ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when hit by Bug, Dark or Ghost type move")

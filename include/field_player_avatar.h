@@ -40,7 +40,10 @@ void StopPlayerAvatar(void);
 void SetSpinStartFacingDir(enum Direction direction);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender);
+<<<<<<< HEAD
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void SetPlayerAvatarFieldMove(void);
 u16 GetPlayerAvatarGraphicsIdByCurrentState(void);
 void SetPlayerAvatarStateMask(u8 flags);

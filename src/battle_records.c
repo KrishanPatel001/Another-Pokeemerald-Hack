@@ -4,7 +4,10 @@
 #include "window.h"
 #include "link.h"
 #include "battle.h"
+<<<<<<< HEAD
 #include "event_data.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "overworld.h"
 #include "text.h"
 #include "text_window.h"
@@ -23,7 +26,10 @@
 #include "gpu_regs.h"
 #include "constants/game_stat.h"
 #include "trainer_hill.h"
+<<<<<<< HEAD
 #include "trainer_tower.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "constants/rgb.h"
 
 static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
@@ -204,7 +210,11 @@ static void UpdateLinkBattleGameStats(s32 battleOutcome)
         IncrementGameStat(stat);
 }
 
+<<<<<<< HEAD
 static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, enum BattlerId battler)
+=======
+static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 index;
 
@@ -529,10 +539,14 @@ static void CB2_ShowTrainerHillRecords(void)
     case 7:
         SetDispcntReg();
         SetVBlankCallback(VblankCB_TrainerHillRecords);
+<<<<<<< HEAD
         if (gSpecialVar_0x8004)
             PrintTrainerTowerRecords();
         else
             PrintOnTrainerHillRecordsWindow();
+=======
+        PrintOnTrainerHillRecordsWindow();
+>>>>>>> 11d8f44022 (Updated to upcoming)
         CreateTask(Task_TrainerHillWaitForPaletteFade, 8);
         SetMainCallback2(MainCB2_TrainerHillRecords);
         gMain.state = 0;

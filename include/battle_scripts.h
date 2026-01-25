@@ -345,8 +345,11 @@ extern const u8 BattleScript_DancerActivates[];
 extern const u8 BattleScript_AftermathDmg[];
 extern const u8 BattleScript_BattlerFormChange[];
 extern const u8 BattleScript_BattlerFormChangeEnd2[];
+<<<<<<< HEAD
 extern const u8 BattleScript_BattlerFormChangeNoPopup[];
 extern const u8 BattleScript_BattlerFormChangeDisguise[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 BattleScript_AttackerFormChangeWithString[];
 extern const u8 BattleScript_TargetFormChange[];
 extern const u8 BattleScript_AnticipationActivates[];
@@ -399,7 +402,11 @@ extern const u8 BattleScript_DoesntAffectTargetAtkString[];
 extern const u8 BattleScript_DoesntAffectScripting[];
 extern const u8 BattleScript_GulpMissileGorging[];
 extern const u8 BattleScript_GulpMissileGulping[];
+<<<<<<< HEAD
 extern const u8 BattleScript_TwoTurnMovesSecondTurnFormChange[];
+=======
+extern const u8 BattleScript_GulpMissileFormChange[];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 BattleScript_BattleBondActivatesOnMoveEndAttacker[];
 extern const u8 BattleScript_EffectBattleBondStatIncrease[];
 extern const u8 BattleScript_PrimalWeatherBlocksMove[];
@@ -516,10 +523,13 @@ extern const u8 BattleScript_Explosion[];
 extern const u8 BattleScript_ActivateSwitchInAbility[];
 extern const u8 BattleScript_BreakScreens[];
 extern const u8 BattleScript_StealStats[];
+<<<<<<< HEAD
 extern const u8 BattleScript_BeatUpAttackMessage[];
 extern const u8 BattleScript_MagnitudeMessage[];
 extern const u8 BattleScript_FickleBeamMessage[];
 extern const u8 BattleScript_BeforeSnoreMessage[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
@@ -624,6 +634,10 @@ extern const u8 BattleScript_EffectHappyHour[];
 extern const u8 BattleScript_EffectDisable[];
 extern const u8 BattleScript_EffectEncore[];
 extern const u8 BattleScript_EffectPainSplit[];
+<<<<<<< HEAD
+=======
+extern const u8 BattleScript_EffectSnore[];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 BattleScript_EffectConversion2[];
 extern const u8 BattleScript_EffectLockOn[];
 extern const u8 BattleScript_EffectSketch[];
@@ -645,6 +659,10 @@ extern const u8 BattleScript_EffectSwagger[];
 extern const u8 BattleScript_EffectAttract[];
 extern const u8 BattleScript_EffectPresent[];
 extern const u8 BattleScript_EffectSafeguard[];
+<<<<<<< HEAD
+=======
+extern const u8 BattleScript_EffectMagnitude[];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 BattleScript_EffectBatonPass[];
 extern const u8 BattleScript_EffectCaptivate[];
 extern const u8 BattleScript_EffectMorningSun[];
@@ -663,6 +681,10 @@ extern const u8 BattleScript_EffectSemiInvulnerable[];
 extern const u8 BattleScript_EffectDefenseCurl[];
 extern const u8 BattleScript_EffectSoftboiled[];
 extern const u8 BattleScript_EffectStockpile[];
+<<<<<<< HEAD
+=======
+extern const u8 BattleScript_EffectSpitUp[];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 BattleScript_EffectSwallow[];
 extern const u8 BattleScript_EffectOverwriteAbility[];
 extern const u8 BattleScript_EffectTorment[];
@@ -698,6 +720,10 @@ extern const u8 BattleScript_EffectDragonDance[];
 extern const u8 BattleScript_EffectCamouflage[];
 extern const u8 BattleScript_EffectPledge[];
 extern const u8 BattleScript_EffectFling[];
+<<<<<<< HEAD
+=======
+extern const u8 BattleScript_EffectNaturalGift[];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 BattleScript_EffectRoost[];
 extern const u8 BattleScript_EffectGravity[];
 extern const u8 BattleScript_EffectMiracleEye[];
@@ -810,9 +836,13 @@ extern const u8 BattleScript_EffectFilletAway[];
 extern const u8 BattleScript_EffectShedTail[];
 extern const u8 BattleScript_EffectTidyUp[];
 extern const u8 BattleScript_EffectSpicyExtract[];
+<<<<<<< HEAD
 extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 BattleScript_GhostGetOutGetOut[];
 extern const u8 BattleScript_TooScaredToMove[];
 extern const u8 BattleScript_SilphScopeUnveiled[];
+=======
+extern const u8 BattleScript_EffectFickleBeam[];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #endif // GUARD_BATTLE_SCRIPTS_H

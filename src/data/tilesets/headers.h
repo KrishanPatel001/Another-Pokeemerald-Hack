@@ -3,6 +3,7 @@
 // Whether a palette has a night version, located at ((x + 9) % 16).pal
 #define SWAP_PAL(x) ((x) < NUM_PALS_IN_PRIMARY ? 1 << (x) : 1 << ((x) - NUM_PALS_IN_PRIMARY))
 
+<<<<<<< HEAD
 const struct Tileset gTileset_SecretBase =
 {
     .isCompressed = FALSE,
@@ -30,6 +31,8 @@ const struct Tileset *const gTilesetPointer_SecretBaseRedCave = &gTileset_Secret
 
 #if !IS_FRLG
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 const struct Tileset gTileset_General =
 {
     .isCompressed = TRUE,
@@ -437,6 +440,20 @@ const struct Tileset gTileset_SecretBaseYellowCave =
     .callback = NULL,
 };
 
+<<<<<<< HEAD
+=======
+const struct Tileset gTileset_SecretBaseRedCave =
+{
+    .isCompressed = FALSE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SecretBaseRedCave,
+    .palettes = gTilesetPalettes_SecretBaseRedCave,
+    .metatiles = gMetatiles_SecretBaseSecondary,
+    .metatileAttributes = gMetatileAttributes_SecretBaseSecondary,
+    .callback = NULL,
+};
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 const struct Tileset gTileset_InsideOfTruck =
 {
     .isCompressed = TRUE,
@@ -646,6 +663,23 @@ const struct Tileset gTileset_InsideShip =
     .callback = NULL,
 };
 
+<<<<<<< HEAD
+=======
+const struct Tileset gTileset_SecretBase =
+{
+    .isCompressed = FALSE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_SecretBase,
+    .palettes = gTilesetPalettes_SecretBase,
+    .metatiles = gMetatiles_SecretBasePrimary,
+    .metatileAttributes = gMetatileAttributes_SecretBasePrimary,
+    .callback = NULL,
+};
+
+const struct Tileset *const gTilesetPointer_SecretBase = &gTileset_SecretBase;
+const struct Tileset *const gTilesetPointer_SecretBaseRedCave = &gTileset_SecretBaseRedCave;
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 const struct Tileset gTileset_EliteFour =
 {
     .isCompressed = TRUE,
@@ -832,6 +866,7 @@ const struct Tileset gTileset_UnionRoom =
     .metatileAttributes = gMetatileAttributes_UnionRoom,
     .callback = NULL,
 };
+<<<<<<< HEAD
 
 #else
 
@@ -1541,3 +1576,5 @@ const struct Tileset gTileset_HallOfFame =
 };
 
 #endif // IS_FRLG
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

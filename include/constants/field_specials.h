@@ -7,7 +7,10 @@ enum PCLocation
     PC_LOCATION_OTHER,
     PC_LOCATION_BRENDANS_HOUSE,
     PC_LOCATION_MAYS_HOUSE,
+<<<<<<< HEAD
     PC_LOCATION_PLAYER_HOUSE_FRLG
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 // SS Tidal Locations
@@ -52,8 +55,11 @@ enum ScrollMulti
     SCROLL_MULTI_BF_MOVE_TUTOR_2,
     SCROLL_MULTI_SS_TIDAL_DESTINATION,
     SCROLL_MULTI_BATTLE_TENT_RULES,
+<<<<<<< HEAD
     SCROLL_MULTI_BADGES,
     SCROLL_MULTI_SILPHCO_FLOORS,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 #define MAX_SCROLL_MULTI_ON_SCREEN 6

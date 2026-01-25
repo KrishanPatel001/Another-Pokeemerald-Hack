@@ -410,7 +410,10 @@ extern const u8 EventScript_UseCutGrass[];
 extern const u8 EventScript_UseDefog[];
 
 //player pc
+<<<<<<< HEAD
 extern const u8 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
 
@@ -546,7 +549,10 @@ extern const u8 MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory[];
 
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_PC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_PC[];
+<<<<<<< HEAD
 extern const u8 EventScript_PalletTown_PlayersHouse_2F_TurnOnPC[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_AccessPokemonBoxLink[];
 extern const u8 EventScript_TestSignpostMsg[];
@@ -570,7 +576,10 @@ extern const u8 EventScript_WirelessBoxResults[];
 extern const u8 EventScript_CableBoxResults[];
 extern const u8 EventScript_Questionnaire[];
 extern const u8 EventScript_TrainerHillTimer[];
+<<<<<<< HEAD
 extern const u8 EventScript_CurrentTooFast[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern const u8 EventScript_UseSurf[];
 extern const u8 EventScript_UseWaterfall[];
 extern const u8 EventScript_CannotUseWaterfall[];
@@ -690,6 +699,7 @@ extern const u8 EventScript_TooDark[];
 extern const u8 EventScript_MovedTooFast[];
 
 extern const u8 MoveTutor_AfterChooseBoxMon[];
+<<<<<<< HEAD
 
 extern const u8 gOtherText_NewName[];
 extern const u8 gNameChoice_Green[];
@@ -785,4 +795,6 @@ extern const u8 CableClub_EventScript_ShowBattleRecords_Frlg[];
 extern const u8 EventScript_Indigo_UltimateGoal[];
 extern const u8 EventScript_Indigo_HighestAuthority[];
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_EVENT_SCRIPTS_H

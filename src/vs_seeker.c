@@ -678,6 +678,7 @@ static bool32 IsRegularLandTrainer(u8 graphicsId)
         OBJ_EVENT_GFX_WOMAN_2,
         OBJ_EVENT_GFX_WOMAN_4,
         OBJ_EVENT_GFX_WOMAN_5,
+<<<<<<< HEAD
         OBJ_EVENT_GFX_YOUNGSTER,
         OBJ_EVENT_GFX_TUBER_F_FRLG,
         OBJ_EVENT_GFX_SAILOR_FRLG,
@@ -693,6 +694,9 @@ static bool32 IsRegularLandTrainer(u8 graphicsId)
         OBJ_EVENT_GFX_LASS_FRLG,
         OBJ_EVENT_GFX_LITTLE_GIRL_FRLG,
         OBJ_EVENT_GFX_LITTLE_BOY_FRLG,
+=======
+        OBJ_EVENT_GFX_YOUNGSTER
+>>>>>>> 11d8f44022 (Updated to upcoming)
     };
 
     for (i = 0; i < ARRAY_COUNT(regularTrainersOnLand); i++)

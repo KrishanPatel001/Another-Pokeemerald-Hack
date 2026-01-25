@@ -6,6 +6,7 @@
 // Exported type declarations
 #define MAP_NAME_LENGTH 16
 
+<<<<<<< HEAD
 enum RegionMapType
 {
     REGION_MAP_HOENN,
@@ -15,6 +16,8 @@ enum RegionMapType
     REGION_MAP_SEVII67
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 enum
 {
     MAP_INPUT_NONE,
@@ -35,6 +38,7 @@ enum {
     NUM_MAPSEC_TYPES
 };
 
+<<<<<<< HEAD
 struct RegionMapInfo
 {
     const u32 *dexMapTilemap;
@@ -46,6 +50,8 @@ struct RegionMapInfo
     u16 dexMapPaletteSize;
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 struct RegionMap {
     /*0x000*/ mapsec_u16_t mapSecId;
     /*0x002*/ u8 mapSecType;
@@ -135,13 +141,19 @@ bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
 void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
+<<<<<<< HEAD
 enum RegionMapType GetRegionMapType(u32 mapSecId);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 //Pokenav Fly funcs
 u32 FilterFlyDestination(struct RegionMap* regionMap);
 void SetFlyDestination(struct RegionMap* regionMap);
 
 extern const struct RegionMapLocation gRegionMapEntries[];
+<<<<<<< HEAD
 extern const struct RegionMapInfo gRegionMapInfos[];
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #endif //GUARD_REGION_MAP_H

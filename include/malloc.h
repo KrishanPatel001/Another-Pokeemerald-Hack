@@ -41,7 +41,11 @@ struct MemBlock
     u8 data[0];
 };
 
+<<<<<<< HEAD
 #define HEAP_SIZE 0x1C500
+=======
+#define HEAP_SIZE 0x1C348
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern u8 gHeap[HEAP_SIZE];
 
 #if TESTING || !defined(NDEBUG)

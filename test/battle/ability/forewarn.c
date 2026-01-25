@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 DOUBLE_BATTLE_TEST("Forewarn warns about the highest power move among all opposing battlers")
 {
     GIVEN {
@@ -82,3 +83,6 @@ DOUBLE_BATTLE_TEST("Forewarn does not trigger if a mon switches in while the opp
         NOT ABILITY_POPUP(playerLeft, ABILITY_FOREWARN);
     }
 }
+=======
+TO_DO_BATTLE_TEST("TODO: Write Forewarn (Ability) test titles")
+>>>>>>> 11d8f44022 (Updated to upcoming)

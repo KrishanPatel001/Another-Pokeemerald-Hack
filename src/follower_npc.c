@@ -285,7 +285,11 @@ static bool32 FollowerNPCHasRunningFrames(void)
 
 static bool32 IsStateMovement(u32 state)
 {
+<<<<<<< HEAD
+    switch (state)
+=======
     switch (state) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
     case MOVEMENT_ACTION_FACE_DOWN:
     case MOVEMENT_ACTION_FACE_UP:
@@ -510,7 +514,11 @@ static void SetSurfJump(void)
     SetUpSurfBlobFieldEffect(follower);
 
     // Adjust surf head spawn location infront of follower.
+<<<<<<< HEAD
+    switch (direction)
+=======
     switch (direction) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
     case DIR_SOUTH:
         gFieldEffectArguments[1]++; // effect_y
@@ -814,7 +822,11 @@ void CreateFollowerNPC(u32 gfx, u32 followerFlags, const u8 *scriptPtr)
 
     struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct ObjectEvent *follower;
+<<<<<<< HEAD
+    struct ObjectEventTemplate npc =
+=======
     struct ObjectEventTemplate npc = 
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         .localId = OBJ_EVENT_ID_NPC_FOLLOWER,
         .graphicsId = gfx,
@@ -932,7 +944,11 @@ u32 DetermineFollowerNPCState(struct ObjectEvent *follower, u32 state, enum Dire
         break;
     }
 
+<<<<<<< HEAD
+    switch (state)
+=======
     switch (state) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
     case MOVEMENT_ACTION_WALK_SLOW_DOWN ... MOVEMENT_ACTION_WALK_SLOW_RIGHT:
         // Slow walk.
@@ -1289,7 +1305,11 @@ void NPCFollow(struct ObjectEvent *npc, u32 state, bool32 ignoreScriptActive)
     ObjectEventSetHeldMovement(follower, newState);
     PlayerLogCoordinates(player);
 
+<<<<<<< HEAD
+    switch (newState)
+=======
     switch (newState) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
     case MOVEMENT_ACTION_JUMP_2_DOWN ... MOVEMENT_ACTION_JUMP_2_RIGHT:
     case MOVEMENT_ACTION_JUMP_DOWN ... MOVEMENT_ACTION_JUMP_RIGHT:
@@ -1308,7 +1328,11 @@ void CreateFollowerNPCAvatar(void)
         return;
 
     struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+<<<<<<< HEAD
+    struct ObjectEventTemplate clone =
+=======
     struct ObjectEventTemplate clone = 
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         .localId = OBJ_EVENT_ID_NPC_FOLLOWER,
         .graphicsId = GetFollowerNPCSprite(),
@@ -1837,7 +1861,11 @@ void ScriptFaceFollowerNPC(struct ScriptContext *ctx)
         followerDirection = playerDirection;
 
         //Flip direction.
+<<<<<<< HEAD
+        switch (playerDirection)
+=======
         switch (playerDirection) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
         case DIR_NORTH:
             playerDirection = DIR_SOUTH;
@@ -1860,7 +1888,11 @@ void ScriptFaceFollowerNPC(struct ScriptContext *ctx)
     }
 }
 
+<<<<<<< HEAD
+static const u8 *const FollowerNPCHideMovementsSpeedTable[][4] =
+=======
 static const u8 *const FollowerNPCHideMovementsSpeedTable[][4] = 
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     [DIR_SOUTH] = {Common_Movement_WalkDownSlow, Common_Movement_WalkDown, Common_Movement_WalkDownFast, Common_Movement_WalkDownFaster},
     [DIR_NORTH] = {Common_Movement_WalkUpSlow, Common_Movement_WalkUp, Common_Movement_WalkUpFast, Common_Movement_WalkUpFaster},

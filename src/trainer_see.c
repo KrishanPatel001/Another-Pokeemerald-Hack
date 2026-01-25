@@ -63,7 +63,10 @@ COMMON_DATA bool8 gTrainerApproachedPlayer = 0;
 EWRAM_DATA u8 gApproachingTrainerId = 0;
 
 // const rom data
+<<<<<<< HEAD
 static const u16 sGfx_Emoticons[] = INCBIN_U16("graphics/misc/emoticons.4bpp");
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const u8 sEmotion_ExclamationMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_exclamation.4bpp");
 static const u8 sEmotion_QuestionMarkGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_question.4bpp");
 static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/field_effects/pics/emotion_heart.4bpp");
@@ -136,6 +139,7 @@ static const struct OamData sOamData_Icons =
     .affineParam = 0,
 };
 
+<<<<<<< HEAD
 static const struct SpriteFrameImage sSpriteImages_Emoticons[] = {
     {sGfx_Emoticons + 0x000, 0x80},
     {sGfx_Emoticons + 0x040, 0x80},
@@ -211,6 +215,8 @@ static const struct SpriteTemplate sSpriteTemplate_Emoticons = {
     .callback = SpriteCB_TrainerIcons
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const struct SpriteFrameImage sSpriteImageTable_ExclamationQuestionMark[] =
 {
     {
@@ -498,8 +504,13 @@ bool8 CheckForTrainersWantingBattle(void)
     if (InBattlePyramid_() || InTrainerHillChallenge())
     {
         u8 facility = InBattlePyramid_() ? FACILITY_BATTLE_PYRAMID : FACILITY_BATTLE_TRAINER_HILL;
+<<<<<<< HEAD
 
         if (gNoOfApproachingTrainers > 0)
+=======
+        
+        if (gNoOfApproachingTrainers > 0) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             ResetTrainerOpponentIds();
             InitTrainerBattleParameter();
@@ -507,7 +518,11 @@ bool8 CheckForTrainersWantingBattle(void)
             gSelectedObjectEvent = gApproachingTrainers[0].objectEventId;
             gSpecialVar_LastTalked = gObjectEvents[gApproachingTrainers[0].objectEventId].localId;
             BattleSetup_ConfigureFacilityTrainerBattle(facility, gApproachingTrainers[0].trainerScriptPtr + 2);
+<<<<<<< HEAD
             if (gNoOfApproachingTrainers > 1)
+=======
+            if (gNoOfApproachingTrainers > 1) 
+>>>>>>> 11d8f44022 (Updated to upcoming)
             {
                 gApproachingTrainerId++;
                 gSelectedObjectEvent = gApproachingTrainers[1].objectEventId;
@@ -1117,6 +1132,7 @@ u8 FldEff_XIcon(void)
     return 0;
 }
 
+<<<<<<< HEAD
 u8 FldEff_SmileyFaceIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x53);
@@ -1127,6 +1143,8 @@ u8 FldEff_SmileyFaceIcon(void)
     return 0;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnimNum)
 {
     sprite->oam.priority = 1;

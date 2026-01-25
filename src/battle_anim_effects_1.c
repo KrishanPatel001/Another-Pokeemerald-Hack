@@ -3873,7 +3873,11 @@ void AnimTeraStarstormStars(struct Sprite *sprite)
     sprite->data[3] = sprite->y;
     if (gBattleAnimArgs[5] == 1)
     {
+<<<<<<< HEAD
         enum BattlerId targetPartner;
+=======
+        u32 targetPartner;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (IsOnPlayerSide(gBattleAnimTarget))
         {
             if (gBattleAnimTarget == 0)
@@ -4844,7 +4848,11 @@ static void AnimTask_LeafBlade_Step2_Callback(struct Sprite *sprite)
 
 static void AnimFlyingParticle(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (!gBattleAnimArgs[6])
         battler = gBattleAnimAttacker;
     else
@@ -5417,8 +5425,12 @@ static void AnimMilkBottle_Step2(struct Sprite *sprite, int unk1, int unk2)
 
 void AnimGrantingStars(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[2];
     if (!InitSpritePosToAnimBattler(animBattler, sprite, FALSE))
+=======
+    if (!InitSpritePosToAnimBattler(gBattleAnimArgs[2], sprite, FALSE))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return;
 
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
@@ -5432,7 +5444,11 @@ void AnimGrantingStars(struct Sprite *sprite)
 
 static void AnimSparklingStars(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (!gBattleAnimArgs[2])
         battler = gBattleAnimAttacker;
     else
@@ -6209,7 +6225,12 @@ void AnimTask_Conversion2AlphaBlend(u8 taskId)
 
 static void UNUSED AnimTask_HideBattlersHealthbox(u8 taskId)
 {
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    u8 i;
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (gBattleAnimArgs[0] == TRUE && IsOnPlayerSide(i))
             SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
@@ -6223,7 +6244,12 @@ static void UNUSED AnimTask_HideBattlersHealthbox(u8 taskId)
 
 static void UNUSED AnimTask_ShowBattlersHealthbox(u8 taskId)
 {
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    u8 i;
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[i]);
 
     DestroyAnimVisualTask(taskId);
@@ -6467,7 +6493,11 @@ static void AnimHornHit_Step(struct Sprite *sprite)
 #define sSinIndexMod        data[5]
 #define sBattlerFlank       data[6]
 
+<<<<<<< HEAD
 void PrepareDoubleTeamAnim(u32 taskId, enum AnimBattler animBattler, bool32 forAllySwitch)
+=======
+void PrepareDoubleTeamAnim(u32 taskId, u32 animBattler, bool32 forAllySwitch)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i, spriteId;
     u16 palOffsetBattler, palOffsetSpoon;
@@ -6526,7 +6556,11 @@ static inline void SwapStructData(void *s1, void *s2, void *data, u32 size)
     memcpy(s2, data, size);
 }
 
+<<<<<<< HEAD
 static void ReloadBattlerSprites(enum BattlerId battler, struct Pokemon *party)
+=======
+static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     struct Pokemon *mon = &party[gBattlerPartyIndexes[battler]];
     BattleLoadMonSpriteGfx(mon, battler);
@@ -6562,14 +6596,24 @@ static void ReloadBattlerSprites(enum BattlerId battler, struct Pokemon *party)
     }
 }
 
+<<<<<<< HEAD
 static void TrySwapSkyDropTargets(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
 {
     u32 temp;
+=======
+static void TrySwapSkyDropTargets(u32 battlerAtk, u32 battlerPartner)
+{
+    u32 i, temp;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     // battlerAtk is using Ally Switch
     // check if our partner is the target of sky drop
     // If so, change that index to battlerAtk
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++) {
+=======
+    for (i = 0; i < gBattlersCount; i++) {
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (gBattleStruct->skyDropTargets[i] == battlerPartner) {
             gBattleStruct->skyDropTargets[i] = battlerAtk;
             break;
@@ -6586,7 +6630,11 @@ static void TrySwapSkyDropTargets(enum BattlerId battlerAtk, enum BattlerId batt
     else if (gSideTimers[side].field == battlerPartner)             \
         gSideTimers[side].field = battlerAtk;
 
+<<<<<<< HEAD
 static void TrySwapStickyWebBattlerId(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
+=======
+static void TrySwapStickyWebBattlerId(u32 battlerAtk, u32 battlerPartner)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 oppSide = GetBattlerSide(BATTLE_OPPOSITE(battlerAtk));
 
@@ -6595,15 +6643,25 @@ static void TrySwapStickyWebBattlerId(enum BattlerId battlerAtk, enum BattlerId 
 }
 #undef TRY_SIDE_TIMER_BATTLER_ID_SWAP
 
+<<<<<<< HEAD
 static void TrySwapWishBattlerIds(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
 {
     u32 temp;
+=======
+static void TrySwapWishBattlerIds(u32 battlerAtk, u32 battlerPartner)
+{
+    u32 i, temp;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     // if used future sight on opposing side, properly track who used it
     if (gBattleStruct->futureSight[LEFT_FOE(battlerAtk)].counter > 0
      || gBattleStruct->futureSight[RIGHT_FOE(battlerAtk)].counter > 0)
     {
+<<<<<<< HEAD
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+        for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             if (IsBattlerAlly(i, battlerAtk))
                 continue;   // only on opposing side
@@ -6630,14 +6688,22 @@ static void TrySwapWishBattlerIds(enum BattlerId battlerAtk, enum BattlerId batt
         SWAP(gBattleStruct->wish[battlerAtk].partyId, gBattleStruct->wish[battlerPartner].partyId, temp);
 }
 
+<<<<<<< HEAD
 static void TrySwapAttractBattlerIds(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
+=======
+static void TrySwapAttractBattlerIds(u32 battlerAtk, u32 battlerPartner)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 attractedTo;
 
     // our own infatuation handled with gBattleMons struct data swapping
 
     // if another battler is infatuated with one of us, change to other battler
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    for (u32 i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (i == battlerAtk || i == battlerPartner || !gBattleMons[i].volatiles.infatuation)
             continue;
@@ -6656,7 +6722,11 @@ static void TrySwapAttractBattlerIds(enum BattlerId battlerAtk, enum BattlerId b
     }
 }
 
+<<<<<<< HEAD
 static void SwapBattlerMoveData(enum BattlerId battler1, enum BattlerId battler2)
+=======
+static void SwapBattlerMoveData(u32 battler1, u32 battler2)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 temp;
     SWAP(gBattleStruct->chosenMovePositions[battler1], gBattleStruct->chosenMovePositions[battler2], temp);
@@ -6677,11 +6747,19 @@ static void SwapBattlerMoveData(enum BattlerId battler1, enum BattlerId battler2
 
 static void AnimTask_AllySwitchDataSwap(u8 taskId)
 {
+<<<<<<< HEAD
     enum BattlerId i, j;
     struct Pokemon *party;
     u32 temp;
     enum BattlerId battlerAtk = gBattlerAttacker;
     enum BattlerId battlerPartner = BATTLE_PARTNER(battlerAtk);
+=======
+    s32 i, j;
+    struct Pokemon *party;
+    u32 temp;
+    u32 battlerAtk = gBattlerAttacker;
+    u32 battlerPartner = BATTLE_PARTNER(battlerAtk);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     void *data = Alloc(0x200);
     if (data == NULL)
@@ -7071,7 +7149,11 @@ static void AnimSlowFlyingMusicNotes_Step(struct Sprite *sprite)
     }
 }
 
+<<<<<<< HEAD
 void SetSpriteNextToMonHead(enum BattlerId battler, struct Sprite *sprite)
+=======
+void SetSpriteNextToMonHead(u8 battler, struct Sprite *sprite)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsOnPlayerSide(battler))
         sprite->x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_RIGHT) + 8;
@@ -7084,7 +7166,11 @@ void SetSpriteNextToMonHead(enum BattlerId battler, struct Sprite *sprite)
 void AnimThoughtBubble(struct Sprite *sprite)
 {
     u8 animNum;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
     else
@@ -7111,7 +7197,11 @@ static void AnimThoughtBubble_Step(struct Sprite *sprite)
 
 void AnimMetronomeFinger(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
     else
@@ -7135,7 +7225,11 @@ static void AnimMetronomeFinger_Step(struct Sprite *sprite)
 
 void AnimFollowMeFinger(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
     else
@@ -7193,7 +7287,11 @@ static void AnimFollowMeFinger_Step2(struct Sprite *sprite)
 
 static void AnimTauntFinger(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleAnimArgs[0] == 0)
         battler = gBattleAnimAttacker;
     else

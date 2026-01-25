@@ -176,7 +176,10 @@
       "x": 15,
       "y": 20,
       "respawn_map": "MAP_SOUTHERN_ISLAND_EXTERIOR",
+<<<<<<< HEAD
       "respawn_npc": "LOCALID_NONE",
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
       "respawn_x": 15,
       "respawn_y": 20
     },
@@ -187,6 +190,7 @@
       "y": 52,
       "respawn_map": "MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_FRONTIER_NURSE"
+<<<<<<< HEAD
     },
     {
       "id": "HEAL_LOCATION_PALLET_TOWN",
@@ -349,6 +353,8 @@
       "y": 12,
       "respawn_map": "MAP_SIX_ISLAND_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_SIX_ISLAND_NURSE"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
   ]
 }

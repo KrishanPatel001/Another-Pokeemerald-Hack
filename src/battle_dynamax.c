@@ -70,7 +70,11 @@ static const struct GMaxMove sGMaxMoveTable[] =
 };
 
 // Returns whether a battler can Dynamax.
+<<<<<<< HEAD
 bool32 CanDynamax(enum BattlerId battler)
+=======
+bool32 CanDynamax(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u16 species = GetBattlerVisualSpecies(battler);
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
@@ -120,7 +124,11 @@ bool32 CanDynamax(enum BattlerId battler)
 }
 
 // Returns whether a battler is transformed into a Gigantamax form.
+<<<<<<< HEAD
 bool32 IsGigantamaxed(enum BattlerId battler)
+=======
+bool32 IsGigantamaxed(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     struct Pokemon *mon = GetBattlerMon(battler);
     if ((gSpeciesInfo[gBattleMons[battler].species].isGigantamax) && GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR))
@@ -144,7 +152,11 @@ void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
 }
 
 // Returns the non-Dynamax HP of a Pokemon.
+<<<<<<< HEAD
 u32 GetNonDynamaxHP(enum BattlerId battler)
+=======
+u32 GetNonDynamaxHP(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].hp;
@@ -158,7 +170,11 @@ u32 GetNonDynamaxHP(enum BattlerId battler)
 }
 
 // Returns the non-Dynamax Max HP of a Pokemon.
+<<<<<<< HEAD
 u32 GetNonDynamaxMaxHP(enum BattlerId battler)
+=======
+u32 GetNonDynamaxMaxHP(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].maxHP;
@@ -172,7 +188,11 @@ u32 GetNonDynamaxMaxHP(enum BattlerId battler)
 }
 
 // Sets flags used for Dynamaxing and checks Gigantamax forms.
+<<<<<<< HEAD
 void ActivateDynamax(enum BattlerId battler)
+=======
+void ActivateDynamax(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     // Set appropriate use flags.
     SetActiveGimmick(battler, GIMMICK_DYNAMAX);
@@ -188,13 +208,21 @@ void ActivateDynamax(enum BattlerId battler)
 
     // Try Gigantamax form change.
     if (!gBattleMons[battler].volatiles.transformed) // Ditto cannot Gigantamax.
+<<<<<<< HEAD
         TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX, GetBattlerAbility(battler));
+=======
+        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     BattleScriptPushCursorAndCallback(BattleScript_DynamaxBegins);
 }
 
 // Unsets the flags used for Dynamaxing and reverts max HP if needed.
+<<<<<<< HEAD
 void UndoDynamax(enum BattlerId battler)
+=======
+void UndoDynamax(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     // Revert HP if battler is still Dynamaxed.
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
@@ -211,7 +239,11 @@ void UndoDynamax(enum BattlerId battler)
 
     // Undo form change if needed.
     if (IsGigantamaxed(battler))
+<<<<<<< HEAD
         TryBattleFormChange(battler, FORM_CHANGE_END_BATTLE, GetBattlerAbility(battler));
+=======
+        TryBattleFormChange(battler, FORM_CHANGE_END_BATTLE);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 // Certain moves are blocked by Max Guard that normally ignore protection.
@@ -234,16 +266,26 @@ bool32 IsMoveBlockedByMaxGuard(enum Move move)
     }
 }
 
+<<<<<<< HEAD
 static enum Move GetTypeBasedMaxMove(enum BattlerId battler, enum Type type)
+=======
+static enum Move GetTypeBasedMaxMove(u32 battler, enum Type type)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     // Gigantamax check
     u32 i;
     u32 species = gBattleMons[battler].species;
     u32 targetSpecies = species;
+<<<<<<< HEAD
     enum Ability ability = GetBattlerAbility(battler);
 
     if (!gSpeciesInfo[species].isGigantamax)
         targetSpecies = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_GIGANTAMAX, ability);
+=======
+
+    if (!gSpeciesInfo[species].isGigantamax)
+        targetSpecies = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (targetSpecies != species)
         species = targetSpecies;
@@ -264,7 +306,11 @@ static enum Move GetTypeBasedMaxMove(enum BattlerId battler, enum Type type)
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
+<<<<<<< HEAD
 enum Move GetMaxMove(enum BattlerId battler, enum Move baseMove)
+=======
+enum Move GetMaxMove(u32 battler, enum Move baseMove)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Type moveType;
     SetTypeBeforeUsingMove(baseMove, battler);
@@ -459,6 +505,8 @@ void ChooseDamageNonTypesString(enum Type type)
             break;
     }
 }
+<<<<<<< HEAD
+=======
 
 // Updates Dynamax HP multipliers and healthboxes.
 void BS_UpdateDynamax(void)
@@ -499,3 +547,4 @@ void BS_UndoDynamax(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+>>>>>>> 11d8f44022 (Updated to upcoming)

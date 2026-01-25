@@ -10,12 +10,20 @@
 #include "constants/moves.h"
 
 static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues);
+<<<<<<< HEAD
 static bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType);
+=======
+static bool32 TryHazardsOnSwitchIn(u32 battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static bool32 SecondEventBlockEvents(struct BattleCalcValues *calcValues);
 
 bool32 DoSwitchInEvents(void)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     struct BattleCalcValues calcValues = {0};
     for (battler = 0; battler < gBattlersCount; battler++)
@@ -29,7 +37,11 @@ bool32 DoSwitchInEvents(void)
     switch (gBattleStruct->eventState.switchIn)
     {
     case SWITCH_IN_EVENTS_ORDER_BY_SPEED:
+<<<<<<< HEAD
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+        for (u32 i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             gBattlersBySpeed[i] = i;
         SortBattlersBySpeed(gBattlersBySpeed, FALSE);
         gBattleStruct->battlersSorted = TRUE;
@@ -92,6 +104,7 @@ bool32 DoSwitchInEvents(void)
         gBattleStruct->switchInBattlerCounter = 0;
         gBattleStruct->eventState.switchIn++;
         break;
+<<<<<<< HEAD
     case SWITCH_IN_EVENTS_FORM_CHANGE:
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
@@ -102,6 +115,8 @@ bool32 DoSwitchInEvents(void)
         gBattleStruct->switchInBattlerCounter = 0;
         gBattleStruct->eventState.switchIn++;
         break;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     case SWITCH_IN_EVENTS_SECOND_BLOCK:
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
@@ -130,7 +145,11 @@ bool32 DoSwitchInEvents(void)
     case SWITCH_IN_EVENTS_WHITE_HERB:
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
+<<<<<<< HEAD
             enum BattlerId battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
+=======
+            u32 battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
+>>>>>>> 11d8f44022 (Updated to upcoming)
             if (ItemBattleEffects(battler, 0, calcValues.holdEffects[battler], IsWhiteHerbActivation))
                 return TRUE;
         }
@@ -140,7 +159,11 @@ bool32 DoSwitchInEvents(void)
     case SWITCH_IN_EVENTS_OPPORTUNIST:
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
+<<<<<<< HEAD
             enum BattlerId battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
+=======
+            u32 battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
+>>>>>>> 11d8f44022 (Updated to upcoming)
             if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, calcValues.abilities[battler], 0, TRUE))
                 return TRUE;
         }
@@ -150,7 +173,11 @@ bool32 DoSwitchInEvents(void)
     case SWITCH_IN_EVENTS_MIRROR_HERB:
         while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
         {
+<<<<<<< HEAD
             enum BattlerId battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
+=======
+            u32 battler = gBattlersBySpeed[gBattleStruct->switchInBattlerCounter++];
+>>>>>>> 11d8f44022 (Updated to upcoming)
             if (ItemBattleEffects(battler, 0, GetBattlerHoldEffect(battler), IsMirrorHerbActivation))
                 return TRUE;
         }
@@ -181,7 +208,11 @@ bool32 DoSwitchInEvents(void)
     return FALSE;
 }
 
+<<<<<<< HEAD
 static bool32 CanBattlerBeHealed(enum BattlerId battler)
+=======
+static bool32 CanBattlerBeHealed(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (GetGenConfig(GEN_CONFIG_HEALING_WISH_SWITCH) < GEN_8)
         return TRUE;
@@ -195,7 +226,11 @@ static bool32 CanBattlerBeHealed(enum BattlerId battler)
 static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
 {
     bool32 effect = FALSE;
+<<<<<<< HEAD
     enum BattlerId battler = calcValues->battlerAtk;
+=======
+    u32 battler = calcValues->battlerAtk;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     switch (gBattleStruct->eventState.battlerSwitchIn)
     {
@@ -283,14 +318,22 @@ static bool32 FirstEventBlockEvents(struct BattleCalcValues *calcValues)
     return effect;
 }
 
+<<<<<<< HEAD
 static void SetDmgHazardsBattlescript(enum BattlerId battler, u8 multistringId)
+=======
+static void SetDmgHazardsBattlescript(u8 battler, u8 multistringId)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleScripting.battler = battler;
     gBattleCommunication[MULTISTRING_CHOOSER] = multistringId;
     BattleScriptCall(BattleScript_DmgHazardsOnBattler);
 }
 
+<<<<<<< HEAD
 static bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType)
+=======
+static bool32 TryHazardsOnSwitchIn(u32 battler, enum Ability ability, enum HoldEffect holdEffect, enum Hazards hazardType)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 effect = FALSE;
     enum BattleSide side = GetBattlerSide(battler);
@@ -390,7 +433,11 @@ static bool32 TryHazardsOnSwitchIn(enum BattlerId battler, enum Ability ability,
 static bool32 SecondEventBlockEvents(struct BattleCalcValues *calcValues)
 {
     bool32 effect = FALSE;
+<<<<<<< HEAD
     enum BattlerId battler = calcValues->battlerAtk;
+=======
+    u32 battler = calcValues->battlerAtk;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     switch (gBattleStruct->eventState.battlerSwitchIn)
     {

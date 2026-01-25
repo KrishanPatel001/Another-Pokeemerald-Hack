@@ -223,7 +223,10 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->pressedStartButton)
     {
+<<<<<<< HEAD
         FlagSet(FLAG_OPENED_START_MENU);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         PlaySE(SE_WIN_OPEN);
         ShowStartMenu();
         return TRUE;
@@ -291,7 +294,10 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     // Don't play interaction sound for certain scripts.
     if (script != LittlerootTown_BrendansHouse_2F_EventScript_PC
      && script != LittlerootTown_MaysHouse_2F_EventScript_PC
+<<<<<<< HEAD
      && script != EventScript_PalletTown_PlayersHouse_2F_TurnOnPC
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
      && script != SecretBase_EventScript_PC
      && script != SecretBase_EventScript_RecordMixingPC
      && script != SecretBase_EventScript_DollInteract
@@ -448,11 +454,16 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     case 5:
     case 6:
     case BG_EVENT_HIDDEN_ITEM:
+<<<<<<< HEAD
         if (bgEvent->bgUnion.hiddenItem.underfoot == TRUE)
             return NULL;
         gSpecialVar_0x8004 = bgEvent->bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START;
         gSpecialVar_0x8005 = bgEvent->bgUnion.hiddenItem.item;
         gSpecialVar_0x8009 = bgEvent->bgUnion.hiddenItem.quantity;
+=======
+        gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + FLAG_HIDDEN_ITEMS_START;
+        gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         return EventScript_HiddenItemScript;
@@ -513,6 +524,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_Questionnaire;
     if (MetatileBehavior_IsTrainerHillTimer(metatileBehavior) == TRUE)
         return EventScript_TrainerHillTimer;
+<<<<<<< HEAD
     if (IS_FRLG)
     {
         if (MetatileBehavior_IsFood(metatileBehavior) == TRUE)
@@ -573,6 +585,8 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         }
     }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (MetatileBehavior_IsPokeMartSign(metatileBehavior) == TRUE)
     {
         if(direction != DIR_NORTH)
@@ -628,8 +642,11 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, enum Direction direction)
 {
+<<<<<<< HEAD
     if (MetatileBehavior_IsFastWater(metatileBehavior) == TRUE && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return EventScript_CurrentTooFast;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (IsFieldMoveUnlocked(FIELD_MOVE_SURF) && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
      )
@@ -683,7 +700,11 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
         return TRUE;
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
         return TRUE;
+<<<<<<< HEAD
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
+=======
+    if (UpdateRepelCounter() == TRUE)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return TRUE;
     if (OnStep_DexNavSearch())
         return TRUE;
@@ -1364,6 +1385,7 @@ void CancelSignPostMessageBox(struct FieldInput *input)
 
     CreateTask(Task_OpenStartMenu, 8);
 }
+<<<<<<< HEAD
 
 u16 GetBoulderRevealFlagByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
@@ -1400,3 +1422,5 @@ void HandleBoulderActivateVictoryRoadSwitch(u16 x, u16 y)
         }
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

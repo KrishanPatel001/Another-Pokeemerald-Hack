@@ -89,8 +89,13 @@ void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInBattle(u8 partyAction);
 void ChooseMonForInBattleItem(void);
 void BufferBattlePartyCurrentOrder(void);
+<<<<<<< HEAD
 void BufferBattlePartyCurrentOrderBySide(enum BattlerId battler, u8 flankId);
 void SwitchPartyOrderLinkMulti(enum BattlerId battler, u8 slot, u8 slot2);
+=======
+void BufferBattlePartyCurrentOrderBySide(u8 battler, u8 flankId);
+void SwitchPartyOrderLinkMulti(u8 battler, u8 slot, u8 slot2);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void SwitchPartyMonSlots(u8 slot, u8 slot2);
 u8 GetPartyIdFromBattlePartyId(u8 battlePartyId);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);

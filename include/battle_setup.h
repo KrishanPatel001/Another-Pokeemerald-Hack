@@ -38,7 +38,10 @@ typedef union PACKED TrainerBattleParameter
         u8 *battleScriptRetAddrB;
         u8 *victoryText;
         u8 *cannotBattleText;
+<<<<<<< HEAD
         u8 rivalBattleFlags;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     } params;
     u8 data[sizeof(struct _TrainerBattleParameter)];
 } TrainerBattleParameter;
@@ -116,6 +119,9 @@ void BattleSetup_StartTrainerBattle_Debug(void);
 s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
 s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
 u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId);
+<<<<<<< HEAD
 u8 GetRivalBattleFlags(void);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #endif // GUARD_BATTLE_SETUP_H

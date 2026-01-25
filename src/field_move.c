@@ -10,25 +10,34 @@
 
 static bool32 IsFieldMoveUnlocked_Cut(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FlagGet(FLAG_BADGE02_GET);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return FlagGet(FLAG_BADGE01_GET);
 }
 
 static bool32 IsFieldMoveUnlocked_Flash(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FlagGet(FLAG_BADGE01_GET);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return FlagGet(FLAG_BADGE02_GET);
 }
 
 static bool32 IsFieldMoveUnlocked_RockSmash(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FlagGet(FLAG_BADGE06_GET);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return FlagGet(FLAG_BADGE03_GET);
 }
 
@@ -44,9 +53,12 @@ static bool32 IsFieldMoveUnlocked_Surf(void)
 
 static bool32 IsFieldMoveUnlocked_Fly(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FlagGet(FLAG_BADGE03_GET);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return FlagGet(FLAG_BADGE06_GET);
 }
 
@@ -57,9 +69,12 @@ static bool32 IsFieldMoveUnlocked_Dive(void)
 
 static bool32 IsFieldMoveUnlocked_Waterfall(void)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FlagGet(FLAG_BADGE07_GET);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return FlagGet(FLAG_BADGE08_GET);
 }
 

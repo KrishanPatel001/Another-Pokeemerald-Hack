@@ -13,9 +13,13 @@ struct BattleEnvironment
     u16 secretPowerEffect;
     enum Type camouflageType;
     u16 camouflageBlend;
+<<<<<<< HEAD
     struct BattleBackgroundEntry entry;
     struct BattleBackground background;
     const void *palette;
+=======
+    struct BattleBackground background;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     TaskFunc battleIntroSlide;
 };
 

@@ -5,7 +5,10 @@
 #include "malloc.h"
 #include "pokemon.h"
 #include "trainer_hill.h"
+<<<<<<< HEAD
 #include "trainer_tower.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "party_menu.h"
 #include "event_data.h"
 #include "constants/abilities.h"
@@ -15,9 +18,13 @@
 
 void AllocateBattleResources(void)
 {
+<<<<<<< HEAD
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
         InitTrainerTowerBattleStruct();
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+=======
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         InitTrainerHillBattleStruct();
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
@@ -52,9 +59,13 @@ void AllocateBattleResources(void)
 
 void FreeBattleResources(void)
 {
+<<<<<<< HEAD
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
         FreeTrainerTowerBattleStruct();
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+=======
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         FreeTrainerHillBattleStruct();
 
     gFieldStatuses = 0;
@@ -81,6 +92,7 @@ void FreeBattleResources(void)
     }
 }
 
+<<<<<<< HEAD
 void AdjustFriendshipOnBattleFaint(enum BattlerId battler)
 {
     enum BattlerId opposingBattlerId;
@@ -88,6 +100,15 @@ void AdjustFriendshipOnBattleFaint(enum BattlerId battler)
     if (IsDoubleBattle())
     {
         enum BattlerId opposingBattlerId2;
+=======
+void AdjustFriendshipOnBattleFaint(u8 battler)
+{
+    u8 opposingBattlerId;
+
+    if (IsDoubleBattle())
+    {
+        u8 opposingBattlerId2;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
         opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         opposingBattlerId2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
@@ -106,7 +127,11 @@ void AdjustFriendshipOnBattleFaint(enum BattlerId battler)
         AdjustFriendship(GetBattlerMon(battler), FRIENDSHIP_EVENT_FAINT_SMALL);
 }
 
+<<<<<<< HEAD
 void SwitchPartyOrderInGameMulti(enum BattlerId battler, u8 arg1)
+=======
+void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsOnPlayerSide(battler))
     {
@@ -123,7 +148,11 @@ void SwitchPartyOrderInGameMulti(enum BattlerId battler, u8 arg1)
 
 // Called when a Pokémon is unable to attack during a Battle Palace battle.
 // Check if it was because they are frozen/asleep, and if so try to cure the status.
+<<<<<<< HEAD
 u32 BattlePalace_TryEscapeStatus(enum BattlerId battler)
+=======
+u32 BattlePalace_TryEscapeStatus(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 effect = 0;
 

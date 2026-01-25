@@ -24,11 +24,16 @@
 #include "battle_terastal.h"
 #include "battle_gimmick.h"
 #include "generational_changes.h"
+<<<<<<< HEAD
 #include "item.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "move.h"
 #include "random.h" // for rng_value_t
 #include "trainer_slide.h"
 
+<<<<<<< HEAD
+=======
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
 // For example accuracycheck is defined as:
@@ -49,6 +54,7 @@
 #define VARIOUS_ARGS(...) CMD_ARGS(u8 battler, u8 id, ##__VA_ARGS__)
 #define NATIVE_ARGS(...) CMD_ARGS(void (*func)(void), ##__VA_ARGS__)
 
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // Used to exclude moves learned temporarily by Transform or Mimic
 #define MOVE_IS_PERMANENT(battler, moveSlot)                        \
    (!(gBattleMons[battler].volatiles.transformed)           \
@@ -584,7 +590,11 @@ struct BattleStruct
     u8 expSentInMons; // As bits for player party mons - not including exp share mons.
     u8 wildVictorySong;
     enum Type dynamicMoveType;
+<<<<<<< HEAD
     enum BattlerId battlerPreventingSwitchout;
+=======
+    u8 battlerPreventingSwitchout;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 moneyMultiplier:6;
     u8 moneyMultiplierItem:1;
     u8 moneyMultiplierMove:1;
@@ -624,6 +634,10 @@ struct BattleStruct
     void (*savedCallback)(void);
     u16 chosenItem[MAX_BATTLERS_COUNT];
     u16 choicedMove[MAX_BATTLERS_COUNT];
+<<<<<<< HEAD
+=======
+    u16 changedItems[MAX_BATTLERS_COUNT];
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 switchInBattlerCounter;
     u16 lastTakenMoveFrom[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // a 2-D array [target][attacker]
     union {
@@ -659,9 +673,15 @@ struct BattleStruct
     u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages
     enum Ability tracedAbility[MAX_BATTLERS_COUNT];
     struct Illusion illusion[MAX_BATTLERS_COUNT];
+<<<<<<< HEAD
     enum BattlerId soulheartBattlerId;
     enum BattlerId friskedBattler; // Frisk needs to identify 2 battlers in double battles.
     enum BattlerId quickClawBattlerId;
+=======
+    u8 soulheartBattlerId;
+    u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
+    u8 quickClawBattlerId;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     struct LostItem itemLost[NUM_BATTLE_SIDES][PARTY_SIZE];  // Pokemon that had items consumed or stolen (two bytes per party member per side)
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
@@ -825,7 +845,11 @@ struct BattleScripting
     u8 moveendState;
     u8 savedStatChanger; // For further use, if attempting to change stat two times(ex. Moody)
     u8 shiftSwitched; // When the game tells you the next enemy's pokemon and you switch. Option for noobs but oh well.
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
@@ -980,8 +1004,13 @@ extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
+<<<<<<< HEAD
 extern enum BattlerId gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern enum BattlerId gBattlersBySpeed[MAX_BATTLERS_COUNT];
+=======
+extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
+extern u8 gBattlersBySpeed[MAX_BATTLERS_COUNT];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern u8 gCurrentTurnActionNumber;
 extern u8 gCurrentActionFuncId;
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
@@ -994,11 +1023,19 @@ extern u16 gCalledMove;
 extern s32 gBideDmg[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedItem;
 extern enum Ability gLastUsedAbility;
+<<<<<<< HEAD
 extern enum BattlerId gBattlerAttacker;
 extern enum BattlerId gBattlerTarget;
 extern enum BattlerId gBattlerFainted;
 extern enum BattlerId gEffectBattler;
 extern enum BattlerId gPotentialItemEffectBattler;
+=======
+extern u8 gBattlerAttacker;
+extern u8 gBattlerTarget;
+extern u8 gBattlerFainted;
+extern u8 gEffectBattler;
+extern u8 gPotentialItemEffectBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern u8 gAbsentBattlerFlags;
 extern u8 gMultiHitCounter;
 extern const u8 *gBattlescriptCurrInstr;
@@ -1055,7 +1092,11 @@ extern u16 gMoveToLearn;
 extern u32 gFieldStatuses;
 extern struct FieldTimer gFieldTimers;
 extern u16 gBattleTurnCounter;
+<<<<<<< HEAD
 extern enum BattlerId gBattlerAbility;
+=======
+extern u8 gBattlerAbility;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 
 extern MainCallback gPreBattleCallback1;
@@ -1073,7 +1114,11 @@ extern bool8 gLastUsedBallMenuPresent;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 extern u8 gCategoryIconSpriteId;
 
+<<<<<<< HEAD
 static inline bool32 IsBattlerAlive(enum BattlerId battler)
+=======
+static inline bool32 IsBattlerAlive(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (battler >= gBattlersCount)
         return FALSE;
@@ -1085,24 +1130,42 @@ static inline bool32 IsBattlerAlive(enum BattlerId battler)
         return TRUE;
 }
 
+<<<<<<< HEAD
 static inline bool32 IsBattlerTurnDamaged(enum BattlerId battler)
+=======
+static inline bool32 IsBattlerTurnDamaged(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return gSpecialStatuses[battler].damagedByAttack;
 }
 
+<<<<<<< HEAD
 static inline bool32 IsBattlerAtMaxHp(enum BattlerId battler)
+=======
+static inline bool32 IsBattlerAtMaxHp(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return gBattleMons[battler].hp == gBattleMons[battler].maxHP;
 }
 
+<<<<<<< HEAD
 static inline enum BattlerPosition GetBattlerPosition(enum BattlerId battler)
+=======
+static inline enum BattlerPosition GetBattlerPosition(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return gBattlerPositions[battler];
 }
 
+<<<<<<< HEAD
 static inline enum BattlerId GetBattlerAtPosition(enum BattlerPosition position)
 {
     enum BattlerId battler;
+=======
+static inline u32 GetBattlerAtPosition(enum BattlerPosition position)
+{
+    u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     for (battler = 0; battler < gBattlersCount; battler++)
     {
         if (GetBattlerPosition(battler) == position)
@@ -1111,37 +1174,65 @@ static inline enum BattlerId GetBattlerAtPosition(enum BattlerPosition position)
     return battler;
 }
 
+<<<<<<< HEAD
 static inline u32 GetPartnerBattler(enum BattlerId battler)
+=======
+static inline u32 GetPartnerBattler(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)));
 }
 
+<<<<<<< HEAD
 static inline u32 GetOppositeBattler(enum BattlerId battler)
+=======
+static inline u32 GetOppositeBattler(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(battler)));
 }
 
+<<<<<<< HEAD
 static inline u32 GetBattlerSide(enum BattlerId battler)
+=======
+static inline u32 GetBattlerSide(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetBattlerPosition(battler) & BIT_SIDE;
 }
 
+<<<<<<< HEAD
 static inline bool32 IsOnPlayerSide(enum BattlerId battler)
+=======
+static inline bool32 IsOnPlayerSide(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetBattlerSide(battler) == B_SIDE_PLAYER;
 }
 
+<<<<<<< HEAD
 static inline bool32 IsBattlerAlly(enum BattlerId battlerAtk, enum BattlerId battlerDef)
+=======
+static inline bool32 IsBattlerAlly(u32 battlerAtk, u32 battlerDef)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef);
 }
 
+<<<<<<< HEAD
 static inline u32 GetOpposingSideBattler(enum BattlerId battler)
+=======
+static inline u32 GetOpposingSideBattler(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerSide(battler)));
 }
 
+<<<<<<< HEAD
 static inline struct Pokemon* GetBattlerMon(enum BattlerId battler)
+=======
+static inline struct Pokemon* GetBattlerMon(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 index = gBattlerPartyIndexes[battler];
     return !IsOnPlayerSide(battler) ? &gEnemyParty[index] : &gPlayerParty[index];
@@ -1152,19 +1243,31 @@ static inline struct Pokemon *GetSideParty(enum BattleSide side)
     return side == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
 }
 
+<<<<<<< HEAD
 static inline struct Pokemon *GetBattlerParty(enum BattlerId battler)
+=======
+static inline struct Pokemon *GetBattlerParty(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return GetSideParty(GetBattlerSide(battler));
 }
 
+<<<<<<< HEAD
 static inline struct PartyState *GetBattlerPartyState(enum BattlerId battler)
+=======
+static inline struct PartyState *GetBattlerPartyState(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return &gBattleStruct->partyState[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]];
 }
 
 static inline bool32 IsDoubleBattle(void)
 {
+<<<<<<< HEAD
+    return !!(gBattleTypeFlags & BATTLE_TYPE_MORE_THAN_TWO_BATTLERS);
+=======
     return (gBattleTypeFlags & BATTLE_TYPE_MORE_THAN_TWO_BATTLERS);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static inline bool32 IsSpreadMove(enum MoveTarget moveTarget)
@@ -1174,28 +1277,43 @@ static inline bool32 IsSpreadMove(enum MoveTarget moveTarget)
     return moveTarget == TARGET_BOTH || moveTarget == TARGET_FOES_AND_ALLY;
 }
 
+<<<<<<< HEAD
 static inline u32 GetBattlerChosenMove(enum BattlerId battler)
+=======
+static inline u32 GetChosenMoveFromPosition(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
 }
 
+<<<<<<< HEAD
 static inline void SetPassiveDamageAmount(enum BattlerId battler, s32 value)
+=======
+static inline void SetPassiveDamageAmount(u32 battler, s32 value)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (value == 0)
         value = 1;
     gBattleStruct->passiveHpUpdate[battler] = value;
 }
 
+<<<<<<< HEAD
 static inline void SetHealAmount(enum BattlerId battler, s32 value)
+=======
+static inline void SetHealAmount(u32 battler, s32 value)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (value == 0)
         value = 1;
     gBattleStruct->passiveHpUpdate[battler] = -1 * value;
 }
 
+<<<<<<< HEAD
 static inline bool32 IsGhostBattleWithoutScope(void)
 {
     return (gBattleTypeFlags & BATTLE_TYPE_GHOST) && !CheckBagHasItem(ITEM_SILPH_SCOPE, 1);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_BATTLE_H

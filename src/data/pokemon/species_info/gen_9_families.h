@@ -3420,6 +3420,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "Mega Evolution has dialed up this\n"
             "Pokémon's spiciness. It swings its\n"
             "“necktie” around to wallop its foes."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -3436,6 +3437,24 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Scovillain)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Scovillain)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sScovillainLevelUpLearnset,
         .teachableLearnset = sScovillainTeachableLearnset,
@@ -4719,6 +4738,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "separated from its main body-rotate\n"
             "around it to provide defense while\n"
             "cattering poisonous fragments."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_GlimmoraMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -4736,6 +4756,24 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Glimmora)
         SHADOW(1, 18, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Glimmora)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGlimmoraLevelUpLearnset,
         .teachableLearnset = sGlimmoraTeachableLearnset,
@@ -5437,6 +5475,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "by Mega Evolution, making it even\n"
             "wilier. It can create and command\n"
             "copies of itself."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -5453,6 +5492,24 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Tatsugiri)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Tatsugiri)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sTatsugiriLevelUpLearnset,
         .teachableLearnset = sTatsugiriTeachableLearnset,
@@ -5495,6 +5552,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "building up an overflowing pile to launch\n"
             "as projectiles. These projectiles explode\n"
             "on contact."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -5511,6 +5569,24 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Tatsugiri)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Tatsugiri)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sTatsugiriLevelUpLearnset,
         .teachableLearnset = sTatsugiriTeachableLearnset,
@@ -5553,6 +5629,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "creates a dish to ride upon, allowing it\n"
             "to move with total freedom-even through\n"
             "the air."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -5569,6 +5646,24 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Tatsugiri)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Tatsugiri)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sTatsugiriLevelUpLearnset,
         .teachableLearnset = sTatsugiriTeachableLearnset,
@@ -6617,6 +6712,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "more massive thanks to Mega Evolution.\n"
             "This Pokémon fires beams from the hilt\n"
             "at its solar plexus."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -6633,6 +6729,24 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Baxcalibur)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Baxcalibur)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sBaxcaliburLevelUpLearnset,
         .teachableLearnset = sBaxcaliburTeachableLearnset,
@@ -8025,7 +8139,11 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .levelUpLearnset = sOgerponLevelUpLearnset,                                                                     \
         .teachableLearnset = sOgerponTeachableLearnset,                                                                 \
         .formSpeciesIdTable = sOgerponFormSpeciesIdTable,                                                               \
+<<<<<<< HEAD
         .formChangeTable = sOgerpon##Form1##FormChangeTable,                                                            \
+=======
+        .formChangeTable = sOgerponFormChangeTable,                                                                     \
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isSubLegendary = TRUE,                                                                                         \
         .isTeraForm = isTeraform,                                                                                       \
         .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,                                                                   \

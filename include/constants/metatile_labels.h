@@ -1,8 +1,11 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+<<<<<<< HEAD
 #include "constants/metatile_labels_frlg.h"
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // gTileset_BattleArena
 #define METATILE_BattleArena_Door  0x21B
 

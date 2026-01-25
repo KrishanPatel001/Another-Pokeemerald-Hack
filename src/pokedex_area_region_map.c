@@ -5,17 +5,29 @@
 #include "malloc.h"
 #include "palette.h"
 #include "pokedex_area_region_map.h"
+<<<<<<< HEAD
 #include "regions.h"
 #include "region_map.h"
 
 static EWRAM_DATA u8 *sPokedexAreaMapBgNum = NULL;
 
+=======
+
+static EWRAM_DATA u8 *sPokedexAreaMapBgNum = NULL;
+
+static const u16 ALIGNED(4) sPokedexAreaMap_Pal[] = INCBIN_U16("graphics/pokedex/region_map.gbapal");
+static const u32 sPokedexAreaMap_Gfx[] = INCBIN_U32("graphics/pokedex/region_map.8bpp.smol");
+static const u32 sPokedexAreaMap_Tilemap[] = INCBIN_U32("graphics/pokedex/region_map.bin.smolTM");
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const u32 sPokedexAreaMapAffine_Gfx[] = INCBIN_U32("graphics/pokedex/region_map_affine.8bpp.smol");
 static const u32 sPokedexAreaMapAffine_Tilemap[] = INCBIN_U32("graphics/pokedex/region_map_affine.bin.smolTM");
 
 void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
 {
+<<<<<<< HEAD
     enum RegionMapType regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 mode;
     void *tilemap;
     sPokedexAreaMapBgNum = Alloc(sizeof(sPokedexAreaMapBgNum));
@@ -24,8 +36,13 @@ void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
     if (mode == 0)
     {
         SetBgAttribute(template->bg, BG_ATTR_METRIC, 0);
+<<<<<<< HEAD
         DecompressAndCopyTileDataToVram(template->bg, gRegionMapInfos[regionMapType].dexMapGfx, 0, template->offset, 0);
         tilemap = DecompressAndCopyTileDataToVram(template->bg, gRegionMapInfos[regionMapType].dexMapTilemap, 0, 0, 1);
+=======
+        DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Gfx, 0, template->offset, 0);
+        tilemap = DecompressAndCopyTileDataToVram(template->bg, sPokedexAreaMap_Tilemap, 0, 0, 1);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         AddValToTilemapBuffer(tilemap, template->offset, 32, 32, FALSE); // template->offset is always 0, so this does nothing.
     }
     else
@@ -41,7 +58,11 @@ void LoadPokedexAreaMapGfx(const struct PokedexAreaMapTemplate *template)
     ChangeBgX(template->bg, 0, BG_COORD_SET);
     ChangeBgY(template->bg, 0, BG_COORD_SET);
     SetBgAttribute(template->bg, BG_ATTR_PALETTEMODE, 1);
+<<<<<<< HEAD
     CpuCopy32(gRegionMapInfos[regionMapType].dexMapPalette, &gPlttBufferUnfaded[BG_PLTT_ID(7)], gRegionMapInfos[regionMapType].dexMapPaletteSize);
+=======
+    CpuCopy32(sPokedexAreaMap_Pal, &gPlttBufferUnfaded[BG_PLTT_ID(7)], sizeof(sPokedexAreaMap_Pal));
+>>>>>>> 11d8f44022 (Updated to upcoming)
     *sPokedexAreaMapBgNum = template->bg;
 }
 

@@ -494,6 +494,7 @@ static void AnimSludgeProjectile(struct Sprite *sprite)
         StartSpriteAnim(sprite, 2);
     if (gBattleAnimArgs[4] && IsDoubleBattle())
     {
+<<<<<<< HEAD
         enum BattlerId targetPartner;
         if (IsOnPlayerSide(gBattleAnimTarget))
         {
@@ -508,6 +509,22 @@ static void AnimSludgeProjectile(struct Sprite *sprite)
                 targetPartner = B_BATTLER_3;
             else
                 targetPartner = B_BATTLER_1;
+=======
+        u32 targetPartner;
+        if (IsOnPlayerSide(gBattleAnimTarget))
+        {
+            if (gBattleAnimTarget == 0)
+                targetPartner = 2;
+            else
+                targetPartner = 0;
+        }
+        else
+        {
+            if (gBattleAnimTarget == 1)
+                targetPartner = 3;
+            else
+                targetPartner = 1;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
 
         if (IsBattlerAlive(gBattleAnimTarget) && !IsBattlerAlive(targetPartner))

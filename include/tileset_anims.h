@@ -32,6 +32,7 @@ void InitTilesetAnim_EliteFour(void);
 void InitTilesetAnim_BattleDome(void);
 void InitTilesetAnim_BattlePyramid(void);
 
+<<<<<<< HEAD
 // FRLG
 void InitTilesetAnim_General_Frlg(void);
 void InitTilesetAnim_CeladonCity(void);
@@ -40,4 +41,6 @@ void InitTilesetAnim_CeladonGym(void);
 void InitTilesetAnim_SilphCo(void);
 void InitTilesetAnim_MtEmber(void);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_TILESET_ANIMS_H

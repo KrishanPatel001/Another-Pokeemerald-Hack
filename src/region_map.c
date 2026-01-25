@@ -19,7 +19,10 @@
 #include "field_effect.h"
 #include "field_specials.h"
 #include "fldeff.h"
+<<<<<<< HEAD
 #include "regions.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "region_map.h"
 #include "decompress.h"
 #include "constants/region_map_sections.h"
@@ -285,6 +288,7 @@ static const u32 sRegionMapFrameTilemapLZ[] = INCBIN_U32("graphics/pokenav/regio
 static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/region_map/fly_target_icons.gbapal");
 static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/fly_target_icons.4bpp.smol");
 
+<<<<<<< HEAD
 static const u16 ALIGNED(4) sPokedexAreaMap_Pal[] = INCBIN_U16("graphics/pokedex/region_map.gbapal");
 static const u32 sPokedexAreaMap_Gfx[] = INCBIN_U32("graphics/pokedex/region_map.8bpp.smol");
 static const u32 sPokedexAreaMap_Tilemap[] = INCBIN_U32("graphics/pokedex/region_map.bin.smolTM");
@@ -371,6 +375,8 @@ const struct RegionMapInfo gRegionMapInfos[] =
     },
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const u8 sMapHealLocations[][3] =
 {
     [MAPSEC_LITTLEROOT_TOWN] = {MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
@@ -423,6 +429,7 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_132] = {MAP_GROUP(MAP_ROUTE132), MAP_NUM(MAP_ROUTE132), HEAL_LOCATION_NONE},
     [MAPSEC_ROUTE_133] = {MAP_GROUP(MAP_ROUTE133), MAP_NUM(MAP_ROUTE133), HEAL_LOCATION_NONE},
     [MAPSEC_ROUTE_134] = {MAP_GROUP(MAP_ROUTE134), MAP_NUM(MAP_ROUTE134), HEAL_LOCATION_NONE},
+<<<<<<< HEAD
     [MAPSEC_PALLET_TOWN] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_PALLET_TOWN},
     [MAPSEC_VIRIDIAN_CITY] = {MAP_GROUP(MAP_VIRIDIAN_CITY), MAP_NUM(MAP_VIRIDIAN_CITY), HEAL_LOCATION_VIRIDIAN_CITY},
     [MAPSEC_PEWTER_CITY] = {MAP_GROUP(MAP_PEWTER_CITY), MAP_NUM(MAP_PEWTER_CITY), HEAL_LOCATION_PEWTER_CITY},
@@ -527,6 +534,8 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_RIXY_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_VIAPOIS_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_EMBER_SPA] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 static const u8 *const sEverGrandeCityNames[] =
@@ -729,6 +738,7 @@ void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap)
 
 bool8 LoadRegionMapGfx(void)
 {
+<<<<<<< HEAD
     enum RegionMapType regionMapType;
     switch (sRegionMap->initStep)
     {
@@ -755,6 +765,30 @@ bool8 LoadRegionMapGfx(void)
         regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
         if (!FreeTempTileDataBuffersIfPossible())
             LoadPalette(gRegionMapInfos[regionMapType].regionMapPalette, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
+=======
+    switch (sRegionMap->initStep)
+    {
+    case 0:
+        if (sRegionMap->bgManaged)
+            DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sRegionMapBg_GfxLZ, 0, 0, 0);
+        else
+            DecompressDataWithHeaderVram(sRegionMapBg_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
+        break;
+    case 1:
+        if (sRegionMap->bgManaged)
+        {
+            if (!FreeTempTileDataBuffersIfPossible())
+                DecompressAndCopyTileDataToVram(sRegionMap->bgNum, sRegionMapBg_TilemapLZ, 0, 0, 1);
+        }
+        else
+        {
+            DecompressDataWithHeaderVram(sRegionMapBg_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
+        }
+        break;
+    case 2:
+        if (!FreeTempTileDataBuffersIfPossible())
+            LoadPalette(sRegionMapBg_Pal, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         break;
     case 3:
         DecompressDataWithHeaderWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
@@ -1152,6 +1186,7 @@ void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y)
     }
 }
 
+<<<<<<< HEAD
 enum RegionMapType GetRegionMapType(u32 mapSecId)
 {
     switch (GetRegionForSectionId(mapSecId))
@@ -1175,6 +1210,8 @@ enum RegionMapType GetRegionMapType(u32 mapSecId)
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
@@ -1183,6 +1220,7 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
     }
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
+<<<<<<< HEAD
 
     switch (GetCurrentRegion())
     {
@@ -1203,6 +1241,9 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
         default:
             return sRegionMap_MapSectionLayout[y][x];
     }
+=======
+    return sRegionMap_MapSectionLayout[y][x];
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static void InitMapBasedOnPlayerLocation(void)
@@ -1454,6 +1495,7 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
     case MAPSEC_SOUTHERN_ISLAND:
         return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
+<<<<<<< HEAD
     case MAPSEC_PALLET_TOWN:
         return FlagGet(FLAG_WORLD_MAP_PALLET_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_VIRIDIAN_CITY:
@@ -1494,6 +1536,8 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_ROUTE_10_POKECENTER:
         return FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     default:
         return MAPSECTYPE_ROUTE;
     }
@@ -2112,6 +2156,7 @@ static void LoadFlyDestIcons(void)
     TryCreateRedOutlineFlyDestIcons();
 }
 
+<<<<<<< HEAD
 struct FlyLocation
 {
     enum RegionMapType regionMapType;
@@ -2304,14 +2349,21 @@ static const struct FlyLocation sFlyLocations[] =
 };
 
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // Sprite data for SpriteCB_FlyDestIcon
 #define sIconMapSec   data[0]
 #define sFlickerTimer data[1]
 
 static void CreateFlyDestIcons(void)
 {
+<<<<<<< HEAD
     enum RegionMapType regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
     u32 i;
+=======
+    u16 canFlyFlag;
+    mapsec_u16_t mapSecId;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u16 x;
     u16 y;
     u16 width;
@@ -2319,12 +2371,19 @@ static void CreateFlyDestIcons(void)
     u16 shape;
     u8 spriteId;
 
+<<<<<<< HEAD
     for (i = 0; i < ARRAY_COUNT(sFlyLocations); i++)
     {
         if (sFlyLocations[i].regionMapType != regionMapType)
             continue;
 
         GetMapSecDimensions(sFlyLocations[i].mapsec, &x, &y, &width, &height);
+=======
+    canFlyFlag = FLAG_VISITED_LITTLEROOT_TOWN;
+    for (mapSecId = MAPSEC_LITTLEROOT_TOWN; mapSecId <= MAPSEC_EVER_GRANDE_CITY; mapSecId++)
+    {
+        GetMapSecDimensions(mapSecId, &x, &y, &width, &height);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         x = (x + MAPCURSOR_X_MIN) * 8 + 4;
         y = (y + MAPCURSOR_Y_MIN) * 8 + 4;
 
@@ -2340,14 +2399,24 @@ static void CreateFlyDestIcons(void)
         {
             gSprites[spriteId].oam.shape = shape;
 
+<<<<<<< HEAD
             if (FlagGet(sFlyLocations[i].flag))
+=======
+            if (FlagGet(canFlyFlag))
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 gSprites[spriteId].callback = SpriteCB_FlyDestIcon;
             else
                 shape += 3;
 
             StartSpriteAnim(&gSprites[spriteId], shape);
+<<<<<<< HEAD
             gSprites[spriteId].sIconMapSec = sFlyLocations[i].mapsec;
         }
+=======
+            gSprites[spriteId].sIconMapSec = mapSecId;
+        }
+        canFlyFlag++;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 

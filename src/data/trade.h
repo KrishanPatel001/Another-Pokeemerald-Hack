@@ -1031,6 +1031,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SKITTY
+<<<<<<< HEAD
     },
     [INGAME_TRADE_MR_MIME] = 
     {
@@ -1211,6 +1212,8 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_PONYTA
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 };
 
@@ -1246,6 +1249,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_A,
         EC_WORD_CUTE,
         EC_WORD_WAY
+<<<<<<< HEAD
     },
     {
         EC_WORD_THAT_S,
@@ -1257,6 +1261,8 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_KIND,
         EC_WORD_TO,
         EC_WORD_IT
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 };
 

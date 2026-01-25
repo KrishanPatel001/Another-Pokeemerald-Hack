@@ -22,10 +22,17 @@
 #include "constants/moves.h"
 
 // this file's functions
+<<<<<<< HEAD
 static bool32 AI_ShouldHeal(enum BattlerId battler, u32 healAmount);
 static u32 GetHPHealAmount(u8 itemEffectParam, struct Pokemon *mon);
 
 bool32 ShouldUseItem(enum BattlerId battler)
+=======
+static bool32 AI_ShouldHeal(u32 battler, u32 healAmount);
+static u32 GetHPHealAmount(u8 itemEffectParam, struct Pokemon *mon);
+
+bool32 ShouldUseItem(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     struct Pokemon *party;
     u32 validMons = 0;
@@ -194,7 +201,11 @@ bool32 ShouldUseItem(enum BattlerId battler)
     return FALSE;
 }
 
+<<<<<<< HEAD
 static bool32 AI_ShouldHeal(enum BattlerId battler, u32 healAmount)
+=======
+static bool32 AI_ShouldHeal(u32 battler, u32 healAmount)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 shouldHeal = FALSE;
     u32 maxDamage = 0;
@@ -209,7 +220,11 @@ static bool32 AI_ShouldHeal(enum BattlerId battler, u32 healAmount)
     }
 
     //calculate max expected damage from the opponent
+<<<<<<< HEAD
     for (enum BattlerId battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
+=======
+    for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (IsOnPlayerSide(battlerIndex))
         {

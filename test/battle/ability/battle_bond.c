@@ -3,7 +3,11 @@
 
 ASSUMPTIONS
 {
+<<<<<<< HEAD
     ASSUME(GetMoveCategory(MOVE_WATER_GUN) != DAMAGE_CATEGORY_STATUS);
+=======
+    ASSUME(!IsBattleMoveStatus(MOVE_WATER_GUN));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 // Battle Bond transforms the Pokémon when fainting any battler(opposing or partner), unless it's the last Pokémon and the battle ends.

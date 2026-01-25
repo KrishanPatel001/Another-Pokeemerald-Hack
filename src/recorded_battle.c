@@ -151,13 +151,21 @@ void RecordedBattle_SetTrainerInfo(void)
     }
 }
 
+<<<<<<< HEAD
 void RecordedBattle_SetBattlerAction(enum BattlerId battler, u8 action)
+=======
+void RecordedBattle_SetBattlerAction(u8 battler, u8 action)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (sBattlerRecordSizes[battler] < BATTLER_RECORD_SIZE && sRecordMode != B_RECORD_MODE_PLAYBACK)
         sBattleRecords[battler][sBattlerRecordSizes[battler]++] = action;
 }
 
+<<<<<<< HEAD
 void RecordedBattle_ClearBattlerAction(enum BattlerId battler, u8 bytesToClear)
+=======
+void RecordedBattle_ClearBattlerAction(u8 battler, u8 bytesToClear)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
 
@@ -170,7 +178,11 @@ void RecordedBattle_ClearBattlerAction(enum BattlerId battler, u8 bytesToClear)
     }
 }
 
+<<<<<<< HEAD
 u8 RecordedBattle_GetBattlerAction(u32 actionType, enum BattlerId battler)
+=======
+u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (gTestRunnerEnabled)
         TestRunner_Battle_CheckBattleRecordActionType(battler, sBattlerRecordSizes[battler], actionType);
@@ -236,7 +248,11 @@ void RecordedBattle_RecordAllBattlerData(u8 *src)
     {
         for (size = *src; size != 0;)
         {
+<<<<<<< HEAD
             enum BattlerId battler = GetNextRecordedDataByte(src, &idx, &size);
+=======
+            u8 battler = GetNextRecordedDataByte(src, &idx, &size);
+>>>>>>> 11d8f44022 (Updated to upcoming)
             u8 numActions = GetNextRecordedDataByte(src, &idx, &size);
 
             for (i = 0; i < numActions; i++)
@@ -617,7 +633,11 @@ static void RecordedBattle_RestoreSavedParties(void)
     }
 }
 
+<<<<<<< HEAD
 u8 GetBattlerLinkPlayerGender(enum BattlerId battler)
+=======
+u8 GetBattlerLinkPlayerGender(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
 
@@ -659,7 +679,11 @@ u8 GetTextSpeedInRecordedBattle(void)
     return sTextSpeed;
 }
 
+<<<<<<< HEAD
 void RecordedBattle_CopyBattlerMoves(enum BattlerId battler)
+=======
+void RecordedBattle_CopyBattlerMoves(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
 
@@ -680,12 +704,20 @@ void RecordedBattle_CopyBattlerMoves(enum BattlerId battler)
 
 void RecordedBattle_CheckMovesetChanges(u8 mode)
 {
+<<<<<<< HEAD
     s32 j, k;
+=======
+    s32 battler, j, k;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
 
+<<<<<<< HEAD
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+    for (battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         // Player's side only
         if (IsOnPlayerSide(battler))
@@ -776,14 +808,22 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
 
                         SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonusSet);
                     }
+<<<<<<< HEAD
                     gChosenMoveByBattler[battler] = GetBattlerChosenMove(battler);
+=======
+                    gChosenMoveByBattler[battler] = GetChosenMoveFromPosition(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 }
             }
         }
     }
 }
 
+<<<<<<< HEAD
 u64 GetAiScriptsInRecordedBattle(enum BattlerId battler)
+=======
+u64 GetAiScriptsInRecordedBattle(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return sAI_Scripts[battler];
 }

@@ -571,12 +571,20 @@ static const struct WindowTemplate sLevelUpStatsWindowTemplate =
     .baseBlock = 0x2E9,
 };
 
+<<<<<<< HEAD
 static const struct WindowTemplate sWindowTemplate_FirstBattleOakVoiceover =
+=======
+static const struct WindowTemplate sUnusedWindowTemplate1 =
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     .bg = 2,
     .tilemapLeft = 2,
     .tilemapTop = 15,
+<<<<<<< HEAD
     .width = 26,
+=======
+    .width = 27,
+>>>>>>> 11d8f44022 (Updated to upcoming)
     .height = 4,
     .paletteNum = 14,
     .baseBlock = 0x1DF,

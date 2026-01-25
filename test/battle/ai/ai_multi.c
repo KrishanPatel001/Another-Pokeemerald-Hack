@@ -8,7 +8,11 @@ AI_MULTI_BATTLE_TEST("AI will only explode and kill everything on the field with
     ASSUME(IsExplosionMove(MOVE_EXPLOSION));
 
     u32 aiFlags;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     PARAMETRIZE { aiFlags = 0; battler = 1; }
     PARAMETRIZE { aiFlags = 0; battler = 3; }
@@ -38,7 +42,11 @@ AI_ONE_VS_TWO_BATTLE_TEST("AI will only explode and kill everything on the field
     ASSUME(IsExplosionMove(MOVE_EXPLOSION));
 
     u32 aiFlags;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     PARAMETRIZE { aiFlags = 0; battler = 1; }
     PARAMETRIZE { aiFlags = 0; battler = 3; }
@@ -102,7 +110,11 @@ AI_TWO_VS_ONE_BATTLE_TEST("Battler 3 has Battler 1 AI flags set correctly (2v1)"
     ASSUME(IsExplosionMove(MOVE_EXPLOSION));
 
     u32 aiFlags;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     PARAMETRIZE { aiFlags = 0; battler = 1; }
     PARAMETRIZE { aiFlags = 0; battler = 3; }
@@ -235,7 +247,11 @@ AI_MULTI_BATTLE_TEST("Pollen Puff: AI correctly scores moves with EFFECT_HIT_ENE
         MULTI_OPPONENT_A(SPECIES_WOBBUFFET) { Speed(1); HP(50); Moves(MOVE_POLLEN_PUFF);                 }
         MULTI_OPPONENT_B(SPECIES_WOBBUFFET) { Speed(1); HP(50); Moves(MOVE_POLLEN_PUFF);                 }
     } WHEN {
+<<<<<<< HEAD
+        TURN {
+=======
         TURN { 
+>>>>>>> 11d8f44022 (Updated to upcoming)
             // Targeting ally
             SCORE_EQ_VAL(opponentLeft,  MOVE_POLLEN_PUFF, AI_SCORE_DEFAULT + WEAK_EFFECT, target:opponentRight);
             SCORE_EQ_VAL(playerRight,   MOVE_POLLEN_PUFF, AI_SCORE_DEFAULT + WEAK_EFFECT, target:playerLeft);

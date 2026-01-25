@@ -54,7 +54,10 @@ static void FortreeBridgePerStepCallback(u8);
 static void PacifidlogBridgePerStepCallback(u8);
 static void SootopolisGymIcePerStepCallback(u8);
 static void CrackedFloorPerStepCallback(u8);
+<<<<<<< HEAD
 static void IcefallCaveIcePerStepCallback(u8);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void Task_MuddySlope(u8);
 
 static const TaskFunc sPerStepCallbacks[] =
@@ -66,6 +69,7 @@ static const TaskFunc sPerStepCallbacks[] =
     [STEP_CB_SOOTOPOLIS_ICE]    = SootopolisGymIcePerStepCallback,
     [STEP_CB_TRUCK]             = EndTruckSequence,
     [STEP_CB_SECRET_BASE]       = SecretBasePerStepCallback,
+<<<<<<< HEAD
     [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback,
     [STEP_CB_ICEFALL_CAVE]      = IcefallCaveIcePerStepCallback
 };
@@ -82,6 +86,9 @@ static const u8 sIcefallCaveIceCoords[][2] =
     {  8, 10 },
     {  9, 10 },
     {  8, 14 }
+=======
+    [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 // Each array has 4 pairs of data, each pair representing two metatiles of a log and their relative position.
@@ -971,6 +978,7 @@ static void Task_MuddySlope(u8 taskId)
         }
     }
 }
+<<<<<<< HEAD
 
 static void MarkIcefallCavePuzzleCoordVisited(s16 x, s16 y)
 {
@@ -1086,3 +1094,5 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
 #undef tIceX
 #undef tIceY
 #undef tDelay
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

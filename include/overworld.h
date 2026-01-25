@@ -47,6 +47,7 @@ struct LinkPlayerObjectEvent
     u8 movementMode;
 };
 
+<<<<<<< HEAD
 struct CreditsOverworldCmd
 {
     s16 unk_0;
@@ -60,6 +61,8 @@ enum {
     MUSIC_DISABLE_KEEP,
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
@@ -76,7 +79,10 @@ extern bool8 gExitStairsMovementDisabled;
 extern bool8 gSkipShowMonAnim;
 extern u8 gTimeOfDay;
 extern s16 gTimeUpdateCounter;
+<<<<<<< HEAD
 extern u8 gDisableMapMusicChangeOnMapLoad;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 extern struct TimeBlendSettings gTimeBlend;
 
@@ -107,6 +113,10 @@ void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 
 void SetWarpDestinationToDynamicWarp(u8 unusedWarpId);
 void SetWarpDestinationToHealLocation(u8 healLocationId);
 void SetWarpDestinationToLastHealLocation(void);
+<<<<<<< HEAD
+void SetWarpDestinationForTeleport(void);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void SetLastHealLocationWarp(u8 healLocationId);
 void UpdateEscapeWarp(s16 x, s16 y);
 void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -188,7 +198,10 @@ bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 bool16 SetTimeOfDay(u16 hours);
+<<<<<<< HEAD
 bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Item Description Headers
 enum ItemObtainFlags
@@ -198,7 +211,10 @@ enum ItemObtainFlags
 };
 bool8 GetSetItemObtained(enum Item item, enum ItemObtainFlags caseId);
 
+<<<<<<< HEAD
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *);
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_OVERWORLD_H

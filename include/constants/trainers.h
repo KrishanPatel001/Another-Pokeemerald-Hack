@@ -110,6 +110,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_FRONT_LEAF,
     TRAINER_PIC_FRONT_RS_BRENDAN,
     TRAINER_PIC_FRONT_RS_MAY,
+<<<<<<< HEAD
     TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
     TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
     TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
@@ -172,6 +173,8 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
     TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
     TRAINER_PIC_FRONT_PAINTER_FRLG,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     TRAINER_PIC_FRONT_COUNT,
     TRAINER_PIC_BACK_BRENDAN = TRAINER_PIC_FRONT_COUNT, // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
     TRAINER_PIC_BACK_MAY,
@@ -181,15 +184,21 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_BACK_RUBY_SAPPHIRE_MAY,
     TRAINER_PIC_BACK_WALLY,
     TRAINER_PIC_BACK_STEVEN,
+<<<<<<< HEAD
     TRAINER_PIC_BACK_POKEDUDE,
     TRAINER_PIC_BACK_OLD_MAN,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     TRAINER_PIC_COUNT,
     TRAINER_PIC_BACK_COUNT = (TRAINER_PIC_COUNT - TRAINER_PIC_FRONT_COUNT),
 };
 
+<<<<<<< HEAD
 #define TRAINER_BACK_PIC_PLAYER_MALE (IS_FRLG ? TRAINER_PIC_BACK_RED : TRAINER_PIC_BACK_BRENDAN)
 #define TRAINER_BACK_PIC_PLAYER_FEMALE (IS_FRLG ? TRAINER_PIC_BACK_LEAF : TRAINER_PIC_BACK_MAY)
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define FACILITY_CLASS_HIKER                 0x0
 #define FACILITY_CLASS_AQUA_GRUNT_M          0x1
 #define FACILITY_CLASS_PKMN_BREEDER_F        0x2
@@ -272,6 +281,7 @@ enum __attribute__((packed)) TrainerPicID
 #define FACILITY_CLASS_LEAF                  0x4f
 #define FACILITY_CLASS_RS_BRENDAN            0x50
 #define FACILITY_CLASS_RS_MAY                0x51
+<<<<<<< HEAD
 #define FACILITY_CLASS_YOUNGSTER_FRLG        0x52
 #define FACILITY_CLASS_BURGLAR_FRLG          0x53
 #define FACILITY_CLASS_PSYCHIC_F_FRLG        0x54
@@ -327,6 +337,10 @@ enum __attribute__((packed)) TrainerPicID
 #define FACILITY_CLASS_PKMN_BREEDER             FACILITY_CLASS_HIKER
 #define FACILITY_CLASS_COOL_COUPLE              FACILITY_CLASS_HIKER
 #define FACILITY_CLASS_CRUSH_KIN                FACILITY_CLASS_HIKER
+=======
+
+#define FACILITY_CLASSES_COUNT               0x52
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #define RS_FACILITY_CLASS_AQUA_LEADER_ARCHIE    0x0
 #define RS_FACILITY_CLASS_AQUA_GRUNT_M          0x1
@@ -476,6 +490,7 @@ enum TrainerClassID
     TRAINER_CLASS_PIKE_QUEEN,
     TRAINER_CLASS_PYRAMID_KING,
     TRAINER_CLASS_RS_PROTAG,
+<<<<<<< HEAD
 
     TRAINER_CLASS_YOUNGSTER_FRLG,
     TRAINER_CLASS_BUG_CATCHER_FRLG,
@@ -528,6 +543,8 @@ enum TrainerClassID
     TRAINER_CLASS_LADY_FRLG,
     TRAINER_CLASS_PAINTER_FRLG,
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     TRAINER_CLASS_COUNT,
 };
 

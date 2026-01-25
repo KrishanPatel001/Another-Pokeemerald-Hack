@@ -381,7 +381,11 @@ u32 UnpackSelectedBattlePalettes(s16 selector)
     bool8 targetPartner = (selector >> 4) & 1;
     bool8 anim1 = (selector >> 5) & 1;
     bool8 anim2 = (selector >> 6) & 1;
+<<<<<<< HEAD
     enum MoveTarget moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gAnimMoveIndex);
+=======
+    u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gAnimMoveIndex);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     switch (moveTarget)
     {
@@ -398,8 +402,11 @@ u32 UnpackSelectedBattlePalettes(s16 selector)
             attackerPartner |= 1;
         }
         break;
+<<<<<<< HEAD
     default:
         break;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 
     return GetBattlePalettesMask(battleBackground, attacker, target, attackerPartner, targetPartner, anim1, anim2);
@@ -563,6 +570,10 @@ static void AnimTask_BlendColorCycleLoop(u8 taskId)
 // See AnimTask_BlendColorCycle. Same, but excludes Attacker and Target
 void AnimTask_BlendColorCycleExclude(u8 taskId)
 {
+<<<<<<< HEAD
+=======
+    int battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 selectedPalettes = 0;
 
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
@@ -573,7 +584,11 @@ void AnimTask_BlendColorCycleExclude(u8 taskId)
     gTasks[taskId].tBlendColor = gBattleAnimArgs[5];
     gTasks[taskId].tRestoreBlend = 0;
 
+<<<<<<< HEAD
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+    for (battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (battler != gBattleAnimAttacker && battler != gBattleAnimTarget)
             selectedPalettes |= 1 << (battler + 16);
@@ -817,8 +832,13 @@ void AnimTask_InvertScreenColor(u8 taskId)
 #define tColorB        data[7]
 void AnimTask_TintPalettes(u8 taskId)
 {
+<<<<<<< HEAD
     enum BattlerId attackerBattler;
     enum BattlerId targetBattler;
+=======
+    u8 attackerBattler;
+    u8 targetBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 paletteIndex;
     u32 selectedPalettes = 0;
 
@@ -905,6 +925,10 @@ static void AnimShakeMonOrBattlePlatforms(struct Sprite *sprite)
 
 static void AnimShakeMonOrBattlePlatforms_Step(struct Sprite *sprite)
 {
+<<<<<<< HEAD
+=======
+    u8 i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u16 var0;
 
     if (sprite->data[3] > 0)
@@ -927,7 +951,11 @@ static void AnimShakeMonOrBattlePlatforms_Step(struct Sprite *sprite)
         var0 = sprite->data[5] - 2;
         if (var0 < 2)
         {
+<<<<<<< HEAD
             for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+            for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 gSprites[gBattlerSpriteIds[i]].coordOffsetEnabled = FALSE;
         }
 
@@ -1055,11 +1083,18 @@ static void AnimHitSplatHandleInvert(struct Sprite *sprite)
 
 void AnimHitSplatRandom(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     if (gBattleAnimArgs[1] == -1)
         gBattleAnimArgs[1] = Random2() & 3;
 
     if (!InitSpritePosToAnimBattler(animBattler, sprite, FALSE))
+=======
+    if (gBattleAnimArgs[1] == -1)
+        gBattleAnimArgs[1] = Random2() & 3;
+
+    if (!InitSpritePosToAnimBattler(gBattleAnimArgs[0], sprite, FALSE))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return;
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[1]);
 
@@ -1072,8 +1107,12 @@ void AnimHitSplatRandom(struct Sprite *sprite)
 
 void AnimHitSplatOnMonEdge(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum AnimBattler animBattler = gBattleAnimArgs[0];
     sprite->data[0] = GetAnimBattlerSpriteId(animBattler);
+=======
+    sprite->data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     sprite->x = gSprites[sprite->data[0]].x + gSprites[sprite->data[0]].x2;
     sprite->y = gSprites[sprite->data[0]].y + gSprites[sprite->data[0]].y2;
     sprite->x2 = gBattleAnimArgs[1];

@@ -621,7 +621,11 @@ enum
 
 struct QueuedAbilityEvent
 {
+<<<<<<< HEAD
     enum BattlerId battlerId;
+=======
+    u8 battlerId;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     enum Ability ability;
 };
 
@@ -638,14 +642,22 @@ enum { EXP_EVENT_NEW_EXP, EXP_EVENT_DELTA_EXP };
 
 struct QueuedHPEvent
 {
+<<<<<<< HEAD
     enum BattlerId battlerId:3;
+=======
+    u32 battlerId:3;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 type:1;
     u32 address:28;
 };
 
 struct QueuedSubHitEvent
 {
+<<<<<<< HEAD
     enum BattlerId battlerId:3;
+=======
+    u32 battlerId:3;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 checkBreak:1;
     u32 breakSub:1;
     u32 address:27;
@@ -653,7 +665,11 @@ struct QueuedSubHitEvent
 
 struct QueuedExpEvent
 {
+<<<<<<< HEAD
     enum BattlerId battlerId:3;
+=======
+    u32 battlerId:3;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 type:1;
     u32 address:28;
 };
@@ -665,7 +681,11 @@ struct QueuedMessageEvent
 
 struct QueuedStatusEvent
 {
+<<<<<<< HEAD
     enum BattlerId battlerId:3;
+=======
+    u32 battlerId:3;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 mask:29;
 };
 
@@ -1064,7 +1084,11 @@ void ClosePokemon(u32 sourceLine);
 
 void RNGSeed_(u32 sourceLine, rng_value_t seed);
 void AIFlags_(u32 sourceLine, u64 flags);
+<<<<<<< HEAD
 void BattlerAIFlags_(u32 sourceLine, enum BattlerId battler, u64 flags);
+=======
+void BattlerAIFlags_(u32 sourceLine, u32 battler, u64 flags);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void AILogScores(u32 sourceLine);
 void Gender_(u32 sourceLine, u32 gender);
 void Nature_(u32 sourceLine, u32 nature);

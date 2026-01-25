@@ -70,8 +70,12 @@ bool32 IsLastHealLocationPlayerHouse()
     if (IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE)
         || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F)
         || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE)
+<<<<<<< HEAD
         || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F)
         || IsLastHealLocation(HEAL_LOCATION_PALLET_TOWN))
+=======
+        || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F))
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return TRUE;
 
     return FALSE;
@@ -80,7 +84,11 @@ bool32 IsLastHealLocationPlayerHouse()
 u32 GetHealNpcLocalId(u32 healLocationId)
 {
     if (healLocationId == HEAL_LOCATION_NONE || healLocationId >= NUM_HEAL_LOCATIONS)
+<<<<<<< HEAD
+        return LOCALID_NONE;
+=======
         return 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     return sWhiteoutRespawnHealerNpcIds[healLocationId - 1];
 }

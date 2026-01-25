@@ -21,14 +21,22 @@ class Config:
             lines = config_file.readlines()
             for line in lines:
                 self.ParseTimeConfig(line)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if self.time_encounters == None:
             raise Exception("OW_TIME_OF_DAY_ENCOUNTERS not defined.")
         if self.disable_time_fallback == None:
             raise Exception("OW_TIME_OF_DAY_DISABLE_FALLBACK not defined.")
         if self.time_fallback == None:
             raise Exception("OW_TIME_OF_DAY_FALLBACK not defined.")
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     def ParseTimeEnum(self, rtc_constants_file_name):
         with open(rtc_constants_file_name, 'r') as rtc_constants_file:
             DEFAULT_TIME_PAT = re.compile(r"enum\s+TimeOfDay\s*\{(?P<rtc_val>[\s*\w+,\=\d*]+)\s*\}\s*\;")
@@ -70,7 +78,11 @@ class WildEncounterAssembler:
         self.output_file = output_file
         self.json_data = json_data
         self.config = config
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     def WriteLine(self, line="", indents = 0):
         self.output_file.write(4 * indents * " " + line + "\n")
 
@@ -101,7 +113,11 @@ class WildEncounterAssembler:
                         for group_name, indices in groups.items():
                             for index in indices:
                                 group_name_mapping[index] = "_" + group_name.upper()
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
                     for idx, rate in enumerate(encounter_rates):
                         macro_name = macro_base + group_name_mapping[idx] + "_SLOT_" + str(idx)
                         macro_value = str(rate)
@@ -118,7 +134,11 @@ class WildEncounterAssembler:
                             self.WriteMacro(macro_total_name, "(" + previous_macro + ")")
                     macro_total_name = macro_base + group_name_mapping[-1] + "_TOTAL"
                     self.WriteLine()
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     def WriteMonInfos(self, name, mons, encounter_rate):
         info_name = name + "Info"
         self.WriteLine(f"const struct WildPokemon {name}[] =")
@@ -133,7 +153,11 @@ class WildEncounterAssembler:
         self.WriteLine()
         self.WriteLine(f"const struct WildPokemonInfo {info_name} = {{ {encounter_rate}, {name} }};")
         self.WriteLine()
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     def WriteTerminator(self):
         self.WriteLine("{", 1)
         self.WriteLine(".mapGroup = MAP_GROUP(MAP_UNDEFINED),", 2)
@@ -168,7 +192,11 @@ class WildEncounterAssembler:
                 version = "FIRERED"
             elif "LeafGreen" in shared_label:
                 version = "LEAFGREEN"
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
             self.WriteLine(f"#ifdef {version}")
 
             self.WriteLine("{", 1)
@@ -179,8 +207,13 @@ class WildEncounterAssembler:
             for time in self.config.times_of_day:
                 if not self.config.time_encounters and time != self.config.time_fallback:
                     continue
+<<<<<<< HEAD
                 self.WriteLine(f"[{time}] =", 4)
                 self.WriteLine("{", 4)
+=======
+                self.WriteLine(f"[{time}] =", 3)
+                self.WriteLine("{", 3)
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 for mon_type in self.config.mon_types:
                     member_name = mon_type.title().replace("_", "")
                     member_name = member_name[0].lower() + member_name[1:] + "Info"
@@ -189,10 +222,17 @@ class WildEncounterAssembler:
                         value = encounter_data[time][mon_type]
                     if value != "NULL":
                         value = "&" + value
+<<<<<<< HEAD
                     self.WriteLine(f".{member_name} = {value},", 5)
 
                 self.WriteLine("},", 3)
             
+=======
+                    self.WriteLine(f".{member_name} = {value},", 4)
+
+                self.WriteLine("},", 3)
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
             self.WriteLine("},", 2)
             self.WriteLine("},", 1)
             self.WriteLine(f"#endif")
@@ -246,7 +286,11 @@ class WildEncounterAssembler:
                     if mon_type not in map_encounters:
                         headers["data"][shared_label][mon_type] = "NULL"
                         continue
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
                     mons_entry = map_encounters[mon_type]
                     encounter_rate = mons_entry["encounter_rate"]
                     mons = mons_entry["mons"]
@@ -271,7 +315,11 @@ def main():
     with open('src/data/wild_encounters.json', 'r') as json_file:
         json_data = json.load(json_file)
         ConvertToHeaderFile(json_data)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 if __name__ == '__main__':
     main()

@@ -67,11 +67,17 @@ enum TransitionType
 // this file's functions
 static void DoBattlePikeWildBattle(void);
 static void DoSafariBattle(void);
+<<<<<<< HEAD
 static void DoGhostBattle(void);
 static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
 static void CB2_EndScriptedWildBattle(void);
 static void CB2_EndMarowakBattle(void);
+=======
+static void DoStandardWildBattle(bool32 isDouble);
+static void CB2_EndWildBattle(void);
+static void CB2_EndScriptedWildBattle(void);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void TryUpdateGymLeaderRematchFromWild(void);
 static void TryUpdateGymLeaderRematchFromTrainer(void);
 static void CB2_GiveStarter(void);
@@ -311,6 +317,7 @@ static void CreateBattleStartTask_Debug(u8 transition, u16 song)
 #undef tState
 #undef tTransition
 
+<<<<<<< HEAD
 static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 {
     if (mapGroup == MAP_GROUP(MAP_POKEMON_TOWER_1F)
@@ -327,12 +334,17 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
         return FALSE;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void BattleSetup_StartWildBattle(void)
 {
     if (GetSafariZoneFlag())
         DoSafariBattle();
+<<<<<<< HEAD
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     else
         DoStandardWildBattle(FALSE);
 }
@@ -415,6 +427,7 @@ static void DoSafariBattle(void)
     CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
+<<<<<<< HEAD
 static void DoGhostBattle(void)
 {
     LockPlayerFieldControls();
@@ -428,6 +441,8 @@ static void DoGhostBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void DoBattlePikeWildBattle(void)
 {
     LockPlayerFieldControls();
@@ -468,6 +483,7 @@ void StartWallyTutorialBattle(void)
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+<<<<<<< HEAD
     gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;
     CreateBattleStartTask(B_TRANSITION_SLICE, 0);
 }
@@ -478,6 +494,9 @@ void StartOldManTutorialBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;
+=======
+    gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     CreateBattleStartTask(B_TRANSITION_SLICE, 0);
 }
 
@@ -505,6 +524,7 @@ void BattleSetup_StartScriptedDoubleWildBattle(void)
     TryUpdateGymLeaderRematchFromWild();
 }
 
+<<<<<<< HEAD
 void StartMarowakBattle(void)
 {
     LockPlayerFieldControls();
@@ -524,6 +544,8 @@ void StartMarowakBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void BattleSetup_StartLatiBattle(void)
 {
     LockPlayerFieldControls();
@@ -544,6 +566,10 @@ void BattleSetup_StartLegendaryBattle(void)
 
     switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES))
     {
+<<<<<<< HEAD
+=======
+    default:
+>>>>>>> 11d8f44022 (Updated to upcoming)
     case SPECIES_GROUDON:
     case SPECIES_GROUDON_PRIMAL:
         CreateBattleStartTask(B_TRANSITION_GROUDON, MUS_VS_KYOGRE_GROUDON);
@@ -564,7 +590,10 @@ void BattleSetup_StartLegendaryBattle(void)
         break;
     case SPECIES_LUGIA:
     case SPECIES_HO_OH:
+<<<<<<< HEAD
     default:
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RG_VS_LEGEND);
         break;
     case SPECIES_MEW:
@@ -686,6 +715,7 @@ static void CB2_EndScriptedWildBattle(void)
     }
 }
 
+<<<<<<< HEAD
 static void CB2_EndMarowakBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
@@ -707,6 +737,8 @@ static void CB2_EndMarowakBattle(void)
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 enum BattleEnvironments BattleSetup_GetEnvironmentId(void)
 {
     u16 tileBehavior;
@@ -1143,9 +1175,12 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         TRAINER_BATTLE_PARAM.opponentA = GetRematchTrainerId(TRAINER_BATTLE_PARAM.opponentA);
         return EventScript_TryDoRematchBattle;
 #endif //FREE_MATCH_CALL
+<<<<<<< HEAD
     case TRAINER_BATTLE_EARLY_RIVAL:
         SetMapVarsToTrainerA();
         return EventScript_DoNoIntroTrainerBattle;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     case TRAINER_BATTLE_TWO_TRAINERS_NO_INTRO:
         gNoOfApproachingTrainers = 2; // set TWO_OPPONENTS gBattleTypeFlags
         gApproachingTrainerId = 1; // prevent trainer approach
@@ -1254,11 +1289,14 @@ u8 GetTrainerBattleMode(void)
     return TRAINER_BATTLE_PARAM.mode;
 }
 
+<<<<<<< HEAD
 u8 GetRivalBattleFlags(void)
 {
     return TRAINER_BATTLE_PARAM.rivalBattleFlags;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 bool8 GetTrainerFlag(void)
 {
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
@@ -1318,9 +1356,12 @@ void BattleSetup_StartTrainerBattle(void)
         }
     }
 
+<<<<<<< HEAD
     if (GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
@@ -1438,6 +1479,7 @@ static void CB2_EndTrainerBattle(void)
             HealPlayerParty();
     }
 
+<<<<<<< HEAD
     if (GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
     {
         if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -1462,6 +1504,9 @@ static void CB2_EndTrainerBattle(void)
         SetBattledTrainerFlag();
     }
     else if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
+=======
+    if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_SECRET_BASE)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         DowngradeBadPoison();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -1688,8 +1733,12 @@ const u8 *GetTrainerBLoseText(void)
 
 const u8 *GetTrainerWonSpeech(void)
 {
+<<<<<<< HEAD
     StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.victoryText));
     return gStringVar4;
+=======
+    return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.victoryText);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static const u8 *GetTrainerCantBattleSpeech(void)

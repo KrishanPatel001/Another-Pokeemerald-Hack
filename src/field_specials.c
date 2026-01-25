@@ -26,7 +26,10 @@
 #include "link.h"
 #include "list_menu.h"
 #include "load_save.h"
+<<<<<<< HEAD
 #include "mail.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "main.h"
 #include "match_call.h"
 #include "menu.h"
@@ -51,7 +54,10 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+<<<<<<< HEAD
 #include "text_window.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "tilesets.h"
 #include "tv.h"
 #include "wallclock.h"
@@ -109,11 +115,14 @@ static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
 EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 
+<<<<<<< HEAD
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
@@ -163,6 +172,7 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
 #else
 static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer);
 #endif //FREE_LINK_BATTLE_RECORDS
+<<<<<<< HEAD
 static void Task_ElevatorShake(u8 taskId);
 static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
 static void Task_AnimateElevatorWindowView(u8 taskId);
@@ -172,6 +182,8 @@ static u16 SampleResortGorgeousMon(void);
 static u16 SampleResortGorgeousReward(void);
 static void Task_ShakeScreen(u8 taskId);
 static void Task_EndScreenShake(u8 taskId);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static const u8 sText_BigGuy[] = _("Big guy");
 static const u8 sText_BigGirl[] = _("Big girl");
@@ -1019,6 +1031,7 @@ void FieldShowRegionMap(void)
 
 static bool32 IsBuildingPCTile(u32 tileId)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FALSE;
 
@@ -1031,13 +1044,19 @@ static bool32 IsBuildingPCTileFrlg(u32 tileId)
         return gMapHeader.mapLayout->primaryTileset == &gTileset_BuildingFrlg && (tileId == METATILE_BuildingFrlg_PCOn || tileId == METATILE_BuildingFrlg_PCOff);
 
     return FALSE;
+=======
+    return (MetatileBehavior_IsPC(UNPACK_BEHAVIOR(GetMetatileAttributesById(tileId))));
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static bool32 IsPlayerHousePCTile(u32 tileId)
 {
+<<<<<<< HEAD
     if (IS_FRLG)
         return FALSE;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return gMapHeader.mapLayout->secondaryTileset == &gTileset_BrendansMaysHouse
         && (tileId == METATILE_BrendansMaysHouse_BrendanPC_On
             || tileId == METATILE_BrendansMaysHouse_BrendanPC_Off
@@ -1045,6 +1064,7 @@ static bool32 IsPlayerHousePCTile(u32 tileId)
             || tileId == METATILE_BrendansMaysHouse_MayPC_Off);
 }
 
+<<<<<<< HEAD
 static bool32 IsPlayerHousePCTileFrlg(u32 tileId)
 {
     if (IS_FRLG)
@@ -1054,6 +1074,8 @@ static bool32 IsPlayerHousePCTileFrlg(u32 tileId)
     return FALSE;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static bool8 IsPlayerInFrontOfPC(void)
 {
     s16 x, y;
@@ -1062,10 +1084,14 @@ static bool8 IsPlayerInFrontOfPC(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     tileInFront = MapGridGetMetatileIdAt(x, y);
 
+<<<<<<< HEAD
     return IsBuildingPCTile(tileInFront)
         || IsBuildingPCTileFrlg(tileInFront)
         || IsPlayerHousePCTile(tileInFront)
         || IsPlayerHousePCTileFrlg(tileInFront);
+=======
+    return IsBuildingPCTile(tileInFront) || IsPlayerHousePCTile(tileInFront);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 // Task data for Task_PCTurnOnEffect and Task_LotteryCornerComputerEffect
@@ -1145,25 +1171,39 @@ static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
     {
         // Screen is on, set it off
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+<<<<<<< HEAD
             metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOff : METATILE_Building_PC_Off;
+=======
+            metatileId = METATILE_Building_PC_Off;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+<<<<<<< HEAD
         else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
             metatileId = METATILE_GenericBuilding1_PlayersPCOff;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     else
     {
         // Screen is off, set it on
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+<<<<<<< HEAD
             metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOn : METATILE_Building_PC_On;
+=======
+            metatileId = METATILE_Building_PC_On;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_BrendanPC_On;
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_On;
+<<<<<<< HEAD
         else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
             metatileId = METATILE_GenericBuilding1_PlayersPCOn;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
 }
@@ -1204,13 +1244,20 @@ static void PCTurnOffEffect(void)
     }
 
     if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+<<<<<<< HEAD
         metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOff : METATILE_Building_PC_Off;
+=======
+        metatileId = METATILE_Building_PC_Off;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
     else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+<<<<<<< HEAD
     else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
         metatileId = METATILE_GenericBuilding1_PlayersPCOff;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
     DrawWholeMapView();
@@ -2493,6 +2540,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
+<<<<<<< HEAD
     case SCROLL_MULTI_BADGES:
         task->tMaxItemsOnScreen = 4;
         task->tNumItems = 9;
@@ -2515,6 +2563,8 @@ void ShowScrollableMultichoice(void)
         task->tScrollOffset = sElevatorScroll;
         task->tSelectedRow = sElevatorCursorPos;
         break;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;
         DestroyTask(taskId);
@@ -2675,6 +2725,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Underpowered,
         gText_WhenInDanger,
         gText_Exit
+<<<<<<< HEAD
     },
     [SCROLL_MULTI_BADGES] =
     {
@@ -2702,6 +2753,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_2F,
         gText_1F,
         gText_Exit,
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 };
 
@@ -2933,9 +2986,15 @@ void SetBattleTowerLinkPlayerGfx(void)
     for (i = 0; i < 2; i++)
     {
         if (gLinkPlayers[i].gender == MALE)
+<<<<<<< HEAD
             VarSet(VAR_OBJ_GFX_ID_F - i, PLAYER_AVATAR_GFX_MALE_NORMAL);
         else
             VarSet(VAR_OBJ_GFX_ID_F - i, PLAYER_AVATAR_GFX_FEMALE_NORMAL);
+=======
+            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_BRENDAN_NORMAL);
+        else
+            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
@@ -3421,6 +3480,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
 
     CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK;
+<<<<<<< HEAD
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG))
     {
         gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
@@ -3431,6 +3491,10 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
         gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
         gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
     }
+=======
+    gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
+    gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gFieldEffectArguments[3] = sDeoxysRockCoords[rockLevel][0];
     gFieldEffectArguments[4] = sDeoxysRockCoords[rockLevel][1];
 
@@ -3457,8 +3521,12 @@ static void WaitForDeoxysRockMovement(u8 taskId)
 void IncrementBirthIslandRockStepCount(void)
 {
     u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
+<<<<<<< HEAD
     if ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
      || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG)))
+=======
+    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (++stepCount > 99)
             VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
@@ -4610,6 +4678,7 @@ void SetAbility(void)
     u32 ability = gSpecialVar_Result;
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ABILITY_NUM, &ability);
 }
+<<<<<<< HEAD
 
 void DaisyMassageServices(void)
 {
@@ -5790,3 +5859,5 @@ bool8 CheckAddCoins(void)
     else
         return TRUE;
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

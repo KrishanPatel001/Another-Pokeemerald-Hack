@@ -1186,6 +1186,7 @@ static void BlendAnimPalette_BattleDome_FloorLightsNoBlend(u16 timer)
             sSecondaryTilesetAnimCallback = NULL;
     }
 }
+<<<<<<< HEAD
 
 // FRLG anims
 
@@ -1432,3 +1433,5 @@ void InitTilesetAnim_CeladonGym(void)
     sSecondaryTilesetAnimCallback = TilesetAnim_CeladonGym;
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

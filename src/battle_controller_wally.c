@@ -32,6 +32,7 @@
 #include "constants/trainers.h"
 #include "constants/rgb.h"
 
+<<<<<<< HEAD
 static void WallyHandleDrawTrainerPic(enum BattlerId battler);
 static void WallyHandleTrainerSlide(enum BattlerId battler);
 static void WallyHandleChooseAction(enum BattlerId battler);
@@ -47,6 +48,23 @@ static void CompleteOnChosenItem(enum BattlerId battler);
 static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler);
 
 static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
+=======
+static void WallyHandleDrawTrainerPic(u32 battler);
+static void WallyHandleTrainerSlide(u32 battler);
+static void WallyHandleChooseAction(u32 battler);
+static void WallyHandleChooseMove(u32 battler);
+static void WallyHandleChooseItem(u32 battler);
+static void WallyHandleFaintingCry(u32 battler);
+static void WallyHandleIntroTrainerBallThrow(u32 battler);
+static void WallyHandleDrawPartyStatusSummary(u32 battler);
+static void WallyHandleEndLinkBattle(u32 battler);
+
+static void WallyBufferRunCommand(u32 battler);
+static void CompleteOnChosenItem(u32 battler);
+static void Intro_WaitForShinyAnimAndHealthbox(u32 battler);
+
+static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,
@@ -103,7 +121,11 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId 
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
+<<<<<<< HEAD
 void SetControllerToWally(enum BattlerId battler)
+=======
+void SetControllerToWally(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerBattleController[battler] = BATTLE_CONTROLLER_WALLY;
     gBattlerControllerEndFuncs[battler] = WallyBufferExecCompleted;
@@ -114,7 +136,11 @@ void SetControllerToWally(enum BattlerId battler)
     gBattleStruct->wallyMoveFrames = 0;
 }
 
+<<<<<<< HEAD
 static void WallyBufferRunCommand(enum BattlerId battler)
+=======
+static void WallyBufferRunCommand(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsBattleControllerActiveOnLocal(battler))
     {
@@ -125,7 +151,11 @@ static void WallyBufferRunCommand(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void WallyHandleActions(enum BattlerId battler)
+=======
+static void WallyHandleActions(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     switch (gBattleStruct->wallyBattleState)
     {
@@ -185,7 +215,11 @@ static void WallyHandleActions(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void OpenBagAfterPaletteFade(enum BattlerId battler)
+=======
+static void OpenBagAfterPaletteFade(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (!gPaletteFade.active)
     {
@@ -196,7 +230,11 @@ static void OpenBagAfterPaletteFade(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void CompleteOnChosenItem(enum BattlerId battler)
+=======
+static void CompleteOnChosenItem(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
@@ -205,7 +243,11 @@ static void CompleteOnChosenItem(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
+=======
+static void Intro_TryShinyAnimShowHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive)
@@ -237,7 +279,11 @@ static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
+=======
+static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool32 healthboxAnimDone = FALSE;
 
@@ -262,7 +308,11 @@ static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 void WallyBufferExecCompleted(enum BattlerId battler)
+=======
+void WallyBufferExecCompleted(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattlerControllerFuncs[battler] = WallyBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -280,21 +330,33 @@ void WallyBufferExecCompleted(enum BattlerId battler)
 
 #define sSpeedX data[0]
 
+<<<<<<< HEAD
 static void WallyHandleDrawTrainerPic(enum BattlerId battler)
+=======
+static void WallyHandleDrawTrainerPic(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleDrawTrainerPic(battler, TRAINER_PIC_BACK_WALLY, FALSE,
                                        80, 80 + 4 * (8 - gTrainerBacksprites[TRAINER_PIC_BACK_WALLY].coordinates.size),
                                        30);
 }
 
+<<<<<<< HEAD
 static void WallyHandleTrainerSlide(enum BattlerId battler)
+=======
+static void WallyHandleTrainerSlide(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleTrainerSlide(battler, TRAINER_PIC_BACK_WALLY);
 }
 
 #undef sSpeedX
 
+<<<<<<< HEAD
 static void HandleChooseActionAfterDma3(enum BattlerId battler)
+=======
+static void HandleChooseActionAfterDma3(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (!IsDma3ManagerBusyWithBgCopy())
     {
@@ -304,7 +366,11 @@ static void HandleChooseActionAfterDma3(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void WallyHandleChooseAction(enum BattlerId battler)
+=======
+static void WallyHandleChooseAction(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
 
@@ -319,7 +385,11 @@ static void WallyHandleChooseAction(enum BattlerId battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
+<<<<<<< HEAD
 static void WallyHandleChooseMove(enum BattlerId battler)
+=======
+static void WallyHandleChooseMove(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     switch (gBattleStruct->wallyMovesState)
     {
@@ -347,7 +417,11 @@ static void WallyHandleChooseMove(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 static void WallyHandleChooseItem(enum BattlerId battler)
+=======
+static void WallyHandleChooseItem(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = OpenBagAfterPaletteFade;
@@ -356,7 +430,11 @@ static void WallyHandleChooseItem(enum BattlerId battler)
 
 // All of the other controllers use CRY_MODE_FAINT.
 // Wally's Pokémon during the tutorial is never intended to faint, so that's probably why it's different here.
+<<<<<<< HEAD
 static void WallyHandleFaintingCry(enum BattlerId battler)
+=======
+static void WallyHandleFaintingCry(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u16 species = GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES);
 
@@ -364,18 +442,30 @@ static void WallyHandleFaintingCry(enum BattlerId battler)
     BtlController_Complete(battler);
 }
 
+<<<<<<< HEAD
 static void WallyHandleIntroTrainerBallThrow(enum BattlerId battler)
+=======
+static void WallyHandleIntroTrainerBallThrow(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     const u16 *trainerPal = gTrainerBacksprites[TRAINER_PIC_BACK_WALLY].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
 }
 
+<<<<<<< HEAD
 static void WallyHandleDrawPartyStatusSummary(enum BattlerId battler)
+=======
+static void WallyHandleDrawPartyStatusSummary(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_PLAYER, FALSE);
 }
 
+<<<<<<< HEAD
 static void WallyHandleEndLinkBattle(enum BattlerId battler)
+=======
+static void WallyHandleEndLinkBattle(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleOutcome = gBattleResources->bufferA[battler][1];
     FadeOutMapMusic(5);

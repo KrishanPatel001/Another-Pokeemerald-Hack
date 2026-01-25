@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 ASSUMPTIONS
 {
     ASSUME(MoveMakesContact(MOVE_BREAKING_SWIPE));
@@ -310,3 +311,6 @@ SINGLE_BATTLE_TEST("Pickpocket does not prevent King's Rock or Razor Fang flinch
         EXPECT(player->item == ITEM_NONE);
     }
 }
+=======
+TO_DO_BATTLE_TEST("TODO: Write Pickpocket (Ability) test titles")
+>>>>>>> 11d8f44022 (Updated to upcoming)

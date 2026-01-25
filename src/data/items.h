@@ -13825,8 +13825,12 @@ const struct ItemInfo gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
+<<<<<<< HEAD
         .fieldUseFunc = ItemUseOutOfBattle_Bike,
         .secondaryId = STANDARD_BIKE,
+=======
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .iconPic = gItemIcon_Bicycle,
         .iconPalette = gItemIconPalette_Bicycle,
     },

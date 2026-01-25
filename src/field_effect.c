@@ -61,9 +61,13 @@ static void HallOfFameRecordEffect_WaitForBallPlacement(struct Task *);
 static void HallOfFameRecordEffect_WaitForBallFlashing(struct Task *);
 static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *);
 static void CreateHofMonitorSprite(s16, s16, s16, bool8);
+<<<<<<< HEAD
 static void CreateHofMonitorSpriteFrlg(s32 x, s32 y);
 static void SpriteCB_HallOfFameMonitor(struct Sprite *);
 static void SpriteCB_HallOfFameMonitorFrlg(struct Sprite *sprite);
+=======
+static void SpriteCB_HallOfFameMonitor(struct Sprite *);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static u8 CreateGlowingPokeballsEffect(s16, s16, s16, bool16);
 static void SpriteCB_PokeballGlowEffect(struct Sprite *);
@@ -279,8 +283,11 @@ static const u32 sPokecenterMonitor1_Gfx[] = INCBIN_U32("graphics/field_effects/
 static const u32 sHofMonitorBig_Gfx[] = INCBIN_U32("graphics/field_effects/pics/hof_monitor_big.4bpp");
 static const u8 sHofMonitorSmall_Gfx[] = INCBIN_U8("graphics/field_effects/pics/hof_monitor_small.4bpp");
 static const u16 sHofMonitor_Pal[16] = INCBIN_U16("graphics/field_effects/palettes/hof_monitor.gbapal");
+<<<<<<< HEAD
 static const u16 sHofMonitor_Gfx_Frlg[] = INCBIN_U16("graphics/field_effects/pics/hof_monitor_frlg.4bpp");
 static const u16 sHofMonitor_Pal_Frlg[] = INCBIN_U16("graphics/field_effects/pics/hof_monitor_frlg.gbapal");
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Graphics for the lights streaking past your Pokémon when it uses a field move.
 static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCBIN_U32("graphics/field_effects/pics/field_move_streaks.4bpp");
@@ -396,12 +403,15 @@ const struct SpritePalette gSpritePalette_HofMonitor =
     .tag = FLDEFF_PAL_TAG_HOF_MONITOR
 };
 
+<<<<<<< HEAD
 const struct SpritePalette gSpritePalette_HofMonitor_Frlg =
 {
     .data = sHofMonitor_Pal_Frlg,
     .tag = FLDEFF_PAL_TAG_HOF_MONITOR
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const struct OamData sOam_32x16 =
 {
     .y = 0,
@@ -437,6 +447,7 @@ static const struct SpriteFrameImage sPicTable_HofMonitorSmall[] =
     {.data = sHofMonitorSmall_Gfx, .size = 0x200} // the macro breaks down here
 };
 
+<<<<<<< HEAD
 static const struct SpriteFrameImage sPicTable_HofMonitor_Frlg[] = {
     {sHofMonitor_Gfx_Frlg + 0x00, 0x80},
     {sHofMonitor_Gfx_Frlg + 0x40, 0x80},
@@ -444,6 +455,8 @@ static const struct SpriteFrameImage sPicTable_HofMonitor_Frlg[] = {
     {sHofMonitor_Gfx_Frlg + 0xC0, 0x80}
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 /*
 [0_][] <-1    24x16
 [2 ][] <-3
@@ -561,6 +574,7 @@ static const union AnimCmd *const sAnims_HofMonitor[] =
     sAnim_Static
 };
 
+<<<<<<< HEAD
 static const union AnimCmd sAnim_HofMonitorFrlg[] = {
     ANIMCMD_FRAME(3, 8),
     ANIMCMD_FRAME(2, 8),
@@ -578,6 +592,8 @@ static const union AnimCmd *const sAnims_HofMonitorFrlg[] = {
     sAnim_HofMonitorFrlg
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
 {
     .tileTag = TAG_NONE,
@@ -618,6 +634,7 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorSmall =
     .callback = SpriteCB_HallOfFameMonitor
 };
 
+<<<<<<< HEAD
 static const struct SpriteTemplate sSpriteTemplate_HofMonitor = {
     .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
@@ -628,6 +645,8 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitor = {
     .callback = SpriteCB_HallOfFameMonitorFrlg
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void (*const sPokecenterHealEffectFuncs[])(struct Task *) =
 {
     PokecenterHealEffect_Init,
@@ -1151,7 +1170,11 @@ bool8 FldEff_HallOfFameRecord(void)
     task = &gTasks[CreateTask(Task_HallOfFameRecord, 0xff)];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 117;
+<<<<<<< HEAD
     task->tFirstBallY = IS_FRLG ? 60 : 52;
+=======
+    task->tFirstBallY = 52;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     return FALSE;
 }
 
@@ -1167,6 +1190,7 @@ static void HallOfFameRecordEffect_Init(struct Task *task)
     u8 taskId;
     task->tState++;
     task->tBallSpriteId = CreateGlowingPokeballsEffect(task->tNumMons, task->tFirstBallX, task->tFirstBallY, FALSE);
+<<<<<<< HEAD
     if (!IS_FRLG)
     {
         taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
@@ -1176,14 +1200,25 @@ static void HallOfFameRecordEffect_Init(struct Task *task)
         CreateHofMonitorSprite(taskId, 168, 8, TRUE);
         CreateHofMonitorSprite(taskId, 200, 8, TRUE);
     }
+=======
+    taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
+    CreateHofMonitorSprite(taskId, 120, 24, FALSE);
+    CreateHofMonitorSprite(taskId, 40, 8, TRUE);
+    CreateHofMonitorSprite(taskId, 72, 8, TRUE);
+    CreateHofMonitorSprite(taskId, 168, 8, TRUE);
+    CreateHofMonitorSprite(taskId, 200, 8, TRUE);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 static void HallOfFameRecordEffect_WaitForBallPlacement(struct Task *task)
 {
     if (gSprites[task->tBallSpriteId].sState > 1)
     {
+<<<<<<< HEAD
         if (IS_FRLG)
             CreateHofMonitorSpriteFrlg(120, 25);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         task->tStartHofFlash++;
         task->tState++;
     }
@@ -1202,10 +1237,14 @@ static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *task)
     if (gSprites[task->tBallSpriteId].sState > 6)
     {
         DestroySprite(&gSprites[task->tBallSpriteId]);
+<<<<<<< HEAD
         if (IS_FRLG)
             FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD_FRLG);
         else
             FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
+=======
+        FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         DestroyTask(FindTaskIdByFunc(Task_HallOfFameRecord));
     }
 }
@@ -1389,11 +1428,14 @@ static void CreateHofMonitorSprite(s16 taskId, s16 x, s16 y, bool8 isSmallMonito
     gSprites[spriteId].data[0] = taskId;
 }
 
+<<<<<<< HEAD
 static void CreateHofMonitorSpriteFrlg(s32 x, s32 y)
 {
     CreateSpriteAtEnd(&sSpriteTemplate_HofMonitor, x, y, 0);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 {
     if (gTasks[sprite->data[0]].tStartHofFlash)
@@ -1411,12 +1453,15 @@ static void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
     }
 }
 
+<<<<<<< HEAD
 static void SpriteCB_HallOfFameMonitorFrlg(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         FieldEffectFreeGraphicsResources(sprite);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #undef tState
 #undef tNumMons
 #undef tFirstBallX
@@ -1697,18 +1742,24 @@ static bool8 FallWarpEffect_CameraShake(struct Task *task)
 
 static bool8 FallWarpEffect_End(struct Task *task)
 {
+<<<<<<< HEAD
     s16 x, y;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gPlayerAvatar.preventStep = FALSE;
     UnlockPlayerFieldControls();
     CameraObjectReset();
     UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
+<<<<<<< HEAD
     PlayerGetDestCoords(&x, &y);
     if (MetatileBehavior_IsSurfableInSeafoamIslands(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
     {
         VarSet(VAR_TEMP_1, 1);
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
     }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
     FollowerNPC_WarpSetEnd();
 
@@ -2723,7 +2774,11 @@ static void TeleportWarpOutFieldEffect_End(struct Task *task)
 
         if (BGMusicStopped() == TRUE)
         {
+<<<<<<< HEAD
+            SetWarpDestinationForTeleport();
+=======
             SetWarpDestinationToLastHealLocation();
+>>>>>>> 11d8f44022 (Updated to upcoming)
             WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = FieldCallback_TeleportWarpIn;
@@ -4570,6 +4625,7 @@ static void UseVsSeeker_CleanUpFieldEffect(struct Task *task)
     FieldEffectActiveListRemove(FLDEFF_USE_VS_SEEKER);
     DestroyTask(FindTaskIdByFunc(Task_FldEffUseVsSeeker));
 }
+<<<<<<< HEAD
 
 static void Task_PhotoFlash(u8 taskId)
 {
@@ -4588,3 +4644,5 @@ u32 FldEff_PhotoFlash(void)
 
     return 0;
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

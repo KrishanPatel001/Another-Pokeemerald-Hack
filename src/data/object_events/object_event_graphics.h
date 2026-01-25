@@ -467,6 +467,7 @@ const u32 gFieldEffectObjectPic_CaveDust[] = INCBIN_U32("graphics/field_effects/
 const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effects/palettes/cave_dust.gbapal");
 
 const u32 gObjectEventPic_ApricornTree[] = INCBIN_U32("graphics/object_events/pics/misc/apricorn_tree.4bpp");
+<<<<<<< HEAD
 
 #if IS_FRLG
 
@@ -635,3 +636,5 @@ const u16 gObjectEventPic_PidgeyOld[] = INCBIN_U16("graphics/object_events/pics/
 const u16 gObjectEventPic_ClefairyOld[] = INCBIN_U16("graphics/object_events/pics/pokemon_old/clefairy.4bpp");
 
 #endif // IS_FRLG
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

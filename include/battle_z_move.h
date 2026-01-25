@@ -12,6 +12,7 @@ struct SignatureZMove
 };
 
 bool32 IsZMove(enum Move move);
+<<<<<<< HEAD
 bool32 CanUseZMove(enum BattlerId battler);
 enum Move GetUsableZMove(enum BattlerId battler, enum Move move);
 void ActivateZMove(enum BattlerId battler);
@@ -22,6 +23,18 @@ enum Move GetSignatureZMove(enum Move move, u32 species, enum Item item);
 bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler);
 void SetZEffect(void);
 void AssignUsableZMoves(enum BattlerId battler, enum Move *moves);
+=======
+bool32 CanUseZMove(u32 battler);
+enum Move GetUsableZMove(u32 battler, enum Move move);
+void ActivateZMove(u32 battler);
+bool32 IsViableZMove(u32 battler, enum Move move);
+bool32 TryChangeZTrigger(u32 battler, u32 moveIndex);
+enum Move GetTypeBasedZMove(enum Move move);
+enum Move GetSignatureZMove(enum Move move, u32 species, enum Item item);
+bool32 MoveSelectionDisplayZMove(enum Move zmove, u32 battler);
+void SetZEffect(void);
+void AssignUsableZMoves(u32 battler, enum Move *moves);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u32 GetZMovePower(enum Move move);
 
 #endif // GUARD_BATTLE_Z_MOVE_H

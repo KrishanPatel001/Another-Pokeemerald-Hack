@@ -560,8 +560,12 @@ struct FeatherDanceData
 
 static void AnimFallingFeather(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
     u8 matrixNum, sinIndex;
+=======
+    u8 battler, matrixNum, sinIndex;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     s16 spriteCoord;
 
     struct FeatherDanceData *data = (struct FeatherDanceData *)sprite->data;

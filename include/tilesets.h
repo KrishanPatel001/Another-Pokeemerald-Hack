@@ -8,6 +8,7 @@ extern const struct Tileset *const gTilesetPointer_SecretBase;
 extern const struct Tileset *const gTilesetPointer_SecretBaseRedCave;
 
 extern const struct Tileset gTileset_Building;
+<<<<<<< HEAD
 extern const struct Tileset gTileset_BuildingFrlg;
 extern const struct Tileset gTileset_BrendansMaysHouse;
 extern const struct Tileset gTileset_GenericBuilding1;
@@ -60,5 +61,8 @@ extern const struct Tileset gTileset_SilphCo;
 extern const struct Tileset gTileset_SSAnne;
 extern const struct Tileset gTileset_SeaCottage;
 extern const struct Tileset gTileset_TrainerTower;
+=======
+extern const struct Tileset gTileset_BrendansMaysHouse;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #endif //GUARD_tilesets_H

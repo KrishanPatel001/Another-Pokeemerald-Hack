@@ -191,10 +191,17 @@ static void SpriteCB_StatusSummaryBalls_Enter(struct Sprite *);
 static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *);
 static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *);
 
+<<<<<<< HEAD
 static u8 GetStatusIconForBattlerId(u8, enum BattlerId);
 static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u16);
 static u8 GetScaledExpFraction(s32, s32, s32, u8);
 static void MoveBattleBarGraphically(enum BattlerId, u8);
+=======
+static u8 GetStatusIconForBattlerId(u8, u8);
+static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u16);
+static u8 GetScaledExpFraction(s32, s32, s32, u8);
+static void MoveBattleBarGraphically(u8, u8);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static u8 CalcBarFilledPixels(s32, s32, s32, s32 *, u8 *, u8);
 
 static void SpriteCb_AbilityPopUp(struct Sprite *);
@@ -594,7 +601,11 @@ static const union TextColor sHealthBoxTextColor =
 
 // This function is here to cover a specific case - one player's mon in a 2 vs 1 double battle. In this scenario - display singles layout.
 // The same goes for a 2 vs 1 where opponent has only one pokemon.
+<<<<<<< HEAD
 enum BattleCoordTypes GetBattlerCoordsIndex(enum BattlerId battler)
+=======
+enum BattleCoordTypes GetBattlerCoordsIndex(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT && gPlayerPartyCount == 1 && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         return BATTLE_COORDS_SINGLES;
@@ -606,7 +617,11 @@ enum BattleCoordTypes GetBattlerCoordsIndex(enum BattlerId battler)
         return BATTLE_COORDS_SINGLES;
 }
 
+<<<<<<< HEAD
 u8 CreateBattlerHealthboxSprites(enum BattlerId battler)
+=======
+u8 CreateBattlerHealthboxSprites(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s16 data6 = 0;
     u8 healthboxLeftSpriteId, healthboxRightSpriteId;
@@ -755,7 +770,11 @@ static void SpriteCB_HealthBoxOther(struct Sprite *sprite)
     sprite->y2 = gSprites[healthboxMainSpriteId].y2;
 }
 
+<<<<<<< HEAD
 void SetBattleBarStruct(enum BattlerId battler, u8 healthboxSpriteId, s32 maxVal, s32 oldVal, s32 receivedValue)
+=======
+void SetBattleBarStruct(u8 battler, u8 healthboxSpriteId, s32 maxVal, s32 oldVal, s32 receivedValue)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleSpritesDataPtr->battleBars[battler].healthboxSpriteId = healthboxSpriteId;
     gBattleSpritesDataPtr->battleBars[battler].maxValue = maxVal;
@@ -809,7 +828,13 @@ static void TryToggleHealboxVisibility(u32 priority, u32 healthboxLeftSpriteId, 
 
 void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
 {
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    s32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         u8 healthboxLeftSpriteId = gHealthboxSpriteIds[i];
         u8 healthboxRightSpriteId = gSprites[gHealthboxSpriteIds[i]].oam.affineParam;
@@ -842,7 +867,11 @@ static const s16 sBattlerHealthboxCoords[BATTLE_COORDS_COUNT][MAX_BATTLERS_COUNT
     },
 };
 
+<<<<<<< HEAD
 void GetBattlerHealthboxCoords(enum BattlerId battler, s16 *x, s16 *y)
+=======
+void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum BattlerPosition position = GetBattlerPosition(battler);
     enum BattleCoordTypes index = GetBattlerCoordsIndex(battler);
@@ -851,7 +880,11 @@ void GetBattlerHealthboxCoords(enum BattlerId battler, s16 *x, s16 *y)
     *y = sBattlerHealthboxCoords[index][position][1];
 }
 
+<<<<<<< HEAD
 void InitBattlerHealthboxCoords(enum BattlerId battler)
+=======
+void InitBattlerHealthboxCoords(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s16 x, y;
 
@@ -862,7 +895,11 @@ void InitBattlerHealthboxCoords(enum BattlerId battler)
 static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
 {
     u8 text[16];
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
+=======
+    u8 battler = gSprites[healthboxSpriteId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 spriteId = gSprites[healthboxSpriteId].oam.affineParam;
 
     // Don't print Lv char if mon has a gimmick with an indicator active.
@@ -937,7 +974,11 @@ static void UpdateOpponentHpTextDoubles(u32 healthboxSpriteId, u32 barSpriteId, 
 {
     u8 text[32], *txtPtr;
     u32 i, var;
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
+=======
+    u32 battler = gSprites[healthboxSpriteId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (gBattleSpritesDataPtr->battlerData[battler].hpNumbersNoBars) // don't print text if only bars are visible
     {
@@ -983,7 +1024,11 @@ static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s16 value, u32 ma
 {
     u8 text[32];
     u32 var, i;
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
+=======
+    u32 battler = gSprites[healthboxSpriteId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(sEmptyWhiteText_GrayHighlight));
     if (gBattleSpritesDataPtr->battlerData[battler].hpNumbersNoBars) // don't print text if only bars are visible
@@ -1007,7 +1052,11 @@ static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s16 value, u32 ma
 
 void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
 {
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
+=======
+    u32 battler = gSprites[healthboxSpriteId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     switch (GetBattlerCoordsIndex(battler))
     {
     default:
@@ -1034,7 +1083,11 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
 static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
 {
     u32 barSpriteId = gSprites[healthboxSpriteId].data[5];
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
+=======
+    u32 battler = gSprites[healthboxSpriteId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (IsOnPlayerSide(battler))
     {
@@ -1124,9 +1177,15 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 
 void SwapHpBarsWithHpText(void)
 {
+<<<<<<< HEAD
     u32 healthBarSpriteId;
 
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    u32 healthBarSpriteId, i;
+
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         struct Pokemon *mon = GetBattlerMon(i);
         if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
@@ -1203,7 +1262,11 @@ void SwapHpBarsWithHpText(void)
 #define tIsBattleStart          data[10]
 #define tBlend                  data[15]
 
+<<<<<<< HEAD
 u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
+=======
+u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     bool8 isOpponent;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
@@ -1429,7 +1492,11 @@ void Task_HidePartyStatusSummary(u8 taskId)
     u8 ballIconSpriteIds[PARTY_SIZE];
     bool8 isBattleStart;
     u8 summaryBarSpriteId;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     s32 i;
 
     isBattleStart = gTasks[taskId].tIsBattleStart;
@@ -1498,7 +1565,11 @@ static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId)
     u8 ballIconSpriteIds[PARTY_SIZE];
     s32 i;
 
+<<<<<<< HEAD
     enum BattlerId battler = gTasks[taskId].tBattler;
+=======
+    u8 battler = gTasks[taskId].tBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (--gTasks[taskId].tBlend == -1)
     {
         u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
@@ -1536,7 +1607,11 @@ static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
     s32 i;
+<<<<<<< HEAD
     enum BattlerId battler = gTasks[taskId].tBattler;
+=======
+    u8 battler = gTasks[taskId].tBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (--gTasks[taskId].tBlend >= 0)
     {
@@ -1665,7 +1740,11 @@ static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *sprite)
     sprite->y2 = gSprites[barSpriteId].y2;
 }
 
+<<<<<<< HEAD
 void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
+=======
+static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 healthboxSpriteId2 = gSprites[healthboxSpriteId].oam.affineParam;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -1686,9 +1765,12 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && StringCompare(nickname, GetSpeciesName(species)) == 0)
         gender = 100;
 
+<<<<<<< HEAD
     if (GetBattlerSide(gSprites[healthboxSpriteId].hMain_Battler) == B_SIDE_OPPONENT && IsGhostBattleWithoutScope())
         gender = 100;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     switch (gender)
     {
     default:
@@ -1726,12 +1808,20 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     gSprites[healthboxSpriteId2].data[1] = savedValue2;
 }
 
+<<<<<<< HEAD
 void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
 {
     enum BattlerId battler;
     u8 healthBarSpriteId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_CATCH_TUTORIAL)
+=======
+static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
+{
+    u8 battler, healthBarSpriteId;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         return;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         return;
@@ -1739,8 +1829,11 @@ void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
     battler = gSprites[healthboxSpriteId].hMain_Battler;
     if (IsOnPlayerSide(battler))
         return;
+<<<<<<< HEAD
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT && IsGhostBattleWithoutScope())
         return;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
         return;
 
@@ -1755,8 +1848,12 @@ void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 {
     s32 i;
+<<<<<<< HEAD
     enum BattlerId battler;
     u8 healthBarSpriteId;
+=======
+    u8 battler, healthBarSpriteId;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 status, pltAdder;
     const u8 *statusGfxPtr;
     s16 tileNumAdder;
@@ -1843,7 +1940,11 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     TryAddPokeballIconToHealthbox(healthboxSpriteId, FALSE);
 }
 
+<<<<<<< HEAD
 static u8 GetStatusIconForBattlerId(u8 statusElementId, enum BattlerId battler)
+=======
+static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 ret = statusElementId;
 
@@ -1953,7 +2054,11 @@ static void UpdateLeftNoOfBallsTextOnHealthbox(u8 healthboxSpriteId)
 
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId)
 {
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
+=======
+    u32 battler = gSprites[healthboxSpriteId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     s32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
     s32 currHp = GetMonData(mon, MON_DATA_HP);
 
@@ -2033,7 +2138,11 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 #define B_EXPBAR_PIXELS 64
 #define B_HEALTHBAR_PIXELS 48
 
+<<<<<<< HEAD
 s32 MoveBattleBar(enum BattlerId battler, u8 healthboxSpriteId, u8 whichBar, u8 unused)
+=======
+s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 unused)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 currentBarValue;
 
@@ -2071,7 +2180,11 @@ s32 MoveBattleBar(enum BattlerId battler, u8 healthboxSpriteId, u8 whichBar, u8 
     return currentBarValue;
 }
 
+<<<<<<< HEAD
 static void MoveBattleBarGraphically(enum BattlerId battler, u8 whichBar)
+=======
+static void MoveBattleBarGraphically(u8 battler, u8 whichBar)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 array[8];
     u8 level;
@@ -2475,7 +2588,11 @@ static void TextIntoAbilityPopUp(void *dest, u8 *windowTileData, s32 windowWidth
     #undef PIXELS
 }
 
+<<<<<<< HEAD
 static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTileData2, u32 x, u32 y, u32 bgColor, u32 fgColor, u32 shadowColor, u32 printNickname, enum BattlerId battler)
+=======
+static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTileData2, u32 x, u32 y, u32 bgColor, u32 fgColor, u32 shadowColor, u32 printNickname, u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 windowId, fontId;
     u8 *windowTileData = AddTextPrinterAndCreateWindowOnAbilityPopUp(str, x, y, bgColor, fgColor, shadowColor, &windowId);
@@ -2501,7 +2618,11 @@ static void PrintOnAbilityPopUp(const u8 *str, u8 *spriteTileData1, u8 *spriteTi
     RemoveWindow(windowId);
 }
 
+<<<<<<< HEAD
 static void PrintBattlerOnAbilityPopUp(enum BattlerId battler, u8 spriteId1, u8 spriteId2)
+=======
+static void PrintBattlerOnAbilityPopUp(u8 battler, u8 spriteId1, u8 spriteId2)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 totalChar = 0, lastChar;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
@@ -2546,7 +2667,11 @@ static void PrintAbilityOnAbilityPopUp(enum Ability ability, u8 spriteId1, u8 sp
 static inline bool32 IsAnyAbilityPopUpActive(void)
 {
     u32 activeAbilityPopUps = 0;
+<<<<<<< HEAD
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+    for (u32 battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (gBattleStruct->battlerState[battler].activeAbilityPopUps)
             activeAbilityPopUps++;
@@ -2555,7 +2680,11 @@ static inline bool32 IsAnyAbilityPopUpActive(void)
     return activeAbilityPopUps;
 }
 
+<<<<<<< HEAD
 void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isDoubleBattle)
+=======
+void CreateAbilityPopUp(u8 battler, enum Ability ability, bool32 isDoubleBattle)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 *spriteIds;
     u32 xSlide, tileTag;
@@ -2618,7 +2747,11 @@ void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isD
     PrintAbilityOnAbilityPopUp(ability, spriteIds[0], spriteIds[1]);
 }
 
+<<<<<<< HEAD
 void UpdateAbilityPopup(enum BattlerId battler)
+=======
+void UpdateAbilityPopup(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 *spriteIds = gBattleStruct->abilityPopUpSpriteIds[battler];
     enum Ability ability = (gBattleScripting.abilityPopupOverwrite) ? gBattleScripting.abilityPopupOverwrite
@@ -2693,7 +2826,11 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     }
 }
 
+<<<<<<< HEAD
 void DestroyAbilityPopUp(enum BattlerId battler)
+=======
+void DestroyAbilityPopUp(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (gBattleStruct->battlerState[battler].activeAbilityPopUps)
     {
@@ -2706,7 +2843,11 @@ static void Task_FreeAbilityPopUpGfx(u8 taskId)
 {
     if (!IsAnyAbilityPopUpActive())
     {
+<<<<<<< HEAD
         for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+        for (u32 battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             if (IndexOfSpriteTileTag(TAG_ABILITY_POP_UP_PLAYER1 + battler) != 0xFF)
                 FreeSpriteTilesByTag(TAG_ABILITY_POP_UP_PLAYER1 + battler);

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 ASSUMPTIONS
 {
     ASSUME(GetMoveEffect(MOVE_SYNCHRONOISE) == EFFECT_SYNCHRONOISE);
@@ -12,6 +13,8 @@ ASSUMPTIONS
     ASSUME(GetSpeciesType(SPECIES_ARCANINE, 1) == TYPE_FIRE);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 DOUBLE_BATTLE_TEST("Synchronoise hits all Pokemon that share a type with the attacker")
 {
     GIVEN {
@@ -84,6 +87,7 @@ DOUBLE_BATTLE_TEST("Synchronoise will fail if the corresponding typing mon prote
     }
 }
 
+<<<<<<< HEAD
 DOUBLE_BATTLE_TEST("Synchronoise will fail for a typeless user even if a target is typeless")
 {
     GIVEN {
@@ -115,4 +119,6 @@ DOUBLE_BATTLE_TEST("Synchronoise will fail for a typeless user even if a target 
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 TO_DO_BATTLE_TEST("TODO: Write Synchronoise (Move Effect) test titles")

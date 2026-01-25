@@ -5,7 +5,11 @@ SINGLE_BATTLE_TEST("Magician gets self-damage recoil after stealing Life Orb")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_LIFE_ORB].holdEffect == HOLD_EFFECT_LIFE_ORB);
+<<<<<<< HEAD
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+=======
+        ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         PLAYER(SPECIES_DELPHOX) { Ability(ABILITY_MAGICIAN); Item(ITEM_NONE); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LIFE_ORB); }
     } WHEN {

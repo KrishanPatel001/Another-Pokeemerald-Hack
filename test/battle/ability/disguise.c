@@ -8,12 +8,18 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu doesn't lose 1/8 of its max HP upon changing to its busted form (Gen7)")
 {
+<<<<<<< HEAD
     u32 species, newSpecies;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED;       newSpecies = SPECIES_MIMIKYU_BUSTED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; newSpecies = SPECIES_MIMIKYU_BUSTED_TOTEM; }
     GIVEN {
         WITH_CONFIG(CONFIG_DISGUISE_HP_LOSS, GEN_7);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        WITH_CONFIG(CONFIG_DISGUISE_HP_LOSS, GEN_7);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
@@ -22,7 +28,11 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu doesn't lose 1/8 of its max HP upon changi
         NOT HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_DISGUISE);
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, newSpecies);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_BUSTED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         EXPECT_EQ(player->hp, player->maxHP);
     }
 }
@@ -30,12 +40,19 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu doesn't lose 1/8 of its max HP upon changi
 SINGLE_BATTLE_TEST("Disguised Mimikyu will lose 1/8 of its max HP upon changing to its busted form (Gen8+)")
 {
     s16 disguiseDamage;
+<<<<<<< HEAD
     u32 species, newSpecies;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED;       newSpecies = SPECIES_MIMIKYU_BUSTED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; newSpecies = SPECIES_MIMIKYU_BUSTED_TOTEM; }
     GIVEN {
         WITH_CONFIG(CONFIG_DISGUISE_HP_LOSS, GEN_8);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+
+    GIVEN {
+        WITH_CONFIG(CONFIG_DISGUISE_HP_LOSS, GEN_8);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
@@ -44,19 +61,29 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu will lose 1/8 of its max HP upon changing 
         ABILITY_POPUP(player, ABILITY_DISGUISE);
         HP_BAR(player, captureDamage: &disguiseDamage);
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, newSpecies);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_BUSTED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         EXPECT_EQ(disguiseDamage, player->maxHP / 8);
     }
 }
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu takes no damage from a confusion hit and changes to its busted form")
 {
+<<<<<<< HEAD
     u32 species, newSpecies;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED;       newSpecies = SPECIES_MIMIKYU_BUSTED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; newSpecies = SPECIES_MIMIKYU_BUSTED_TOTEM; }
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_CONFUSE_RAY); }
@@ -70,18 +97,28 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes no damage from a confusion hit and c
         NOT HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_DISGUISE);
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, newSpecies);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_BUSTED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu's Air Balloon will pop upon changing to its busted form")
 {
+<<<<<<< HEAD
     u32 species, newSpecies;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED;       newSpecies = SPECIES_MIMIKYU_BUSTED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; newSpecies = SPECIES_MIMIKYU_BUSTED_TOTEM; }
     GIVEN {
         ASSUME(gItemsInfo[ITEM_AIR_BALLOON].holdEffect == HOLD_EFFECT_AIR_BALLOON);
         PLAYER(species) { Ability(ABILITY_DISGUISE); Item(ITEM_AIR_BALLOON); }
+=======
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_AIR_BALLOON].holdEffect == HOLD_EFFECT_AIR_BALLOON);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); Item(ITEM_AIR_BALLOON); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
@@ -92,12 +129,17 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu's Air Balloon will pop upon changing to it
         ABILITY_POPUP(player, ABILITY_DISGUISE);
         MESSAGE("Mimikyu's Air Balloon popped!");
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, newSpecies);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_BUSTED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from secondary damage without breaking the disguise - Stealth Rock")
 {
+<<<<<<< HEAD
     u32 species;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
@@ -105,6 +147,12 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from secondary damage without
         ASSUME(GetMoveEffect(MOVE_STEALTH_ROCK) == EFFECT_STEALTH_ROCK);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_STEALTH_ROCK) == EFFECT_STEALTH_ROCK);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_STEALTH_ROCK); }
@@ -114,7 +162,11 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from secondary damage without
         HP_BAR(player);
         MESSAGE("Pointed stones dug into Mimikyu!");
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, species);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_DISGUISED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
@@ -140,12 +192,18 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from secondary damage without
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from Rocky Helmet without breaking the disguise")
 {
+<<<<<<< HEAD
     u32 species;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
     GIVEN {
         ASSUME(gItemsInfo[ITEM_ROCKY_HELMET].holdEffect == HOLD_EFFECT_ROCKY_HELMET);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_ROCKY_HELMET].holdEffect == HOLD_EFFECT_ROCKY_HELMET);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ROCKY_HELMET); }
     } WHEN {
         TURN { MOVE(player, MOVE_AERIAL_ACE); }
@@ -156,17 +214,26 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from Rocky Helmet without bre
         HP_BAR(player);
         MESSAGE("Mimikyu was hurt by the opposing Wobbuffet's Rocky Helmet!");
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, species);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_DISGUISED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from Rough Skin without breaking the disguise")
 {
+<<<<<<< HEAD
     u32 species;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
     GIVEN {
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_CARVANHA) { Ability(ABILITY_ROUGH_SKIN); }
     } WHEN {
         TURN { MOVE(player, MOVE_AERIAL_ACE); }
@@ -177,36 +244,54 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu takes damage from Rough Skin without break
         HP_BAR(player);
         MESSAGE("Mimikyu was hurt by the opposing Carvanha's Rough Skin!");
     } THEN {
+<<<<<<< HEAD
         EXPECT_EQ(player->species, species);
+=======
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_DISGUISED);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu is ignored by Mold Breaker")
 {
+<<<<<<< HEAD
     u32 species;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
     GIVEN {
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AERIAL_ACE, opponent);
         NOT ABILITY_POPUP(player, ABILITY_DISGUISE);
+<<<<<<< HEAD
     } THEN {
         EXPECT_EQ(player->species, species);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu's types revert back to Ghost/Fairy when Disguise is broken")
 {
+<<<<<<< HEAD
     u32 species;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
     GIVEN {
         ASSUME(GetMoveType(MOVE_SHADOW_CLAW) == TYPE_GHOST);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_SHADOW_CLAW) == TYPE_GHOST);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SOAK); }
@@ -224,6 +309,7 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu's types revert back to Ghost/Fairy when Di
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu blocks a move after getting Gastro Acid Batton Passed")
 {
+<<<<<<< HEAD
     u32 species, newSpecies;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED;       newSpecies = SPECIES_MIMIKYU_BUSTED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; newSpecies = SPECIES_MIMIKYU_BUSTED_TOTEM; }
@@ -231,6 +317,12 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu blocks a move after getting Gastro Acid Ba
         ASSUME(GetMoveEffect(MOVE_BATON_PASS) == EFFECT_BATON_PASS);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
+=======
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_BATON_PASS) == EFFECT_BATON_PASS);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_GASTRO_ACID); MOVE(player, MOVE_BATON_PASS); SEND_OUT(player, 1); }
@@ -241,13 +333,17 @@ SINGLE_BATTLE_TEST("Disguised Mimikyu blocks a move after getting Gastro Acid Ba
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_CLAW, opponent);
         ABILITY_POPUP(player, ABILITY_DISGUISE);
+<<<<<<< HEAD
     } THEN {
         EXPECT_EQ(player->species, newSpecies);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }
 
 SINGLE_BATTLE_TEST("Disguise does not break from a teammate's Wish")
 {
+<<<<<<< HEAD
     u32 species;
     PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
@@ -255,6 +351,12 @@ SINGLE_BATTLE_TEST("Disguise does not break from a teammate's Wish")
         ASSUME(GetMoveEffect(MOVE_WISH) == EFFECT_WISH);
         PLAYER(SPECIES_JIRACHI);
         PLAYER(species) { Ability(ABILITY_DISGUISE); HP(219); MaxHP(220); }
+=======
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_WISH) == EFFECT_WISH);
+        PLAYER(SPECIES_JIRACHI);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); HP(219); MaxHP(220); }
+>>>>>>> 11d8f44022 (Updated to upcoming)
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_WISH); }
@@ -262,7 +364,10 @@ SINGLE_BATTLE_TEST("Disguise does not break from a teammate's Wish")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WISH, player);
         NOT ABILITY_POPUP(player, ABILITY_DISGUISE);
+<<<<<<< HEAD
     } THEN {
         EXPECT_EQ(player->species, species);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 }

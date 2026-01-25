@@ -1145,6 +1145,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_ALOLAN_FORMS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_RaichuMegaX[] = INCBIN_U32("graphics/pokemon/raichu/mega_x/front.4bpp.smol");
@@ -1173,6 +1174,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_PIKACHU
 
 #if P_FAMILY_SANDSHREW
@@ -1506,6 +1509,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Clefable[] = INCBIN_U16("graphics/pokemon/clefable/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ClefableMega[] = INCBIN_U32("graphics/pokemon/clefable/mega/front.4bpp.smol");
@@ -1521,6 +1525,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_CLEFAIRY
 
 #if P_FAMILY_VULPIX
@@ -2874,6 +2880,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Victreebel[] = INCBIN_U16("graphics/pokemon/victreebel/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_VictreebelMega[] = INCBIN_U32("graphics/pokemon/victreebel/mega/front.4bpp.smol");
@@ -2889,6 +2896,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_BELLSPROUT
 
 #if P_FAMILY_TENTACOOL
@@ -4974,6 +4983,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Starmie[] = INCBIN_U16("graphics/pokemon/starmie/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_StarmieMega[] = INCBIN_U32("graphics/pokemon/starmie/mega/front.4bpp.smol");
@@ -4989,6 +4999,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_STARYU
 
 #if P_FAMILY_MR_MIME
@@ -6404,6 +6416,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Dragonite[] = INCBIN_U16("graphics/pokemon/dragonite/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_DragoniteMega[] = INCBIN_U32("graphics/pokemon/dragonite/mega/front.4bpp.smol");
@@ -6419,6 +6432,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_DRATINI
 
 #if P_FAMILY_MEWTWO
@@ -6596,6 +6611,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_MeganiumF[] = INCBIN_COMP("graphics/pokemon/meganium/overworldf.4bpp");
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_GENDER_DIFFERENCES
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_MeganiumMega[] = INCBIN_U32("graphics/pokemon/meganium/mega/front.4bpp.smol");
@@ -6611,6 +6627,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_CHIKORITA
 
 #if P_FAMILY_CYNDAQUIL
@@ -6792,6 +6810,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Feraligatr[] = INCBIN_U16("graphics/pokemon/feraligatr/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_FeraligatrMega[] = INCBIN_U32("graphics/pokemon/feraligatr/mega/front.4bpp.smol");
@@ -6807,6 +6826,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_TOTODILE
 
 #if P_FAMILY_SENTRET
@@ -9144,6 +9165,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Skarmory[] = INCBIN_U16("graphics/pokemon/skarmory/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_SkarmoryMega[] = INCBIN_U32("graphics/pokemon/skarmory/mega/front.4bpp.smol");
@@ -9159,6 +9181,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_SKARMORY
 
 #if P_FAMILY_HOUNDOUR
@@ -13209,6 +13233,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Chimecho[] = INCBIN_U16("graphics/pokemon/chimecho/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ChimechoMega[] = INCBIN_U32("graphics/pokemon/chimecho/mega/front.4bpp.smol");
@@ -13224,6 +13249,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_CHIMECHO
 
 #if P_FAMILY_ABSOL
@@ -13268,6 +13295,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_MEGA_EVOLUTIONS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_AbsolMegaZ[] = INCBIN_U32("graphics/pokemon/absol/mega_z/front.4bpp.smol");
@@ -13283,6 +13311,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_ABSOL
 
 #if P_FAMILY_SNORUNT
@@ -13371,6 +13401,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Froslass[] = INCBIN_U16("graphics/pokemon/froslass/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_FroslassMega[] = INCBIN_U32("graphics/pokemon/froslass/mega/front.4bpp.smol");
@@ -13386,6 +13417,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_SNORUNT
 
@@ -14447,6 +14480,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_StaraptorF[] = INCBIN_COMP("graphics/pokemon/staraptor/overworldf.4bpp");
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_GENDER_DIFFERENCES
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_StaraptorMega[] = INCBIN_U32("graphics/pokemon/staraptor/mega/front.4bpp.smol");
@@ -14462,6 +14496,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_STARLY
 
 #if P_FAMILY_BIDOOF
@@ -15312,6 +15348,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_MEGA_EVOLUTIONS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_GarchompMegaZ[] = INCBIN_U32("graphics/pokemon/garchomp/mega_z/front.4bpp.smol");
@@ -15327,6 +15364,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_GIBLE
 
 #if P_FAMILY_RIOLU
@@ -15376,6 +15415,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_MEGA_EVOLUTIONS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_LucarioMegaZ[] = INCBIN_U32("graphics/pokemon/lucario/mega_z/front.4bpp.smol");
@@ -15391,6 +15431,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_RIOLU
 
 #if P_FAMILY_HIPPOPOTAS
@@ -15864,6 +15906,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Heatran[] = INCBIN_U16("graphics/pokemon/heatran/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_HeatranMega[] = INCBIN_U32("graphics/pokemon/heatran/mega/front.4bpp.smol");
@@ -15879,6 +15922,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_HEATRAN
 
 #if P_FAMILY_REGIGIGAS
@@ -16006,6 +16051,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Darkrai[] = INCBIN_U16("graphics/pokemon/darkrai/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_DarkraiMega[] = INCBIN_U32("graphics/pokemon/darkrai/mega/front.4bpp.smol");
@@ -16021,6 +16067,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_DARKRAI
 
 #if P_FAMILY_SHAYMIN
@@ -16311,6 +16359,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Emboar[] = INCBIN_U16("graphics/pokemon/emboar/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_EmboarMega[] = INCBIN_U32("graphics/pokemon/emboar/mega/front.4bpp.smol");
@@ -16326,6 +16375,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_TEPIG
 
 #if P_FAMILY_OSHAWOTT
@@ -16862,6 +16913,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Excadrill[] = INCBIN_U16("graphics/pokemon/excadrill/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ExcadrillMega[] = INCBIN_U32("graphics/pokemon/excadrill/mega/front.4bpp.smol");
@@ -16877,6 +16929,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_DRILBUR
 
 #if P_FAMILY_AUDINO
@@ -17146,6 +17200,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Scolipede[] = INCBIN_U16("graphics/pokemon/scolipede/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_ScolipedeMega[] = INCBIN_U32("graphics/pokemon/scolipede/mega/front.4bpp.smol");
@@ -17161,6 +17216,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_VENIPEDE
 
 #if P_FAMILY_COTTONEE
@@ -17538,6 +17595,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Scrafty[] = INCBIN_U16("graphics/pokemon/scrafty/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ScraftyMega[] = INCBIN_U32("graphics/pokemon/scrafty/mega/front.4bpp.smol");
@@ -17553,6 +17611,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_SCRAGGY
 
 #if P_FAMILY_SIGILYPH
@@ -18454,6 +18514,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Eelektross[] = INCBIN_U16("graphics/pokemon/eelektross/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_EelektrossMega[] = INCBIN_U32("graphics/pokemon/eelektross/mega/front.4bpp.smol");
@@ -18469,6 +18530,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_TYNAMO
 
 #if P_FAMILY_ELGYEM
@@ -18553,6 +18616,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Chandelure[] = INCBIN_U16("graphics/pokemon/chandelure/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_ChandelureMega[] = INCBIN_U32("graphics/pokemon/chandelure/mega/front.4bpp.smol");
@@ -18568,6 +18632,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_LITWICK
 
 #if P_FAMILY_AXEW
@@ -18823,6 +18889,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Golurk[] = INCBIN_U16("graphics/pokemon/golurk/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_GolurkMega[] = INCBIN_U32("graphics/pokemon/Golurk/mega/front.4bpp.smol");
@@ -18838,6 +18905,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_GOLETT
 
 #if P_FAMILY_PAWNIARD
@@ -19513,6 +19582,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Chesnaught[] = INCBIN_U16("graphics/pokemon/chesnaught/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_ChesnaughtMega[] = INCBIN_U32("graphics/pokemon/chesnaught/mega/front.4bpp.smol");
@@ -19528,6 +19598,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_CHESPIN
 
 #if P_FAMILY_FENNEKIN
@@ -19578,6 +19650,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Delphox[] = INCBIN_U16("graphics/pokemon/delphox/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_DelphoxMega[] = INCBIN_U32("graphics/pokemon/delphox/mega/front.4bpp.smol");
@@ -19593,6 +19666,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_FENNEKIN
 
 #if P_FAMILY_FROAKIE
@@ -19656,6 +19731,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_GreninjaAsh[] = INCBIN_U16("graphics/pokemon/greninja/ash/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_GreninjaMega[] = INCBIN_U32("graphics/pokemon/greninja/mega/front.4bpp.smol");
@@ -19671,6 +19747,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_FROAKIE
 
 #if P_FAMILY_BUNNELBY
@@ -19794,7 +19872,11 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gMonPalette_VivillonIcySnow[] = INCBIN_U16("graphics/pokemon/vivillon/normal.gbapal");
     const u32 gMonBackPic_VivillonIcySnow[] = INCBIN_U32("graphics/pokemon/vivillon/back.4bpp.smol");
     const u16 gMonShinyPalette_VivillonIcySnow[] = INCBIN_U16("graphics/pokemon/vivillon/shiny.gbapal");
+<<<<<<< HEAD
+    const u8 gMonIcon_VivillonIcySnow[] = INCBIN_U8("graphics/pokemon/vivillon/icon.4bpp");
+=======
     const u8 gMonIcon_VivillonIcySnow[] = INCBIN_U8("graphics/pokemon/vivillon/meadow/icon.4bpp");
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #if P_FOOTPRINTS
     const u8 gMonFootprint_Vivillon[] = INCBIN_U8("graphics/pokemon/vivillon/footprint.1bpp");
 #endif //P_FOOTPRINTS
@@ -20020,6 +20102,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u32 gObjectEventPic_PyroarF[] = INCBIN_COMP("graphics/pokemon/pyroar/overworldf.4bpp");
 #endif //OW_POKEMON_OBJECT_EVENTS
 #endif //P_GENDER_DIFFERENCES
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_PyroarMega[] = INCBIN_U32("graphics/pokemon/pyroar/mega/front.4bpp.smol");
@@ -20035,6 +20118,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_LITLEO
 
 #if P_FAMILY_FLABEBE
@@ -20139,6 +20224,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
 
+<<<<<<< HEAD
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_FloetteMega[] = INCBIN_U32("graphics/pokemon/floette/mega/front.4bpp.smol");
 //    const u16 gMonPalette_FloetteMega[] = INCBIN_U16("graphics/pokemon/floette/mega/normal.gbapal");
@@ -20154,6 +20240,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     const u32 gMonFrontPic_Florges[] = INCBIN_U32("graphics/pokemon/florges/anim_front.4bpp.smol");
     const u32 gMonBackPic_Florges[] = INCBIN_U32("graphics/pokemon/florges/back.4bpp.smol");
 #if P_FOOTPRINTS
@@ -20414,6 +20502,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_MeowsticF[] = INCBIN_U16("graphics/pokemon/meowstic/f/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_MeowsticMega[] = INCBIN_U32("graphics/pokemon/meowstic/mega/front.4bpp.smol");
@@ -20429,6 +20518,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_ESPURR
 
 #if P_FAMILY_HONEDGE
@@ -20594,6 +20685,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Malamar[] = INCBIN_U16("graphics/pokemon/malamar/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_MalamarMega[] = INCBIN_U32("graphics/pokemon/malamar/mega/front.4bpp.smol");
@@ -20609,6 +20701,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_INKAY
 
 #if P_FAMILY_BINACLE
@@ -20643,6 +20737,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Barbaracle[] = INCBIN_U16("graphics/pokemon/barbaracle/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_BarbaracleMega[] = INCBIN_U32("graphics/pokemon/barbaracle/mega/front.4bpp.smol");
@@ -20658,6 +20753,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_BINACLE
 
 #if P_FAMILY_SKRELP
@@ -20692,6 +20789,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Dragalge[] = INCBIN_U16("graphics/pokemon/dragalge/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_DragalgeMega[] = INCBIN_U32("graphics/pokemon/dragalge/mega/front.4bpp.smol");
@@ -20707,6 +20805,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_SKRELP
 
 #if P_FAMILY_CLAUNCHER
@@ -20861,6 +20961,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Hawlucha[] = INCBIN_U16("graphics/pokemon/hawlucha/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_HawluchaMega[] = INCBIN_U32("graphics/pokemon/hawlucha/mega/front.4bpp.smol");
@@ -20876,6 +20977,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_HAWLUCHA
 
 #if P_FAMILY_DEDENNE
@@ -21285,6 +21388,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_ZygardeComplete[] = INCBIN_U16("graphics/pokemon/zygarde/complete/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ZygardeMega[] = INCBIN_U32("graphics/pokemon/zygarde/mega/front.4bpp.smol");
@@ -21300,6 +21404,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_ZYGARDE
 
 #if P_FAMILY_DIANCIE
@@ -21715,6 +21821,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Crabominable[] = INCBIN_U16("graphics/pokemon/crabominable/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_CrabominableMega[] = INCBIN_U32("graphics/pokemon/crabominable/mega/front.4bpp.smol");
@@ -21730,6 +21837,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_CRABRAWLER
 
 #if P_FAMILY_ORICORIO
@@ -22288,6 +22397,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Golisopod[] = INCBIN_U16("graphics/pokemon/golisopod/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_GolisopodMega[] = INCBIN_U32("graphics/pokemon/golisopod/mega/front.4bpp.smol");
@@ -22303,6 +22413,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_WIMPOD
 
 #if P_FAMILY_SANDYGAST
@@ -22606,6 +22718,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Drampa[] = INCBIN_U16("graphics/pokemon/drampa/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_DrampaMega[] = INCBIN_U32("graphics/pokemon/drampa/mega/front.4bpp.smol");
@@ -22621,6 +22734,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_DRAMPA
 
 #if P_FAMILY_DHELMISE
@@ -23045,6 +23160,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_MagearnaOriginal[] = INCBIN_U16("graphics/pokemon/magearna/original_color/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_MagearnaMega[] = INCBIN_U32("graphics/pokemon/magearna/mega/front.4bpp.smol");
@@ -23073,6 +23189,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_MAGEARNA
 
 #if P_FAMILY_MARSHADOW
@@ -23179,6 +23297,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Zeraora[] = INCBIN_U16("graphics/pokemon/zeraora/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ZeraoraMega[] = INCBIN_U32("graphics/pokemon/zeraora/mega/front.4bpp.smol");
@@ -23194,6 +23313,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_ZERAORA
 
 #if P_FAMILY_MELTAN
@@ -24569,6 +24690,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Falinks[] = INCBIN_U16("graphics/pokemon/falinks/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_FalinksMega[] = INCBIN_U32("graphics/pokemon/falinks/mega/front.4bpp.smol");
@@ -24584,6 +24706,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_FALINKS
 
 #if P_FAMILY_PINCURCHIN
@@ -26127,6 +26251,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Scovillain[] = INCBIN_U16("graphics/pokemon/scovillain/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_ScovillainMega[] = INCBIN_U32("graphics/pokemon/scovillain/mega/front.4bpp.smol");
@@ -26142,6 +26267,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_CAPSAKID
 
 #if P_FAMILY_RELLOR
@@ -26463,6 +26590,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Glimmora[] = INCBIN_U16("graphics/pokemon/glimmora/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
     const u32 gMonFrontPic_GlimmoraMega[] = INCBIN_U32("graphics/pokemon/glimmora/mega/front.4bpp.smol");
@@ -26478,6 +26606,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_GLIMMET
 
 #if P_FAMILY_GREAVARD
@@ -26644,6 +26774,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_TatsugiriStretchy[] = INCBIN_U16("graphics/pokemon/tatsugiri/stretchy/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_TatsugiriCurlyMega[] = INCBIN_U32("graphics/pokemon/tatsugiri/mega/front.4bpp.smol");
@@ -26686,6 +26817,9 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
 #endif //P_FAMILY_TATSUGIRI
+=======
+#endif //P_FAMILY_DONDOZO
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #if P_FAMILY_GREAT_TUSK
     const u32 gMonFrontPic_GreatTusk[] = INCBIN_U32("graphics/pokemon/great_tusk/front.4bpp.smol");
@@ -26951,6 +27085,7 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
     const u16 gShinyOverworldPalette_Baxcalibur[] = INCBIN_U16("graphics/pokemon/baxcalibur/overworld_shiny.gbapal");
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS
+<<<<<<< HEAD
 
 #if P_GEN_9_MEGA_EVOLUTIONS
 //    const u32 gMonFrontPic_BaxcaliburMega[] = INCBIN_U32("graphics/pokemon/baxcalibur/mega/front.4bpp.smol");
@@ -26966,6 +27101,8 @@ const u32 gObjectEventPic_Substitute[] = INCBIN_COMP("graphics/pokemon/question_
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES
 #endif //OW_POKEMON_OBJECT_EVENTS && OW_BATTLE_ONLY_FORMS
 #endif //P_GEN_9_MEGA_EVOLUTIONS
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif //P_FAMILY_FRIGIBAX
 
 #if P_FAMILY_GIMMIGHOUL

@@ -1,11 +1,17 @@
 #ifndef GUARD_CONSTANTS_FLAGS_H
 #define GUARD_CONSTANTS_FLAGS_H
 
+<<<<<<< HEAD
 #include "constants/trainers.h"
 #include "constants/opponents.h"
 #include "constants/rematches.h"
 
 
+=======
+#include "constants/opponents.h"
+#include "constants/rematches.h"
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 // Temporary Flags
 // These temporary flags are are cleared every time a map is loaded. They are used
 // for things like shortening an NPCs introduction text if the player already spoke
@@ -45,12 +51,15 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
+<<<<<<< HEAD
 #if IS_FRLG
 
 #include "constants/flags_frlg.h"
 
 #else
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define FLAG_UNUSED_0x020    0x20 // Unused Flag
 #define FLAG_UNUSED_0x021    0x21 // Unused Flag
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
@@ -757,6 +766,17 @@
 #define FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG                      0x2BC
 #define FLAG_HIDE_APPRENTICE                                        0x2BD
 #define FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN                0x2BE
+<<<<<<< HEAD
+=======
+#define FLAG_HIDE_UNION_ROOM_PLAYER_1                               0x2BF
+#define FLAG_HIDE_UNION_ROOM_PLAYER_2                               0x2C0
+#define FLAG_HIDE_UNION_ROOM_PLAYER_3                               0x2C1
+#define FLAG_HIDE_UNION_ROOM_PLAYER_4                               0x2C2
+#define FLAG_HIDE_UNION_ROOM_PLAYER_5                               0x2C3
+#define FLAG_HIDE_UNION_ROOM_PLAYER_6                               0x2C4
+#define FLAG_HIDE_UNION_ROOM_PLAYER_7                               0x2C5
+#define FLAG_HIDE_UNION_ROOM_PLAYER_8                               0x2C6
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1               0x2C7
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2               0x2C8
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3               0x2C9
@@ -1356,6 +1376,7 @@
 #define FLAG_UNLOCKED_TRENDY_SAYINGS                 (SYSTEM_FLAGS + 0x6)
 
 // Badges
+<<<<<<< HEAD
 #define FLAG_BADGE01_GET                      (SYSTEM_FLAGS + 0x7)
 #define FLAG_BADGE02_GET                      (SYSTEM_FLAGS + 0x8)
 #define FLAG_BADGE03_GET                      (SYSTEM_FLAGS + 0x9)
@@ -1365,6 +1386,17 @@
 #define FLAG_BADGE07_GET                      (SYSTEM_FLAGS + 0xD)
 #define FLAG_BADGE08_GET                      (SYSTEM_FLAGS + 0xE)
 #define NUM_BADGES                            (1 + FLAG_BADGE08_GET - FLAG_BADGE01_GET)
+=======
+#define FLAG_BADGE01_GET                             (SYSTEM_FLAGS + 0x7)
+#define FLAG_BADGE02_GET                             (SYSTEM_FLAGS + 0x8)
+#define FLAG_BADGE03_GET                             (SYSTEM_FLAGS + 0x9)
+#define FLAG_BADGE04_GET                             (SYSTEM_FLAGS + 0xA)
+#define FLAG_BADGE05_GET                             (SYSTEM_FLAGS + 0xB)
+#define FLAG_BADGE06_GET                             (SYSTEM_FLAGS + 0xC)
+#define FLAG_BADGE07_GET                             (SYSTEM_FLAGS + 0xD)
+#define FLAG_BADGE08_GET                             (SYSTEM_FLAGS + 0xE)
+#define NUM_BADGES                                   (1 + FLAG_BADGE08_GET - FLAG_BADGE01_GET)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // Towns and Cities
 #define FLAG_VISITED_LITTLEROOT_TOWN                (SYSTEM_FLAGS + 0xF)
@@ -1661,6 +1693,7 @@
 #define FLAG_TEMP_HIDE_FOLLOWER                 FLAG_TEMP_E
 #define FLAG_TEMP_HIDE_MIRAGE_ISLAND_BERRY_TREE FLAG_TEMP_11
 
+<<<<<<< HEAD
 // FRLG flags
 
 #define FLAG_HIDE_BULBASAUR_BALL                           0
@@ -2436,6 +2469,8 @@
 
 #endif
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #if TESTING
 #define TESTING_FLAGS_START                     0x5000
 #define TESTING_FLAG_SLEEP_CLAUSE               (TESTING_FLAGS_START + 0x0)
@@ -2448,5 +2483,8 @@
 #define TESTING_FLAG_UNUSED_7                   (TESTING_FLAGS_START + 0x7)
 #endif // TESTING
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #endif // GUARD_CONSTANTS_FLAGS_H

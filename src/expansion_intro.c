@@ -9,7 +9,10 @@
 #include "trig.h"
 #include "main.h"
 #include "intro.h"
+<<<<<<< HEAD
 #include "intro_frlg.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "m4a.h"
 #include "expansion_intro.h"
 #include "constants/rgb.h"
@@ -276,6 +279,7 @@ void Task_HandleExpansionIntro(u8 taskId)
             ResetSpriteData();
             FreeAllSpritePalettes();
             DestroyTask(taskId);
+<<<<<<< HEAD
             if (IS_FRLG)
             {
                 SetMainCallback2(CB2_SetUpIntroFrlg);
@@ -285,6 +289,10 @@ void Task_HandleExpansionIntro(u8 taskId)
                 CreateTask(Task_Scene1_Load, 0);
                 SetMainCallback2(MainCB2_Intro);
             }
+=======
+            CreateTask(Task_Scene1_Load, 0);
+            SetMainCallback2(MainCB2_Intro);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
         break;
     }

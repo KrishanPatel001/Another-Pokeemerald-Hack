@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
+<<<<<<< HEAD
 ASSUMPTIONS
 {
     ASSUME(GetMoveEffect(MOVE_MIRACLE_EYE) == EFFECT_MIRACLE_EYE);
@@ -104,3 +105,6 @@ SINGLE_BATTLE_TEST("Miracle Eye does not fail if the target is already affected 
         NOT MESSAGE("But it failed!");
     }
 }
+=======
+TO_DO_BATTLE_TEST("TODO: Write Miracle Eye (Move Effect) test titles")
+>>>>>>> 11d8f44022 (Updated to upcoming)

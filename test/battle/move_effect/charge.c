@@ -3,7 +3,11 @@
 
 ASSUMPTIONS
 {
+<<<<<<< HEAD
     ASSUME(GetMoveCategory(MOVE_THUNDERBOLT) != DAMAGE_CATEGORY_STATUS);
+=======
+    ASSUME(!IsBattleMoveStatus(MOVE_THUNDERBOLT));
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ASSUME(GetMoveType(MOVE_THUNDERBOLT) == TYPE_ELECTRIC);
 }
 
@@ -108,7 +112,11 @@ SINGLE_BATTLE_TEST("Charge's effect is removed regardless if the next move is El
     s16 damage[2];
     GIVEN {
         ASSUME(GetMoveType(MOVE_SCRATCH) != TYPE_ELECTRIC);
+<<<<<<< HEAD
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+=======
+        ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -273,7 +273,11 @@ static void AnimPunishment(struct Sprite *sprite)
 
 void AnimTask_AttackerFadeToInvisible(u8 taskId)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    int battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     battler = gBattleAnimAttacker;
     gTasks[taskId].data[1] = 16;
@@ -430,7 +434,11 @@ static void AnimBite_Step2(struct Sprite *sprite)
 // Launches a tear drop away from the battler. Used by Fake Tears
 void AnimTearDrop(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     s8 xOffset;
 
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
@@ -1008,18 +1016,30 @@ static void AnimTask_MetallicShine_Step(u8 taskId)
 void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
 {
     u8 spriteId;
+<<<<<<< HEAD
     enum BattlerId battler;
     bool8 calcSpriteId = FALSE;
     u8 position = B_POSITION_PLAYER_LEFT;
     enum AnimBattler animBattler = gBattleAnimArgs[0];
 
     switch (animBattler)
+=======
+    u8 battler;
+    bool8 calcSpriteId = FALSE;
+    u8 position = B_POSITION_PLAYER_LEFT;
+
+    switch (gBattleAnimArgs[0])
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
     case ANIM_ATTACKER:
     case ANIM_TARGET:
     case ANIM_ATK_PARTNER:
     case ANIM_DEF_PARTNER:
+<<<<<<< HEAD
         spriteId = GetAnimBattlerSpriteId(animBattler);
+=======
+        spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         break;
     case ANIM_PLAYER_LEFT:
         position = B_POSITION_PLAYER_LEFT;

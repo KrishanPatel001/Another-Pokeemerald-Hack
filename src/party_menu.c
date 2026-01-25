@@ -443,7 +443,11 @@ static u8 GetMaxBattleEntries(void);
 static u8 GetMinBattleEntries(void);
 static void Task_ContinueChoosingHalfParty(u8);
 static void BufferBattlePartyOrder(u8 *, bool8);
+<<<<<<< HEAD
 static void BufferBattlePartyOrderBySide(u8 *, u8, enum BattlerId);
+=======
+static void BufferBattlePartyOrderBySide(u8 *, u8, u8);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void Task_InitMultiPartnerPartySlideIn(u8);
 static void Task_MultiPartnerPartySlideIn(u8);
 static void SlideMultiPartyMenuBoxSpritesOneStep(u8);
@@ -497,6 +501,7 @@ static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
 static void Task_HideFollowerNPCForTeleport(u8);
 static void FieldCallback_RockClimb(void);
+<<<<<<< HEAD
 static void Task_FirstBattleEnterParty_WaitFadeIn(u8 taskId);
 static void Task_FirstBattleEnterParty_DarkenScreen(u8 taskId);
 static void Task_FirstBattleEnterParty_WaitDarken(u8 taskId);
@@ -508,6 +513,8 @@ static void Task_FirstBattleEnterParty_StartPrintMsg2(u8 taskId);
 static void Task_FirstBattleEnterParty_RunPrinterMsg2(u8 taskId);
 static void Task_FirstBattleEnterParty_FadeNormal(u8 taskId);
 static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
@@ -1145,10 +1152,17 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
         {
         default:
             return FALSE;
+<<<<<<< HEAD
+        case ITEM_IS_TM_HM: // TM/HM
+            DisplayPartyPokemonDataToTeachMove(slot, ItemIdToBattleMoveId(item));
+            break;
+        case ITEM_IS_EVOLUTION_STONE: // Evolution stone
+=======
         case 1: // TM/HM
             DisplayPartyPokemonDataToTeachMove(slot, ItemIdToBattleMoveId(item));
             break;
         case 2: // Evolution stone
+>>>>>>> 11d8f44022 (Updated to upcoming)
             if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL, NULL, CHECK_EVO) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
@@ -6658,11 +6672,16 @@ static void SpriteCB_FormChangeIconMosaic(struct Sprite *sprite)
 static void Task_TryItemUseFormChange(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+<<<<<<< HEAD
+=======
+    u16 targetSpecies;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     struct Sprite *icon = &gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId];
 
     switch (gTasks[taskId].tState)
     {
     case 0:
+<<<<<<< HEAD
         PlaySE(SE_M_TELEPORT);
         gTasks[taskId].tState++;
         break;
@@ -6671,6 +6690,28 @@ static void Task_TryItemUseFormChange(u8 taskId)
         {
             FreeAndDestroyMonIconSprite(icon);
             CreatePartyMonIconSpriteParameterized(gTasks[taskId].tTargetSpecies, GetMonData(mon, MON_DATA_PERSONALITY), FALSE, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
+=======
+        targetSpecies = gTasks[taskId].tTargetSpecies;
+        SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        TrySetDayLimitToFormChange(mon);
+        CalculateMonStats(mon);
+        gTasks[taskId].tState++;
+        break;
+    case 1:
+        gTasks[taskId].tState++;
+        break;
+    case 2:
+        PlaySE(SE_M_TELEPORT);
+        gTasks[taskId].tState++;
+        break;
+    case 3:
+        targetSpecies = gTasks[taskId].tTargetSpecies;
+
+        if (gTasks[taskId].tAnimWait == 0)
+        {
+            FreeAndDestroyMonIconSprite(icon);
+            CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY), FALSE, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
+>>>>>>> 11d8f44022 (Updated to upcoming)
             icon->oam.mosaic = TRUE;
             icon->data[0] = 10;
             icon->data[1] = 1;
@@ -6678,6 +6719,7 @@ static void Task_TryItemUseFormChange(u8 taskId)
             icon->callback = SpriteCB_FormChangeIconMosaic;
             SetGpuReg(REG_OFFSET_MOSAIC, (icon->data[0] << 12) | (icon->data[1] << 8));
         }
+<<<<<<< HEAD
         if (++gTasks[taskId].tAnimWait == 60)
             gTasks[taskId].tState++;
         break;
@@ -6686,6 +6728,19 @@ static void Task_TryItemUseFormChange(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 3:
+=======
+
+        if (++gTasks[taskId].tAnimWait == 60)
+            gTasks[taskId].tState++;
+
+        break;
+    case 4:
+        targetSpecies = gTasks[taskId].tTargetSpecies;
+        PlayCry_Normal(targetSpecies, 0);
+        gTasks[taskId].tState++;
+        break;
+    case 5:
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (IsCryFinished())
         {
             GetMonNickname(mon, gStringVar1);
@@ -6696,7 +6751,11 @@ static void Task_TryItemUseFormChange(u8 taskId)
         }
 
         break;
+<<<<<<< HEAD
     case 4:
+=======
+    case 6:
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (!IsPartyMenuTextPrinterActive())
         {
             if (gSpecialVar_ItemId == ITEM_ROTOM_CATALOG) //only for Rotom currently
@@ -6717,7 +6776,11 @@ static void Task_TryItemUseFormChange(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
+<<<<<<< HEAD
     case 5:
+=======
+    case 7:
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tNextFunc);
         break;
     }
@@ -6726,14 +6789,25 @@ static void Task_TryItemUseFormChange(u8 taskId)
 bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+<<<<<<< HEAD
 
     if (TryFormChange(mon, FORM_CHANGE_ITEM_USE))
+=======
+    u32 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_USE, gSpecialVar_ItemId);
+
+    if (targetSpecies != currentSpecies)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         gPartyMenuUseExitCallback = TRUE;
         SetWordTaskArg(taskId, tNextFunc, (u32)task);
         gTasks[taskId].func = Task_TryItemUseFormChange;
         gTasks[taskId].tState = 0;
+<<<<<<< HEAD
         gTasks[taskId].tTargetSpecies = GetMonData(mon, MON_DATA_SPECIES);
+=======
+        gTasks[taskId].tTargetSpecies = targetSpecies;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gTasks[taskId].tAnimWait = 0;
         return TRUE;
     }
@@ -6773,17 +6847,30 @@ void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task)
 bool32 TryMultichoiceFormChange(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+<<<<<<< HEAD
+=======
+    u32 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_USE_MULTICHOICE, gSpecialVar_ItemId);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
 
+<<<<<<< HEAD
     if (TryFormChange(mon, FORM_CHANGE_ITEM_USE_MULTICHOICE))
+=======
+    if (targetSpecies != currentSpecies)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         gPartyMenuUseExitCallback = TRUE;
         SetWordTaskArg(taskId, tNextFunc, (u32)Task_ClosePartyMenuAfterText);
         gTasks[taskId].func = Task_TryItemUseFormChange;
         gTasks[taskId].tState = 0;
+<<<<<<< HEAD
         gTasks[taskId].tTargetSpecies = GetMonData(mon, MON_DATA_SPECIES);
+=======
+        gTasks[taskId].tTargetSpecies = targetSpecies;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gTasks[taskId].tAnimWait = 0;
         return TRUE;
     }
@@ -6864,12 +6951,24 @@ static void CursorCb_ChangeAbility(u8 taskId)
 
 void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId)
 {
+<<<<<<< HEAD
     if (TryFormChange(mon, FORM_CHANGE_ITEM_HOLD))
     {
         u32 species = GetMonData(mon, MON_DATA_SPECIES);
         PlayCry_NormalNoDucking(species, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
         FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[slotId].monSpriteId]);
         CreatePartyMonIconSpriteParameterized(species, GetMonData(mon, MON_DATA_PERSONALITY), FALSE, &sPartyMenuBoxes[slotId], 1);
+=======
+    u32 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_HOLD, 0);
+    if (targetSpecies != currentSpecies)
+    {
+        PlayCry_NormalNoDucking(targetSpecies, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
+        SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[slotId].monSpriteId]);
+        CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY), FALSE, &sPartyMenuBoxes[slotId], 1);
+        CalculateMonStats(mon);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[slotId]);
     }
 }
@@ -7387,6 +7486,7 @@ static u8 GetPartyLayoutFromBattleType(void)
 
 void OpenPartyMenuInBattle(u8 partyAction)
 {
+<<<<<<< HEAD
     if (IS_FRLG && !BtlCtrl_OakOldMan_TestState2Flag(FIRST_BATTLE_MSG_FLAG_PARTY_MENU) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
     {
         InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_NONE, Task_FirstBattleEnterParty_WaitFadeIn, CB2_SetUpReshowBattleScreenAfterMenu);
@@ -7399,6 +7499,13 @@ void OpenPartyMenuInBattle(u8 partyAction)
         else
             InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_SetUpReshowBattleScreenAfterMenu);
     }
+=======
+    if (partyAction == PARTY_ACTION_SEND_MON_TO_BOX)
+        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON_FOR_BOX, Task_HandleChooseMonInput, ReshowBlankBattleScreenAfterMenu);
+    else
+        InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), partyAction, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_SetUpReshowBattleScreenAfterMenu);
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ReshowBattleScreenDummy();
     UpdatePartyToBattleOrder();
 }
@@ -7426,6 +7533,10 @@ static bool8 TrySwitchInPokemon(void)
 {
     u8 slot = GetCursorSelectionMonId();
     u8 newSlot;
+<<<<<<< HEAD
+=======
+    u8 i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     // In a multi battle, slots 1, 4, and 5 are the partner's Pokémon
     if (IsMultiBattle() == TRUE && (slot == 1 || slot == 4 || slot == 5))
@@ -7440,7 +7551,11 @@ static bool8 TrySwitchInPokemon(void)
         StringExpandPlaceholders(gStringVar4, gText_PkmnHasNoEnergy);
         return FALSE;
     }
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (IsOnPlayerSide(i) && GetPartyIdFromBattleSlot(slot) == gBattlerPartyIndexes[i])
         {
@@ -7539,18 +7654,30 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
         partyBattleOrder[i] = (partyIds[0 + (i * 2)] << 4) | partyIds[1 + (i * 2)];
 }
 
+<<<<<<< HEAD
 void BufferBattlePartyCurrentOrderBySide(enum BattlerId battler, u8 flankId)
+=======
+void BufferBattlePartyCurrentOrderBySide(u8 battler, u8 flankId)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     BufferBattlePartyOrderBySide(gBattleStruct->battlerPartyOrders[battler], flankId, battler);
 }
 
 // when IsOnPlayerSide(battlerId), this function is identical the one above
+<<<<<<< HEAD
 static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, enum BattlerId battler)
+=======
+static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 partyIndexes[PARTY_SIZE];
     int i, j;
 
+<<<<<<< HEAD
     enum BattlerId leftBattler;
+=======
+    u8 leftBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (IsOnPlayerSide(battler))
         leftBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
     else
@@ -7587,7 +7714,11 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, enum 
     }
     else
     {
+<<<<<<< HEAD
         enum BattlerId rightBattler;
+=======
+        u8 rightBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (IsOnPlayerSide(battler))
             rightBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
         else
@@ -7610,7 +7741,11 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, enum 
         partyBattleOrder[i] = (partyIndexes[0 + (i * 2)] << 4) | partyIndexes[1 + (i * 2)];
 }
 
+<<<<<<< HEAD
 void SwitchPartyOrderLinkMulti(enum BattlerId battler, u8 slot, u8 slot2)
+=======
+void SwitchPartyOrderLinkMulti(u8 battler, u8 slot, u8 slot2)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 partyIds[PARTY_SIZE];
     u8 tempSlot = 0;
@@ -8235,6 +8370,7 @@ static void FieldCallback_RockClimb(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_ROCK_CLIMB);
 }
+<<<<<<< HEAD
 
 static void PartyMenu_Oak_PrintText(u8 windowId, const u8 *str)
 {
@@ -8343,3 +8479,5 @@ static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId)
         gTasks[taskId].func = Task_HandleChooseMonInput;
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

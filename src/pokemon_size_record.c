@@ -9,7 +9,10 @@
 #include "text.h"
 
 #define DEFAULT_MAX_SIZE 0x8000 // was 0x8100 in Ruby/Sapphire
+<<<<<<< HEAD
 #define DEFAULT_MAX_SIZE_MAGIKARP 0
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static u8* ReturnHeightStringNoWhitespace(u32 size);
 
 struct UnknownStruct
@@ -165,10 +168,13 @@ static void GetMonSizeRecordInfo(u16 species, u16 *sizeRecord)
 
     FormatMonSizeRecord(gStringVar3, size);
     StringCopy(gStringVar1, GetSpeciesName(species));
+<<<<<<< HEAD
 
     if (species == SPECIES_MAGIKARP)
         return;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (*sizeRecord == DEFAULT_MAX_SIZE)
         StringCopy(gStringVar2, gText_Marco);
     else
@@ -213,6 +219,7 @@ void CompareLotadSize(void)
     gSpecialVar_Result = CompareMonSize(SPECIES_LOTAD, sizeRecord);
 }
 
+<<<<<<< HEAD
 void InitHeracrossSizeRecord(void)
 {
     VarSet(VAR_HERACROSS_SIZE_RECORD, DEFAULT_MAX_SIZE);
@@ -251,6 +258,8 @@ void CompareMagikarpSize(void)
     gSpecialVar_Result = CompareMonSize(SPECIES_MAGIKARP, sizeRecord);
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
 {
     s32 i;

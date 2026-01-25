@@ -2906,7 +2906,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 100,
         .baseSpAttack  = 165,
         .baseSpDefense = 135,
+<<<<<<< HEAD
         .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FAIRY),
+=======
+        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 309 : 278,
         .evYield_SpAttack = 3,
@@ -10361,6 +10365,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             "all directions using sound waves. Any who\n"
             "hear the vibrations get so confused, they\n"
             "forget who they are."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -10377,6 +10382,24 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Chimecho)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Chimecho)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sChimechoLevelUpLearnset,
         .teachableLearnset = sChimechoTeachableLearnset,
@@ -10578,6 +10601,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             "clawlike shapes, it cuts down foes with\n"
             "a single blow. This is an act of kindness\n"
             "to keep them from suffering."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -10594,6 +10618,24 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Absol)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Absol)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sAbsolLevelUpLearnset,
         .teachableLearnset = sAbsolTeachableLearnset,
@@ -10953,8 +10995,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_FroslassMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)

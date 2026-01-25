@@ -19,10 +19,18 @@
 // Populates gBattleStruct->gimmick.usableGimmick for each battler.
 void AssignUsableGimmicks(void)
 {
+<<<<<<< HEAD
     for (enum BattlerId battler = 0; battler < gBattlersCount; ++battler)
     {
         gBattleStruct->gimmick.usableGimmick[battler] = GIMMICK_NONE;
         for (enum Gimmick gimmick = 0; gimmick < GIMMICKS_COUNT; ++gimmick)
+=======
+    u32 battler, gimmick;
+    for (battler = 0; battler < gBattlersCount; ++battler)
+    {
+        gBattleStruct->gimmick.usableGimmick[battler] = GIMMICK_NONE;
+        for (gimmick = 0; gimmick < GIMMICKS_COUNT; ++gimmick)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             if (CanActivateGimmick(battler, gimmick))
             {
@@ -34,13 +42,21 @@ void AssignUsableGimmicks(void)
 }
 
 // Returns whether a battler is able to use a gimmick. Checks consumption and gimmick specific functions.
+<<<<<<< HEAD
 bool32 CanActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
+=======
+bool32 CanActivateGimmick(u32 battler, enum Gimmick gimmick)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return gGimmicksInfo[gimmick].CanActivate != NULL && gGimmicksInfo[gimmick].CanActivate(battler);
 }
 
 // Returns whether the player has a gimmick selected while in the move selection menu.
+<<<<<<< HEAD
 bool32 IsGimmickSelected(enum BattlerId battler, enum Gimmick gimmick)
+=======
+bool32 IsGimmickSelected(u32 battler, enum Gimmick gimmick)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     // There's no player select in tests, but some gimmicks need to test choice before they are fully activated.
     #if TESTING
@@ -51,26 +67,42 @@ bool32 IsGimmickSelected(enum BattlerId battler, enum Gimmick gimmick)
 }
 
 // Sets a battler as having a gimmick active using their party index.
+<<<<<<< HEAD
 void SetActiveGimmick(enum BattlerId battler, enum Gimmick gimmick)
+=======
+void SetActiveGimmick(u32 battler, enum Gimmick gimmick)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleStruct->gimmick.activeGimmick[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]] = gimmick;
 }
 
 // Returns a battler's active gimmick, if any.
+<<<<<<< HEAD
 enum Gimmick GetActiveGimmick(enum BattlerId battler)
+=======
+enum Gimmick GetActiveGimmick(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return gBattleStruct->gimmick.activeGimmick[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]];
 }
 
 // Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
+<<<<<<< HEAD
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick)
+=======
+bool32 ShouldTrainerBattlerUseGimmick(u32 battler, enum Gimmick gimmick)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     // There are no trainer party settings in battles, but the AI needs to know which gimmick to use.
     #if TESTING
     return gimmick == TestRunner_Battle_GetChosenGimmick(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler]);
     #else
     // The player can bypass these checks because they can choose through the controller.
+<<<<<<< HEAD
     if (IsOnPlayerSide(battler) && !((gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+=======
+    if (IsOnPlayerSide(battler) && !((gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         return TRUE;
     }
@@ -88,11 +120,19 @@ bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmi
 }
 
 // Returns whether a trainer has used a gimmick during a battle.
+<<<<<<< HEAD
 bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
     if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
     {
         enum BattlerId partner = BATTLE_PARTNER(battler);
+=======
+bool32 HasTrainerUsedGimmick(u32 battler, enum Gimmick gimmick)
+{
+    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
+    {
+        u32 partner = BATTLE_PARTNER(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (gBattleStruct->gimmick.activated[partner][gimmick]
          || ((gBattleStruct->gimmick.toActivate & (1u << partner)) && gBattleStruct->gimmick.usableGimmick[partner] == gimmick))
             return TRUE;
@@ -102,7 +142,11 @@ bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick)
 }
 
 // Sets a gimmick as used by a trainer with checks for Multi Battles.
+<<<<<<< HEAD
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
+=======
+void SetGimmickAsActivated(u32 battler, enum Gimmick gimmick)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
     if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
@@ -127,7 +171,11 @@ void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId)
     StartSpriteAnim(&gSprites[spriteId], animId);
 }
 
+<<<<<<< HEAD
 void CreateGimmickTriggerSprite(enum BattlerId battler)
+=======
+void CreateGimmickTriggerSprite(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     const struct GimmickInfo * gimmick = &gGimmicksInfo[gBattleStruct->gimmick.usableGimmick[battler]];
 
@@ -172,7 +220,11 @@ bool32 IsGimmickTriggerSpriteActive(void)
         return FALSE;
 }
 
+<<<<<<< HEAD
 bool32 IsGimmickTriggerSpriteMatchingBattler(enum BattlerId battler)
+=======
+bool32 IsGimmickTriggerSpriteMatchingBattler(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (battler == gSprites[gBattleStruct->gimmick.triggerSpriteId].tBattler)
         return TRUE;
@@ -273,7 +325,11 @@ void LoadIndicatorSpritesGfx(void)
 
 static void SpriteCb_GimmickIndicator(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler = sprite->tBattler;
+=======
+    u32 battler = sprite->tBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     sprite->x = gSprites[gHealthboxSpriteIds[battler]].x + sprite->tPosX + sprite->tLevelXDelta;
     sprite->x2 = gSprites[gHealthboxSpriteIds[battler]].x2;
@@ -285,7 +341,11 @@ static inline u32 GetIndicatorSpriteId(u32 healthboxId)
     return gBattleStruct->gimmick.indicatorSpriteId[gSprites[healthboxId].hMain_Battler];
 }
 
+<<<<<<< HEAD
 const u32 *GetIndicatorSpriteSrc(enum BattlerId battler)
+=======
+const u32 *GetIndicatorSpriteSrc(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 gimmick = GetActiveGimmick(battler);
 
@@ -310,7 +370,11 @@ const u32 *GetIndicatorSpriteSrc(enum BattlerId battler)
     }
 }
 
+<<<<<<< HEAD
 u32 GetIndicatorPalTag(enum BattlerId battler)
+=======
+u32 GetIndicatorPalTag(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 gimmick = GetActiveGimmick(battler);
     if (IsBattlerPrimalReverted(battler))
@@ -325,7 +389,11 @@ u32 GetIndicatorPalTag(enum BattlerId battler)
 
 void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
 {
+<<<<<<< HEAD
     enum BattlerId battler = gSprites[healthboxId].hMain_Battler;
+=======
+    u32 battler = gSprites[healthboxId].hMain_Battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 palTag = GetIndicatorPalTag(battler);
     struct Sprite *sprite = &gSprites[GetIndicatorSpriteId(healthboxId)];
 
@@ -377,7 +445,11 @@ static const s8 sIndicatorPositions[][2] =
     [B_POSITION_OPPONENT_RIGHT] = {40, -9},
 };
 
+<<<<<<< HEAD
 void CreateIndicatorSprite(enum BattlerId battler)
+=======
+void CreateIndicatorSprite(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum BattlerPosition position;
     u32 spriteId;

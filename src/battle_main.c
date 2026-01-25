@@ -69,7 +69,10 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_partner.h"
+<<<<<<< HEAD
 #include "constants/battle_setup.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -113,7 +116,11 @@ static void TryDoEventsBeforeFirstTurn(void);
 static void HandleTurnActionSelectionState(void);
 static void RunTurnActionsFunctions(void);
 static void SetActionsAndBattlersTurnOrder(void);
+<<<<<<< HEAD
 static void UpdateBattlerPartyOrdersOnSwitch(enum BattlerId battler);
+=======
+static void UpdateBattlerPartyOrdersOnSwitch(u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static bool8 AllAtActionConfirmed(void);
 static void TryChangeTurnOrder(void);
 static void TryChangingTurnOrderEffects(struct BattleCalcValues *calcValues, u32 *quickClawRandom, u32 *quickDrawRandom);
@@ -158,8 +165,13 @@ EWRAM_DATA u8 gBattlersCount = 0;
 EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerPositions[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT] = {0};
+<<<<<<< HEAD
 EWRAM_DATA enum BattlerId gBattlerByTurnOrder[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA enum BattlerId gBattlersBySpeed[MAX_BATTLERS_COUNT] = {0};
+=======
+EWRAM_DATA u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlersBySpeed[MAX_BATTLERS_COUNT] = {0};
+>>>>>>> 11d8f44022 (Updated to upcoming)
 EWRAM_DATA u8 gCurrentTurnActionNumber = 0;
 EWRAM_DATA u8 gCurrentActionFuncId = 0;
 EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
@@ -172,11 +184,19 @@ EWRAM_DATA u16 gCalledMove = 0;
 EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastUsedItem = 0;
 EWRAM_DATA enum Ability gLastUsedAbility = 0;
+<<<<<<< HEAD
 EWRAM_DATA enum BattlerId gBattlerAttacker = 0;
 EWRAM_DATA enum BattlerId gBattlerTarget = 0;
 EWRAM_DATA enum BattlerId gBattlerFainted = 0;
 EWRAM_DATA enum BattlerId gEffectBattler = 0;
 EWRAM_DATA enum BattlerId gPotentialItemEffectBattler = 0;
+=======
+EWRAM_DATA u8 gBattlerAttacker = 0;
+EWRAM_DATA u8 gBattlerTarget = 0;
+EWRAM_DATA u8 gBattlerFainted = 0;
+EWRAM_DATA u8 gEffectBattler = 0;
+EWRAM_DATA u8 gPotentialItemEffectBattler = 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 EWRAM_DATA u8 gAbsentBattlerFlags = 0;
 EWRAM_DATA u8 gMultiHitCounter = 0;
 EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
@@ -234,7 +254,11 @@ EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u32 gFieldStatuses = 0;
 EWRAM_DATA struct FieldTimer gFieldTimers = {0};
 EWRAM_DATA u16 gBattleTurnCounter = 0;
+<<<<<<< HEAD
 EWRAM_DATA enum BattlerId gBattlerAbility = 0;
+=======
+EWRAM_DATA u8 gBattlerAbility = 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 EWRAM_DATA struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u16 gLastUsedBall = 0;
@@ -369,6 +393,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_PIKE_QUEEN] = { _("PIKE QUEEN") },
     [TRAINER_CLASS_PYRAMID_KING] = { _("PYRAMID KING") },
     [TRAINER_CLASS_RS_PROTAG] = { _("{PKMN} TRAINER") },
+<<<<<<< HEAD
 
     [TRAINER_CLASS_YOUNGSTER_FRLG] =       { _("YOUNGSTER"), 4 },
     [TRAINER_CLASS_BUG_CATCHER_FRLG] =     { _("BUG CATCHER"), 3 },
@@ -420,6 +445,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_RUIN_MANIAC_FRLG] =     { _("RUIN MANIAC"), 12 },
     [TRAINER_CLASS_LADY_FRLG] =            { _("LADY"), 50 },
     [TRAINER_CLASS_PAINTER_FRLG] =         { _("PAINTER"), 4 },
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
@@ -567,7 +594,13 @@ static void CB2_InitBattleInternal(void)
     gBattle_BG3_Y = 0;
 
     if (!DEBUG_OVERWORLD_MENU || (DEBUG_OVERWORLD_MENU && !gIsDebugBattle))
+<<<<<<< HEAD
         gBattleEnvironment = BattleSetup_GetEnvironmentId();
+=======
+    {
+        gBattleEnvironment = BattleSetup_GetEnvironmentId();
+    }
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         gBattleEnvironment = BATTLE_ENVIRONMENT_BUILDING;
     if (TestRunner_Battle_GetForcedEnvironment())
@@ -613,8 +646,13 @@ static void CB2_InitBattleInternal(void)
         AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
 
         // Apply party-wide start-of-battle form changes for both sides.
+<<<<<<< HEAD
         TryFormChange(&gPlayerParty[i], FORM_CHANGE_BEGIN_BATTLE);
         TryFormChange(&gEnemyParty[i], FORM_CHANGE_BEGIN_BATTLE);
+=======
+        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BEGIN_BATTLE);
+        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BEGIN_BATTLE);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 
     #if TESTING
@@ -759,7 +797,11 @@ static void SetAllPlayersBerryData(void)
     {
         s32 numPlayers;
         struct BattleEnigmaBerry *src;
+<<<<<<< HEAD
         enum BattlerId battler;
+=======
+        u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
@@ -2734,7 +2776,11 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler = sprite->sBattler;
+=======
+    u8 battler = sprite->sBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 personality = GetMonData(GetBattlerMon(battler), MON_DATA_PERSONALITY);
     u16 species;
     u8 yOffset;
@@ -2865,7 +2911,11 @@ void SpriteCB_FaintSlideAnim(struct Sprite *sprite)
 #define sBouncerSpriteId    data[6]
 #define sWhich              data[7]
 
+<<<<<<< HEAD
 void DoBounceEffect(enum BattlerId battler, u8 which, s8 delta, s8 amplitude)
+=======
+void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 invisibleSpriteId;
     u8 bouncerSpriteId;
@@ -2907,7 +2957,11 @@ void DoBounceEffect(enum BattlerId battler, u8 which, s8 delta, s8 amplitude)
     gSprites[bouncerSpriteId].y2 = 0;
 }
 
+<<<<<<< HEAD
 void EndBounceEffect(enum BattlerId battler, u8 which)
+=======
+void EndBounceEffect(u8 battler, u8 which)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 bouncerSpriteId;
 
@@ -3023,8 +3077,15 @@ void BeginBattleIntro(void)
 
 static void BattleMainCB1(void)
 {
+<<<<<<< HEAD
     gBattleMainFunc();
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+    u32 battler;
+
+    gBattleMainFunc();
+    for (battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gBattlerControllerFuncs[battler](battler);
 }
 
@@ -3068,10 +3129,17 @@ static void BattleStartClearSetData(void)
         gLastHitBy[i] = 0xFF;
         gLockedMoves[i] = MOVE_NONE;
         gLastPrintedMoves[i] = MOVE_NONE;
+<<<<<<< HEAD
         gSelectionBattleScripts[i] = NULL;
         gPalaceSelectionBattleScripts[i] = NULL;
         gBattleStruct->lastTakenMove[i] = MOVE_NONE;
         gBattleStruct->choicedMove[i] = MOVE_NONE;
+=======
+        gPalaceSelectionBattleScripts[i] = 0;
+        gBattleStruct->lastTakenMove[i] = MOVE_NONE;
+        gBattleStruct->choicedMove[i] = MOVE_NONE;
+        gBattleStruct->changedItems[i] = 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gBattleStruct->lastTakenMoveFrom[i][0] = MOVE_NONE;
         gBattleStruct->lastTakenMoveFrom[i][1] = MOVE_NONE;
         gBattleStruct->lastTakenMoveFrom[i][2] = MOVE_NONE;
@@ -3165,16 +3233,28 @@ static void BattleStartClearSetData(void)
 
 #define UNPACK_VOLATILE_BATON_PASSABLES(_enum, _fieldName, _typeMaxValue, ...) __VA_OPT__(if ((FIRST(__VA_ARGS__)) & V_BATON_PASSABLE) gBattleMons[battler].volatiles._fieldName = volatilesCopy->_fieldName;)
 
+<<<<<<< HEAD
 void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCopy)
 {
+=======
+void SwitchInClearSetData(u32 battler, struct Volatiles *volatilesCopy)
+{
+    s32 i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     enum BattleMoveEffects effect = GetMoveEffect(gCurrentMove);
 
     ClearIllusionMon(battler);
     if (effect != EFFECT_BATON_PASS)
     {
+<<<<<<< HEAD
         for (enum Stat i = 0; i < NUM_BATTLE_STATS; i++)
             gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
+            gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
+        for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
@@ -3199,7 +3279,10 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
          * ...etc
          */
 
+<<<<<<< HEAD
         enum BattlerId i;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         for (i = 0; i < gBattlersCount; i++)
         {
             if (!IsBattlerAlly(battler, i)
@@ -3213,7 +3296,11 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
             SWAP(gBattleMons[battler].attack, gBattleMons[battler].defense, i);
     }
 
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (gBattleMons[i].volatiles.infatuation == INFATUATED_WITH(battler))
             gBattleMons[i].volatiles.infatuation = 0;
@@ -3271,14 +3358,22 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
 
     ClearPursuitValuesIfSet(battler);
 
+<<<<<<< HEAD
     for (u32 i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+=======
+    for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         // Switched into sticky web user slot, so reset stored battler ID
         if (gSideTimers[i].stickyWebBattlerId == battler)
             gSideTimers[i].stickyWebBattlerId = 0xFF;
     }
 
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (i != battler && !IsBattlerAlly(i, battler))
             gBattleStruct->lastTakenMove[i] = MOVE_NONE;
@@ -3306,25 +3401,42 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         enum BattleTrainer trainer = GetBattlerTrainer(battler);
         u32 partyIndex = gBattlerPartyIndexes[battler];
         if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
+<<<<<<< HEAD
             gBattleMons[battler].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
+=======
+            gBattleMons[i].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     #endif // TESTING
 
     Ai_UpdateSwitchInData(battler);
 }
 
+<<<<<<< HEAD
 const u8* FaintClearSetData(enum BattlerId battler)
 {
     const u8 *result = NULL;
 
     for (enum Stat i = 0; i < NUM_BATTLE_STATS; i++)
+=======
+const u8* FaintClearSetData(u32 battler)
+{
+    s32 i;
+    const u8 *result = NULL;
+
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
 
     bool32 keepGastroAcid = gBattleMons[battler].volatiles.gastroAcid;
     memset(&gBattleMons[battler].volatiles, 0, sizeof(struct Volatiles));
     gBattleMons[battler].volatiles.gastroAcid = keepGastroAcid; // Edge case: Keep Gastro Acid if pokemon's ability can have effect after fainting, for example Innards Out.
 
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
             gBattleMons[i].volatiles.escapePrevention = FALSE;
@@ -3371,14 +3483,21 @@ const u8* FaintClearSetData(enum BattlerId battler)
     gBattleStruct->lastTakenMoveFrom[battler][2] = 0;
     gBattleStruct->lastTakenMoveFrom[battler][3] = 0;
     gBattleStruct->palaceFlags &= ~(1u << battler);
+<<<<<<< HEAD
     if (battler == gBattlerAttacker)
         gBattleStruct->moldBreakerActive = FALSE;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     ClearPursuitValuesIfSet(battler);
 
     if (gBattleStruct->battlerState[battler].commanderSpecies != SPECIES_NONE)
     {
+<<<<<<< HEAD
         enum BattlerId partner = BATTLE_PARTNER(battler);
+=======
+        u32 partner = BATTLE_PARTNER(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (IsBattlerAlive(partner))
         {
             BtlController_EmitSpriteInvisibility(partner, B_COMM_TO_CONTROLLER, FALSE);
@@ -3386,14 +3505,22 @@ const u8* FaintClearSetData(enum BattlerId battler)
         }
     }
 
+<<<<<<< HEAD
     for (u32 i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+=======
+    for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         // User of sticky web fainted, so reset the stored battler ID
         if (gSideTimers[i].stickyWebBattlerId == battler)
             gSideTimers[i].stickyWebBattlerId = 0xFF;
     }
 
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (i != battler && !IsBattlerAlly(i, battler))
             gBattleStruct->lastTakenMove[i] = MOVE_NONE;
@@ -3406,7 +3533,11 @@ const u8* FaintClearSetData(enum BattlerId battler)
     gBattleMons[battler].types[2] = TYPE_MYSTERY;
 
     Ai_UpdateFaintData(battler);
+<<<<<<< HEAD
     TryBattleFormChange(battler, FORM_CHANGE_FAINT, GetBattlerAbility(battler));
+=======
+    TryBattleFormChange(battler, FORM_CHANGE_FAINT);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     // If the fainted mon was involved in a Sky Drop
     if (gBattleStruct->skyDropTargets[battler] != SKY_DROP_NO_TARGET)
@@ -3454,7 +3585,11 @@ const u8* FaintClearSetData(enum BattlerId battler)
 static void DoBattleIntro(void)
 {
     s32 i;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u32 battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     switch ((enum BattleIntroStates)gBattleStruct->eventState.battleIntro)
     {
@@ -3690,6 +3825,7 @@ static void DoBattleIntro(void)
         break;
     case BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT:
         if (!IsBattlerMarkedForControllerExec(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)))
+<<<<<<< HEAD
         {
             if (gBattleTypeFlags & BATTLE_TYPE_GHOST && CheckBagHasItem(ITEM_SILPH_SCOPE, 1))
             {
@@ -3698,6 +3834,9 @@ static void DoBattleIntro(void)
             }
             gBattleStruct->eventState.battleIntro++;
         }
+=======
+            gBattleStruct->eventState.battleIntro++;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         break;
     case BATTLE_INTRO_STATE_PRINT_PLAYER_SEND_OUT_TEXT:
         if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
@@ -3798,12 +3937,21 @@ static void TryDoEventsBeforeFirstTurn(void)
         // Set invalid mons as absent(for example when starting a double battle with only one pokemon).
         if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
         {
+<<<<<<< HEAD
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
             {
                 gBattleStruct->monToSwitchIntoId[battler] = PARTY_SIZE; // Included here because switches can happen before during set ups (eg. eject pack)
                 struct Pokemon *mon = GetBattlerMon(battler);
                 if (!IsBattlerAlive(battler) || gBattleMons[battler].species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
                     gAbsentBattlerFlags |= 1u << battler;
+=======
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                gBattleStruct->monToSwitchIntoId[i] = PARTY_SIZE; // Included here because switches can happen before during set ups (eg. eject pack)
+                struct Pokemon *mon = GetBattlerMon(i);
+                if (!IsBattlerAlive(i) || gBattleMons[i].species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
+                    gAbsentBattlerFlags |= 1u << i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
             }
         }
 
@@ -3811,12 +3959,21 @@ static void TryDoEventsBeforeFirstTurn(void)
         #if TESTING
         if (gTestRunnerEnabled)
         {
+<<<<<<< HEAD
             for (enum BattlerId battler = 0; battler < gBattlersCount; ++battler)
             {
                 enum BattleTrainer trainer = GetBattlerTrainer(battler);
                 u32 partyIndex = gBattlerPartyIndexes[battler];
                 if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
                     gBattleMons[battler].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
+=======
+            for (i = 0; i < gBattlersCount; ++i)
+            {
+                enum BattleTrainer trainer = GetBattlerTrainer(i);
+                u32 partyIndex = gBattlerPartyIndexes[i];
+                if (TestRunner_Battle_GetForcedAbility(trainer, partyIndex))
+                    gBattleMons[i].ability = TestRunner_Battle_GetForcedAbility(trainer, partyIndex);
+>>>>>>> 11d8f44022 (Updated to upcoming)
             }
         }
         #endif // TESTING
@@ -3845,11 +4002,19 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_TOTEM_BOOST:
+<<<<<<< HEAD
         for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
         {
             if (gQueuedStatBoosts[battler].stats != 0 && !gProtectStructs[battler].eatMirrorHerb && gProtectStructs[battler].activateOpportunist == 0)
             {
                 gBattlerAttacker = battler;
+=======
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gQueuedStatBoosts[i].stats != 0 && !gProtectStructs[i].eatMirrorHerb && gProtectStructs[i].activateOpportunist == 0)
+            {
+                gBattlerAttacker = i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 BattleScriptExecute(BattleScript_TotemVar);
                 return;
             }
@@ -3859,7 +4024,11 @@ static void TryDoEventsBeforeFirstTurn(void)
         break;
     case FIRST_TURN_SWITCH_IN_EVENTS:
         gBattleStruct->eventState.switchIn = 0;
+<<<<<<< HEAD
         for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+        for (u32 battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             gBattleStruct->battlerState[battler].switchIn = TRUE;
         BattleScriptPushCursorAndCallback(BattleScript_FirstTurnSwitchInEvents);
         gBattleStruct->eventState.beforeFirstTurn++;
@@ -3895,11 +4064,19 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->eventState.beforeFirstTurn++;
         break;
     case FIRST_TURN_EVENTS_END:
+<<<<<<< HEAD
         for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
         {
             gBattleStruct->monToSwitchIntoId[battler] = PARTY_SIZE;
             gChosenActionByBattler[battler] = B_ACTION_NONE;
             gChosenMoveByBattler[battler] = MOVE_NONE;
+=======
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        {
+            gBattleStruct->monToSwitchIntoId[i] = PARTY_SIZE;
+            gChosenActionByBattler[i] = B_ACTION_NONE;
+            gChosenMoveByBattler[i] = MOVE_NONE;
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
         TurnValuesCleanUp(FALSE);
         memset(&gSpecialStatuses, 0, sizeof(gSpecialStatuses));
@@ -3934,6 +4111,7 @@ static void TryDoEventsBeforeFirstTurn(void)
 
 static void HandleEndTurn_ContinueBattle(void)
 {
+<<<<<<< HEAD
     if (gBattleControllerExecFlags == 0)
     {
         gBattleMainFunc = BattleTurnPassed;
@@ -3944,6 +4122,20 @@ static void HandleEndTurn_ContinueBattle(void)
             gBattleMons[battler].volatiles.flinched = FALSE;
             if ((gBattleMons[battler].status1 & STATUS1_SLEEP) && (gBattleMons[battler].volatiles.multipleTurns))
                 CancelMultiTurnMoves(battler, SKY_DROP_IGNORE);
+=======
+    s32 i;
+
+    if (gBattleControllerExecFlags == 0)
+    {
+        gBattleMainFunc = BattleTurnPassed;
+        for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
+            gBattleCommunication[i] = 0;
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            gBattleMons[i].volatiles.flinched = FALSE;
+            if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].volatiles.multipleTurns))
+                CancelMultiTurnMoves(i, SKY_DROP_IGNORE);
+>>>>>>> 11d8f44022 (Updated to upcoming)
         }
         gBattleStruct->eventState.endTurnBlock = 0;
         gBattleStruct->eventState.endTurnBattler = 0;
@@ -3990,6 +4182,7 @@ void BattleTurnPassed(void)
         gBattleStruct->eventState.arenaTurn++;
     }
 
+<<<<<<< HEAD
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
         gChosenActionByBattler[battler] = B_ACTION_NONE;
@@ -4001,6 +4194,19 @@ void BattleTurnPassed(void)
 
         if (gBattleStruct->battlerState[battler].stompingTantrumTimer > 0)
             gBattleStruct->battlerState[battler].stompingTantrumTimer--;
+=======
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        gChosenActionByBattler[i] = B_ACTION_NONE;
+        gChosenMoveByBattler[i] = MOVE_NONE;
+        gBattleStruct->monToSwitchIntoId[i] = PARTY_SIZE;
+        gBattleMons[i].volatiles.electrified = FALSE;
+        gBattleMons[i].volatiles.flinched = FALSE;
+        gBattleMons[i].volatiles.powder = FALSE;
+
+        if (gBattleStruct->battlerState[i].stompingTantrumTimer > 0)
+            gBattleStruct->battlerState[i].stompingTantrumTimer--;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
 
     for (i = 0; i < NUM_BATTLE_SIDES; i++)
@@ -4023,7 +4229,11 @@ void BattleTurnPassed(void)
         BattleScriptExecute(BattleScript_ArenaTurnBeginning);
 }
 
+<<<<<<< HEAD
 u8 IsRunningFromBattleImpossible(enum BattlerId battler)
+=======
+u8 IsRunningFromBattleImpossible(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum HoldEffect holdEffect;
     u32 i;
@@ -4078,7 +4288,11 @@ u8 IsRunningFromBattleImpossible(enum BattlerId battler)
     return BATTLE_RUN_SUCCESS;
 }
 
+<<<<<<< HEAD
 void SwitchTwoBattlersInParty(enum BattlerId battler, enum BattlerId battler2)
+=======
+void SwitchTwoBattlersInParty(u32 battler, u32 battler2)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
     u32 partyId1, partyId2;
@@ -4097,7 +4311,11 @@ void SwitchTwoBattlersInParty(enum BattlerId battler, enum BattlerId battler2)
     }
 }
 
+<<<<<<< HEAD
 void SwitchPartyOrder(enum BattlerId battler)
+=======
+void SwitchPartyOrder(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 i;
     u32 partyId1, partyId2;
@@ -4141,10 +4359,17 @@ enum
 
 static void HandleTurnActionSelectionState(void)
 {
+<<<<<<< HEAD
     s32 i;
 
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+    s32 i, battler;
+
+    gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
+    for (battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         enum BattlerPosition position = GetBattlerPosition(battler);
         switch (gBattleCommunication[battler])
@@ -4326,11 +4551,16 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_SAFARI_POKEBLOCK:
+<<<<<<< HEAD
                     if (!IS_FRLG)
                     {
                         BtlController_EmitChooseItem(battler, B_COMM_TO_CONTROLLER, gBattleStruct->battlerPartyOrders[battler]);
                         MarkBattlerForControllerExec(battler);
                     }
+=======
+                    BtlController_EmitChooseItem(battler, B_COMM_TO_CONTROLLER, gBattleStruct->battlerPartyOrders[battler]);
+                    MarkBattlerForControllerExec(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
                     break;
                 case B_ACTION_CANCEL_PARTNER:
                     gBattleCommunication[battler] = STATE_WAIT_SET_BEFORE_ACTION;
@@ -4466,7 +4696,11 @@ static void HandleTurnActionSelectionState(void)
 
                             // Get the chosen move position (and thus the chosen move) and target from the returned buffer.
                             gBattleStruct->chosenMovePositions[battler] = gBattleResources->bufferB[battler][2] & ~RET_GIMMICK;
+<<<<<<< HEAD
                             gChosenMoveByBattler[battler] = GetBattlerChosenMove(battler);
+=======
+                            gChosenMoveByBattler[battler] = GetChosenMoveFromPosition(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
                             gBattleStruct->moveTarget[battler] = gBattleResources->bufferB[battler][3];
                             if (IsBattleMoveStatus(gChosenMoveByBattler[battler]) && GetBattlerAbility(battler) == ABILITY_MYCELIUM_MIGHT)
                                 gProtectStructs[battler].myceliumMight = TRUE;
@@ -4480,7 +4714,11 @@ static void HandleTurnActionSelectionState(void)
                             // Max Move check
                             if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX || IsGimmickSelected(battler, GIMMICK_DYNAMAX))
                             {
+<<<<<<< HEAD
                                 gBattleStruct->dynamax.baseMoves[battler] = GetBattlerChosenMove(battler);
+=======
+                                gBattleStruct->dynamax.baseMoves[battler] = GetChosenMoveFromPosition(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
                             }
                             gBattleCommunication[battler]++;
 
@@ -4535,6 +4773,7 @@ static void HandleTurnActionSelectionState(void)
                     gBattleCommunication[battler]++;
                     break;
                 case B_ACTION_SAFARI_POKEBLOCK:
+<<<<<<< HEAD
                     if (IS_FRLG)
                     {
                         gBattleCommunication[battler]++;
@@ -4546,6 +4785,12 @@ static void HandleTurnActionSelectionState(void)
                         else
                             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                     }
+=======
+                    if ((gBattleResources->bufferB[battler][1] | (gBattleResources->bufferB[battler][2] << 8)) != 0)
+                        gBattleCommunication[battler]++;
+                    else
+                        gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
+>>>>>>> 11d8f44022 (Updated to upcoming)
                     break;
                 case B_ACTION_SAFARI_GO_NEAR:
                     gBattleCommunication[battler]++;
@@ -4668,10 +4913,17 @@ static void HandleTurnActionSelectionState(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
+<<<<<<< HEAD
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
             {
                 if (gChosenActionByBattler[battler] == B_ACTION_SWITCH)
                     SwitchPartyOrderInGameMulti(battler, gBattleStruct->monToSwitchIntoId[battler]);
+=======
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gChosenActionByBattler[i] == B_ACTION_SWITCH)
+                    SwitchPartyOrderInGameMulti(i, gBattleStruct->monToSwitchIntoId[i]);
+>>>>>>> 11d8f44022 (Updated to upcoming)
             }
         }
     }
@@ -4679,8 +4931,12 @@ static void HandleTurnActionSelectionState(void)
 
 static bool8 AllAtActionConfirmed(void)
 {
+<<<<<<< HEAD
     enum BattlerId i;
     s32 count;
+=======
+    s32 i, count;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     for (count = 0, i = 0; i < gBattlersCount; i++)
     {
@@ -4694,7 +4950,11 @@ static bool8 AllAtActionConfirmed(void)
         return FALSE;
 }
 
+<<<<<<< HEAD
 static void UpdateBattlerPartyOrdersOnSwitch(enum BattlerId battler)
+=======
+static void UpdateBattlerPartyOrdersOnSwitch(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     gBattleStruct->monToSwitchIntoId[battler] = gBattleResources->bufferB[battler][1];
     RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][1]);
@@ -4720,7 +4980,11 @@ void SwapTurnOrder(u8 id1, u8 id2)
 }
 
 // For AI, so it doesn't 'cheat' by knowing player's ability
+<<<<<<< HEAD
 u32 GetBattlerTotalSpeedStat(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect)
+=======
+u32 GetBattlerTotalSpeedStat(u32 battler, enum Ability ability, enum HoldEffect holdEffect)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u32 speed = gBattleMons[battler].speed;
 
@@ -4787,7 +5051,11 @@ u32 GetBattlerTotalSpeedStat(enum BattlerId battler, enum Ability ability, enum 
     return speed;
 }
 
+<<<<<<< HEAD
 s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability)
+=======
+s32 GetChosenMovePriority(u32 battler, enum Ability ability)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Move move;
 
@@ -4795,12 +5063,20 @@ s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability)
     if (gProtectStructs[battler].noValidMoves)
         move = MOVE_STRUGGLE;
     else
+<<<<<<< HEAD
         move = GetBattlerChosenMove(battler);
+=======
+        move = GetChosenMoveFromPosition(battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     return GetBattleMovePriority(battler, ability, move);
 }
 
+<<<<<<< HEAD
 s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Move move)
+=======
+s32 GetBattleMovePriority(u32 battler, enum Ability ability, enum Move move)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     s32 priority = 0;
 
@@ -4976,7 +5252,11 @@ s32 GetWhichBattlerFaster(struct BattleCalcValues *calcValues, bool32 ignoreChos
 static void SetActionsAndBattlersTurnOrder(void)
 {
     s32 turnOrderId = 0;
+<<<<<<< HEAD
     enum BattlerId battler, battler2;
+=======
+    s32 i, j, battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
     {
@@ -5004,12 +5284,20 @@ static void SetActionsAndBattlersTurnOrder(void)
         {
             if (gChosenActionByBattler[0] == B_ACTION_RUN)
             {
+<<<<<<< HEAD
                 battler = B_BATTLER_0;
+=======
+                battler = 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 turnOrderId = 5;
             }
             if (gChosenActionByBattler[2] == B_ACTION_RUN)
             {
+<<<<<<< HEAD
                 battler = B_BATTLER_2;
+=======
+                battler = 2;
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 turnOrderId = 5;
             }
         }
@@ -5019,12 +5307,21 @@ static void SetActionsAndBattlersTurnOrder(void)
             gActionsByTurnOrder[0] = gChosenActionByBattler[battler];
             gBattlerByTurnOrder[0] = battler;
             turnOrderId = 1;
+<<<<<<< HEAD
             for (battler2 = 0; battler2 < gBattlersCount; battler2++)
             {
                 if (battler2 != battler)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler2];
                     gBattlerByTurnOrder[turnOrderId] = battler2;
+=======
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (i != battler)
+                {
+                    gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[i];
+                    gBattlerByTurnOrder[turnOrderId] = i;
+>>>>>>> 11d8f44022 (Updated to upcoming)
                     turnOrderId++;
                 }
             }
@@ -5059,6 +5356,7 @@ static void SetActionsAndBattlersTurnOrder(void)
                 }
             }
             struct BattleCalcValues calcValues = {0};
+<<<<<<< HEAD
             for (battler = 0; battler < gBattlersCount; battler++)
             {
                 calcValues.abilities[battler] = GetBattlerAbility(battler);
@@ -5080,6 +5378,29 @@ static void SetActionsAndBattlersTurnOrder(void)
                     {
                         if (GetWhichBattlerFaster(&calcValues, FALSE) == -1)
                             SwapTurnOrder(battler, battler2);
+=======
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                calcValues.abilities[i] = GetBattlerAbility(i);
+                calcValues.holdEffects[i] = GetBattlerHoldEffect(i);
+            }
+            for (i = 0; i < gBattlersCount - 1; i++)
+            {
+                for (j = i + 1; j < gBattlersCount; j++)
+                {
+                    calcValues.battlerAtk = gBattlerByTurnOrder[i];
+                    calcValues.battlerDef = gBattlerByTurnOrder[j];
+                    TryChangingTurnOrderEffects(&calcValues, quickClawRandom, quickDrawRandom);
+                    if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[i] != B_ACTION_SWITCH
+                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH
+                        && gActionsByTurnOrder[i] != B_ACTION_THROW_BALL
+                        && gActionsByTurnOrder[j] != B_ACTION_THROW_BALL)
+                    {
+                        if (GetWhichBattlerFaster(&calcValues, FALSE) == -1)
+                            SwapTurnOrder(i, j);
+>>>>>>> 11d8f44022 (Updated to upcoming)
                     }
                 }
             }
@@ -5091,7 +5412,13 @@ static void SetActionsAndBattlersTurnOrder(void)
 
 static void TurnValuesCleanUp(bool8 var0)
 {
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
+=======
+    s32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
     {
         if (var0)
         {
@@ -5139,11 +5466,20 @@ static void TurnValuesCleanUp(bool8 var0)
 
 static void PopulateArrayWithBattlers(u8 *battlers)
 {
+<<<<<<< HEAD
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
         battlers[i] = i;
 }
 
 static bool32 TryActivateGimmick(enum BattlerId battler)
+=======
+    u32 i;
+    for (i = 0; i < gBattlersCount; i++)
+        battlers[i] = i;
+}
+
+static bool32 TryActivateGimmick(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if ((gBattleStruct->gimmick.toActivate & (1u << battler)) && !(gProtectStructs[battler].noValidMoves))
     {
@@ -5162,6 +5498,7 @@ static bool32 TryDoGimmicksBeforeMoves(void)
 {
     if (!(gHitMarker & HITMARKER_RUN) && gBattleStruct->gimmick.toActivate)
     {
+<<<<<<< HEAD
         enum BattlerId battlers[MAX_BATTLERS_COUNT];
 
         PopulateArrayWithBattlers(battlers);
@@ -5170,6 +5507,17 @@ static bool32 TryDoGimmicksBeforeMoves(void)
         {
             // Search through each battler and activate their gimmick if they have one prepared.
             if (TryActivateGimmick(battlers[i]))
+=======
+        u32 i;
+        u8 order[MAX_BATTLERS_COUNT];
+
+        PopulateArrayWithBattlers(order);
+        SortBattlersBySpeed(order, FALSE);
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            // Search through each battler and activate their gimmick if they have one prepared.
+            if (TryActivateGimmick(order[i]))
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 return TRUE;
         }
     }
@@ -5183,6 +5531,7 @@ static bool32 TryDoMoveEffectsBeforeMoves(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
+<<<<<<< HEAD
         enum BattlerId battlers[MAX_BATTLERS_COUNT];
 
         PopulateArrayWithBattlers(battlers);
@@ -5197,6 +5546,22 @@ static bool32 TryDoMoveEffectsBeforeMoves(void)
             {
                 gBattleStruct->battlerState[battler].focusPunchBattlers = TRUE;
                 gBattlerAttacker = battler;
+=======
+        u32 i;
+        u8 battlers[MAX_BATTLERS_COUNT];
+
+        PopulateArrayWithBattlers(battlers);
+        SortBattlersBySpeed(battlers, FALSE);
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (!gBattleStruct->battlerState[battlers[i]].focusPunchBattlers
+                && !(gBattleMons[battlers[i]].status1 & STATUS1_SLEEP)
+                && !(gBattleMons[battlers[i]].volatiles.truantCounter)
+                && !(gProtectStructs[battlers[i]].noValidMoves))
+            {
+                gBattleStruct->battlerState[battlers[i]].focusPunchBattlers = TRUE;
+                gBattlerAttacker = battlers[i];
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 switch (GetMoveEffect(gChosenMoveByBattler[gBattlerAttacker]))
                 {
                 case EFFECT_FOCUS_PUNCH:
@@ -5221,7 +5586,11 @@ static bool32 TryDoMoveEffectsBeforeMoves(void)
 // In gen7, priority and speed are recalculated during the turn in which a pokemon mega evolves
 static void TryChangeTurnOrder(void)
 {
+<<<<<<< HEAD
     enum BattlerId i, j;
+=======
+    u32 i, j;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     struct BattleCalcValues calcValues = {0};
     for (i = 0; i < gBattlersCount; i++)
@@ -5248,8 +5617,13 @@ static void TryChangeTurnOrder(void)
 
 static void TryChangingTurnOrderEffects(struct BattleCalcValues *calcValues, u32 *quickClawRandom, u32 *quickDrawRandom)
 {
+<<<<<<< HEAD
     enum BattlerId battler1 = calcValues->battlerAtk;
     enum BattlerId battler2 = calcValues->battlerDef;
+=======
+    u32 battler1 = calcValues->battlerAtk;
+    u32 battler2 = calcValues->battlerDef;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     enum Ability ability1 = calcValues->abilities[calcValues->battlerAtk];
     enum Ability ability2 = calcValues->abilities[calcValues->battlerDef];
     enum HoldEffect holdEffectBattler1 = calcValues->holdEffects[calcValues->battlerAtk];
@@ -5278,7 +5652,11 @@ static void TryChangingTurnOrderEffects(struct BattleCalcValues *calcValues, u32
 
 static void CheckChangingTurnOrderEffects(void)
 {
+<<<<<<< HEAD
     enum BattlerId i, battler;
+=======
+    u32 i, battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (!(gHitMarker & HITMARKER_RUN))
     {
@@ -5468,6 +5846,7 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
+<<<<<<< HEAD
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
         {
             if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
@@ -5480,6 +5859,8 @@ static void HandleEndTurn_BattleLost(void)
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
         gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     }
 
@@ -5537,6 +5918,11 @@ static void HandleEndTurn_MonFled(void)
 
 static void HandleEndTurn_FinishBattle(void)
 {
+<<<<<<< HEAD
+=======
+    u32 i, battler;
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
@@ -5544,11 +5930,18 @@ static void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_FIRST_BATTLE
                                   | BATTLE_TYPE_SAFARI
                                   | BATTLE_TYPE_EREADER_TRAINER
+<<<<<<< HEAD
                                   | BATTLE_TYPE_CATCH_TUTORIAL
                                   | BATTLE_TYPE_FRONTIER))
             && !(gBattleTypeFlags & BATTLE_TYPE_GHOST && IsGhostBattleWithoutScope()))
         {
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+=======
+                                  | BATTLE_TYPE_WALLY_TUTORIAL
+                                  | BATTLE_TYPE_FRONTIER)))
+        {
+            for (battler = 0; battler < gBattlersCount; battler++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
             {
                 if (IsOnPlayerSide(battler))
                 {
@@ -5595,7 +5988,11 @@ static void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_SAFARI
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_EREADER_TRAINER
+<<<<<<< HEAD
                                   | BATTLE_TYPE_CATCH_TUTORIAL))
+=======
+                                  | BATTLE_TYPE_WALLY_TUTORIAL))
+>>>>>>> 11d8f44022 (Updated to upcoming)
             && gBattleResults.shinyWildMon)
         {
             TryPutBreakingNewsOnAir();
@@ -5606,7 +6003,11 @@ static void HandleEndTurn_FinishBattle(void)
         if (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
             TryRestoreHeldItems();
 
+<<<<<<< HEAD
         for (u32 i = 0; i < PARTY_SIZE; i++)
+=======
+        for (i = 0; i < PARTY_SIZE; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             bool32 changedForm = TryRevertPartyMonFormChange(i);
 
@@ -5620,13 +6021,21 @@ static void HandleEndTurn_FinishBattle(void)
         // Clear battle mon species to avoid a bug on the next battle that causes
         // healthboxes loading incorrectly due to it trying to create a Mega Indicator
         // if the previous battler would've had it.
+<<<<<<< HEAD
         for (enum BattlerId i = 0; i < MAX_BATTLERS_COUNT; i++)
+=======
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             gBattleMons[i].species = SPECIES_NONE;
         }
 
         // Set Battle Controllers to BATTLE_CONTROLLER_NONE
+<<<<<<< HEAD
         for (enum BattlerId i = 0; i < MAX_BATTLERS_COUNT; i++)
+=======
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             gBattlerBattleController[i] = BATTLE_CONTROLLER_NONE;
         }
@@ -5664,7 +6073,11 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
                                   | BATTLE_TYPE_SAFARI
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_EREADER_TRAINER
+<<<<<<< HEAD
                                   | BATTLE_TYPE_CATCH_TUTORIAL))
+=======
+                                  | BATTLE_TYPE_WALLY_TUTORIAL))
+>>>>>>> 11d8f44022 (Updated to upcoming)
             && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6
                 || gBattleOutcome == B_OUTCOME_WON
                 || gBattleOutcome == B_OUTCOME_CAUGHT))
@@ -5791,7 +6204,11 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
+<<<<<<< HEAD
 enum Type TrySetAteType(enum Move move, enum BattlerId battlerAtk, enum Ability attackerAbility)
+=======
+enum Type TrySetAteType(enum Move move, u32 battlerAtk, enum Ability attackerAbility)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Type ateType = TYPE_NONE;
 
@@ -5839,7 +6256,11 @@ enum Type TrySetAteType(enum Move move, enum BattlerId battlerAtk, enum Ability 
 }
 
 // Returns TYPE_NONE if type doesn't change.
+<<<<<<< HEAD
 enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId battler, enum MonState state)
+=======
+enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, u32 battler, enum MonState state)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Type moveType = GetMoveType(move);
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);
@@ -6037,10 +6458,13 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
         if (species == SPECIES_TERAPAGOS_STELLAR)
             return TYPE_STELLAR;
         break;
+<<<<<<< HEAD
     case EFFECT_NATURE_POWER:
         if (state == MON_IN_BATTLE)
             return GetMoveType(GetNaturePowerMove());
         break;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     default:
         break;
     }
@@ -6081,7 +6505,11 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
     return TYPE_NONE;
 }
 
+<<<<<<< HEAD
 void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler)
+=======
+void SetTypeBeforeUsingMove(enum Move move, u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     enum Type moveType;
     u32 heldItem = gBattleMons[battler].item;
@@ -6119,7 +6547,11 @@ void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler)
 // Queues stat boosts for a given battler for totem battles
 void ScriptSetTotemBoost(struct ScriptContext *ctx)
 {
+<<<<<<< HEAD
     enum BattlerId battler = VarGet(ScriptReadHalfword(ctx));
+=======
+    u32 battler = VarGet(ScriptReadHalfword(ctx));
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 stat;
     u32 i;
 

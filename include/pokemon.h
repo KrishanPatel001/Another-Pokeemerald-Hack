@@ -626,6 +626,7 @@ struct FormChange
     u16 param1;
     u16 param2;
     u16 param3;
+<<<<<<< HEAD
     u16 param4;
 };
 
@@ -646,6 +647,8 @@ struct FormChangeContext
     enum Type teraType;
     u32 level:7;
     u32 padding:8;
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 };
 
 enum FusionExtraMoveHandling
@@ -763,8 +766,13 @@ enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u3
 enum Move MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, enum Move move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, enum Move move);
+<<<<<<< HEAD
 u8 CountAliveMonsInBattle(u8 caseId, enum BattlerId battler);
 u8 GetDefaultMoveTarget(enum BattlerId battler);
+=======
+u8 CountAliveMonsInBattle(u8 caseId, u32 battler);
+u8 GetDefaultMoveTarget(u8 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
@@ -793,7 +801,11 @@ u8 GiveCapturedMonToPlayer(struct Pokemon *mon);
 u8 CopyMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
+<<<<<<< HEAD
 u8 CalculateEnemyPartyCountInSide(enum BattlerId battler);
+=======
+u8 CalculateEnemyPartyCountInSide(u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u8 GetMonsStateToDoubles(void);
 u8 GetMonsStateToDoubles_2(void);
 enum Ability GetAbilityBySpecies(u16 species, u8 abilityNum);
@@ -828,11 +840,19 @@ void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
 void RemoveBoxMonPPBonus(struct BoxPokemon *mon, u8 moveIndex);
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
 void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst);
+<<<<<<< HEAD
 void CopyPartyMonToBattleData(enum BattlerId battler, u32 partyIndex);
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, enum Item item, u8 partyIndex, u8 moveIndex);
 bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, u8 moveIndex, u8 usedByAI);
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, enum BattlerId battler);
 u8 GetItemEffectParamOffset(enum BattlerId battler, enum Item itemId, u8 effectByte, u8 effectBit);
+=======
+void CopyPartyMonToBattleData(u32 battler, u32 partyIndex);
+bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, enum Item item, u8 partyIndex, u8 moveIndex);
+bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, u8 moveIndex, u8 usedByAI);
+bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battler);
+u8 GetItemEffectParamOffset(u32 battler, enum Item itemId, u8 effectByte, u8 effectBit);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 u8 *UseStatIncreaseItem(enum Item itemId);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
@@ -841,6 +861,7 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
 u32 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 evolutionItem, struct Pokemon *tradePartner, bool32 *canStopEvo, enum EvoState evoState);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
 u16 NationalPokedexNumToSpecies(enum NationalDexOrder nationalNum);
+<<<<<<< HEAD
 u32 NationalToRegionalOrder(enum NationalDexOrder nationalNum);
 enum KantoDexOrder NationalToKantoOrder(enum NationalDexOrder nationalNum);
 enum HoennDexOrder NationalToHoennOrder(enum NationalDexOrder nationalNum);
@@ -850,6 +871,11 @@ enum KantoDexOrder SpeciesToKantoPokedexNum(u16 species);
 enum HoennDexOrder SpeciesToHoennPokedexNum(u16 species);
 enum NationalDexOrder RegionalToNationalOrder(u32 regionNum);
 enum NationalDexOrder KantoToNationalOrder(enum KantoDexOrder kantoNum);
+=======
+enum HoennDexOrder NationalToHoennOrder(enum NationalDexOrder nationalNum);
+enum NationalDexOrder SpeciesToNationalPokedexNum(u16 species);
+enum HoennDexOrder SpeciesToHoennPokedexNum(u16 species);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 enum NationalDexOrder HoennToNationalOrder(enum HoennDexOrder hoennNum);
 void DrawSpindaSpots(u32 personality, u8 *dest, bool32 isSecondFrame);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
@@ -866,8 +892,11 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u8 CanLearnTeachableMove(u16 species, enum Move move);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 u16 SpeciesToPokedexNum(u16 species);
+<<<<<<< HEAD
 bool32 IsSpeciesInRegionalDex(u16 species);
 bool32 IsSpeciesInKantoDex(u16 species);
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 bool32 IsSpeciesInHoennDex(u16 species);
 u16 GetBattleBGM(void);
 void PlayBattleBGM(void);
@@ -907,14 +936,23 @@ void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
 u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
+<<<<<<< HEAD
 u32 GetFormChangeTargetSpecies_Internal(struct FormChangeContext ctx);
+=======
+u32 GetFormChangeTargetSpecies(struct Pokemon *mon, enum FormChanges method, u32 arg);
+u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method, u32 arg);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 bool32 DoesSpeciesHaveFormChangeMethod(u16 species, enum FormChanges method);
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo(void);
 bool32 SpeciesHasGenderDifferences(u16 species);
+<<<<<<< HEAD
 bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method);
 bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method);
+=======
+bool32 TryFormChange(u32 monId, enum BattleSide side, enum FormChanges method);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, enum FormChanges method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 u32 GetMonAffectionHearts(struct Pokemon *pokemon);
@@ -928,7 +966,11 @@ void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
 void UpdateDaysPassedSinceFormChange(u16 days);
 void TrySetDayLimitToFormChange(struct Pokemon *mon);
+<<<<<<< HEAD
 enum Type CheckDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId battler, enum MonState state);
+=======
+enum Type CheckDynamicMoveType(struct Pokemon *mon, enum Move move, u32 battler, enum MonState state);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier);
 u32 GetRegionalFormByRegion(u32 species, u32 region);
 bool32 IsSpeciesForeignRegionalForm(u32 species, u32 currentRegion);

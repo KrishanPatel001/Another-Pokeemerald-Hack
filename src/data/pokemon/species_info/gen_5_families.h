@@ -563,8 +563,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_EmboarMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -2899,8 +2904,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_ExcadrillMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -4138,6 +4148,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             "Its deadly venom gives off a faint\n"
             "glow. The venom affects Scolipede's\n"
             "mind, honing its viciousness."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_ScolipedeMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -4154,6 +4165,24 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Scolipede)
         SHADOW(2, 14, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Scolipede)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sScolipedeLevelUpLearnset,
         .teachableLearnset = sScolipedeTeachableLearnset,
@@ -5886,8 +5915,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_ScraftyMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -9903,8 +9937,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         //.backAnimId = BACK_ANIM_NONE,
         //.palette = gMonPalette_CircledQuestionMark,
         //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+<<<<<<< HEAD
         .iconSprite = gMonIcon_EelektrossMega,
         .iconPalIndex = 0,
+=======
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
         SHADOW(-1, 0, SHADOW_SIZE_M)
@@ -10338,6 +10377,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             "our world with the afterlife.\n"
             "This Pokémon draws in hatred and\n"
             "converts it into power."),
+<<<<<<< HEAD
         .frontPic = gMonFrontPic_ChandelureMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -10355,6 +10395,24 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Chandelure)
         SHADOW(-1, 16, SHADOW_SIZE_L)
+=======
+        //.frontPic = gMonFrontPic_CircledQuestionMark,
+        //.frontPicSize = MON_COORDS_SIZE(40, 40),
+        //.frontPicYOffset = 12,
+        //.frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        //.backPic = gMonBackPic_CircledQuestionMark,
+        //.backPicSize = MON_COORDS_SIZE(40, 40),
+        //.backPicYOffset = 12,
+        //.backAnimId = BACK_ANIM_NONE,
+        //.palette = gMonPalette_CircledQuestionMark,
+        //.shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        //.iconSprite = gMonIcon_QuestionMark,
+        //.iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Chandelure)
+        //SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sChandelureLevelUpLearnset,
         .teachableLearnset = sChandelureTeachableLearnset,
@@ -11461,6 +11519,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             "The energy within Golurk has been\n"
             "stimulated by Mega Evolution.\n"
             "The Pokémon could explode at any moment."),
+<<<<<<< HEAD
         //.frontPic = gMonBackPic_CircledQuestionMark,
         //.frontPicSize = MON_COORDS_SIZE(40, 40),
         //.frontPicYOffset = 12,
@@ -11477,6 +11536,24 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(Golurk)
         //SHADOW(-1, 0, SHADOW_SIZE_M)
+=======
+        .frontPic = gMonBackPic_CircledQuestionMark,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 12,
+        .frontAnimFrames = sAnims_TwoFramePlaceHolder,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .backPic = gMonBackPic_CircledQuestionMark,
+        .backPicSize = MON_COORDS_SIZE(40, 40),
+        .backPicYOffset = 12,
+        .backAnimId = BACK_ANIM_NONE,
+        .palette = gMonPalette_CircledQuestionMark,
+        .shinyPalette = gMonShinyPalette_CircledQuestionMark,
+        .iconSprite = gMonIcon_QuestionMark,
+        .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
+        FOOTPRINT(Golurk)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .isMegaEvolution = TRUE,
         .levelUpLearnset = sGolurkLevelUpLearnset,
         .teachableLearnset = sGolurkTeachableLearnset,

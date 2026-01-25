@@ -8,8 +8,13 @@ bool16 ScriptGetPokedexInfo(void)
 {
     if (gSpecialVar_0x8004 == 0) // is national dex not present?
     {
+<<<<<<< HEAD
         gSpecialVar_0x8005 = GetRegionalPokedexCount(FLAG_GET_SEEN);
         gSpecialVar_0x8006 = GetRegionalPokedexCount(FLAG_GET_CAUGHT);
+=======
+        gSpecialVar_0x8005 = GetHoennPokedexCount(FLAG_GET_SEEN);
+        gSpecialVar_0x8006 = GetHoennPokedexCount(FLAG_GET_CAUGHT);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     }
     else
     {
@@ -51,11 +56,19 @@ static const u8 *const sBirchDexRatingTexts[BIRCH_DEX_STRINGS] =
 const u8 *GetPokedexRatingText(u32 count)
 {
     u32 i, j;
+<<<<<<< HEAD
     u16 maxDex = REGIONAL_DEX_COUNT - 1;
     // doesNotCountForRegionalPokedex
     for(i = 0; i < REGIONAL_DEX_COUNT; i++)
     {
         j = NationalPokedexNumToSpecies(RegionalToNationalOrder(i + 1));
+=======
+    u16 maxDex = HOENN_DEX_COUNT - 1;
+    // doesNotCountForRegionalPokedex
+    for(i = 0; i < HOENN_DEX_COUNT; i++)
+    {
+        j = NationalPokedexNumToSpecies(HoennToNationalOrder(i + 1));
+>>>>>>> 11d8f44022 (Updated to upcoming)
         if (gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired)
         {
             if (GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
@@ -70,6 +83,7 @@ void ShowPokedexRatingMessage(void)
 {
     ShowFieldMessage(GetPokedexRatingText(gSpecialVar_0x8004));
 }
+<<<<<<< HEAD
 
 // FRLG
 extern const u8 PokedexRating_Text_LessThan10[];
@@ -165,3 +179,5 @@ void GetProfOaksRatingMessage(void)
     ShowFieldMessage(GetProfOaksRatingMessageByCount(gSpecialVar_0x8004));
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

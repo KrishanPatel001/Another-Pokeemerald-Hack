@@ -87,6 +87,10 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, move); MOVE(player, MOVE_BEAK_BLAST); }
+<<<<<<< HEAD
+=======
+        TURN {}
+>>>>>>> 11d8f44022 (Updated to upcoming)
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_BEAK_BLAST_SETUP, player);
         MESSAGE("Wobbuffet started heating up its beak!");
@@ -111,6 +115,7 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
     }
 }
 
+<<<<<<< HEAD
 SINGLE_BATTLE_TEST("Beak Blast doesn't burn when charging a two turn move")
 {
     u32 move;
@@ -140,6 +145,8 @@ SINGLE_BATTLE_TEST("Beak Blast doesn't burn when charging a two turn move")
     }
 }
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 SINGLE_BATTLE_TEST("Beak Blast doesn't burn fire types")
 {
     GIVEN {

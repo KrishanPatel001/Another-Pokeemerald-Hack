@@ -19,6 +19,7 @@ struct GimmickInfo
     const struct SpriteTemplate *triggerTemplate;
     const u32 indicatorPalTag;
     const u8 *indicatorData;
+<<<<<<< HEAD
     bool32 (*CanActivate)(enum BattlerId battler);
     void (*ActivateGimmick)(enum BattlerId battler);
 };
@@ -36,15 +37,42 @@ void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId);
 void CreateGimmickTriggerSprite(enum BattlerId battler);
 bool32 IsGimmickTriggerSpriteActive(void);
 bool32 IsGimmickTriggerSpriteMatchingBattler(enum BattlerId battler);
+=======
+    bool32 (*CanActivate)(u32 battler);
+    void (*ActivateGimmick)(u32 battler);
+};
+
+void AssignUsableGimmicks(void);
+bool32 CanActivateGimmick(u32 battler, enum Gimmick gimmick);
+bool32 IsGimmickSelected(u32 battler, enum Gimmick gimmick);
+void SetActiveGimmick(u32 battler, enum Gimmick gimmick);
+enum Gimmick GetActiveGimmick(u32 battler);
+bool32 ShouldTrainerBattlerUseGimmick(u32 battler, enum Gimmick gimmick);
+bool32 HasTrainerUsedGimmick(u32 battler, enum Gimmick gimmick);
+void SetGimmickAsActivated(u32 battler, enum Gimmick gimmick);
+
+void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId);
+void CreateGimmickTriggerSprite(u32 battler);
+bool32 IsGimmickTriggerSpriteActive(void);
+bool32 IsGimmickTriggerSpriteMatchingBattler(u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 void HideGimmickTriggerSprite(void);
 void DestroyGimmickTriggerSprite(void);
 
 void LoadIndicatorSpritesGfx(void);
+<<<<<<< HEAD
 u32 GetIndicatorPalTag(enum BattlerId battler);
 void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible);
 void UpdateIndicatorOamPriority(u32 healthboxId, u32 oamPriority);
 void UpdateIndicatorLevelData(u32 healthboxId, u32 level);
 void CreateIndicatorSprite(enum BattlerId battler);
+=======
+u32 GetIndicatorPalTag(u32 battler);
+void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible);
+void UpdateIndicatorOamPriority(u32 healthboxId, u32 oamPriority);
+void UpdateIndicatorLevelData(u32 healthboxId, u32 level);
+void CreateIndicatorSprite(u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 extern const struct GimmickInfo gGimmicksInfo[];
 

@@ -32,7 +32,10 @@
 #include "item.h"
 #include "lilycove_lady.h"
 #include "main.h"
+<<<<<<< HEAD
 #include "map_preview_screen.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "menu.h"
 #include "money.h"
 #include "move.h"
@@ -3318,6 +3321,7 @@ bool8 ScrCmd_setstartingstatus(struct ScriptContext *ctx)
 
     return FALSE;
 }
+<<<<<<< HEAD
 
 bool8 ScrCmd_textcolor(struct ScriptContext * ctx)
 {
@@ -3350,3 +3354,5 @@ bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
     gSpecialVar_0x8004 = GetStringWidth(FONT_BRAILLE, msg, -1);
     return FALSE;
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

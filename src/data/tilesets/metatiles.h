@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const u16 gMetatiles_SecretBasePrimary[] = INCBIN_U16("data/tilesets/primary/secret_base/metatiles.bin");
 const u16 gMetatileAttributes_SecretBasePrimary[] = INCBIN_U16("data/tilesets/primary/secret_base/metatile_attributes.bin");
 
@@ -6,6 +7,8 @@ const u16 gMetatileAttributes_SecretBaseSecondary[] = INCBIN_U16("data/tilesets/
 
 #if !IS_FRLG
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 const u16 gMetatiles_General[] = INCBIN_U16("data/tilesets/primary/general/metatiles.bin");
 const u16 gMetatileAttributes_General[] = INCBIN_U16("data/tilesets/primary/general/metatile_attributes.bin");
 
@@ -102,6 +105,12 @@ const u16 gMetatileAttributes_BikeShop[] = INCBIN_U16("data/tilesets/secondary/b
 const u16 gMetatiles_RusturfTunnel[] = INCBIN_U16("data/tilesets/secondary/rusturf_tunnel/metatiles.bin");
 const u16 gMetatileAttributes_RusturfTunnel[] = INCBIN_U16("data/tilesets/secondary/rusturf_tunnel/metatile_attributes.bin");
 
+<<<<<<< HEAD
+=======
+const u16 gMetatiles_SecretBaseSecondary[] = INCBIN_U16("data/tilesets/secondary/secret_base/metatiles.bin");
+const u16 gMetatileAttributes_SecretBaseSecondary[] = INCBIN_U16("data/tilesets/secondary/secret_base/metatile_attributes.bin");
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 const u16 gMetatiles_InsideOfTruck[] = INCBIN_U16("data/tilesets/secondary/inside_of_truck/metatiles.bin");
 const u16 gMetatileAttributes_InsideOfTruck[] = INCBIN_U16("data/tilesets/secondary/inside_of_truck/metatile_attributes.bin");
 
@@ -159,6 +168,12 @@ const u16 gMetatileAttributes_TrickHousePuzzle[] = INCBIN_U16("data/tilesets/sec
 const u16 gMetatiles_InsideShip[] = INCBIN_U16("data/tilesets/secondary/inside_ship/metatiles.bin");
 const u16 gMetatileAttributes_InsideShip[] = INCBIN_U16("data/tilesets/secondary/inside_ship/metatile_attributes.bin");
 
+<<<<<<< HEAD
+=======
+const u16 gMetatiles_SecretBasePrimary[] = INCBIN_U16("data/tilesets/primary/secret_base/metatiles.bin");
+const u16 gMetatileAttributes_SecretBasePrimary[] = INCBIN_U16("data/tilesets/primary/secret_base/metatile_attributes.bin");
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 const u16 gMetatiles_EliteFour[] = INCBIN_U16("data/tilesets/secondary/elite_four/metatiles.bin");
 const u16 gMetatileAttributes_EliteFour[] = INCBIN_U16("data/tilesets/secondary/elite_four/metatile_attributes.bin");
 
@@ -209,6 +224,7 @@ const u16 gMetatileAttributes_MysteryEventsHouse[] = INCBIN_U16("data/tilesets/s
 
 const u16 gMetatiles_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatiles.bin");
 const u16 gMetatileAttributes_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatile_attributes.bin");
+<<<<<<< HEAD
 
 #else
 
@@ -408,3 +424,5 @@ const u16 gMetatiles_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_
 const u16 gMetatileAttributes_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_fame_frlg/metatile_attributes.bin");
 
 #endif // IS_FRLG
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

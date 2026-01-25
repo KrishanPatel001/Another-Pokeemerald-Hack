@@ -455,6 +455,7 @@ DOUBLE_BATTLE_TEST("Commander prevent Dondozo from switch out by Dragon Tail")
         NOT MESSAGE("Wobbuffet was dragged out!");
     }
 }
+<<<<<<< HEAD
 
 DOUBLE_BATTLE_TEST("Commander will not activate if partner Dondozo is about to switch out")
 {
@@ -474,3 +475,5 @@ DOUBLE_BATTLE_TEST("Commander will not activate if partner Dondozo is about to s
         NOT ABILITY_POPUP(playerRight, ABILITY_COMMANDER);
     }
 }
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)

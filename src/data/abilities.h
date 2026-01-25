@@ -1832,8 +1832,12 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Gulp Missile"),
         .description = COMPOUND_STRING("If hit, spits prey from sea."),
         .aiRating = 3,
+<<<<<<< HEAD
         .cantBeCopied = B_UPDATED_MOVE_FLAGS <= GEN_8,
         .cantBeSwapped = B_UPDATED_MOVE_FLAGS <= GEN_8,
+=======
+        .cantBeCopied = TRUE,
+>>>>>>> 11d8f44022 (Updated to upcoming)
         .cantBeSuppressed = TRUE,
         .cantBeOverwritten = TRUE,
         .failsOnImposter = TRUE,

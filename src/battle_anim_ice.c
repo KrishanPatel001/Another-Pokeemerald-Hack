@@ -959,7 +959,11 @@ static void AnimWaveFromCenterOfTarget(struct Sprite *sprite)
 static void InitSwirlingFogAnim(struct Sprite *sprite)
 {
     s16 tempVar;
+<<<<<<< HEAD
     enum BattlerId battler;
+=======
+    u8  battler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (gBattleAnimArgs[4] == 0)
     {
@@ -1031,11 +1035,18 @@ static void AnimSwirlingFogAnim(struct Sprite *sprite)
         sprite->x2 += Sin(sprite->data[5], sprite->data[6]);
         sprite->y2 += Cos(sprite->data[5], -6);
 
+<<<<<<< HEAD
         enum BattlerId battler = sprite->data[7];
         if ((u16)(sprite->data[5] - 64) <= 0x7F)
             sprite->oam.priority = GetBattlerSpriteBGPriority(battler);
         else
             sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
+=======
+        if ((u16)(sprite->data[5] - 64) <= 0x7F)
+            sprite->oam.priority = GetBattlerSpriteBGPriority(sprite->data[7]);
+        else
+            sprite->oam.priority = GetBattlerSpriteBGPriority(sprite->data[7]) + 1;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
         sprite->data[5] = (sprite->data[5] + 3) & 0xFF;
     }
@@ -1494,6 +1505,7 @@ static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, 
 
     if (type != HAILSTRUCTTYPE_FIXED_POSITION)
     {
+<<<<<<< HEAD
         enum BattlerId battler = GetBattlerAtPosition(sHailCoordData[hailStructId].bPosition);
         if (IsBattlerSpriteVisible(battler))
         {
@@ -1509,6 +1521,23 @@ static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, 
             case HAILSTRUCTTYPE_POSITIVE_POS_MOD:
                 battlerX += GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_WIDTH) / 6;
                 battlerY += GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 6;
+=======
+        id = GetBattlerAtPosition(sHailCoordData[hailStructId].bPosition);
+        if (IsBattlerSpriteVisible(id))
+        {
+            shouldSpawnImpactEffect = TRUE;
+            battlerX = GetBattlerSpriteCoord(id, BATTLER_COORD_X_2);
+            battlerY = GetBattlerSpriteCoord(id, BATTLER_COORD_Y_PIC_OFFSET);
+            switch (type)
+            {
+            case HAILSTRUCTTYPE_NEGATIVE_POS_MOD:
+                battlerX -= GetBattlerSpriteCoordAttr(id, BATTLER_COORD_ATTR_WIDTH) / 6;
+                battlerY -= GetBattlerSpriteCoordAttr(id, BATTLER_COORD_ATTR_HEIGHT) / 6;
+                break;
+            case HAILSTRUCTTYPE_POSITIVE_POS_MOD:
+                battlerX += GetBattlerSpriteCoordAttr(id, BATTLER_COORD_ATTR_WIDTH) / 6;
+                battlerY += GetBattlerSpriteCoordAttr(id, BATTLER_COORD_ATTR_HEIGHT) / 6;
+>>>>>>> 11d8f44022 (Updated to upcoming)
                 break;
             }
         }

@@ -16,8 +16,11 @@ struct Fanfare
     u16 duration;
 };
 
+<<<<<<< HEAD
 extern u8 gDisableMapMusicChangeOnMapLoad;
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
@@ -565,8 +568,12 @@ void PlayBGM(u16 songNum)
 
 void PlaySE(u16 songNum)
 {
+<<<<<<< HEAD
     if (gDisableMapMusicChangeOnMapLoad == 0)
         m4aSongNumStart(songNum);
+=======
+    m4aSongNumStart(songNum);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)

@@ -2006,8 +2006,13 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
         return;
     }
 
+<<<<<<< HEAD
     numSeen = GetRegionalPokedexCount(FLAG_GET_SEEN);
     numCaught = GetRegionalPokedexCount(FLAG_GET_CAUGHT);
+=======
+    numSeen = GetHoennPokedexCount(FLAG_GET_SEEN);
+    numCaught = GetHoennPokedexCount(FLAG_GET_CAUGHT);
+>>>>>>> 11d8f44022 (Updated to upcoming)
     ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 3);
     str = StringCopy(buffer, gBirchDexRatingText_AreYouCurious);

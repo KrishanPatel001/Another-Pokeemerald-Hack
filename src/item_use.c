@@ -222,11 +222,19 @@ static void Task_CloseCantUseKeyItemMessage(u8 taskId)
 u8 CheckIfItemIsTMHMOrEvolutionStone(enum Item itemId)
 {
     if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_TMHM)
+<<<<<<< HEAD
+        return ITEM_IS_TM_HM;
+    else if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone)
+        return 2;
+    else
+        return ITEM_IS_OTHER;
+=======
         return 1;
     else if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone)
         return 2;
     else
         return 0;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 }
 
 // Mail in the bag menu can't have a message but it can be checked (view the mail background, no message)
@@ -298,9 +306,13 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 
 static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
+<<<<<<< HEAD
     if (GetItemSecondaryId(gSpecialVar_ItemId) == STANDARD_BIKE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE);
     else if (GetItemSecondaryId(gSpecialVar_ItemId) == MACH_BIKE)
+=======
+    if (GetItemSecondaryId(gSpecialVar_ItemId) == MACH_BIKE)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
     else // ACRO_BIKE
         GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
@@ -1229,7 +1241,11 @@ void ItemUseInBattle_PartyMenuChooseMove(u8 taskId)
     ItemUseInBattle_ShowPartyMenu(taskId);
 }
 
+<<<<<<< HEAD
 static bool32 IteamHealsMonVolatile(enum BattlerId battler, enum Item itemId)
+=======
+static bool32 IteamHealsMonVolatile(u32 battler, enum Item itemId)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     const u8 *effect = GetItemEffect(itemId);
     if (effect[3] & ITEM3_STATUS_ALL)

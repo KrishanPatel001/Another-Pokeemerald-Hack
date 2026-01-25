@@ -68,12 +68,17 @@ TEST("Forms have the appropriate species form changes")
     {
         if (gSpeciesInfo[i].isMegaEvolution
             || gSpeciesInfo[i].isGigantamax
+<<<<<<< HEAD
             || gSpeciesInfo[i].isUltraBurst
             || gSpeciesInfo[i].isPrimalReversion)
+=======
+            || gSpeciesInfo[i].isUltraBurst)
+>>>>>>> 11d8f44022 (Updated to upcoming)
         {
             PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
         }
     }
+<<<<<<< HEAD
     bool32 hasBattleEnd = FALSE, hasFaint = FALSE;
 
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
@@ -101,6 +106,11 @@ TEST("Forms have the appropriate species form changes")
     }
 }
 
+=======
+        EXPECT(DoesSpeciesHaveFormChangeMethod(species, FORM_CHANGE_END_BATTLE));
+    }
+
+>>>>>>> 11d8f44022 (Updated to upcoming)
 TEST("Form change targets have the appropriate species flags")
 {
     u32 i;

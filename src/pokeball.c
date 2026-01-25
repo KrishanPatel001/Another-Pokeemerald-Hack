@@ -18,9 +18,15 @@
 #include "constants/songs.h"
 
 static void Task_DoPokeballSendOutAnim(u8 taskId);
+<<<<<<< HEAD
 static inline void DoPokeballSendOutSoundEffect(enum BattlerId battler);
 static inline void *GetOpponentMonSendOutCallback(void);
 static inline bool32 IsBattlerPlayer(enum BattlerId battler);
+=======
+static inline void DoPokeballSendOutSoundEffect(u32 battler);
+static inline void *GetOpponentMonSendOutCallback(void);
+static inline bool32 IsBattlerPlayer(u32 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 static void SpriteCB_MonSendOut_1(struct Sprite *sprite);
 static void SpriteCB_MonSendOut_2(struct Sprite *sprite);
 static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite);
@@ -45,7 +51,11 @@ static void SpriteCB_TradePokeballEnd(struct Sprite *sprite);
 static void SpriteCB_HealthboxSlideInDelayed(struct Sprite *sprite);
 static void SpriteCB_HealthboxSlideIn(struct Sprite *sprite);
 static void SpriteCB_HitAnimHealthoxEffect(struct Sprite *sprite);
+<<<<<<< HEAD
 static u16 GetBattlerPokeballItemId(enum BattlerId battler);
+=======
+static u16 GetBattlerPokeballItemId(u8 battler);
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 // rom const data
 
@@ -381,7 +391,11 @@ const struct PokeBallSprite gPokeBalls[POKEBALL_COUNT] =
     },
 };
 
+<<<<<<< HEAD
 u8 DoPokeballSendOutAnimation(enum BattlerId battler, s16 pan, u8 kindOfThrow)
+=======
+u8 DoPokeballSendOutAnimation(u32 battler, s16 pan, u8 kindOfThrow)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 taskId;
 
@@ -400,8 +414,12 @@ u8 DoPokeballSendOutAnimation(enum BattlerId battler, s16 pan, u8 kindOfThrow)
 
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
+<<<<<<< HEAD
     u32 throwCaseId, ballId, ballSpriteId;
     enum BattlerId battler;
+=======
+    u32 throwCaseId, ballId, battler, ballSpriteId;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     bool32 notSendOut = FALSE;
     u32 throwXoffset = (B_ENEMY_THROW_BALLS >= GEN_6 && !gTestRunnerHeadless) ? 24 : 0;
     s32 throwYoffset = (B_ENEMY_THROW_BALLS >= GEN_6 && !gTestRunnerHeadless) ? -16 : 24;
@@ -468,7 +486,11 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     PlaySE(SE_BALL_THROW);
 }
 
+<<<<<<< HEAD
 static inline void DoPokeballSendOutSoundEffect(enum BattlerId battler)
+=======
+static inline void DoPokeballSendOutSoundEffect(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     if (IsBattlerPlayer(battler) && B_PLAYER_THROW_BALLS_SOUND < GEN_5)
         return;
@@ -733,7 +755,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
     u8 wantedCry = gTasks[taskId].tCryTaskWantedCry;
     s8 pan = gTasks[taskId].tCryTaskPan;
     u16 species = gTasks[taskId].tCryTaskSpecies;
+<<<<<<< HEAD
     enum BattlerId battler = gTasks[taskId].tCryTaskBattler;
+=======
+    u8 battler = gTasks[taskId].tCryTaskBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u8 monSpriteId = gTasks[taskId].tCryTaskMonSpriteId;
     struct Pokemon *mon = (void *)(u32)((gTasks[taskId].tCryTaskMonPtr1 << 16) | (u16)(gTasks[taskId].tCryTaskMonPtr2));
 
@@ -815,7 +841,11 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
 
 static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler = sprite->sBattler;
+=======
+    u8 battler = sprite->sBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
     u32 ballId;
 
     StartSpriteAnim(sprite, 1);
@@ -910,7 +940,11 @@ static void SpriteCB_BallThrow_StartCaptureMon(struct Sprite *sprite)
 static void HandleBallAnimEnd(struct Sprite *sprite)
 {
     bool8 affineAnimEnded = FALSE;
+<<<<<<< HEAD
     enum BattlerId battler = sprite->sBattler;
+=======
+    u8 battler = sprite->sBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     if (sprite->data[7] == POKEBALL_PLAYER_SLIDEIN)
     {
@@ -960,7 +994,11 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
 
 static void SpriteCB_BallThrow_CaptureMon(struct Sprite *sprite)
 {
+<<<<<<< HEAD
     enum BattlerId battler = sprite->sBattler;
+=======
+    u8 battler = sprite->sBattler;
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
     sprite->data[4]++;
     if (sprite->data[4] == 40)
@@ -983,7 +1021,11 @@ static void SpriteCB_BallThrow_CaptureMon(struct Sprite *sprite)
     }
 }
 
+<<<<<<< HEAD
 static inline bool32 IsBattlerPlayer(enum BattlerId battler)
+=======
+static inline bool32 IsBattlerPlayer(u32 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     return (battler % B_POSITION_PLAYER_RIGHT) ? FALSE : TRUE;
 }
@@ -1327,7 +1369,11 @@ static void UNUSED DestroySpriteAndFreeResources_Ball(struct Sprite *sprite)
 
 #define sDelayTimer data[1]
 
+<<<<<<< HEAD
 void StartHealthboxSlideIn(enum BattlerId battler)
+=======
+void StartHealthboxSlideIn(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     struct Sprite *healthboxSprite = &gSprites[gHealthboxSpriteIds[battler]];
 
@@ -1370,7 +1416,11 @@ static void SpriteCB_HealthboxSlideIn(struct Sprite *sprite)
 #undef sSpeedY
 #undef sDelayTimer
 
+<<<<<<< HEAD
 void DoHitAnimHealthboxEffect(enum BattlerId battler)
+=======
+void DoHitAnimHealthboxEffect(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     u8 spriteId;
 
@@ -1423,7 +1473,11 @@ void FreeBallGfx(u8 ballId)
     FreeSpritePaletteByTag(gPokeBalls[ballId].palette.tag);
 }
 
+<<<<<<< HEAD
 static u16 GetBattlerPokeballItemId(enum BattlerId battler)
+=======
+static u16 GetBattlerPokeballItemId(u8 battler)
+>>>>>>> 11d8f44022 (Updated to upcoming)
 {
     struct Pokemon *illusionMon;
     struct Pokemon *mon = GetBattlerMon(battler);

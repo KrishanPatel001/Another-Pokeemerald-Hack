@@ -21,7 +21,10 @@
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
+<<<<<<< HEAD
 #include "constants/trainer_tower.h"
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "config/save.h"
@@ -962,6 +965,7 @@ struct TrainerHillSave
                //u16 padding:8;
 };
 
+<<<<<<< HEAD
 struct TrainerTower
 {
     u32 timer;
@@ -976,6 +980,8 @@ struct TrainerTower
     bool8 validated:1;
 };
 
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 struct WonderNewsMetadata
 {
     u8 newsType:2;
@@ -1196,6 +1202,7 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
+<<<<<<< HEAD
 #if FREE_TRAINER_TOWER == FALSE && IS_FRLG
     u32 towerChallengeId;
     struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
@@ -1204,6 +1211,8 @@ struct SaveBlock1
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
     struct DaycareMon route5DayCareMon;
 #endif
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
     // sizeof: 0x3???
 };
 

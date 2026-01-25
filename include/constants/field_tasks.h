@@ -9,6 +9,9 @@
 #define STEP_CB_TRUCK               5
 #define STEP_CB_SECRET_BASE         6
 #define STEP_CB_CRACKED_FLOOR       7
+<<<<<<< HEAD
 #define STEP_CB_ICEFALL_CAVE        8
+=======
+>>>>>>> 11d8f44022 (Updated to upcoming)
 
 #endif // GUARD_CONSTANTS_FIELD_TASKS_H

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CinnabarIsland_PokemonLab_Lounge_Frlg_MapScripts::
+=======
+CinnabarIsland_PokemonLab_Lounge_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_Scientist::

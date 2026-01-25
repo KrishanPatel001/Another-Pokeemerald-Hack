@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ThreeIsland_House5_Frlg_MapScripts::
+=======
+ThreeIsland_House5_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 ThreeIsland_House5_EventScript_LittleGirl::

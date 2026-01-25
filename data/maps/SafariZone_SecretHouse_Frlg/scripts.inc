@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SafariZone_SecretHouse_Frlg_MapScripts::
+=======
+SafariZone_SecretHouse_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SafariZone_SecretHouse_EventScript_Attendant::

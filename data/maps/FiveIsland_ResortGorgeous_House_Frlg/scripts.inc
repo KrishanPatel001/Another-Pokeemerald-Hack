@@ -1,6 +1,10 @@
 .equ SHOWN_REQUESTED_MON, FLAG_TEMP_2
 
+<<<<<<< HEAD
 FiveIsland_ResortGorgeous_House_Frlg_MapScripts::
+=======
+FiveIsland_ResortGorgeous_House_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 FiveIsland_ResortGorgeous_House_EventScript_Selphy::

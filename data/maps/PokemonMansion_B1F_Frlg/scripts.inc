@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 PokemonMansion_B1F_Frlg_MapScripts::
+=======
+PokemonMansion_B1F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_B1F_OnLoad
 	.byte 0
 

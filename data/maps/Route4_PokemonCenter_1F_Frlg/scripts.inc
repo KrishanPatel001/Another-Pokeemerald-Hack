@@ -1,6 +1,10 @@
 .equ MAGIKARP_PRICE, 500
 
+<<<<<<< HEAD
 Route4_PokemonCenter_1F_Frlg_MapScripts::
+=======
+Route4_PokemonCenter_1F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, Route4_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
@@ -70,7 +74,11 @@ Route4_PokemonCenter_1F_EventScript_BuyMagikarpPC::
 	goto_if_eq VAR_RESULT, NO, Route4_PokemonCenter_1F_EventScript_TransferMagikarpCloseMoneyBox
 	fadescreen FADE_TO_BLACK
 	hidemoneybox
+<<<<<<< HEAD
 	special ChangePokemonNickname
+=======
+	special ChangeBoxPokemonNickname
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	waitstate
 	lock
 	faceplayer
@@ -134,7 +142,11 @@ Route4_PokemonCenter_1F_EventScript_NoRoomForMagikarp::
 Route4_PokemonCenter_1F_EventScript_Nurse::
 	lock
 	faceplayer
+<<<<<<< HEAD
 	call EventScript_PkmnCenterNurse_Frlg
+=======
+	call Common_EventScript_PkmnCenterNurse
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	release
 	end
 

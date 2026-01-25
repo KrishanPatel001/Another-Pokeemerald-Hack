@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 UndergroundPath_NorthEntrance_Frlg_MapScripts::
+=======
+UndergroundPath_NorthEntrance_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 UndergroundPath_NorthEntrance_EventScript_Saige::

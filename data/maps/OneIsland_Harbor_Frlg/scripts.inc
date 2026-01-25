@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 OneIsland_Harbor_Frlg_MapScripts::
+=======
+OneIsland_Harbor_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, OneIsland_Harbor_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_Harbor_OnFrame
 	.byte 0

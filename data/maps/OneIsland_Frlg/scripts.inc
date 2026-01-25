@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 OneIsland_Frlg_MapScripts::
+=======
+OneIsland_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, OneIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_OnFrame
 	.byte 0

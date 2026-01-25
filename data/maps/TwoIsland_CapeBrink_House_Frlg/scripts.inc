@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 TwoIsland_CapeBrink_House_Frlg_MapScripts::
+=======
+TwoIsland_CapeBrink_House_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 @ See move_tutors.inc

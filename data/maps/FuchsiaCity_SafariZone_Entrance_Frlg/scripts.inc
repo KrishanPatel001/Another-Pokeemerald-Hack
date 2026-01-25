@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FuchsiaCity_SafariZone_Entrance_Frlg_MapScripts::
+=======
+FuchsiaCity_SafariZone_Entrance_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FuchsiaCity_SafariZone_Entrance_OnFrame
 	.byte 0
 

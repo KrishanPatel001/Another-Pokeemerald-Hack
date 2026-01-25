@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route11_Frlg_MapScripts::
+=======
+Route11_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route11_EventScript_DiglettsCaveSign::

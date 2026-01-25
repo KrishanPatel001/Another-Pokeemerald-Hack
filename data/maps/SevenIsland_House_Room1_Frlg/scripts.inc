@@ -1,6 +1,10 @@
 .equ TRAINER_VISITING, VAR_TEMP_1
 
+<<<<<<< HEAD
 SevenIsland_House_Room1_Frlg_MapScripts::
+=======
+SevenIsland_House_Room1_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_House_Room1_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room1_OnFrame
 	.byte 0
@@ -93,7 +97,11 @@ SevenIsland_House_Room1_EventScript_TrainerVisiting::
 	msgbox SevenIsland_House_Room1_Text_SaveProgressBeforeBattle, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SevenIsland_House_Room1_EventScript_DeclineBattle
 	special LoadPlayerParty
+<<<<<<< HEAD
 	call Common_EventScript_SaveGame
+=======
+	call CableClubSaveGame
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	goto_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_DeclineBattle
 	special SavePlayerParty
 	special ReducePlayerPartyToSelectedMons

@@ -34,9 +34,15 @@ will NOT be merged until after the next Minor Release.
 ---
 
 ## What is a "Big Feature"?
+<<<<<<< HEAD
 * If any maintainer thinks a PR is a Big Feature, then it is, no question asked
 * If there is disagreement, it can be discussed in a PR thread, and can ultimately be resolved with a Maintainer vote. 
 * If you believe your PR should have this feature, please let a maintainer know.
+=======
+* If the original owner of the PR thinks a feature should be labeled a Big Feature, it is, no questions asked
+* If a reviewer thinks a PR is a Big Feature, then it is
+* If the two disagree, it can be discussed in a PR thread, and can ultimately be resolved with a Maintainer vote. 
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 
 ### How To Identify a Big Feature
 * **Big diffs**: It's easy for something to go unnoticed in review when it's a tiny part of a massive diff.

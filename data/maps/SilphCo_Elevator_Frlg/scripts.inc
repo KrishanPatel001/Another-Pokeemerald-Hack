@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SilphCo_Elevator_Frlg_MapScripts::
+=======
+SilphCo_Elevator_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SilphCo_Elevator_EventScript_FloorSelect::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 PewterCity_Gym_Frlg_MapScripts::
+=======
+PewterCity_Gym_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 PewterCity_Gym_EventScript_Brock::

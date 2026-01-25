@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ViridianForest_Frlg_MapScripts::
+=======
+ViridianForest_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, ViridianForest_OnTransition
 	.byte 0
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route2_House_Frlg_MapScripts::
+=======
+Route2_House_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route2_House_EventScript_Scientist::

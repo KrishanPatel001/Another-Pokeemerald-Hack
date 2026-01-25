@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route12_Frlg_MapScripts::
+=======
+Route12_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_RESUME, Route12_OnResume
 	.byte 0
 

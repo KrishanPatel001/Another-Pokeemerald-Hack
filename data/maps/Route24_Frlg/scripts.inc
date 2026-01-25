@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route24_Frlg_MapScripts::
+=======
+Route24_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route24_EventScript_Rocket::

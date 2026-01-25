@@ -2814,6 +2814,7 @@
 	callnative ScrCmd_setstartingstatus
 	.byte \status
 	.endm
+<<<<<<< HEAD
 
 @ FRLG
 
@@ -2854,3 +2855,5 @@
 	getbraillestringwidth \text
 	call EventScript_BrailleCursorWaitButton
 	.endm
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)

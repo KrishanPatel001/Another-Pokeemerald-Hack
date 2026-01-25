@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route8_WestEntrance_Frlg_MapScripts::
+=======
+Route8_WestEntrance_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route8_WestEntrance_EventScript_Guard::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 IndigoPlateau_Exterior_Frlg_MapScripts::
+=======
+IndigoPlateau_Exterior_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, IndigoPlateau_Exterior_OnFrame
 	.byte 0

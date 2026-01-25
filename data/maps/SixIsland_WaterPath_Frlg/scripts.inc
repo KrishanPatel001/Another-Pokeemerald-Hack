@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SixIsland_WaterPath_Frlg_MapScripts::
+=======
+SixIsland_WaterPath_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SixIsland_WaterPath_EventScript_HornWantedSign::

@@ -5,7 +5,11 @@
 
 .equ SHOWED_OAK_COMPLETE_DEX, FLAG_TEMP_2
 
+<<<<<<< HEAD
 PalletTown_ProfessorOaksLab_Frlg_MapScripts::
+=======
+PalletTown_ProfessorOaksLab_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_ProfessorOaksLab_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PalletTown_ProfessorOaksLab_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PalletTown_ProfessorOaksLab_OnFrame

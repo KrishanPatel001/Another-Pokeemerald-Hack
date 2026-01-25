@@ -1,7 +1,11 @@
 .set SPOKE_TO_WOMAN_LAST,   FLAG_TEMP_2
 .set SPOKE_TO_FAT_MAN_LAST, FLAG_TEMP_3
 
+<<<<<<< HEAD
 VermilionCity_PokemonFanClub_Frlg_MapScripts::
+=======
+VermilionCity_PokemonFanClub_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 VermilionCity_PokemonFanClub_EventScript_Chairman::

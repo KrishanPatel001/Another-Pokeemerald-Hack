@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FuchsiaCity_House3_Frlg_MapScripts::
+=======
+FuchsiaCity_House3_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 FuchsiaCity_House3_EventScript_MoveDeleter::

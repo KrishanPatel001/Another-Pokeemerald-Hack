@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SevenIsland_SevaultCanyon_Frlg_MapScripts::
+=======
+SevenIsland_SevaultCanyon_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SevenIsland_SevaultCanyon_EventScript_RouteSign::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route20_Frlg_MapScripts::
+=======
+Route20_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, Route20_OnTransition
 	.byte 0
 

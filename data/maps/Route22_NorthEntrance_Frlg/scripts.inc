@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route22_NorthEntrance_Frlg_MapScripts::
+=======
+Route22_NorthEntrance_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route22_NorthEntrance_EventScript_BoulderBadgeGuard::

@@ -1,6 +1,10 @@
 .set DID_CHANSEY_DANCE, FLAG_TEMP_2
 
+<<<<<<< HEAD
 SevenIsland_SevaultCanyon_House_Frlg_MapScripts::
+=======
+SevenIsland_SevaultCanyon_House_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan::

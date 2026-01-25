@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeladonCity_GameCorner_Frlg_MapScripts::
+=======
+CeladonCity_GameCorner_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, CeladonCity_GameCorner_OnLoad
 	.byte 0
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeladonCity_GameCorner_PrizeRoom_Frlg_MapScripts::
+=======
+CeladonCity_GameCorner_PrizeRoom_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_BaldingMan::

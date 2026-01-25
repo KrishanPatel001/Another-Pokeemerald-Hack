@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 PokemonLeague_AgathasRoom_Frlg_MapScripts::
+=======
+PokemonLeague_AgathasRoom_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_AgathasRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_AgathasRoom_OnLoad
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_AgathasRoom_OnWarp

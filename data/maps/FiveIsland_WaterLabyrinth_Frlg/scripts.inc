@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FiveIsland_WaterLabyrinth_Frlg_MapScripts::
+=======
+FiveIsland_WaterLabyrinth_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 FiveIsland_WaterLabyrinth_EventScript_EggGentleman::

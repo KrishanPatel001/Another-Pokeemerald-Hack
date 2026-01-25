@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ViridianCity_Mart_Frlg_MapScripts::
+=======
+ViridianCity_Mart_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, ViridianCity_Mart_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, ViridianCity_Mart_OnFrame
 	.byte 0

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeruleanCity_Mart_Frlg_MapScripts::
+=======
+CeruleanCity_Mart_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeruleanCity_Mart_EventScript_Youngster::

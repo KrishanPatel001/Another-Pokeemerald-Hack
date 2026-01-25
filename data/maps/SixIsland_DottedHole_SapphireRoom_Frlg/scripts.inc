@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SixIsland_DottedHole_SapphireRoom_Frlg_MapScripts::
+=======
+SixIsland_DottedHole_SapphireRoom_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SixIsland_DottedHole_SapphireRoom_EventScript_Sapphire::

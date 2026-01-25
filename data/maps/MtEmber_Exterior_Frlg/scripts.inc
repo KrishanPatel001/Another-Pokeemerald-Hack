@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 MtEmber_Exterior_Frlg_MapScripts::
+=======
+MtEmber_Exterior_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, MtEmber_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, MtEmber_Exterior_OnLoad
 	.byte 0

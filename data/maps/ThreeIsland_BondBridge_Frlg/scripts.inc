@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ThreeIsland_BondBridge_Frlg_MapScripts::
+=======
+ThreeIsland_BondBridge_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 ThreeIsland_BondBridge_EventScript_BerryForestSign::

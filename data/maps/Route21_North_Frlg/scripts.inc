@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route21_North_Frlg_MapScripts::
+=======
+Route21_North_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route21_North_Text_RonaldIntro::

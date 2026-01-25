@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SixIsland_GreenPath_Frlg_MapScripts::
+=======
+SixIsland_GreenPath_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SixIsland_GreenPath_EventScript_RightRouteSign::

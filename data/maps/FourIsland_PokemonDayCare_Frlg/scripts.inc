@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FourIsland_PokemonDayCare_Frlg_MapScripts::
+=======
+FourIsland_PokemonDayCare_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 FourIsland_PokemonDayCare_EventScript_DaycareWoman::

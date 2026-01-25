@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SafariZone_West_Frlg_MapScripts::
+=======
+SafariZone_West_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SafariZone_West_EventScript_RestHouseSign::

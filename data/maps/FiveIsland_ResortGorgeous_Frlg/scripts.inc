@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FiveIsland_ResortGorgeous_Frlg_MapScripts::
+=======
+FiveIsland_ResortGorgeous_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FiveIsland_ResortGorgeous_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FiveIsland_ResortGorgeous_OnFrame
 	.byte 0

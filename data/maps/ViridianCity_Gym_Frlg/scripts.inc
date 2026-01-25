@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ViridianCity_Gym_Frlg_MapScripts::
+=======
+ViridianCity_Gym_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 ViridianCity_Gym_EventScript_Giovanni::

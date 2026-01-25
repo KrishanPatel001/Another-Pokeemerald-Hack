@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SSAnne_Kitchen_Frlg_MapScripts::
+=======
+SSAnne_Kitchen_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 SSAnne_Kitchen_EventScript_Chef1::

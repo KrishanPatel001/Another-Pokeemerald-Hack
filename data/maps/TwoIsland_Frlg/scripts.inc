@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 TwoIsland_Frlg_MapScripts::
+=======
+TwoIsland_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, TwoIsland_OnTransition
 	.byte 0
 

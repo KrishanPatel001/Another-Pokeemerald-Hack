@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SixIsland_RuinValley_Frlg_MapScripts::
+=======
+SixIsland_RuinValley_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, SixIsland_RuinValley_OnLoad
 	.byte 0
 

@@ -321,6 +321,7 @@ BattleScript_TrainerPartnerSlideMsgRet::
 BattleScript_TrainerPartnerSlideMsgEnd2::
 	call BattleScript_TrainerPartnerSlideMsgRet
 	end2
+<<<<<<< HEAD
 
 BattleScript_GhostBallDodge::
 	waitmessage B_WAIT_TIME_LONG
@@ -339,3 +340,5 @@ BattleScript_ActionThrowBait::
 	waitmessage B_WAIT_TIME_LONG
 	playanimation BS_ATTACKER, B_ANIM_POKEBLOCK_THROW
 	end2
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)

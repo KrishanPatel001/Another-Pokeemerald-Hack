@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 NavelRock_Summit_Frlg_MapScripts::
+=======
+NavelRock_Summit_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Summit_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Summit_OnResume
 	.byte 0

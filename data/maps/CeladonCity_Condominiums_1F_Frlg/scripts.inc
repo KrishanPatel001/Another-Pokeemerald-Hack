@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeladonCity_Condominiums_1F_Frlg_MapScripts::
+=======
+CeladonCity_Condominiums_1F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeladonCity_Condominiums_1F_EventScript_TeaWoman::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route17_Frlg_MapScripts::
+=======
+Route17_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route17_EventScript_ItemsNotice::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 MtEmber_Summit_Frlg_MapScripts::
+=======
+MtEmber_Summit_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, MtEmber_Summit_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, MtEmber_Summit_OnResume
 	.byte 0

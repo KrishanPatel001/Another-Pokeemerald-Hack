@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 UndergroundPath_EastEntrance_Frlg_MapScripts::
+=======
+UndergroundPath_EastEntrance_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 UndergroundPath_EastEntrance_EventScript_Woman::

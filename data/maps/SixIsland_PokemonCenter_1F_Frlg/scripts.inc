@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SixIsland_PokemonCenter_1F_Frlg_MapScripts::
+=======
+SixIsland_PokemonCenter_1F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SixIsland_PokemonCenter_1F_OnFrame
@@ -65,7 +69,11 @@ SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit::
 SixIsland_PokemonCenter_1F_EventScript_Nurse::
 	lock
 	faceplayer
+<<<<<<< HEAD
 	call EventScript_PkmnCenterNurse_Frlg
+=======
+	call Common_EventScript_PkmnCenterNurse
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	release
 	end
 

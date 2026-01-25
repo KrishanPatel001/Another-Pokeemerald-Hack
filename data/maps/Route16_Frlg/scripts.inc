@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route16_Frlg_MapScripts::
+=======
+Route16_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_RESUME, Route16_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route16_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route16_OnWarp

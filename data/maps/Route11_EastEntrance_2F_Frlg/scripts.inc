@@ -1,6 +1,10 @@
 .equ REQUIRED_CAUGHT_MONS, 30
 
+<<<<<<< HEAD
 Route11_EastEntrance_2F_Frlg_MapScripts::
+=======
+Route11_EastEntrance_2F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route11_EastEntrance_2F_EventScript_LeftBinoculars::

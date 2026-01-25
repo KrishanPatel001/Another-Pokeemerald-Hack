@@ -1,7 +1,11 @@
 .equ PLAYER_X_POS, VAR_0x8004
 .equ PLAYER_Y_POS, VAR_0x8005
 
+<<<<<<< HEAD
 FiveIsland_RocketWarehouse_Frlg_MapScripts::
+=======
+FiveIsland_RocketWarehouse_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, FiveIsland_RocketWarehouse_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, FiveIsland_RocketWarehouse_OnTransition
 	.byte 0

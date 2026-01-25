@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 VermilionCity_House3_Frlg_MapScripts::
+=======
+VermilionCity_House3_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 VermilionCity_House3_EventScript_Boy::

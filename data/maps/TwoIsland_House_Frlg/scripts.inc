@@ -3,7 +3,11 @@
 .equ HAS_TINY_MUSHROOMS, FLAG_TEMP_3
 .equ HAS_BOTH_MUSHROOMS, FLAG_TEMP_4
 
+<<<<<<< HEAD
 TwoIsland_House_Frlg_MapScripts::
+=======
+TwoIsland_House_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 TwoIsland_House_EventScript_MoveManiac::

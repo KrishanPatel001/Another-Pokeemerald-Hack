@@ -22,6 +22,7 @@
 
 	.section script_data, "aw", %progbits
 
+<<<<<<< HEAD
 BattleScript_FickleBeamMessage::
 	pause B_WAIT_TIME_SHORTEST
 	printstring STRINGID_FICKLEBEAMDOUBLED
@@ -33,6 +34,18 @@ BattleScript_MagnitudeMessage::
 	printstring STRINGID_MAGNITUDESTRENGTH
 	waitmessage B_WAIT_TIME_LONG
     return
+=======
+BattleScript_EffectFickleBeam::
+	attackcanceler
+	accuracycheck BattleScript_MoveMissedPause
+	ficklebeamdamagecalculation
+	goto BattleScript_HitFromDamageCalc
+BattleScript_FickleBeamDoubled::
+	pause B_WAIT_TIME_SHORTEST
+	printstring STRINGID_FICKLEBEAMDOUBLED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_HitFromDamageCalc
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 
 BattleScript_Terastallization::
 	@ TODO: no string prints in S/V, but right now this helps with clarity
@@ -648,7 +661,11 @@ BattleScript_OctlockTurnDmgEnd:
 BattleScript_EffectPoltergeist::
 	attackcanceler
 	accuracycheck BattleScript_MoveMissedPause
+<<<<<<< HEAD
 	setpoltergeistmessage
+=======
+	setpoltergeistmessage BattleScript_ButItFailed
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	printstring STRINGID_ABOUTTOUSEPOLTERGEIST
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_HitFromDamageCalc
@@ -2147,10 +2164,13 @@ BattleScript_TryTailwindAbilitiesLoop_WindPower:
 
 BattleScript_EffectMiracleEye::
 	attackcanceler
-	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
+	accuracycheck BattleScript_MoveMissedPause
+<<<<<<< HEAD
 	jumpifgenconfiglowerthan CONFIG_MIRACLE_EYE_FAIL, GEN_5, BattleScript_MiracleEyeSet
 	jumpifvolatile BS_TARGET, VOLATILE_MIRACLE_EYE, BattleScript_ButItFailed
 BattleScript_MiracleEyeSet:
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	setvolatile BS_TARGET, VOLATILE_MIRACLE_EYE
 	goto BattleScript_IdentifiedFoe
 
@@ -2232,6 +2252,10 @@ BattleScript_HitFromAccCheck::
 	setpreattackadditionaleffect
 BattleScript_HitFromDamageCalc::
 	damagecalc
+<<<<<<< HEAD
+=======
+BattleScript_HitFromAtkAnimation::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	call BattleScript_Hit_RetFromAtkAnimation
 BattleScript_MoveEnd::
 	moveendall
@@ -2239,7 +2263,10 @@ BattleScript_MoveEnd::
 
 BattleScript_EffectHit_RetFromAccCheck::
 	accuracycheck BattleScript_MoveMissedPause
+<<<<<<< HEAD
 	setpreattackadditionaleffect
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	damagecalc
 BattleScript_Hit_RetFromAtkAnimation::
 	attackanimation
@@ -2256,6 +2283,18 @@ BattleScript_Hit_RetFromAtkAnimation::
 	setadditionaleffects
 	return
 
+<<<<<<< HEAD
+=======
+BattleScript_EffectNaturalGift::
+	attackcanceler
+	jumpifnotberry BS_ATTACKER, BattleScript_ButItFailed
+	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailed
+	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailed
+	jumpifvolatile BS_ATTACKER, VOLATILE_EMBARGO, BattleScript_ButItFailed
+	accuracycheck BattleScript_MoveMissedPause
+	call BattleScript_HitFromDamageCalc
+
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 BattleScript_MakeMoveMissed::
 	setmoveresultflags MOVE_RESULT_MISSED
 BattleScript_MoveMissedPause::
@@ -2829,7 +2868,11 @@ BattleScript_PowerHerbActivation::
 	printstring STRINGID_POWERHERB
 	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_ATTACKER
+<<<<<<< HEAD
 	trytwoturnmovespowerherbformchange @ Edge case for Cramorant ability Gulp Missile
+=======
+	trygulpmissile @ Edge case for Cramorant ability Gulp Missile
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	return
 
 BattleScript_EffectGeomancy::
@@ -2999,6 +3042,19 @@ BattleScript_EffectPainSplit::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+<<<<<<< HEAD
+=======
+BattleScript_EffectSnore::
+	attackcanceler
+	jumpifhalfword CMP_EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_DoSnore
+	printstring STRINGID_PKMNFASTASLEEP
+	waitmessage B_WAIT_TIME_LONG
+	statusanimation BS_ATTACKER
+BattleScript_DoSnore::
+	accuracycheck BattleScript_MoveMissedPause
+	goto BattleScript_HitFromDamageCalc
+
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 BattleScript_EffectConversion2::
 	attackcanceler
 	settypetorandomresistance BattleScript_ButItFailed
@@ -3190,10 +3246,13 @@ BattleScript_EffectSpikes::
 
 BattleScript_EffectForesight::
 	attackcanceler
-	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+<<<<<<< HEAD
+	accuracycheck BattleScript_ButItFailed
 	jumpifgenconfiglowerthan CONFIG_FORESIGHT_FAIL, GEN_3, BattleScript_ForesightFailCheck
 	jumpifgenconfiglowerthan CONFIG_FORESIGHT_FAIL, GEN_5, BattleScript_ForesightSet
 BattleScript_ForesightFailCheck:
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	jumpifvolatile BS_TARGET, VOLATILE_FORESIGHT, BattleScript_ButItFailed
 BattleScript_ForesightSet:
 	setvolatile BS_TARGET, VOLATILE_FORESIGHT
@@ -3284,6 +3343,18 @@ BattleScript_EffectSafeguard::
 	setsafeguard
 	goto BattleScript_PrintReflectLightScreenSafeguardString
 
+<<<<<<< HEAD
+=======
+BattleScript_EffectMagnitude::
+	attackcanceler
+	magnitudedamagecalculation
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_MAGNITUDESTRENGTH
+	waitmessage B_WAIT_TIME_LONG
+	accuracycheck BattleScript_MoveMissedPause
+	goto BattleScript_HitFromDamageCalc
+
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 BattleScript_EffectBatonPass::
 	attackcanceler
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
@@ -3428,9 +3499,23 @@ BattleScript_DoEffectTeleport::
 	setteleportoutcome BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+<<<<<<< HEAD
 BattleScript_BeatUpAttackMessage::
 	printstring STRINGID_PKMNATTACK
     return
+=======
+BattleScript_EffectBeatUp::
+	jumpifgenconfiglowerthan CONFIG_BEAT_UP, GEN_5, BattleScript_EffectBeatUpGen3
+	goto BattleScript_EffectHit
+
+BattleScript_EffectBeatUpGen3:
+	attackcanceler
+	accuracycheck BattleScript_MoveMissedPause
+	pause B_WAIT_TIME_SHORT
+	trydobeatup BattleScript_MoveEnd, BattleScript_ButItFailed
+	printstring STRINGID_PKMNATTACK
+	goto BattleScript_HitFromDamageCalc
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 
 BattleScript_EffectDefenseCurl::
 	attackcanceler
@@ -3533,6 +3618,26 @@ BattleScript_StockpileStatChangeDown:
 BattleScript_StockpileStatChangeDown_Ret:
 	return
 
+<<<<<<< HEAD
+=======
+BattleScript_EffectSpitUp::
+	attackcanceler
+	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PROTECTED, BattleScript_SpitUpFailProtect
+	accuracycheck BattleScript_MoveMissedPause
+	damagecalc
+	stockpiletobasedamage
+	call BattleScript_Hit_RetFromAtkAnimation
+	removestockpilecounters
+	goto BattleScript_MoveEnd
+
+BattleScript_SpitUpFailProtect::
+	pause B_WAIT_TIME_LONG
+	stockpiletobasedamage
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 BattleScript_EffectSwallow::
 	attackcanceler
 	stockpiletohpheal BattleScript_ButItFailed
@@ -5440,6 +5545,7 @@ BattleScript_BattlerFormChangeFromAfterAnimation::
 	jumpifability BS_TARGET, ABILITY_DISGUISE, BattleScript_ApplyDisguiseFormChangeHPLoss
 	return
 
+<<<<<<< HEAD
 BattleScript_BattlerFormChangeInstant::
 	handleformchange BS_SCRIPTING, 0
 	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE_INSTANT
@@ -5456,6 +5562,8 @@ BattleScript_BattlerFormChangeDisguise::
 	waitmessage B_WAIT_TIME_SHORT
 	goto BattleScript_BattlerFormChangeFromAfterAnimation
 
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 BattleScript_BattlerFormChangeEnd3NoPopup::
 	call BattleScript_BattlerFormChangeNoPopup
 	end2
@@ -5474,7 +5582,10 @@ BattleScript_BattlerFormChangeWithString::
 	handleformchange BS_SCRIPTING, 1
 	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG
+<<<<<<< HEAD
 	switchinabilities BS_SCRIPTING
+=======
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	return
 
 BattleScript_AttackerFormChangeMoveEffect::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FiveIsland_LostCave_Room10_Frlg_MapScripts::
+=======
+FiveIsland_LostCave_Room10_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_RESUME, FiveIsland_LostCave_Room10_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FiveIsland_LostCave_Room10_OnFrame
 	.byte 0

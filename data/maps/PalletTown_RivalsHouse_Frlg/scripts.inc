@@ -1,6 +1,10 @@
 .equ RECEIVED_TOWN_MAP, VAR_TEMP_1
 
+<<<<<<< HEAD
 PalletTown_RivalsHouse_Frlg_MapScripts::
+=======
+PalletTown_RivalsHouse_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_RivalsHouse_OnTransition
 	.byte 0
 

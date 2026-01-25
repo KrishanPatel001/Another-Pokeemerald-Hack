@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 DiglettsCave_B1F_Frlg_MapScripts::
+=======
+DiglettsCave_B1F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, DiglettsCave_B1F_OnTransition
 	.byte 0
 

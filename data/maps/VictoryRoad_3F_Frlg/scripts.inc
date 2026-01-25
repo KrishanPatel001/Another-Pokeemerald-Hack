@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 VictoryRoad_3F_Frlg_MapScripts::
+=======
+VictoryRoad_3F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_3F_OnLoad
 	.byte 0
 

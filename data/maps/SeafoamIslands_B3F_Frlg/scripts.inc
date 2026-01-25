@@ -1,6 +1,10 @@
 .equ NUM_BOULDERS_PRESENT, VAR_TEMP_2
 
+<<<<<<< HEAD
 SeafoamIslands_B3F_Frlg_MapScripts::
+=======
+SeafoamIslands_B3F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, SeafoamIslands_B3F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SeafoamIslands_B3F_OnFrame
 	.byte 0

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeladonCity_Restaurant_Frlg_MapScripts::
+=======
+CeladonCity_Restaurant_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeladonCity_Restaurant_EventScript_Chef::

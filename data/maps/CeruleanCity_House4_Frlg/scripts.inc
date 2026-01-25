@@ -1,7 +1,11 @@
 .set REWARD_TYPE, VAR_0x8004
 .set REWARD_ITEM, VAR_0x8008
 
+<<<<<<< HEAD
 CeruleanCity_House4_Frlg_MapScripts::
+=======
+CeruleanCity_House4_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeruleanCity_House4_EventScript_WonderNewsBerryMan::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route10_Frlg_MapScripts::
+=======
+Route10_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route10_EventScript_Unused::

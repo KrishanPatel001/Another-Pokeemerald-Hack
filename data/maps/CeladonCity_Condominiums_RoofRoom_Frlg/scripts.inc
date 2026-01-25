@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeladonCity_Condominiums_RoofRoom_Frlg_MapScripts::
+=======
+CeladonCity_Condominiums_RoofRoom_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeladonCity_Condominiums_RoofRoom_EventScript_BlackBelt::

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CeruleanCity_BikeShop_Frlg_MapScripts::
+=======
+CeruleanCity_BikeShop_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 CeruleanCity_BikeShop_EventScript_Clerk::

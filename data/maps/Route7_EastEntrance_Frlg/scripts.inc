@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route7_EastEntrance_Frlg_MapScripts::
+=======
+Route7_EastEntrance_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route7_EastEntrance_EventScript_Guard::

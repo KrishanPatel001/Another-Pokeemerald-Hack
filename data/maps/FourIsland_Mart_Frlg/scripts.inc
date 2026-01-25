@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FourIsland_Mart_Frlg_MapScripts::
+=======
+FourIsland_Mart_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 FourIsland_Mart_EventScript_Clerk::

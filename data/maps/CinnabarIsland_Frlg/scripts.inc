@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 CinnabarIsland_Frlg_MapScripts::
+=======
+CinnabarIsland_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, CinnabarIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CinnabarIsland_OnFrame
 	.byte 0

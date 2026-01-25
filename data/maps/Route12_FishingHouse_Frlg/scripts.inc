@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Route12_FishingHouse_Frlg_MapScripts::
+=======
+Route12_FishingHouse_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route12_FishingHouse_EventScript_FishingGuruBrother::

@@ -1,6 +1,10 @@
 @ Handled by data/scripts/day_care.inc
 
+<<<<<<< HEAD
 Route5_PokemonDayCare_Frlg_MapScripts::
+=======
+Route5_PokemonDayCare_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 Route5_PokemonDayCare_Text_WantMeToRaiseMon::

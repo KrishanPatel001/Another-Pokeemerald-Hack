@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 MtEmber_RubyPath_B3F_Frlg_MapScripts::
+=======
+MtEmber_RubyPath_B3F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 @ Odd that this is here and not in MtEmber_RubyPath_B5F/scripts.inc

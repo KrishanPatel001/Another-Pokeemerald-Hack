@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 VermilionCity_Mart_Frlg_MapScripts::
+=======
+VermilionCity_Mart_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 VermilionCity_Mart_EventScript_CooltrainerF::

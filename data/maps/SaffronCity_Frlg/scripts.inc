@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SaffronCity_Frlg_MapScripts::
+=======
+SaffronCity_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_OnTransition
 	.byte 0
 

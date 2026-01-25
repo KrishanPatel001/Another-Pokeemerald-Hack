@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ThreeIsland_House1_Frlg_MapScripts::
+=======
+ThreeIsland_House1_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 ThreeIsland_House1_EventScript_Lostelle::

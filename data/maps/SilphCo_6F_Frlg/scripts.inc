@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SilphCo_6F_Frlg_MapScripts::
+=======
+SilphCo_6F_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, SilphCo_6F_OnLoad
 	.byte 0
 

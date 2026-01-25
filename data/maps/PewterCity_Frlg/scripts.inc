@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 PewterCity_Frlg_MapScripts::
+=======
+PewterCity_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_OnTransition
 	.byte 0
 

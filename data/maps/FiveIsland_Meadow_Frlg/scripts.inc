@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FiveIsland_Meadow_Frlg_MapScripts::
+=======
+FiveIsland_Meadow_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_LOAD, FiveIsland_Meadow_OnLoad
 	.byte 0
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 PowerPlant_Frlg_MapScripts::
+=======
+PowerPlant_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	map_script MAP_SCRIPT_ON_RESUME, PowerPlant_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, PowerPlant_OnTransition
 	.byte 0

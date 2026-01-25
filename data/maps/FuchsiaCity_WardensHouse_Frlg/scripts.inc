@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FuchsiaCity_WardensHouse_Frlg_MapScripts::
+=======
+FuchsiaCity_WardensHouse_MapScripts::
+>>>>>>> db2b5dd6cf (fuck this noise chat upcoming has been copy pasted)
 	.byte 0
 
 FuchsiaCity_WardensHouse_EventScript_Warden::

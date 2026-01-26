@@ -5784,6 +5784,7 @@ enum Obedience GetAttackerObedienceForAction(void)
         obedienceLevel = 70;
     if (FlagGet(FLAG_BADGE07_GET)) // Mind Badge
         obedienceLevel = 80;
+    obedienceLevel = 100; // remember to remove this
 
     if (B_OBEDIENCE_MECHANICS >= GEN_8
      && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))

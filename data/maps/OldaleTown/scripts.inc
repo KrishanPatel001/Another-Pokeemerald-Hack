@@ -33,6 +33,16 @@ OldaleTown_EventScript_Girl::
 	msgbox OldaleTown_Text_SavingMyProgress, MSGBOX_NPC
 	end
 
+OldaleTown_EventScript_TestNPC::
+	msgbox OldaleTown_Text_TestNPC, MSGBOX_NPC
+	givemon SPECIES_FERALIGATR 100
+	giveitem ITEM_FERALIGITE
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
+	giveitem ITEM_MEGA_RING
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
+	release
+	end
+
 OldaleTown_EventScript_MartEmployee::
 	lock
 	faceplayer
@@ -395,3 +405,7 @@ OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
 	.string "“Where things start off scarce.”$"
 
+OldaleTown_Text_TestNPC:
+	.string "i swear to god this better work\n"
+	.string "or im actually going to do it\l"
+	.string "im so fuckin tired chat$"

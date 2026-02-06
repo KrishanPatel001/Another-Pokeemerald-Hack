@@ -3404,7 +3404,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_INSOMNIA, ABILITY_MOODY },
+        .abilities = { ABILITY_CONTRARY, ABILITY_CONTRARY, ABILITY_CONTRARY },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Scovillain"),
     #if P_MODIFIED_MEGA_CRIES
@@ -4702,7 +4702,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
-        .abilities = { ABILITY_TOXIC_DEBRIS, ABILITY_NONE, ABILITY_CORROSION },
+        .abilities = { ABILITY_LEVITATE, ABILITY_LEVITATE, ABILITY_LEVITATE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Glimmora"),
     #if P_MODIFIED_MEGA_CRIES
@@ -5420,7 +5420,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_STORM_DRAIN, ABILITY_NONE, ABILITY_STORM_DRAIN },
+        .abilities = { ABILITY_DRIZZLE, ABILITY_DRIZZLE, ABILITY_DRIZZLE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Tatsugiri"),
     #if P_MODIFIED_MEGA_CRIES
@@ -5478,7 +5478,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_STORM_DRAIN, ABILITY_NONE, ABILITY_STORM_DRAIN },
+        .abilities = { ABILITY_DRIZZLE, ABILITY_DRIZZLE, ABILITY_DRIZZLE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Tatsugiri"),
     #if P_MODIFIED_MEGA_CRIES
@@ -5536,7 +5536,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_STORM_DRAIN, ABILITY_NONE, ABILITY_STORM_DRAIN },
+        .abilities = { ABILITY_DRIZZLE, ABILITY_DRIZZLE, ABILITY_DRIZZLE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Tatsugiri"),
     #if P_MODIFIED_MEGA_CRIES
@@ -6600,7 +6600,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_DRAGON, EGG_GROUP_MINERAL),
-        .abilities = { ABILITY_THERMAL_EXCHANGE, ABILITY_NONE, ABILITY_ICE_BODY },
+        .abilities = { ABILITY_THERMAL_EXCHANGE, ABILITY_THERMAL_EXCHANGE, ABILITY_THERMAL_EXCHANGE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Baxcalibur"),
     #if P_MODIFIED_MEGA_CRIES

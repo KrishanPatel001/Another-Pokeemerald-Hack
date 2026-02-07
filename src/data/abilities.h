@@ -2413,4 +2413,16 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+        [ABILITY_TINKLE] =
+    {
+        .name = _("Tinkle"),
+        .description = COMPOUND_STRING("Tinkles rain in battle."),
+        .aiRating = 9,
+    },
+        [ABILITY_MIZZLE] =
+    {
+        .name = _("Mizzle"),
+        .description = COMPOUND_STRING("Starts rain. Yes this is a word."),
+        .aiRating = 9,
+    },
 };

@@ -5420,7 +5420,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_DRIZZLE, ABILITY_DRIZZLE, ABILITY_DRIZZLE },
+        .abilities = { ABILITY_TINKLE, ABILITY_TINKLE, ABILITY_TINKLE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Tatsugiri"),
     #if P_MODIFIED_MEGA_CRIES
@@ -5536,7 +5536,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_DRIZZLE, ABILITY_DRIZZLE, ABILITY_DRIZZLE },
+        .abilities = { ABILITY_MIZZLE, ABILITY_MIZZLE, ABILITY_MIZZLE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Tatsugiri"),
     #if P_MODIFIED_MEGA_CRIES

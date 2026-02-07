@@ -3500,6 +3500,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             }
             break;
         case ABILITY_DRIZZLE:
+        case ABILITY_TINKLE:
+        case ABILITY_MIZZLE:
             if (!shouldAbilityTrigger)
                 break;
             if (TryChangeBattleWeather(battler, BATTLE_WEATHER_RAIN, gLastUsedAbility))
@@ -5852,6 +5854,10 @@ enum Obedience GetAttackerObedienceForAction(void)
     s32 calc;
     u8 obedienceLevel = 0;
     u8 levelReferenced;
+    u8 testingVar = 1;
+
+    if (testingVar == 1) // Testing var to bypass obedience
+        return OBEYS;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return OBEYS;
